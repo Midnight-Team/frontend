@@ -2,7 +2,7 @@
   "name": "tickets-project",
   "version": "0.0.1",
   "description": "Venda de ticket por pacote de assinaturas",
-  "productName": "Ingresso? Quero!",
+  "productName": "Midgnight Tickets",
   "author": "EBSERHNET\\samuel.victor <samuel.victor@ebserh.gov.br>",
   "private": true,
   "scripts": {

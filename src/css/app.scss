@@ -5,9 +5,9 @@
 }
 
 .bg-grad-1 {
-    background: #44A08D;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #093637, #44A08D);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #093637, #44A08D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
 }
 
@@ -21,4 +21,8 @@
 
 .opacity-8{
     opacity: 0.6;
+}
+
+.bg-white {
+    background-color: #efefef!important;
 }

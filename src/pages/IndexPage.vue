@@ -1,5 +1,5 @@
 <template>
-  <q-page class="animate__animated animate__fadeIn flex column relative">
+  <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-1">
     <div id="home-card" class="bg-white w100" >
       <q-input color="primary" outlined class="text-primary text-bold" dense label="Buscar evento" >
         <template v-slot:append>
@@ -7,7 +7,7 @@
         </template>
       </q-input>
     </div>
-    <div class="w100 row justify-center q-mt-md" style="filter:invert(1);border-radius: 20px; ">
+    <div class="w100 row justify-center q-mt-md" style="border-radius: 20px; ">
       <img style="border-radius: 10px;" src="~/assets/logo.png" alt="">
     </div>
     <div id="home-card-2">
@@ -78,8 +78,9 @@
         </q-card>
       </div>
     </div>
-    <div class="w100 q-mt-xl">
+    <div class="w100 q-mt-xl bg-white">
       <FooterComponent />
+      <FormCheckoutComponent/>
     </div>
   </q-page>
 </template>
@@ -87,6 +88,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import FooterComponent from 'src/components/FooterComponent.vue';
+import FormCheckoutComponent from 'src/components/FormCheckoutComponent.vue';
 
 const avatar = ref({
   url1: 'https://55knots.com.au/wp-content/uploads/2021/01/Zanj-Avatar-scaled.jpg',
@@ -100,10 +102,6 @@ const avatar = ref({
 
 <style scoped >
 .q-page {
-  background-image: url('https://images.unsplash.com/photo-1633358050629-bb6a292616ff?q=80&w=2127&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 #home-card {
   padding: 20px;
@@ -118,7 +116,14 @@ const avatar = ref({
   border-radius: 50%;
 }
 .border-top{
-  border-top: 4px solid #2c8a7fa9;
+  border-top: 4px solid #6e96c4;
   margin-top: 8px;
+}
+@media (max-width: 600px) {
+  .q-page {
+    background-image: url('https://images.unsplash.com/photo-1505506874110-6a7a69069a08?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: auto;
+    background-repeat: no-repeat;
+  }
 }
 </style>
