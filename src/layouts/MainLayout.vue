@@ -7,7 +7,7 @@
           <q-avatar>
             <q-icon size="md" color="white" name="local_activity"/>
           </q-avatar>
-          Midgnight Tickets
+          Midnight Tickets
         </q-toolbar-title>
 
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />

@@ -1,23 +1,28 @@
 <template>
   <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-1">
-    <div id="home-card" class="bg-white w100" >
+    <div id="home-card" class="bg-white w100" style="border-bottom-left-radius: 20px;" >
       <q-input color="primary" outlined class="text-primary text-bold" dense label="Buscar evento" >
         <template v-slot:append>
           <q-icon name="search" />
         </template>
       </q-input>
     </div>
-    <div class="w100 row justify-center q-mt-md" style="border-radius: 20px; ">
-      <img style="border-radius: 10px;" src="~/assets/logo.png" alt="">
+    <div class="w100 row justify-center q-mt-md items-center text-white text-bold" style="border-radius: 20px; ">
+      <q-avatar>
+        <q-icon size="md" color="white" name="local_activity"/>
+      </q-avatar>
+      <div class="text-h5 text-bold">
+        Midnight Tickets
+      </div>
     </div>
     <div id="home-card-2">
-      <div class="q-mt-md">
-        <q-card-section class="q-mb-md text-primary bg-white">
+      <div class="q-mt-md row justify-center">
+        <q-card-section class="q-mb-md text-primary bg-white q-pa-md" style="border-top-right-radius: 40px;border-bottom-left-radius: 40px;width:80%">
           <div class="text-h5 text-bold text-center">Quem Somos??🫰🏽💰💵</div>
           <div class="text-body1 text-center text-bold opacity-8">Serviço de bilheteria com os melhores preços e gerenciamento de vendas de ingressos!!</div>
         </q-card-section>
-        <div class="w100 bg-white flex flex-center q-py-md q-mb-md">
-          <q-btn label="Criar Conta" class="q-mr-md" color="primary" icon="person_add"/>
+        <div class="w100 flex flex-center q-py-md q-mb-md">
+          <q-btn label="Criar Conta" class="q-mr-md" color="green" icon="person_add"/>
           <q-btn label="Fazer Login" color="blue" icon="login"/>
         </div>
         <!-- Primeiro card existente -->
@@ -80,7 +85,7 @@
     </div>
     <div class="w100 q-mt-xl bg-white">
       <FooterComponent />
-      <FormCheckoutComponent/>
+      <!-- <FormCheckoutComponent/> -->
     </div>
   </q-page>
 </template>
@@ -116,12 +121,11 @@ const avatar = ref({
   border-radius: 50%;
 }
 .border-top{
-  border-top: 4px solid #6e96c4;
+  border-top: 4px solid #7734c4;
   margin-top: 8px;
 }
 @media (max-width: 600px) {
   .q-page {
-    background-image: url('https://images.unsplash.com/photo-1505506874110-6a7a69069a08?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-size: auto;
     background-repeat: no-repeat;
   }
