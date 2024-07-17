@@ -33,7 +33,7 @@ const loadScript = (src) => {
 onMounted(async () => {
   try {
     await loadScript('https://sdk.mercadopago.com/js/v2');
-    const mp = new window.MercadoPago("TEST-d952f38a-4b36-40f3-974d-01cb4e78359a");
+    const mp = new window.MercadoPago(process.env.MP_PUBLIC_KEY);
     const cardForm = mp.cardForm({
       amount: "100.5",
       iframe: true,
