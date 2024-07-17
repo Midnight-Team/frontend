@@ -8,9 +8,9 @@
           </template>
         </q-input>
       </div>
-      <div class="bg-white">
+      <!-- <div class="bg-white">
         <FormCheckoutComponent/>
-      </div>
+      </div> -->
       <div class="w100 row justify-center q-mt-md items-center text-white text-bold" style="border-radius: 20px; ">
         <q-avatar>
           <q-icon size="md" color="white" name="local_activity"/>
