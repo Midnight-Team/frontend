@@ -1,7 +1,7 @@
 <template>
   <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-1">
-    <div id="home-card" class="bg-white w100" style="border-bottom-left-radius: 20px;" >
-      <q-input color="primary" outlined class="text-primary text-bold" dense label="Buscar evento" >
+    <div id="home-card" class="w100 row justify-center" style="" >
+      <q-input color="primary" outlined class="text-primary text-bold" style="width:90%" dense label="Buscar evento" >
         <template v-slot:append>
           <q-icon name="search" />
         </template>
@@ -109,11 +109,13 @@ const avatar = ref({
 .q-page {
 }
 #home-card {
-  padding: 20px;
+  padding: 12px;
   position: sticky;
-  top: 99px;
+  top: 98px;
   z-index: 1;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.435);
+  background: #ffffffc7;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.435);
 }
 .img-avatar{
   width: 60px;
