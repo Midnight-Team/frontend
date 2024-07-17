@@ -21,9 +21,8 @@
           <div class="text-h5 text-bold text-center">Quem Somos??🫰🏽💰💵</div>
           <div class="text-body1 text-center text-bold opacity-8">Serviço de bilheteria com os melhores preços e gerenciamento de vendas de ingressos!!</div>
         </q-card-section>
-        <div class="w100 flex flex-center q-py-md q-mb-md">
-          <q-btn label="Criar Conta" class="q-mr-md" color="green" icon="person_add"/>
-          <q-btn label="Fazer Login" color="blue" icon="login"/>
+        <div class="w100 row justify-center q-my-md">
+          <q-btn class="q-mb-md w100 q-py-xl" label="Crie Agora mesmo seu Evento Totalmente Grátis" color="primary"  icon-right="event_available" />
         </div>
         <!-- Primeiro card existente -->
         <q-card class="q-mb-md q-ml-md" style="width: 70%;">
@@ -43,7 +42,6 @@
             <div class="text-body2 q-pt-sm border-top opacity-8 text-bold">Comprar Ingressos, Criar Eventos e Vender Ingressos com as melhores taxas do mercado, Gerenciar e Monitorar seus eventos e vendas na palma da sua mão!!</div>
           </q-card-section>
         </q-card>
-
         <!-- Terceiro card existente -->
         <q-card class="q-mt-md q-mb-lg" style="margin-left: 25%;width: 70%;">
           <q-card-section>
@@ -54,6 +52,10 @@
             <q-btn class="text-bold" flat label="Criar Minha Conta Agora" icon-right="person_add" color="primary" />
           </q-card-actions>
         </q-card>
+          <div class="w100 flex flex-center q-py-md border-bt">
+            <q-btn label="Criar Conta" class="w80 q-mb-md q-py-md" color="green" icon="person_add"/>
+            <q-btn label="Fazer Login" color="blue" class="w80 q-py-md" icon="login"/>
+          </div>
 
         <q-card class="q-mt-md" style="margin-left: 9%;width: 65%;">
           <q-card-section>
@@ -75,7 +77,7 @@
           </q-card-actions>
         </q-card>
 
-        <q-card class="q-mt-md q-mb-sm" style="margin-left: 30%;width: 65%;">
+        <q-card class="q-mt-md q-mb-sm" style="margin-left: -20%;width: 65%;">
           <q-card-section>
             <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url6" alt="">Segurança Garantida ??🔒🔐</div>
             <div class="text-body2 q-pt-md border-top opacity-8 text-bold">Todos os pagamentos e dados pessoais são protegidos com os mais altos padrões de segurança, garantindo uma experiência segura e confiável para todos os usuários.</div>
@@ -126,6 +128,7 @@ const avatar = ref({
   border-top: 4px solid #7734c4;
   margin-top: 8px;
 }
+
 @media (max-width: 600px) {
   .q-page {
     background-size: auto;

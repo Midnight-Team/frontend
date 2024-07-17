@@ -8,7 +8,7 @@
         Powered by: 
             <img class="q-pl-sm" src="https://http2.mlstatic.com/frontend-assets/mp-web-navigation/ui-navigation/6.7.19/mercadopago/logo__large.png" alt="">
     </div>
-    <div style="border-top: 1px solid #058A83;" class="row bg-white justify-center items-center q-py-lg">
+    <div style="border-top: 1px solid #7734c4;" class="row bg-white justify-center items-center q-py-lg">
         <q-icon size="md" name="local_activity" class="q-pr-md"/>
         <a target="_blank" class="text-primary text-center" href="https://samuelvictorol.github.io/portfolio">Ingresso? Quero!<br>Development Team</a>
         <q-icon size="md" name="groups" class="q-pl-md"/>
