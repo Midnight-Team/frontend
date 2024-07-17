@@ -22,7 +22,7 @@
           <div class="text-body1 text-center text-bold opacity-8">Serviço de bilheteria com os melhores preços e gerenciamento de vendas de ingressos!!</div>
         </q-card-section>
         <div class="w100 row justify-center q-my-md">
-          <q-btn class="q-mb-md w100 q-py-xl" label="Crie Agora mesmo seu Evento Totalmente Grátis" color="primary"  icon-right="event_available" />
+          <q-btn class="q-mb-md w100 q-py-lg" @click="navigateTo('/evento/steps')" label="Crie Agora mesmo seu Evento Totalmente Grátis" color="primary"  icon-right="event_available" />
         </div>
         <!-- Primeiro card existente -->
         <q-card class="q-mb-md q-ml-md" style="width: 70%;">
@@ -96,6 +96,9 @@
 import { onMounted, ref } from 'vue';
 import FooterComponent from 'src/components/FooterComponent.vue';
 import FormCheckoutComponent from 'src/components/FormCheckoutComponent.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const avatar = ref({
   url1: 'https://55knots.com.au/wp-content/uploads/2021/01/Zanj-Avatar-scaled.jpg',
@@ -105,6 +108,10 @@ const avatar = ref({
   url5: 'https://55knots.com.au/wp-content/uploads/2020/07/John-Avatar-Color-1-01-scaled.jpg',
   url6: 'https://static.vecteezy.com/system/resources/previews/000/242/730/original/vector-police-officer-avatar-illustration.jpg'
 })
+
+const navigateTo = (path) => {
+  router.push(path);
+}
 </script>
 
 <style scoped >
