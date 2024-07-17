@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-grad-1 w100 text-primary text-bold">
+  <div id="footer" class="bg-grad-1 w100 text-primary text-bold">
       <div class="row bg-white justify-center items-center q-py-lg">
           <a target="_blank" class="text-primary text-center" href="https://samuelvictorol.github.io/portfolio/contato">Suporte</a>
           <q-icon size="md" name="help" class="q-pl-md"/>
@@ -21,6 +21,7 @@
 </script>
 
 <style scoped>
+
 a {
   text-decoration: none!important;
 
