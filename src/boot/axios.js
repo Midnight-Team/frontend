@@ -8,7 +8,7 @@ import axios from 'axios'
 // "export default () => {}" function below (which runs individually
 // for each client)
 const isProd = !window.location.href.includes('localhost')
-const api = axios.create({ baseURL: isProd ? 'https://google.com' : 'http://localhost:3333/api/' })
+const api = axios.create({ baseURL: isProd ? 'https://midnightickets-api.onrender.com' : 'http://localhost:3333/api/' })
 console.log('isProd', isProd)
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

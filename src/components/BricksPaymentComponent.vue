@@ -95,8 +95,10 @@ onBeforeMount(async () => {
                         console.log('Brick is ready');
                     },
                     onSubmit: ({ selectedPaymentMethod, formData }) => {
+                        const isProd = !window.location.href.includes('localhost')
+                        const baseURL = isProd ? 'https://midnightickets-api.onrender.com' : 'http://localhost:3333/api/' 
                         return new Promise((resolve, reject) => {
-                            fetch("http://localhost:3333/api/process_payment", {
+                            fetch(baseURL, {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
