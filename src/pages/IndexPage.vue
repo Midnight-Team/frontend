@@ -2,15 +2,13 @@
   <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-1">
     <div class="home-wrapper">
       <div id="home-card" class="w100 row justify-center" style="" >
-        <q-input color="primary" outlined dense class="text-primary text-bold" style="width:90%"  label="Buscar evento" >
+        <q-input color="primary" outlined dense class="text-primary text-bold relative" style="width:90%;"  label="Buscar evento" >
           <template v-slot:append>
-            <q-icon name="search" color="primary"/>
+            <q-icon id="search-btn" name="search" color="white" style="border-top-right-radius: 4px;border-bottom-right-radius: 4px" class="absolute-right cursor-pointer bg-primary q-pa-sm"/>
           </template>
         </q-input>
       </div>
-      <!-- <div class="bg-white">
-        <FormCheckoutComponent/>
-      </div> -->
+
       <div class="w100 row justify-center q-mt-md items-center text-white text-bold" style="border-radius: 20px; ">
         <q-avatar>
           <q-icon size="md" color="white" name="local_activity"/>
@@ -99,7 +97,6 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import FooterComponent from 'src/components/FooterComponent.vue';
-import FormCheckoutComponent from 'src/components/FormCheckoutComponent.vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -133,9 +130,9 @@ const navigateTo = (path) => {
   backdrop-filter: blur(10px);
   box-shadow: 0 0 14px rgba(0, 0, 0, 0.435);
   transition: all 0.2s linear;
-  height: 6.5vh;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  height: 6.8vh;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 #home-card:hover {
@@ -170,5 +167,11 @@ const navigateTo = (path) => {
   #home-card:hover {
     height: 13vh;
   }
+}
+#search-btn{
+  transition: all 0.2s linear;
+}
+#search-btn:hover{
+  opacity: 0.8;
 }
 </style>

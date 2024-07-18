@@ -10,7 +10,7 @@
     </div>
     <div style="border-top: 1px solid #7734c4;" class="row bg-white justify-center items-center q-py-lg">
         <q-icon size="md" name="local_activity" class="q-pr-md"/>
-        <a target="_blank" class="text-primary text-center" href="https://samuelvictorol.github.io/portfolio">Ingresso? Quero!<br>Development Team</a>
+        <a target="_blank" class="text-primary text-center" href="https://samuelvictorol.github.io/portfolio">Midnight Tickets<br>Development Team</a>
         <q-icon size="md" name="groups" class="q-pl-md"/>
     </div>
   </div>

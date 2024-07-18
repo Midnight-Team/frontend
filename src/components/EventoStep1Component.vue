@@ -8,8 +8,9 @@
         <q-input outlined class="q-mt-lg" v-model="evento.titulo" label="Título*" />
         <q-input outlined type="textarea" v-model="evento.descricao" label="Descrição*" />
         <q-input outlined type="textarea" v-model="evento.endereco" label="Endereço*" />
+        <q-input outlined type="textarea" v-model="evento.contato" label="Contato*" />
         <q-input outlined v-model="evento.categoria" label="Categoria*" placeholder="ex: Evento Automobilístico, Festas de Fim de Ano..."/>
-        <q-input outlined type="date" v-model="evento.data_evento" label="Data do Evento*" />
+        <q-input outlined type="date" v-model="evento.data_evento"  label="Data do Evento*" />
         <q-input outlined v-model="qtd_ingressos_inicial" label="Quantidade de Ingressos* (limite)"  mask="#####" maxlength="6"/>
         <q-input outlined v-model="evento.localizacao" label="Localização Google Maps">
             <template v-slot:append>
@@ -37,6 +38,7 @@ const evento = ref({
     descricao: '',
     endereco: '',
     categoria: '',
+    contato: '',
     localizacao: '',
     data_evento: '',
     qtd_ingressos_inicial: 0,

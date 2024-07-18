@@ -15,7 +15,7 @@
 
       <q-tabs align="left">
         <q-route-tab to="/" label="Buscar" />
-        <q-route-tab to="/page3" label="Meus Eventos" />
+        <q-route-tab to="#" label="Meus Eventos" />
       </q-tabs>
     </q-header>
 
@@ -25,14 +25,14 @@
           <img src="https://lh3.googleusercontent.com/p/AF1QipN7ksUb-WdGYoJGLfo_79Mxnf0GNpk1cxsicgm6=s1360-w1360-h1020" alt="">
         </q-avatar>
       </div>
-      <div class="text-center text-black text-bold">Externa Produções</div>
+      <div class="text-center text-black text-bold">Midnight Produções</div>
       <div class="text-center text-black q-mb-md ">host</div>
       <div class="w100 text-black q-mb-md text-center">
         {{ saldo }}
         <q-icon name="visibility" @click="changeVisibility()" color="grey-6" class="q-pl-sm" size="sm"/> 
       </div>
       <q-list class="text-bold text-primary">
-        <q-item v-for="item in menuOptions.items" :key="item.label" clickable>
+        <q-item v-for="item in menuOptions.items" :key="item.label" clickable @click="goTo(item.to)">
           <q-item-section avatar>
             <q-icon :name="item.icon" />
           </q-item-section>
@@ -55,10 +55,12 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const rightDrawerOpen = ref(false)
 const saldo = ref('R$ *****,**')
 const saldoHandler = ref('R$ 1.200,00')
+const router = useRouter()
 
 function changeVisibility() {
   if(saldo.value.includes('*')) {
@@ -69,15 +71,19 @@ function changeVisibility() {
   }
 }
 
+function goTo(to) {
+  router.push(to)
+}
+
 const menuOptions = ref({
   items: [
     { label: 'Meu perfil', icon: 'person', to: '/page3' },
     { label: 'Meus Eventos', icon: 'date_range', to: '/page3' },
-    { label: 'Ver vendas', icon: 'payments', to: '/page3' },
+    { label: 'Saldo e Vendas', icon: 'payments', to: '/page3' },
     { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
     { label: 'Planos e Pacotes', icon: 'currency_exchange', to: '/page3' },
     { label: 'Validar Ingresso', icon: 'sensor_occupied', to: '/page3' },
-    { label: 'Sair', icon: 'exit_to_app', to: '/page3' }
+    { label: 'Test', icon: 'bug_report', to: '/test' }
   ]
 
 })

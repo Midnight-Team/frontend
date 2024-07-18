@@ -15,10 +15,10 @@ const routes = [
     ]
   },
   {
-    path: '/pacotes',
+    path: '/test',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/pacotes/HostPacotesPage.vue') },
+      { path: '', component: () => import('pages/TestPage.vue') },
     ]
   },
 
