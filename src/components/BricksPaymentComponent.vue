@@ -37,7 +37,7 @@ onBeforeMount(async () => {
         const mp = new MercadoPago(process.env.PROD_PUBLIC_KEY, { locale: 'pt-BR' });
         const bricksBuilder = mp.bricks();
         const createPreference = async () => {
-            const response = await fetch(baseURL + '/create_preference', {
+            const response = await fetch(baseURL.value + '/create_preference', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ onBeforeMount(async () => {
                     },
                     onSubmit: ({ selectedPaymentMethod, formData }) => {
                         return new Promise((resolve, reject) => {
-                            fetch(baseURL + '/process_payment', {
+                            fetch(baseURL.value + '/process_payment', {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
