@@ -26,15 +26,18 @@ function openPixWindow() {
     
     window.open(pixWindow.value, '_blank', `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes`);
 }
+const isProd = ref(false)
+const baseURL = ref('')
 
 onBeforeMount(async () => {
+    isProd.value = !window.location.href.includes('localhost');
+    baseURL.value = isProd.value ? 'https://midnightickets-api.onrender.com/api' : 'http://localhost:3000/api';
     try {
         await loadScript('https://sdk.mercadopago.com/js/v2');
-
         const mp = new MercadoPago(process.env.PROD_PUBLIC_KEY, { locale: 'pt-BR' });
         const bricksBuilder = mp.bricks();
         const createPreference = async () => {
-            const response = await fetch('http://localhost:3333/api/create_preference', {
+            const response = await fetch(baseURL + '/create_preference', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -95,10 +98,8 @@ onBeforeMount(async () => {
                         console.log('Brick is ready');
                     },
                     onSubmit: ({ selectedPaymentMethod, formData }) => {
-                        const isProd = !window.location.href.includes('localhost')
-                        const baseURL = isProd ? 'https://midnightickets-api.onrender.com' : 'http://localhost:3333/api/' 
                         return new Promise((resolve, reject) => {
-                            fetch(baseURL, {
+                            fetch(baseURL + '/process_payment', {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
