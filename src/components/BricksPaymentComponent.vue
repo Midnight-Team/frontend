@@ -6,7 +6,9 @@
 
 <script setup>
 import { onBeforeMount, ref } from "vue";
+import { useQuasar } from 'quasar';
 
+const $q = useQuasar()
 const loadScript = (src) => {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
@@ -19,19 +21,24 @@ const loadScript = (src) => {
 };
 const pixWindow = ref('');
 function openPixWindow() {
-    const width = 800;  // Defina a largura da janela
-    const height = 600; // Defina a altura da janela
-    const left = (window.innerWidth / 2) - (width / 2); // Centralizar a janela horizontalmente
-    const top = (window.innerHeight / 2) - (height / 2); // Centralizar a janela verticalmente
-    
-    window.open(pixWindow.value, '_blank', `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes`);
+    $q.notify({
+        message: 'Você será redirecionado para o pagamento via PIX',
+        color: 'primary',
+        position: 'top',
+        icon: 'payments',
+        timeout: 600000,
+        actions: [{ label: 'Abrir Pix', color: 'white', class:'bg-green', handler: () => { window.open(pixWindow.value, '_blank'); } }]
+    });
+    setTimeout(() => {
+        window.open(pixWindow.value, '_blank');
+    }, 2000);
 }
 const isProd = ref(false)
 const baseURL = ref('')
 
 onBeforeMount(async () => {
     isProd.value = !window.location.href.includes('localhost');
-    baseURL.value = isProd.value ? 'https://midnightickets-api.onrender.com/api' : 'http://localhost:3000/api';
+    baseURL.value = isProd.value ? 'https://midnightickets-api.onrender.com/api' : 'http://localhost:3333/api';
     try {
         await loadScript('https://sdk.mercadopago.com/js/v2');
         const mp = new MercadoPago(process.env.PROD_PUBLIC_KEY, { locale: 'pt-BR' });
