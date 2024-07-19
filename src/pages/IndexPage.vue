@@ -130,7 +130,7 @@ const navigateTo = (path) => {
   backdrop-filter: blur(10px);
   box-shadow: 0 0 14px rgba(0, 0, 0, 0.435);
   transition: all 0.2s linear;
-  height: 6.8vh;
+  height: 6.4vh;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
