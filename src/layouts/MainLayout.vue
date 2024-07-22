@@ -15,7 +15,7 @@
 
       <q-tabs align="left">
         <q-route-tab to="/" label="Buscar" />
-        <q-route-tab to="#" label="Meus Eventos" />
+        <q-route-tab to="/evento" label="Meus Eventos" />
       </q-tabs>
     </q-header>
 
@@ -78,10 +78,10 @@ function goTo(to) {
 const menuOptions = ref({
   items: [
     { label: 'Meu perfil', icon: 'person', to: '/page3' },
-    { label: 'Meus Eventos', icon: 'date_range', to: '/page3' },
+    { label: 'Meus Eventos', icon: 'date_range', to: '/evento' },
     { label: 'Saldo e Vendas', icon: 'payments', to: '/page3' },
     { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
-    { label: 'Planos e Pacotes', icon: 'currency_exchange', to: '/page3' },
+    { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/page3' },
     { label: 'Validar Ingresso', icon: 'sensor_occupied', to: '/page3' },
     { label: 'Test', icon: 'bug_report', to: '/test' }
   ]

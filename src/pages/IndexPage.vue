@@ -21,42 +21,32 @@
         <div class="q-mt-md row justify-center">
           <q-card-section class="q-mb-md text-primary bg-white q-pa-md" style="border-top-right-radius: 40px;border-bottom-left-radius: 40px;width:80%">
             <div class="text-h5 text-bold text-center">Quem Somos??🫰🏽💰💵</div>
-            <div class="text-body1 text-center text-bold opacity-8">Serviço de bilheteria com os melhores preços e gerenciamento de vendas de ingressos!!</div>
+            <div class="text-body1 text-center text-bold opacity-8">Serviço de Bilheteria Premium sem taxa por ingresso e gerenciamento de vendas de ingressos!!</div>
           </q-card-section>
-          <div class="w100 row justify-center q-my-md">
-            <q-btn class="q-mb-md w100 q-py-lg" @click="navigateTo('/evento/steps')" label="Crie seu Evento Totalmente Grátis Em Poucos Minutos" color="primary"  icon-right="event_available" />
-          </div>
           <!-- Primeiro card existente -->
           <q-card class="q-mb-md q-ml-md" style="width: 70%;">
             <q-card-section>
               <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url2" alt="">Taxas ??💰💵</div>
-              <div class="text-body2 border-top q-pt-sm text-bold opacity-8">As mais baixas do mercado, temos opções de pacotes que possibilitam desde 0% (isentos de taxa) até no máximo 5% em cada ingresso vendido!!</div>
+              <div class="text-body2 border-top q-pt-sm text-bold opacity-8">NÃO! Aqui voce paga apenas o valor do pacote com a quatidade de purple coins🪙 desejadas. Cada purple coin equivale a um evento seu gerenciado pelo nosso App <strong>isento de taxa</strong>!!</div>
             </q-card-section>
-            <q-card-actions align="right">
-              <q-btn class="text-bold" flat label="Achar Meu Pacote Ideal" icon-right="request_quote" color="primary" />
-            </q-card-actions>
           </q-card>
   
           <!-- Segundo card existente -->
           <q-card class="q-mt-md q-ml-xl" style="width: 70%;">
             <q-card-section>
               <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url4" alt="">O que consigo fazer no App ??⚙️📲📱</div>
-              <div class="text-body2 q-pt-sm border-top opacity-8 text-bold">Comprar Ingressos, Criar Eventos e Vender Ingressos com as melhores taxas do mercado, Gerenciar e Monitorar seus eventos e vendas na palma da sua mão!!</div>
+              <div class="text-body2 q-pt-sm border-top opacity-8 text-bold">Comprar e Validar Ingressos, Criar Eventos e Vender Ingressos além de Gerenciar e Monitorar as vendas de seus eventos na palma da sua mão!!</div>
             </q-card-section>
           </q-card>
           <!-- Terceiro card existente -->
           <q-card class="q-mt-md q-mb-lg" style="margin-left: 25%;width: 70%;">
             <q-card-section>
               <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url1" alt="">Preciso Baixar Aplicativo??⚙️📲📱</div>
-              <div class="text-body2 opacity-8 text-bold q-pt-sm border-top">Não! Nosso serviço é um WebApp e pode ser totalmento utilizado por qualquer navegador, inclusive diretamente do Instagram📸!!</div>
+              <div class="text-body2 opacity-8 text-bold q-pt-sm border-top">Não! Nosso serviço é um WebApp hospedado na Nuvem pelas melhores tecnologias do mercado e pode ser totalmento utilizado por qualquer navegador, inclusive diretamente do Instagram📸!!</div>
             </q-card-section>
-            <q-card-actions align="right">
-              <q-btn class="text-bold" flat label="Criar Minha Conta Agora" icon-right="person_add" color="primary" />
-            </q-card-actions>
           </q-card>
             <div class="w100 flex flex-center q-py-md border-bt">
-              <q-btn label="Criar Conta" class="w80 q-mb-md q-py-md" color="green" icon="person_add"/>
-              <q-btn label="Fazer Login" color="blue" class="w80 q-py-md" icon="login"/>
+              <q-btn label="Solicitar Abertura de Conta Host com um de Nossos consultores" class="w80 q-mb-md q-py-md" color="green" icon="person_add"/>
             </div>
   
           <q-card class="q-mt-md" style="margin-left: 9%;width: 65%;">
@@ -74,15 +64,12 @@
               <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url5" alt="">Feedback dos Usuários ??📝💬</div>
               <div class="text-body2 q-pt-md border-top opacity-8 text-bold">Receba feedback instantâneo dos seus clientes para melhorar continuamente seus eventos e serviços. Sua satisfação é nossa prioridade!</div>
             </q-card-section>
-            <q-card-actions align="right">
-              <q-btn class="text-bold" flat label="Ler Feedbacks" icon-right="feedback" color="primary" />
-            </q-card-actions>
           </q-card>
   
           <q-card class="q-mt-md q-mb-sm" style="margin-left: -20%;width: 65%;">
             <q-card-section>
               <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url6" alt="">Segurança Garantida ??🔒🔐</div>
-              <div class="text-body2 q-pt-md border-top opacity-8 text-bold">Todos os pagamentos e dados pessoais são protegidos com os mais altos padrões de segurança, garantindo uma experiência segura e confiável para todos os usuários.</div>
+              <div class="text-body2 q-pt-md border-top opacity-8 text-bold">Todos os pagamentos e dados pessoais são protegidos com os mais altos padrões de segurança utilizando o Mercado Pago, garantindo uma experiência segura e confiável para todos os usuários. Todos os dados sensíveis relacionados ao Midnight Tickets são criptografados.</div>
             </q-card-section>
           </q-card>
         </div>
@@ -121,8 +108,8 @@ const navigateTo = (path) => {
   margin-right: 120px;
 }
 #home-card {
+  padding-top: 5px;
   cursor: pointer!important;
-  padding: 12px;
   position: sticky;
   top: 98px;
   z-index: 1;
@@ -130,7 +117,7 @@ const navigateTo = (path) => {
   backdrop-filter: blur(10px);
   box-shadow: 0 0 14px rgba(0, 0, 0, 0.435);
   transition: all 0.2s linear;
-  height: 6.4vh;
+  height: 50px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
@@ -161,7 +148,7 @@ const navigateTo = (path) => {
     margin-right: 0px;
   }
   #home-card {
-    height: 10vh;
+    padding-top:5px;
     border-radius: 0px;
   }
   #home-card:hover {

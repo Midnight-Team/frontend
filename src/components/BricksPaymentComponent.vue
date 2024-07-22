@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <div id="paymentBrick_container"></div>
+        <!-- <div id="paymentBrick_container"></div> -->
     </div>
 </template>
 
@@ -46,7 +46,7 @@ onBeforeMount(async () => {
         const createPreference = async () => {
             const response = await fetch(baseURL.value + '/create_preference', {
                 method: 'POST',
-                headers: {
+                headers: {  
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -55,7 +55,7 @@ onBeforeMount(async () => {
                             id: 'item-ID-1234',
                             title: 'Ingresso',
                             quantity: 1,
-                            unit_price: 100.00
+                            unit_price: 10.00
                         }
                     ],
                     purpose: 'wallet_purchase'
@@ -75,7 +75,7 @@ onBeforeMount(async () => {
         const renderPaymentBrick = async (bricksBuilder) => {
             const settings = {
                 initialization: {
-                    amount: 100,
+                    amount: 10,
                     preferenceId: preferenceId,
                     payer: {
                         firstName: "comprador teste",

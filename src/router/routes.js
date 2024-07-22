@@ -11,6 +11,7 @@ const routes = [
     path: '/evento',
     component: () => import('layouts/MainLayout.vue'),
     children: [
+      { path: '', component: () => import('pages/evento/MeusEventosPage.vue') },
       { path: 'steps', component: () => import('pages/evento/StepsPage.vue') },
     ]
   },

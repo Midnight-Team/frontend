@@ -1,5 +1,5 @@
-<template>
-    <div class="es1 bg-white q-ma-sm  rounded-borders shadow-4 relative">
+ <template>
+    <div class="es1 bg-white q-mx-sm  rounded-borders shadow-4 relative">
         <div class="title-1 w100 text-h6 row items-center text-primary shadow-1 q-py-xs justify-center text-bold">
             <q-icon size="md" color="primary" name="confirmation_number" class="q-pr-sm" />
             Configuração de Ingressos
@@ -33,7 +33,7 @@
 <script setup >
 import { ref, defineEmits, onMounted } from "vue";
 
-const emit = defineEmits(['next'])
+const emit = defineEmits(['next', 'prev'])
 
 const ingressoHandler = ref({
     titulo: '',
@@ -90,7 +90,7 @@ onMounted(() => {
 <style scoped>
 .title-1{
     position: sticky;
-    top: 140.5px;
+    top: 138px;
     background: #efefef4d;
     backdrop-filter: blur(4px);
     z-index: 1;

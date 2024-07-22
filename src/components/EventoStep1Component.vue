@@ -1,5 +1,5 @@
 <template>
-  <div class="es1 bg-white q-ma-sm  rounded-borders shadow-4 relative">
+  <div class="es1 bg-white q-mx-sm  rounded-borders shadow-4 relative">
     <div class="title-1 w100 text-h6 row items-center text-primary shadow-1 q-py-xs justify-center text-bold">
         <q-icon size="md" color="primary" name="event" class="q-pr-sm" />
         Informações do Evento
@@ -10,7 +10,10 @@
         <q-input outlined type="textarea" v-model="evento.endereco" label="Endereço*" />
         <q-input outlined type="textarea" v-model="evento.contato" label="Contato*" />
         <q-input outlined v-model="evento.categoria" label="Categoria*" placeholder="ex: Evento Automobilístico, Festas de Fim de Ano..."/>
-        <q-input outlined type="date" v-model="evento.data_evento"  label="Data do Evento*" />
+        <div class="row q-gutter-x-md no-wrap">
+            <q-input outlined type="date" v-model="evento.data_evento"  label="Data do Evento*" />
+            <q-input outlined type="time" v-model="evento.hora_evento"  label="Hora*"/>
+        </div>
         <q-input outlined v-model="qtd_ingressos_inicial" label="Quantidade de Ingressos* (limite)"  mask="#####" maxlength="6"/>
         <q-input outlined v-model="evento.localizacao" label="Localização Google Maps">
             <template v-slot:append>
@@ -19,6 +22,7 @@
         </q-input>
         <div class="w100 hline bg-primary"></div>
         <q-btn label="próximo" color="primary" @click="goNext()" icon-right="skip_next"/>
+        <q-btn label="meus eventos" flat color="primary" @click="returnEventos()"/>
     </div>
 
   </div>
@@ -26,11 +30,16 @@
 
 <script setup>
 import { ref, defineEmits, onMounted } from "vue";
-
-const emit = defineEmits(['next'])
+import { useRouter } from "vue-router";
+const router = useRouter()
+const emit = defineEmits(['next', 'prev'])
 
     const goNext = () => {
     emit('next')
+}
+
+const returnEventos = () => {
+    router.push('/evento')
 }
 
 const evento = ref({
@@ -41,6 +50,7 @@ const evento = ref({
     contato: '',
     localizacao: '',
     data_evento: '',
+    hora_evento: '',
     qtd_ingressos_inicial: 0,
     img_url: '',
     tipos_ingressos: [],
@@ -55,7 +65,7 @@ onMounted(() => {
 <style scoped>
 .title-1{
     position: sticky;
-    top: 140.5px;
+    top: 138px;
     background: #efefef4d;
     backdrop-filter: blur(2px);
     z-index: 1;
