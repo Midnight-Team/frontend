@@ -204,6 +204,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.q-page{
+    min-height: 100vh;
+}
 .title-1 {
     position: sticky;
     top: 96px;
