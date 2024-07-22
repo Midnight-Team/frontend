@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const showPassword = ref(false);
 const usuario = ref({
@@ -41,7 +41,9 @@ function colarAcessCode() {
         usuario.value.senha = text;
     });
 }
-
+onMounted(() => {
+    window.scrollTo(0, 0);
+})
 </script>
 
 <style scoped>

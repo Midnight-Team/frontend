@@ -23,7 +23,7 @@
                 </q-form>
             </q-card-section>
             <div class="column q-mb-md q-mx-md">
-                <q-btn flat :label="registrando ? 'já possuo uma conta' : 'criar conta'" @click="registrando = !registrando" :icon-right="registrando ? 'keyboard_return' : 'person_add'" color="primary" />
+                <q-btn flat :label="registrando ? 'já possuo uma conta' : 'criar conta'" @click="toggleRegistrando()" :icon-right="registrando ? 'keyboard_return' : 'person_add'" color="primary" />
             </div>
         </q-card>
     </div>
@@ -43,6 +43,11 @@ const usuario = ref({
     telefone: '',
     email: ''
 })
+
+const toggleRegistrando = () => {
+    window.scrollTo(0, 0);
+    registrando.value = !registrando.value;
+}
 
 </script>
 
