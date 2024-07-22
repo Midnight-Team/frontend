@@ -22,7 +22,14 @@ const routes = [
       { path: '', component: () => import('pages/TestPage.vue') },
     ]
   },
-
+  {
+    path: '/login',
+    component: () => import('layouts/LoginLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/login/UsuarioLoginPage.vue') },
+      { path: 'host', component: () => import('pages/login/HostLoginPage.vue') },
+    ]
+  },
   // Always leave this as last one,
   // but you can also remove it
   {

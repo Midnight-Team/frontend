@@ -1,5 +1,5 @@
 <template>
-    <q-page>
+    <q-page class="animate__animated animate__fadeIn">
         <div class="es1 bg-white q-ma-sm  rounded-borders shadow-4 relative">
             <div
                 class="title-1 w100 q-px-sm row items-center text-primary shadow-1 q-py-xs justify-between no-wrap text-bold">
@@ -20,7 +20,7 @@
                         Produções</div>
                         <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
-                        <q-table class="text-primary" :rows="rows" :columns="columns" row-key="eventName" />
+                        <q-table class="text-primary q-mb-md" :rows="rows" :columns="columns" row-key="eventName" />
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@ const rows = [
         eventName: 'Concerto de Rock',
         creationDate: '2024-01-01T10:00:00',
         eventDate: '2024-07-22T18:00:00',
-        ingressos: 240,
+        ingressos: '303/2000',
         accessCode: '1234',
         status: '🟢 Em andamento',
         revenue: 3200.00
@@ -108,15 +108,15 @@ const rows = [
         creationDate: '2024-02-15T09:00:00',
         eventDate: '2024-08-10T20:00:00',
         accessCode: '5678',
-        ingressos: 133,
+        ingressos: '133/200',
         status: '🟣 Finalizado',
-        revenue: 7500.00
+        revenue: 3500.00
     },
     {
         eventName: 'Feira de Tecnologia',
         creationDate: '2024-03-10T08:30:00',
         eventDate: '2024-09-05T19:00:00',
-        ingressos: 300,
+        ingressos: '230/300',
         accessCode: '9101',
         status: '🟢 Em andamento',
         revenue: 2320.00
@@ -126,24 +126,24 @@ const rows = [
         creationDate: '2024-04-20T11:15:00',
         eventDate: '2024-10-15T17:00:00',
         accessCode: '1121',
-        ingressos: 212,
-        status: '🟣 Finalizado',
-        revenue: 1320.00
+        ingressos: '0/150',
+        status: '🟡 Agendado',
+        revenue: 0.00
     },
     {
         eventName: 'Maratona de Cinema',
         creationDate: '2024-05-05T14:45:00',
-        ingressos: 199,
+        ingressos: '199/250',
         status: '🟣 Finalizado',
         eventDate: '2024-11-22T22:00:00',
         accessCode: '3141',
-        revenue: 420.00
+        revenue: 2340.00
     },
     {
         eventName: 'Workshop de Fotografia',
         creationDate: '2024-06-10T10:00:00',
         eventDate: '2024-12-01T09:00:00',
-        ingressos: 80,
+        ingressos: '80/140',
         accessCode: '2255',
         status: '🟢 Em andamento',
         revenue: 5000.00
@@ -152,7 +152,7 @@ const rows = [
         eventName: 'Seminário de Marketing',
         creationDate: '2024-07-01T11:00:00',
         eventDate: '2024-12-15T10:00:00',
-        ingressos: 150,
+        ingressos: '1240/2000',
         accessCode: '3344',
         status: '🟢 Em andamento',
         revenue: 7000.00
@@ -161,16 +161,16 @@ const rows = [
         eventName: 'Feira de Artesanato',
         creationDate: '2024-08-20T12:00:00',
         eventDate: '2025-01-10T11:00:00',
-        ingressos: 120,
+        ingressos: '12/150',
         accessCode: '4455',
         status: '🔴 Cancelado',
-        revenue: 0.00
+        revenue: 90.00
     },
     {
         eventName: 'Congresso de Medicina',
         creationDate: '2024-09-15T13:00:00',
         eventDate: '2025-02-20T14:00:00',
-        ingressos: 200,
+        ingressos: '200/200',
         accessCode: '5566',
         status: '🟢 Em andamento',
         revenue: 15000.00
@@ -179,7 +179,7 @@ const rows = [
         eventName: 'Festival de Cinema',
         creationDate: '2024-10-25T14:30:00',
         eventDate: '2025-03-05T15:00:00',
-        ingressos: 250,
+        ingressos: '250/300',
         accessCode: '6677',
         status: '🟢 Em andamento',
         revenue: 18000.00
