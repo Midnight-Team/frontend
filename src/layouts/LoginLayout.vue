@@ -10,23 +10,16 @@
         </div>
         <router-view></router-view>
         <q-card id="card-login"
-            class="text-bold column items-center justify-center text-primary q-pa-md text-center q-mt-md shadow-8"
+            class="animate__animated animate__fadeInTopLeft  text-bold column bg-grad-2 items-center justify-center text-white q-pa-md text-center q-mt-md shadow-8"
             v-if="!isLoginHost">
-            <div class="column text-h5 text-primary">LOGIN HOST</div>
+            <div class="column text-h5 text-white text-bold">LOGIN HOST</div>
             <div>É Produtor de Eventos ou Subhost??</div>
             <q-btn @click="isLoginHost = !isLoginHost" icon-right="admin_panel_settings" label="Faça login Aqui"
-            dense class="q-mt-md" color="primary" to="/login/host" />
+            dense class="q-mt-md q-pa-md" color="primary" to="/login/host" />
         </q-card>
-        <q-card id="card-login"
-            class="w100 column items-center justify-center text-bold text-primary q-pa-md text-center q-mt-md shadow-8"
-            v-if="isLoginHost">
-            <div class="text-h5 text-primary">LOGIN USUÁRIO</div>
-            <div>Deseja Comprar Ingressos e Buscar Eventos??</div>
-            <q-btn dense @click="isLoginHost = !isLoginHost" icon-right="person" label="Faça login Aqui" class="q-mt-md"
-                color="primary" to="/login" />
-        </q-card>
-        <q-card class="q-mt-md">
-            <q-btn icon="home" label="página inicial" color="primary" flat to="../" />
+        <q-card class="q-mt-md column animate__animated animate__lightSpeedInLeft animate__slow animate__delay-1s bg-primary-3" style="box-shadow: none!important;">
+            <q-btn @click="isLoginHost = !isLoginHost" v-if="isLoginHost" label="voltar" color="primary" class="q-pb-md bg-primary-3 text-white" flat to="/login"/>
+            <q-btn icon="home" label="página inicial" color="primary" class="bg-white" flat to="../" />
         </q-card>
     </q-layout>
 </template>
@@ -48,13 +41,29 @@ body{
     min-height: 100vh;
 }
 
+.bg-primary-3 {
+    background-color: #5507E0;
+}
+
 #card-login {
     width: 600px;
+    border-radius: 16px;
+    transition: .3s;
+    cursor: pointer;
+    position: relative;
+    border-top: 6px solid #5e1bc2;
+    border-bottom: 6px solid #4b149f;
+    backdrop-filter: blur(10px);
+    filter: drop-shadow(0px 0px 12px #7e06cdb9);
 }
 
 @media (max-width: 600px) {
     #card-login {
         width: 90vw;
     }
+}
+
+.q-btn {
+    border-radius: 16px!important;
 }
 </style>

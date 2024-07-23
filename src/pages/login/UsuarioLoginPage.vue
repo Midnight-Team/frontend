@@ -1,6 +1,6 @@
 <template>
-    <div id="usuariologin-wrapper" class="flex flex-center">
-        <q-card class="shadow-9  q-mt-md" id="card-login">
+    <div id="usuariologin-wrapper" class="animate__animated animate__fadeInLeft flex flex-center">
+        <q-card class="shadow-9  q-mt-md " id="card-login">
             <div class="text-h5 q-pl-md q-pt-md text-primary row items-center">
                 <q-icon :name="registrando ? 'person_add' : 'login'" size="lg" class="q-mr-sm"/>
                 {{ !registrando ? 'Login': 'Registrar'}} Usuário
@@ -45,8 +45,10 @@ const usuario = ref({
 })
 
 const toggleRegistrando = () => {
-    window.scrollTo(0, 0);
     registrando.value = !registrando.value;
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 100);
 }
 
 </script>
