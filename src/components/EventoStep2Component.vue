@@ -11,6 +11,12 @@
                     <q-icon name="payments" color="primary" />
                 </template>
             </q-input>
+            <q-input outlined maxlength="6" v-model="ingressoHandler.quantidade" label="Quantidade de Ingressos*" reverse-fill-mask mask="######">
+                <template v-slot:append>
+                    <div class="q-pr-sm">50</div>
+                    <q-icon name="confirmation_number" color="primary" />
+                </template>
+            </q-input>
             <q-btn label="Adicionar Tipo Ingresso" color="blue" :disable="validaIngresso()" @click="addIngresso()" icon-right="add_circle"/>
             <div class="w100 hline bg-primary"></div>
             <div class="text-bold mid-opacity text-primary text-center">Tipos Ingressos - Total: {{ ingressos.length }}</div>
@@ -38,6 +44,7 @@ const emit = defineEmits(['next', 'prev'])
 const ingressoHandler = ref({
     titulo: '',
     valor: '',
+    quantidade: 0,
 })
 
 const ingressos = ref([])

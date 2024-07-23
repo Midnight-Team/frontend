@@ -18,7 +18,7 @@
             dense class="q-mt-md q-pa-md" color="primary" to="/login/host" />
         </q-card>
         <q-card class="q-mt-md column animate__animated animate__lightSpeedInLeft animate__slow animate__delay-1s bg-primary-3" style="box-shadow: none!important;">
-            <q-btn @click="isLoginHost = !isLoginHost" v-if="isLoginHost" label="voltar" color="primary" class="q-pb-md bg-primary-3 text-white" flat to="/login"/>
+            <q-btn @click="isLoginHost = !isLoginHost" v-if="isLoginHost" label="voltar" color="primary" class="bg-primary-3 text-white" flat to="/login"/>
             <q-btn icon="home" label="página inicial" color="primary" class="bg-white" flat to="../" />
         </q-card>
     </q-layout>

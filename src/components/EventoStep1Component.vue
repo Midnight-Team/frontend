@@ -12,9 +12,15 @@
             <q-input outlined v-model="evento.categoria" label="Categoria*"
                 placeholder="ex: Evento Automobilístico, Festas de Fim de Ano..." />
             <div class="q-gutter-y-sm column">
-                <div class="text-h6 text-primary">Data e Hora do Evento</div>
-                <q-input label="Hora*" class="q-ml-md" style="width: 45%;" outlined v-model="evento.hora_evento" mask="time"
-                    :rules="['time']">
+                <div class="row items-center text-h6 text-primary justify-center no-wrap q-gutter-x-sm">
+                    <q-icon color="primary" size="md" name="schedule" />
+                    <div>
+                        Hora e Data do Evento
+                    </div>
+                    <q-icon color="primary" size="md" name="today" />
+                </div>
+                <q-input label="Hora*" class="q-mt-md q-ml-md" style="width: 45%;" outlined v-model="evento.hora_evento"
+                    mask="time" :rules="['time']">
                     <template v-slot:append>
                         <q-icon name="access_time" color="primary" class="cursor-pointer">
                             <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -31,8 +37,24 @@
                     <q-date class="w100" v-model="evento.data_evento" mask="DD-MM-YYYY HH:mm" color="primary" />
                 </div>
             </div>
-            <q-input outlined v-model="qtd_ingressos_inicial" label="Quantidade de Ingressos* (limite)" mask="#####"
-                maxlength="6" />
+            <div class="text-primary saldo row items-center">
+                <div class="row items-center q-gutter-x-xs">
+                    <div>
+                        Meu Saldo:
+                    </div>
+                    <div class="text-bold text-primary q-px-xs">3</div>
+                    <div class="text-bold mid-opacity text-primary">PurpleCoins</div>
+                    <q-icon name="paid" size="md" class="q-pr-sm" color="primary" />
+                </div>
+                <q-btn label="Recarregar PurpleCoins" icon-right="currency_exchange" to="/" />
+            </div>
+            <q-select outlined v-model="evento.qtd_ingressos_inicial" label="Quantidade de Ingressos Inicial*"
+                :options="evento.qtd_ingressos_inicialOptions" />
+            <q-input outlined v-model="evento.img_url" label="URL da Imagem do Evento">
+                <template v-slot:append>
+                    <q-btn flat icon="image" @click="verImg(evento.img_url)" color="primary" />
+                </template>
+            </q-input>
             <q-input outlined v-model="evento.localizacao" label="Localização Google Maps">
                 <template v-slot:append>
                     <q-btn flat icon="pin_drop" @click="window.open(evento.localizacao)" color="primary" />
@@ -69,11 +91,16 @@ const evento = ref({
     localizacao: '',
     data_evento: '',
     hora_evento: '',
-    qtd_ingressos_inicial: 0,
+    qtd_ingressos_inicial: null,
+    qtd_ingressos_inicialOptions: ['50 ingressos por 1 PurpleCoin🟣', '100 ingressos por 2 PurpleCoins🟣', '300 ingressos por 3 PurpleCoins🟣', '500 ingressos por 4 PurpleCoins🟣', '750 ingressos por 5 PurpleCoins🟣', '1.000  ingressos por 8 PurpleCoins🟣', '10.000  ingressos por 12 PurpleCoins🟣', '20.000 ingressos por 25 PurpleCoins🟣'],
     img_url: '',
     tipos_ingressos: [],
     ingressos: [],
 })
+
+function verImg(url) {
+    window.open(url, '_blank')
+}
 
 onMounted(() => {
     window.scrollTo(0, 0);

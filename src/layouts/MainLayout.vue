@@ -86,7 +86,7 @@ const menuOptions = ref({
     { label: 'Meus Eventos', icon: 'date_range', to: '/evento' },
     // { label: 'Saldo e Vendas', icon: 'payments', to: '/page3' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
-    // { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/page3' },
+    // { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/recarregar' },
     // { label: 'Validar Ingresso', icon: 'sensor_occupied', to: '/page3' },
     // { label: 'Test', icon: 'bug_report', to: '/test' }
   ]
