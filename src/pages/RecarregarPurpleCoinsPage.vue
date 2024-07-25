@@ -12,7 +12,7 @@
         </div>
         <div class="wrapper-responsive q-mt-lg">
             <div
-                class="w100 row items-center justify-center q-py-md q-my-md rounded-borders shadow-4 text-primary q-a bg-orange-4">
+                class="w100 row items-center justify-center q-py-md q-my-md rounded-borders shadow-4 text-primary q-a bg-green-3">
                 <q-icon size="md" color="primary" name="currency_exchange" />
                 <div class="text-center text-bold q-px-sm ">Trocar SubCoins PurpleCoins</div>
                 <q-icon size="md" color="primary" name="paid" />
