@@ -90,7 +90,7 @@ function goTo(to) {
 const menuOptions = ref({
   items: [
     // { label: 'Meu perfil', icon: 'person', to: '/page3' },
-    // { label: 'Meus Eventos', icon: 'date_range', to: '/evento' },
+    { label: 'Meus Eventos', icon: 'date_range', to: '/evento' },
     // { label: 'Saldo e Vendas', icon: 'payments', to: '/page3' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
     { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/recarregar' },

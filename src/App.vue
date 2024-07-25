@@ -9,4 +9,5 @@ console.log(window.location.href)
 export default defineComponent({
   name: 'App'
 })
+alert('🛠️ App em Desenvolvimento, acesso disponível apenas para navegação de teste!! 🟣')
 </script>
