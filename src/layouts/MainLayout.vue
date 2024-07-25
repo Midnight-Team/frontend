@@ -48,6 +48,13 @@
           </div>
           <q-btn class="q-mt-lg" @click="loginLayout('/login')" label="Login ou Criar Conta" color="primary" icon="login" />
         </div>
+        <div id="instagram" class="w100 row no-wrap items-center justify-center q-mt-xl text-primary bg-grey-2 q-py-sm">
+          <img src="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" alt="">
+          <a class="text-center q-pl-sm" href="https://www.instagram.com/midnightickets/" target="_blank" style="font-size: 1.1rem;text-decoration: none;">
+              Midnight Tickets<br>no Instagram
+          </a>
+          <q-icon name="local_activity" size="xl" class="q-pl-sm text-primary" />
+        </div>
       </q-list>
     </q-drawer>
 
@@ -83,10 +90,10 @@ function goTo(to) {
 const menuOptions = ref({
   items: [
     // { label: 'Meu perfil', icon: 'person', to: '/page3' },
-    { label: 'Meus Eventos', icon: 'date_range', to: '/evento' },
+    // { label: 'Meus Eventos', icon: 'date_range', to: '/evento' },
     // { label: 'Saldo e Vendas', icon: 'payments', to: '/page3' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
-    // { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/recarregar' },
+    { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/recarregar' },
     // { label: 'Validar Ingresso', icon: 'sensor_occupied', to: '/page3' },
     // { label: 'Test', icon: 'bug_report', to: '/test' }
   ]
