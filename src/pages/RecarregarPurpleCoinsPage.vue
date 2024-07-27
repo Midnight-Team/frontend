@@ -56,10 +56,10 @@ import FooterComponent from "../components/FooterComponent.vue";
 
 const pacotesCoins = ref(
     [
-        { value: 1, label: '1 PurpleCoin', preco: 120, valorAvista: null },
-        { value: 3, label: '5 PurpleCoins', preco: 500, valorAvista: null },
-        { value: 4, label: '10 PurpleCoins', preco: 10000, valorAvista: 12000 },
-        { value: 5, label: '20 PurpleCoins', preco: 14000, valorAvista: 12000 },
+        { value: 1, label: '1 PurpleCoin', preco: 120, valorAvista: 120 },
+        { value: 3, label: '5 PurpleCoins', preco: 500, valorAvista: 500 },
+        { value: 4, label: '10 PurpleCoins', preco: 1000, valorAvista: 900 },
+        { value: 5, label: '25 PurpleCoins', preco: 2200, valorAvista: 2000 },
     ]
 )
 
