@@ -2,6 +2,7 @@
 // app global css in SCSS form
 * {
     font-family: "Montserrat", sans-serif;
+    scroll-behavior: smooth;
 }
 
 html {
@@ -22,6 +23,17 @@ html {
     background: -webkit-linear-gradient(to left, #682edc, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #682edc, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
+}
+.bg-grad-3 {
+    background: #8E2DE2;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #682edc, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #682edc, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-4 {
+    background: #8E2DE2;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #682edc, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #682edc, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .w100{
