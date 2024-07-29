@@ -158,8 +158,15 @@
                         <q-icon name="local_activity" size="xl" class="q-pl-sm text-primary" />
                     </div>
                     <div class="space rounded-borders q-my-md " style="border-bottom: 8px solid #3C0783;z-index: -10">
-                        <q-btn @click="wppConsultor()" class="q-pa-md w100" color="primary" icon-right="description"
-                            label="Preencha Esse Formulário de Pesquisa para otimização do App" />
+                        <q-card class="q-pa-md">
+                            <q-input v-model="contato.form.companyName" label="Nome da empresa"/>
+                            <q-input v-model="contato.form.phone" label="Telefone de contato"/>
+                            <q-input v-model="contato.email" label="Email de contato"/>
+                            <q-input v-model="contato.form.maxCapacity" label="Capacidade máxima de público"/>
+                            <q-input v-model="contato.form.eventType" label="Tipo de evento"/>
+                        </q-card>
+                        <q-btn @click="sendForm()" class="q-pa-md w100" color="primary" icon-right="description"
+                            label="Enviar formulário" />
                     </div>
                     <div class="space rounded-borders q-my-md " style="border-top: 8px solid #3C0783;z-index: -10">
                         <q-btn @click="wppConsultor()" class="q-pa-md w100" color="green" icon-right="sms"
@@ -174,16 +181,29 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { ref } from "vue";
+import { api } from 'src/boot/axios';
 import FooterComponent from "../components/FooterComponent.vue";
 
 const $q = useQuasar()
 
 const contato = ref({
     email: '',
+    form: {
+        phone: '',
+        companyName: '',
+        maxCapacity: '',
+        eventType: '',
+    },
+    dispositivo: window.innerWidth < 900 ? 'Mobile' : 'Desktop'
 })
 
 function wppConsultor() {
     window.open('https://wa.me/5561981748795?text=Ola,%20Gostaria%20de%20realizar%20uma%20consultoria%20para%20Otimizar%20a%20Venda%20dos%20meus%20Ingressos%20e%20Escalar%20o%20Lucro%20dos%20Meus%20Eventos%20com%20a%20Midnight%20Tickets!', '_blank');
+}
+
+async function sendForm() {
+    console.log(contato.value.email, contato.value.phone, contato.value.companyName, contato.value.maxCapacity, contato.value.eventType, contato.value.dispositivo)
+    await api.post('/landing/email', contato.value)
 }
 
 function getEmail() {
