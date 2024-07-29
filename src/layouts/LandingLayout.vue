@@ -95,7 +95,7 @@
                         Veja
                         como
                         nossa Plataforma pode aumentar o Faturamento do seu Evento!!</div>
-                    <div style="font-size:1rem" class="q-px-sm bg-white text-left q-py-md rounded-borders">
+                    <div style="font-size:1rem" class="q-px-md bg-white text-left q-py-md rounded-borders">
                         🟢 <strong class="text-green">Modalidade Grátis:</strong> Crie Eventos <strong>sem
                             custos</strong> e pague apenas <strong>6% de taxa</strong>
                         por
@@ -115,7 +115,7 @@
                     <div
                         class="w100 text-h5 text-bold bg-white text-primary text-center q-px-md rounded-borders q-py-sm border-bottom q-mt-md">
                         🪙 Benefícios</div>
-                    <div style="font-size:1rem" class="q-px-xs bg-white q-py-md rounded-borders border-bottom">
+                    <div style="font-size:1rem" class="q-px-md bg-white q-py-md rounded-borders border-bottom">
                         💸 <strong style="font-size:1.2rem" class="text-primary text-bold">Pagamentos e Menores
                             Taxa:</strong> Estamos integrados ao <strong>Mercado Pago</strong> com segurança
                         e confidencialidade. Além de possuir <strong>as menores taxas de
