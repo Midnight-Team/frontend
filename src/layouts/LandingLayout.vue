@@ -39,7 +39,7 @@
                                 <q-icon name="email" color="primary" />
                             </template>
                             <template v-slot:append>
-                                <q-btn @click="getEmail()" color="primary" icon="send" label="Enviar" />
+                                <q-btn @click="sendForm()" color="primary" icon="send" label="Enviar" />
                             </template>
                         </q-input>
                     </q-card>
@@ -95,7 +95,7 @@
                         Veja
                         como
                         nossa Plataforma pode aumentar o Faturamento do seu Evento!!</div>
-                    <div style="font-size:1rem" class="q-px-md bg-white text-left q-py-md rounded-borders">
+                    <div style="font-size:1rem" class="q-px-md   bg-white text-left q-py-md rounded-borders">
                         🟢 <strong class="text-green">Modalidade Grátis:</strong> Crie Eventos <strong>sem
                             custos</strong> e pague apenas <strong>6% de taxa</strong>
                         por
@@ -146,24 +146,19 @@
                     <img class="img" src="~/assets/landing-images/evento.png" alt="">
                 </div>
                 <div id="form" class=" relative">
-                    <div class="text-h4 text-bold q-py-md text-white text-center bg-grad-1 border-bottom">🚀 Fale
+                    <div class="text-h4 text-bold q-py-md text-white text-center bg-grad-1 border-bottom q-mt-md">🚀 Fale
                         Conosco</div>
-                    <div id="instagram"
-                        class="w100 row no-wrap items-center justify-center q-mt-sm text-primary bg-grey-2 q-py-sm">
-                        <img src="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" alt="">
-                        <a class="text-center text-primary q-pl-sm" href="https://www.instagram.com/midnightickets/"
-                            target="_blank" style="font-size: 1.1rem;text-decoration: none;">
-                            Midnight Tickets<br>no Instagram
-                        </a>
-                        <q-icon name="local_activity" size="xl" class="q-pl-sm text-primary" />
-                    </div>
+                    
                     <div class="space rounded-borders q-my-md " style="border-bottom: 8px solid #3C0783;z-index: -10">
-                        <q-card class="q-pa-md">
-                            <q-input v-model="contato.form.companyName" label="Nome da empresa"/>
-                            <q-input v-model="contato.form.phone" label="Telefone de contato"/>
-                            <q-input v-model="contato.email" label="Email de contato"/>
-                            <q-input v-model="contato.form.maxCapacity" label="Capacidade máxima de público"/>
-                            <q-input v-model="contato.form.eventType" label="Tipo de evento"/>
+                        <q-card class="q-pa-md collumn q-gutter-y-md " style="border: 15px solid #6310E1; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                            <div class="w100 text-center text-primary text-bold mid-opacity">Preencha os campos abaixo e PARE de pagar TAXAS ABUSIVAS</div>
+                            
+                            <q-input maxlength="200" outlined v-model="contato.form.companyName" label="Nome da empresa"/>
+                            <q-input maxlength="200" outlined v-model="contato.form.phone" label="Telefone de contato"/>
+                            <q-input maxlength="200" outlined v-model="contato.email" label="Email de contato"/>
+                            <q-input type="number" outlined v-model="contato.form.maxCapacity" label="Capacidade máxima de público"/>
+                            <q-input type="number" outlined v-model="contato.form.mediumEventCapacity" label="Média de público por evento"/>
+                            <q-input maxlength="200" outlined v-model="contato.form.eventType" label="Tipo de evento"/>
                         </q-card>
                         <q-btn @click="sendForm()" class="q-pa-md w100" color="primary" icon-right="description"
                             label="Enviar formulário" />
@@ -193,6 +188,7 @@ const contato = ref({
         companyName: '',
         maxCapacity: '',
         eventType: '',
+        mediumEventCapacity: '',
     },
     dispositivo: window.innerWidth < 900 ? 'Mobile' : 'Desktop'
 })
@@ -201,12 +197,7 @@ function wppConsultor() {
     window.open('https://wa.me/5561981748795?text=Ola,%20Gostaria%20de%20realizar%20uma%20consultoria%20para%20Otimizar%20a%20Venda%20dos%20meus%20Ingressos%20e%20Escalar%20o%20Lucro%20dos%20Meus%20Eventos%20com%20a%20Midnight%20Tickets!', '_blank');
 }
 
-async function sendForm() {
-    console.log(contato.value.email, contato.value.phone, contato.value.companyName, contato.value.maxCapacity, contato.value.eventType, contato.value.dispositivo)
-    await api.post('/landing/email', contato.value)
-}
-
-function getEmail() {
+async function sendForm() {    
     if (contato.value.email === '' || !contato.value.email.includes('@')) {
         $q.notify({
             message: 'Por favor, insira um email válido!',
@@ -216,7 +207,22 @@ function getEmail() {
         });
         return
     }
-    window.open(`https://api.whatsapp.com/send?phone=5561981748795&text=Olá,%20gostaria%20de%20receber%20notificações%20sobre%20o%20lançamento%20do%20seu%20serviço%20e%20receber%20bônus%20na%20Midnight%20Tickets!%20Meu%20email%20é:%20${contato.value.email}`, '_blank');
+    
+    await api.post('/landing/email', contato.value).then(() => {
+        $q.notify({
+            message: 'Formulário enviado com sucesso!',
+            color: 'green',
+            position: 'top',
+            icon: 'email',
+        });
+    }).catch(() => {
+        $q.notify({
+            message: 'Erro ao enviar formulário!',
+            color: 'red',
+            position: 'top',
+            icon: 'email',
+        });
+    });
 }
 
 function scrollTop() {
