@@ -3,11 +3,13 @@
 
     <q-header class="bg-grad-1 text-white" height-hint="98">
       <q-toolbar>
-        <q-toolbar-title>
+        <q-toolbar-title class="row items-center">
           <q-avatar>
             <q-icon size="md" color="white" name="local_activity" />
           </q-avatar>
-          Midnight Tickets
+          <a :href="landingLink" style="text-decoration: none;" class="text-white q-pl-xs text-bold">
+            Midnight Tickets
+          </a>
         </q-toolbar-title>
 
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
@@ -46,14 +48,11 @@
             </q-avatar>
             Midnight Tickets
           </div>
-          <q-btn class="q-mt-lg" @click="loginLayout('/login')" label="Login ou Criar Conta" color="primary" icon="login" />
+          <q-btn class="q-mt-lg" @click="loginLayout('/login')" label="Login ou Criar Conta" color="primary"
+            icon="login" />
         </div>
         <div id="instagram" class="w100 row no-wrap items-center justify-center q-mt-xl text-primary bg-grey-2 q-py-sm">
-          <img src="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" alt="">
-          <a class="text-center q-pl-sm" href="https://www.instagram.com/midnightickets/" target="_blank" style="font-size: 1.1rem;text-decoration: none;">
-              Midnight Tickets<br>no Instagram
-          </a>
-          <q-icon name="local_activity" size="xl" class="q-pl-sm text-primary" />
+          <img src="" alt="">
         </div>
       </q-list>
     </q-drawer>
@@ -73,6 +72,7 @@ const rightDrawerOpen = ref(false)
 const saldo = ref('R$ *****,**')
 const saldoHandler = ref('R$ 1.200,00')
 const router = useRouter()
+const landingLink = !window.location.href.includes('localhost') ? 'https://midnightickets.com' : 'http://localhost:9000'
 
 function changeVisibility() {
   if (saldo.value.includes('*')) {

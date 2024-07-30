@@ -7,16 +7,16 @@
             </div>
             <q-card-section>
                 <q-form @submit="submitForm()">
-                    <q-input outlined class="q-mb-md" v-model="usuario.cpf" label="CPF*" />
-                    <q-input outlined v-model="usuario.senha" label="Senha*" :type="showPassword ? 'text' : 'password'">
+                    <q-input v-if="registrando" filled class="q-my-md" v-model="usuario.nome" label="Nome*" />
+                    <q-input filled class="q-mb-md" v-model="usuario.cpf" label="CPF*" mask="###.###.###-##"  />
+                    <q-input v-if="registrando" filled class="q-mb-md" v-model="usuario.email" label="Email*" />
+                    <q-input v-if="registrando" filled class="q-mb-md" v-model="usuario.telefone" label="Telefone*"  mask="(##) #####-####" />
+                    <q-input filled v-model="usuario.senha" label="Senha*" :type="showPassword ? 'text' : 'password'">
                         <template v-slot:append>
                             <q-icon :name="showPassword ? 'visibility' : 'visibility_off'" color="primary" class="cursor-pointer" @click="showPassword = !showPassword" />
                         </template>
                     </q-input>
-                    <q-input v-if="registrando" outlined class="q-my-md" v-model="usuario.nome" label="Nome*" />
-                    <q-input v-if="registrando" outlined class="q-mb-md" v-model="usuario.telefone" label="Telefone*"  mask="(##) #####-####" />
-                    <q-input v-if="registrando" outlined class="q-mb-md" v-model="usuario.email" label="Email*" />
-                    <div v-if="registrando" class="text-h6 text-primary">Data de Nascimento*</div>
+                    <div v-if="registrando" class="q-my-sm text-h6 text-primary">Data de Nascimento:*</div>
                     <q-date class="w100 row justify-center q-mb-md" v-if="registrando" v-model="usuario.dataNascimento" mask="DD-MM-YYYY HH:mm" color="primary" />
                     <q-btn v-if="registrando" type="submit" label="Registrar" color="green" icon-right="person_add" class="w100 q-mt-md"/>
                     <q-btn v-if="!registrando" type="submit" label="Entrar" color="primary" icon-right="login" class="w100 q-mt-md"/>
