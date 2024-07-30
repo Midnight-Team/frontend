@@ -1,7 +1,6 @@
 // src/stores/authStore.ts
 import { defineStore } from 'pinia';
 import { api } from 'src/boot/axios';
-import { useSettingsStore } from './settingsStore';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -13,7 +12,6 @@ export const useAuthStore = defineStore('auth', {
       sessionStorage.setItem('userLogado', 'true');
     },
     async logout() {
-      useSettingsStore().setRepertorioViewHandle('');
       await api.post('/logout', {login: this.getInfoLogin(), senha: this.getInfoPassword()})
         .then(() => {
           this.isAuthenticated = false;

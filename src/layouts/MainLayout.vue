@@ -18,6 +18,7 @@
       <q-tabs align="left">
         <q-route-tab to="/" label="Buscar" />
         <q-route-tab to="/login" label="Login/Registar-se" />
+        <q-route-tab v-if="isAuthenticated" to="/login" label="Meus Eventos" />
       </q-tabs>
     </q-header>
 
@@ -51,8 +52,15 @@
           <q-btn class="q-mt-lg" @click="loginLayout('/login')" label="Login ou Criar Conta" color="primary"
             icon="login" />
         </div>
-        <div id="instagram" class="w100 row no-wrap items-center justify-center q-mt-xl text-primary bg-grey-2 q-py-sm">
-          <img src="" alt="">
+        <div id="instagram" class="w100  row no-wrap items-center justify-center q-mt-xl text-primary bg-primary q-py-sm">
+          <div class="row items-center ">
+            <q-avatar>
+              <q-icon size="md" color="white" name="local_activity" />
+            </q-avatar>
+            <a href="/app" style="text-decoration: none;" class="text-white q-pl-xs text-bold">
+              Midnight Tickets
+            </a>
+          </div>
         </div>
       </q-list>
     </q-drawer>
@@ -65,9 +73,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from 'src/stores/authStore';
 
+const authStore = useAuthStore();
+const isAuthenticated = computed(() => authStore.isAuthenticated);
 const rightDrawerOpen = ref(false)
 const saldo = ref('R$ *****,**')
 const saldoHandler = ref('R$ 1.200,00')

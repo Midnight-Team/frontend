@@ -54,16 +54,15 @@ const login = async () => {
         usuario.value.login = usuario.value.login.toLowerCase();
         await api.post('/login_host', usuario.value).then(res => {
             sessionStorage.clear();
-            sessionStorage.setItem('host', res.data.host);
+            sessionStorage.setItem('userLogado', res.data.host);
             $q.notify({
                 color: 'positive',
                 message: 'Login efetuado com sucesso!',
                 icon: 'local_activity',
                 position: 'top',
-                timeout: 2000
             });
             setTimeout(() => {
-                router.push('/app');
+                window.location.href = '/app'
             }, 1000);
         }).catch(err => {
             $q.notify({
@@ -71,7 +70,6 @@ const login = async () => {
                 message: err.response.data.error,
                 icon: 'report_problem',
                 position: 'top',
-                timeout: 2000
             });
             usuario.value.senha = '';
             console.log(err)
