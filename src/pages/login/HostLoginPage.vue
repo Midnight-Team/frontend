@@ -40,7 +40,6 @@ import { api } from "src/boot/axios";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
-const router = useRouter();
 const $q = useQuasar();
 const showPassword = ref(false);
 const usuario = ref({
@@ -54,7 +53,8 @@ const login = async () => {
         usuario.value.login = usuario.value.login.toLowerCase();
         await api.post('/login_host', usuario.value).then(res => {
             sessionStorage.clear();
-            sessionStorage.setItem('userLogado', res.data.host);
+            sessionStorage.setItem('userLogado', JSON.stringify(res.data.host));
+            sessionStorage.setItem('role', JSON.stringify(res.data.role));
             $q.notify({
                 color: 'positive',
                 message: 'Login efetuado com sucesso!',

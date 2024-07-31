@@ -17,8 +17,8 @@
 
       <q-tabs align="left">
         <q-route-tab to="/" label="Buscar" />
-        <q-route-tab to="/login" label="Login/Registar-se" />
-        <q-route-tab v-if="isAuthenticated" to="/login" label="Meus Eventos" />
+        <q-route-tab v-if="!isAuthenticated" to="/login" label="Login/Registar-se" />
+        <q-route-tab v-if="isAuthenticated" to="/evento" label="Meus Eventos" />
       </q-tabs>
     </q-header>
 
@@ -39,7 +39,7 @@
             <q-item-label>{{ item.label }}</q-item-label>
           </q-item-section>
         </q-item>
-        <div class="w100 row items-center justify-center q-mt-xl">
+        <div v-if="!isAuthenticated" class="w100 row items-center justify-center q-mt-xl">
           <div class="text-center q-mb-md q-mx-md">
             Registre-se ou Faça Login para ter acesso aos seus Eventos e Ingressos!!
           </div>
@@ -49,10 +49,10 @@
             </q-avatar>
             Midnight Tickets
           </div>
-          <q-btn class="q-mt-lg" @click="loginLayout('/login')" label="Login ou Criar Conta" color="primary"
+          <q-btn v-if="!isAuthenticated" class="q-mt-lg" @click="loginLayout('/login')" label="Login ou Criar Conta" color="primary"
             icon="login" />
         </div>
-        <div id="instagram" class="w100  row no-wrap items-center justify-center q-mt-xl text-primary bg-primary q-py-sm">
+        <div class="absolute-bottom w100  row no-wrap items-center justify-center q-mt-xl text-primary bg-primary q-py-sm">
           <div class="row items-center ">
             <q-avatar>
               <q-icon size="md" color="white" name="local_activity" />
@@ -104,7 +104,7 @@ const menuOptions = ref({
     { label: 'Meus Eventos', icon: 'date_range', to: '/evento' },
     // { label: 'Saldo e Vendas', icon: 'payments', to: '/page3' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
-    { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/recarregar' },
+    { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/app/recarregar' },
     // { label: 'Validar Ingresso', icon: 'sensor_occupied', to: '/page3' },
     // { label: 'Test', icon: 'bug_report', to: '/test' }
   ]
