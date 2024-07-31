@@ -3,13 +3,16 @@
         <q-header class="fixed bg-grad-3 text-white animate__animated animate__backInDown animate__slow"
             height-hint="98">
             <div style="font-size: 1rem;" class=" q-py-md w100 row no-wrap items-center  justify-evenly">
-                <a @click="scrollTop()">
-                    Quem Somos
+                <a v-if="!isMobile" @click="scrollTop()" class="menu-item row items-center">
+                    <q-icon class="q-pr-xs" name="local_activity" size="sm"/> Midnight Tickets
                 </a>
-                <a href="#beneficios">
+                <a v-else @click="scrollTop()" class="menu-item row items-center">
+                    <q-icon name="local_activity" size="lg"/>
+                </a>
+                <a class="menu-item" href="#beneficios">
                     Vantagens
                 </a>
-                <a @click="scrollToBottom()">
+                <a class="menu-item" @click="scrollToBottom()">
                     Contato
                 </a>
             </div>
@@ -33,13 +36,13 @@
                     </div>
                     <q-card class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-5s">
                         <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Receba notificações sobre o LANÇAMENTO do nosso SERVIÇO e
-                            receba VANTAGENS GRATUITAMENTE!!</p>
+                            POTENCIALIZE seu FATURAMENTO!!</p>
                         <q-input v-model="contato.email" class="bg-white" filled label="Seu melhor email">
                             <template v-slot:prepend>
                                 <q-icon name="email" color="primary" />
                             </template>
                             <template v-slot:append>
-                                <q-btn @click="sendForm()" color="primary" icon="send" label="Enviar" />
+                                <q-btn @click="scrollToBottom()" color="primary" icon="send" label="Enviar" />
                             </template>
                         </q-input>
                     </q-card>
@@ -63,7 +66,7 @@
                         class="q-mb-md bg-grad-2 text-white high-opacity text-bold q-px-sm q-py-md text-right">
                         Maximizamos seus lucros na venda de ingressos de forma escalável com serviços personalizados,
                         transparência, suporte e uma
-                        interface amigável. Seus ingressos mais caros são os que mais pagam taxas abusivas, mas pra nós o ingresso é apenas um dado e por isso não devem ser mais taxados do que outros.
+                        interface amigável. Seus ingressos mais caros são os que mais pagam taxas abusivas, mas pra nós o ingresso é apenas um dado e por isso não devem ser taxados mais do que outros.
                         <br>
                     </div>
                     <div class="w100 img-wrapper column">
@@ -75,7 +78,7 @@
                     <div style="font-size:1.1rem;border-bottom-left-radius: 40px;"
                         class="bg-grad-2 text-white high-opacity text-bold q-px-sm  q-py-md text-right">Desde
                         pequenos encontros a grandes festivais, nossa plataforma se adapta às suas necessidades e
-                        maximiza seus ganhos.
+                        POTENCIALIZA seus ganhos.
                         Na Midnight Tickets, entendemos que cada evento é único. Oferecemos opções flexíveis que se
                         ajustam ao porte do seu evento, permitindo que você personalize sua experiência de acordo com sua demanda
                     </div>
@@ -143,9 +146,29 @@
                         serviços da AWS, <strong>garantindo segurança e escalabilidade</strong> para <strong>todos os tipos de eventos e usuários</strong>
                     </div>
                 </div>
-                <div class="w100 img-wrapper column">
-                    <img class="img" src="~/assets/landing-images/evento.png" alt="">
-                </div>
+                <q-carousel
+                v-model="slide"
+                transition-prev="scale"
+                transition-next="scale"
+                swipeable
+                animated
+                control-color="white"
+                navigation
+                autoplay="true"
+                infinite
+                padding
+                arrows
+                class="bg-primary text-white shadow-1 q-mt-md"
+              >
+                <q-carousel-slide :name="1" img-src="~/assets/landing-images/login.png" class="column no-wrap flex-center">
+                </q-carousel-slide>
+                <q-carousel-slide :name="2" img-src="~/assets/landing-images/evento.png" class="column no-wrap flex-center">
+                </q-carousel-slide>
+                <q-carousel-slide :name="3" img-src="~/assets/landing-images/evento2.png" class="column no-wrap flex-center">
+                </q-carousel-slide>
+                <q-carousel-slide v-if="isMobile" :name="4" img-src="~/assets/landing-images/evento3.png" class="column no-wrap flex-center">
+                </q-carousel-slide>
+              </q-carousel>
                 <div id="form" class=" relative">
                     <div class="text-h4 text-bold q-py-md text-white text-center bg-grad-1 border-bottom q-mt-md">🚀 Fale
                         Conosco</div>
@@ -153,23 +176,81 @@
                     <div class="space rounded-borders q-my-md  " style="border-bottom: 8px solid #3C0783;z-index: -10">
                         <q-card class="q-pa-md collumn q-gutter-y-md rounded-borders " style="border: 15px solid #6310E1; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
                             <div class="w100 text-center text-primary text-bold mid-opacity ">Os campos abaixos são opcionais. Preencha-os e PARE de pagar TAXAS ABUSIVAS.</div>
-                            <q-input maxlength="200" filled v-model="contato.form.name" label="Nome Completo"/>
-                            <q-input maxlength="200" filled v-model="contato.form.companyName" label="Nome da empresa/Razão Social"/>
-                            <q-input mask="(##) #####-####" maxlength="200" filled v-model="contato.form.phone" label="Telefone de contato"/>
-                            <q-input maxlength="200" filled v-model="contato.email" label="Email de contato"/>
-                            <q-input maxlength="200" filled v-model="contato.form.eventType" label="Tipos de Eventos"/>
-                            <q-input mask="####" filled v-model="contato.form.maxCapacity" label="Capacidade máxima de público"/>
-                            <q-input mask="####" filled v-model="contato.form.mediumEventCapacity" label="Média de público por evento"/>
-                            <q-input maxlength="9" prefix="R$" reverse-fill-mask  mask="##.###,##" filled v-model="contato.form.mediumProfits" placeholder="Média do faturamento por evento" label="Lucro por evento em Ingressos Digitais"/>
-                            <q-toggle class="text-primary text-bold" label="Utiliza o Mercado Pago?" v-model="contato.form.mercadopago"/>
-                            <q-btn @click="sendForm()" class="q-pa-md w100" color="primary" icon-right="description"
+                            <q-input maxlength="200" filled v-model="contato.form.name" label="Nome Completo">
+                                <template v-slot:append>
+                                    <q-icon name="person" color="primary" />
+                                </template>
+                            </q-input>
+                            <q-input maxlength="200" filled v-model="contato.form.companyName" label="Nome Empresa/Razão Social">
+                                <template v-slot:append>
+                                    <q-icon name="business" color="primary" />
+                                </template>
+                            </q-input>
+                            <q-input mask="(##) #####-####" maxlength="200" filled v-model="contato.form.phone" label="Telefone">
+                                <template v-slot:append>
+                                    <q-icon name="phone" color="primary" />
+                                </template>
+                            </q-input>
+                            <q-input maxlength="200" filled v-model="contato.email" label="Email">
+                                <template v-slot:append>
+                                    <q-icon name="email" color="primary" />
+                                </template>
+                            </q-input>
+                            <q-input placeholder="ex: Shows, baile funk, festival de eletrônica..." maxlength="200" filled v-model="contato.form.eventType" label="Tipos de Eventos">
+                                <template v-slot:append>
+                                    <q-icon name="event" color="primary" />
+                                </template>
+                            </q-input>
+                            <q-input suffix="pessoas" mask="#####" filled v-model="contato.form.maxCapacity" label="Capacidade máxima de público">
+                                <template v-slot:append>
+                                    <q-icon name="groups" color="primary" />
+                                </template>
+                            </q-input>
+                            <q-input suffix="pessoas" mask="#####" filled v-model="contato.form.mediumEventCapacity" label="Média de público por evento">
+                                <template v-slot:append>
+                                    <q-icon name="people" color="primary" />
+                                </template>
+                            </q-input>
+                            <q-input maxlength="5" mask="#####"  filled v-model="contato.form.mediumVendaIngressos" placeholder="Média qtd. de Ingressos vendidos" label="Quantidade de Ingressos Digitais ">
+                                <template v-slot:append>
+                                    <q-icon name="123" color="primary" />
+                                </template>
+                            </q-input>
+                            <q-input maxlength="9" prefix="R$" reverse-fill-mask  mask="##.###,##" filled v-model="contato.form.mediaValorIngressos" placeholder="Média do valor de 1 ingresso" label="Valor médio do Ingresso">
+                                <template v-slot:append>
+                                    <q-icon name="payments" color="primary" />
+                                </template>
+                            </q-input>
+                            <q-input maxlength="9" prefix="R$" reverse-fill-mask  mask="##.###,##" filled v-model="contato.form.mediumProfits" placeholder="Média de faturamento por evento" label="Lucro por evento em Ingressos Digitais">
+                                <template v-slot:append>
+                                    <q-icon name="paid" color="primary" />
+                                </template>
+                            </q-input>
+                            <q-input maxlength="200" filled v-model="contato.form.localizacao" label="Localização" placeholder="Ex: Asa Sul - Brasília, Goiânia - GO...">
+                                <template v-slot:append>
+                                    <q-icon name="location_on" color="primary" />
+                                </template>
+                            </q-input>
+                            <div class="text-primary text-bold row no-wrap items-center w100 justify-center">Utiliza Mercado Pago?
+                                <q-toggle  v-model="contato.form.mercadopago" class="text-bold" :label="contato.form.mercadopago ? 'sim' : 'não'"/>
+                            </div>
+                            <q-btn v-if="!sendLoading" @click="sendForm()" class="q-pa-md w100" color="primary" icon-right="description"
                                 label="Enviar formulário" />
+                            <div class="w100 row justify-center">
+                                <q-spinner-bars v-if="sendLoading" class="q-mt-md"
+                                color="primary"
+                                size="2em"
+                              />
+                            </div>
                         </q-card>
                     </div>
                     <div class="space rounded-borders q-my-md ">
                         <q-btn @click="wppConsultor()" class="q-pa-md w100" color="green" icon-right="sms"
                             label="Fale Agora Com um de nossos Consultores" />
                     </div>
+                </div>
+                <div class="w100 text-white text-bold text-center">
+                    Siga-nos no <a href="https://www.instagram.com/midnightickets" class="text-blue" target="_blank">Instagram</a> e acompanhe o nosso desenvolvimento!
                 </div>
             </q-page>
         </q-page-container>
@@ -183,7 +264,9 @@ import { api } from 'src/boot/axios';
 import FooterComponent from "../components/FooterComponent.vue";
 
 const $q = useQuasar()
-
+const slide = ref(1)
+const isMobile = window.innerWidth < 500
+const sendLoading = ref(false)
 const contato = ref({
     email: '',
     form: {
@@ -194,41 +277,72 @@ const contato = ref({
         eventType: '',
         mediumEventCapacity: '',
         mediumProfits: '',
-        mercadopago: false
+        mediumVendaIngressos: '',
+        mercadopago: false,
+        mediaValorIngressos: '',
+        localizacao: '',
     },
     dispositivo: window.innerWidth < 900 ? 'Mobile' : 'Desktop'
 })
 
 function wppConsultor() {
-    window.open('https://wa.me/5561981748795?text=Ola,%20Gostaria%20de%20realizar%20uma%20consultoria%20para%20Otimizar%20a%20Venda%20dos%20meus%20Ingressos%20e%20Escalar%20o%20Lucro%20dos%20Meus%20Eventos%20com%20a%20Midnight%20Tickets!', '_blank');
+    window.open('https://wa.me/5561981748795?text=Ola,%20Gostaria%20de%20realizar%20uma%20consultoria%20para%20Potencializar%20a%20Venda%20dos%20meus%20Ingressos%20e%20Escalar%20o%20Lucro%20dos%20Meus%20Eventos%20com%20a%20Midnight%20Tickets!', '_blank');
 }
 
 async function sendForm() {    
     if (contato.value.email === '' || !contato.value.email.includes('@')) {
         $q.notify({
-            message: 'Por favor, insira um email válido!',
+            message: 'Por favor, insira um email válido',
             color: 'red',
             position: 'top',
             icon: 'email',
         });
         return
     }
-    
+    sendLoading.value = true
     await api.post('/landing/email', contato.value).then(() => {
         $q.notify({
-            message: 'Formulário enviado com sucesso!',
+            message: 'Formulário enviado com sucesso, em breve estaremos entrando em contato!',
             color: 'green',
             position: 'top',
             icon: 'email',
+            timeout: 6000
         });
+        clearForm()
     }).catch(() => {
         $q.notify({
-            message: 'Erro ao enviar formulário!',
+            message: 'Erro ao enviar formulário',
             color: 'red',
             position: 'top',
             icon: 'email',
         });
-    });
+        contato.value.email = ''
+    })
+    .finally(() => {
+        setTimeout(() => {
+            sendLoading.value = false
+        }, 1000)
+    })
+}
+
+function clearForm() {
+    contato.value = {
+        email: '',
+        form: {
+            name: '',
+            phone: '',
+            companyName: '',
+            maxCapacity: '',
+            eventType: '',
+            mediumEventCapacity: '',
+            mediumProfits: '',
+            mercadopago: false,
+            tiposIngresso: '',
+            mediaValorIngressos: '',
+            localizacao: '',
+        },
+        dispositivo: window.innerWidth < 900 ? 'Mobile' : 'Desktop'
+    }
 }
 
 function scrollTop() {
@@ -236,8 +350,9 @@ function scrollTop() {
 }
 
 function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight - 1500);
+    window.scrollTo(0, document.body.scrollHeight - 1770);
 }
+
 
 </script>
 
@@ -278,23 +393,29 @@ a {
     color: white;
     text-decoration: none;
     border-radius: 2px;
-    transition: all 0.3s linear;
+    transition: all 0.4s linear;
     font-weight: bold;
     cursor: pointer;
 }
 
-a:hover {
-    color: #3C0783;
+.menu-item:hover {
+    color: #6310E1;
     background: #ebd3ff;
     padding: 8px;
     border-radius: 12px;
 }
+.q-carousel {
+    height: 400px;
+}
 
 @media(min-width: 1090px) {
     .q-page-container {
-        padding: 0 400px;
+        padding: 0 300px;
+        margin: 0 30px;
     }
-
+    .q-carousel {
+        height: 90vh;
+    }
     .img {
         max-width: 620px;
     }
