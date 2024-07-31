@@ -5,7 +5,7 @@
                 class="title-1 w100 q-px-sm row items-center text-primary shadow-1 q-py-xs justify-between no-wrap text-bold">
                 <div class="row no-wrap items-center">
                     <q-icon size="sm" color="primary" name="paid" class="q-pr-sm" />
-                    3 <div class="q-pl-sm mid-opacity">PurpleCoins</div>
+                    {{authStore.getInfoPurpleCoins()}} <div class="q-pl-sm mid-opacity">PurpleCoins</div>
                 </div>
                 <div class="row no-wrap items-center">
                     <div class="mid-opacity">R$ 22.300,00</div>
@@ -33,7 +33,9 @@
 import { ref, defineEmits, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import FooterComponent from "../../components/FooterComponent.vue";
+import { useAuthStore } from 'src/stores/authStore';
 
+const authStore = useAuthStore();
 const router = useRouter();
 
 const navigateTo = (url) => {

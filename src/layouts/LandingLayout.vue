@@ -1,5 +1,5 @@
 <template>
-    <q-layout class="relative animate__animated animate__fadeIn">
+    <q-layout class="relative animate__animated animate__fadeIn bg-primary">
         <q-header class="fixed bg-grad-3 text-white animate__animated animate__backInDown animate__slow"
             height-hint="98">
             <div style="font-size: 1rem;" class=" q-py-md w100 row no-wrap items-center  justify-evenly">
@@ -63,7 +63,7 @@
                         class="q-mb-md bg-grad-2 text-white high-opacity text-bold q-px-sm q-py-md text-right">
                         Maximizamos seus lucros na venda de ingressos de forma escalável com serviços personalizados,
                         transparência, suporte e uma
-                        interface amigável. Além de consultorias para otimizar cada vez mais suas receitas e reduzir custos
+                        interface amigável. Seus ingressos mais caros são os que mais pagam taxas abusivas, mas pra nós o ingresso é apenas um dado e por isso não devem ser mais taxados do que outros.
                         <br>
                     </div>
                     <div class="w100 img-wrapper column">
@@ -97,7 +97,7 @@
                         nossa Plataforma pode aumentar o Faturamento do seu Evento!!</div>
                     <div style="font-size:1rem" class="q-px-md   bg-white text-left q-py-md rounded-borders">
                         🟢 <strong class="text-green">Modalidade Grátis:</strong> Crie Eventos <strong>sem
-                            custos</strong> e pague apenas <strong>6% de taxa</strong>
+                            custos</strong> e pague <strong>apenas 6% de taxa</strong>
                         por
                         ingresso vendido. Ingressos ilimitados e uma <strong>solução simples para qualquer porte de evento</strong>.
                         <br>🟣 <strong class="text-primary">Modalidade Purplecoins:</strong> Nossa <strong>moeda virtual</strong>
@@ -128,7 +128,8 @@
                         <br>
                         🧑🏼‍💻 <strong style="font-size:1.2rem" class="text-primary text-bold">Suporte Humanizado e
                             Eficaz:</strong> Nosso serviço é monitorado constantemente, focado em <strong>otimizar os custos</strong>
-                        para todos e <strong>gratificar os usuários</strong> com nossas <strong>moedas virtuais</strong> gamificadas
+                        para todos e <strong>gratificar os usuários</strong> com nossas <strong>moedas virtuais</strong>.
+                        Nosso serviço de suporte é <strong>humanizado e rápido</strong> para atender o quanto antes suas dúvidas
                         <br>
                         🖥️ <strong style="font-size:1.2rem" class="text-primary text-bold">Consultoria
                             Especializada:</strong> Nossos <strong>desenvolvedores</strong> possuem experiências profisionais em diversos <strong>projetos
@@ -149,21 +150,23 @@
                     <div class="text-h4 text-bold q-py-md text-white text-center bg-grad-1 border-bottom q-mt-md">🚀 Fale
                         Conosco</div>
                     
-                    <div class="space rounded-borders q-my-md " style="border-bottom: 8px solid #3C0783;z-index: -10">
-                        <q-card class="q-pa-md collumn q-gutter-y-md " style="border: 15px solid #6310E1; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
-                            <div class="w100 text-center text-primary text-bold mid-opacity">Preencha os campos abaixo e PARE de pagar TAXAS ABUSIVAS</div>
-                            
-                            <q-input maxlength="200" outlined v-model="contato.form.companyName" label="Nome da empresa"/>
-                            <q-input maxlength="200" outlined v-model="contato.form.phone" label="Telefone de contato"/>
-                            <q-input maxlength="200" outlined v-model="contato.email" label="Email de contato"/>
-                            <q-input type="number" outlined v-model="contato.form.maxCapacity" label="Capacidade máxima de público"/>
-                            <q-input type="number" outlined v-model="contato.form.mediumEventCapacity" label="Média de público por evento"/>
-                            <q-input maxlength="200" outlined v-model="contato.form.eventType" label="Tipo de evento"/>
+                    <div class="space rounded-borders q-my-md  " style="border-bottom: 8px solid #3C0783;z-index: -10">
+                        <q-card class="q-pa-md collumn q-gutter-y-md rounded-borders " style="border: 15px solid #6310E1; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                            <div class="w100 text-center text-primary text-bold mid-opacity ">Os campos abaixos são opcionais. Preencha-os e PARE de pagar TAXAS ABUSIVAS.</div>
+                            <q-input maxlength="200" filled v-model="contato.form.name" label="Nome Completo"/>
+                            <q-input maxlength="200" filled v-model="contato.form.companyName" label="Nome da empresa/Razão Social"/>
+                            <q-input mask="(##) #####-####" maxlength="200" filled v-model="contato.form.phone" label="Telefone de contato"/>
+                            <q-input maxlength="200" filled v-model="contato.email" label="Email de contato"/>
+                            <q-input maxlength="200" filled v-model="contato.form.eventType" label="Tipos de Eventos"/>
+                            <q-input mask="####" filled v-model="contato.form.maxCapacity" label="Capacidade máxima de público"/>
+                            <q-input mask="####" filled v-model="contato.form.mediumEventCapacity" label="Média de público por evento"/>
+                            <q-input maxlength="9" prefix="R$" reverse-fill-mask  mask="##.###,##" filled v-model="contato.form.mediumProfits" placeholder="Média do faturamento por evento" label="Lucro por evento em Ingressos Digitais"/>
+                            <q-toggle class="text-primary text-bold" label="Utiliza o Mercado Pago?" v-model="contato.form.mercadopago"/>
+                            <q-btn @click="sendForm()" class="q-pa-md w100" color="primary" icon-right="description"
+                                label="Enviar formulário" />
                         </q-card>
-                        <q-btn @click="sendForm()" class="q-pa-md w100" color="primary" icon-right="description"
-                            label="Enviar formulário" />
                     </div>
-                    <div class="space rounded-borders q-my-md " style="border-top: 8px solid #3C0783;z-index: -10">
+                    <div class="space rounded-borders q-my-md ">
                         <q-btn @click="wppConsultor()" class="q-pa-md w100" color="green" icon-right="sms"
                             label="Fale Agora Com um de nossos Consultores" />
                     </div>
@@ -184,11 +187,14 @@ const $q = useQuasar()
 const contato = ref({
     email: '',
     form: {
+        name: '',
         phone: '',
         companyName: '',
         maxCapacity: '',
         eventType: '',
         mediumEventCapacity: '',
+        mediumProfits: '',
+        mercadopago: false
     },
     dispositivo: window.innerWidth < 900 ? 'Mobile' : 'Desktop'
 })
@@ -230,7 +236,7 @@ function scrollTop() {
 }
 
 function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight - 775);
+    window.scrollTo(0, document.body.scrollHeight - 1500);
 }
 
 </script>

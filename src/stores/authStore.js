@@ -34,6 +34,7 @@ export const useAuthStore = defineStore('auth', {
       const userLogado = sessionStorage.getItem('userLogado');
       if (userLogado) {
         const user = JSON.parse(userLogado);
+        console.log(user.login);
         return user.login;
       }
       return null; // Ou um valor padrão, se necessário
@@ -46,11 +47,19 @@ export const useAuthStore = defineStore('auth', {
       }
       return null; // Ou um valor padrão, se necessário
     },
-    getInfoPassword(){
+    getInfoPurpleCoins(){
       const userLogado = sessionStorage.getItem('userLogado');
       if (userLogado) {
         const user = JSON.parse(userLogado);
-        return user.senha;
+        return user.purpleCoins;
+      }
+      return null; // Ou um valor padrão, se necessário
+    },
+    getInfoRole(){
+      const roleUserLogado = sessionStorage.getItem('role');
+      if (roleUserLogado) {
+        const user = JSON.parse(roleUserLogado);
+        return user.role;
       }
       return null; // Ou um valor padrão, se necessário
     }
