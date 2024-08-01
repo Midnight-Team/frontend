@@ -34,7 +34,7 @@
                     <div class="space bg-grad-2 w100 text-center text-white q-py-md text-bold q-px-md high-opacity" style="font-size:1.1rem">
                         PARE de PAGAR TAXAS excessivas na VENDA de SEUS INGRESSOS e REALIZE seus EVENTOS com 0% de TAXA!!
                     </div>
-                    <q-card class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-5s">
+                    <q-card class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-3s">
                         <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Receba notificações sobre o LANÇAMENTO do nosso SERVIÇO e
                             POTENCIALIZE seu FATURAMENTO!!</p>
                         <q-input v-model="contato.email" class="bg-white" filled label="Seu melhor email">
@@ -42,7 +42,7 @@
                                 <q-icon name="email" color="primary" />
                             </template>
                             <template v-slot:append>
-                                <q-btn @click="scrollToBottom()" color="primary" icon="send" label="Enviar" />
+                                <q-btn @click="fastEmailGetter()" color="primary" icon="send" label="Enviar" />
                             </template>
                         </q-input>
                     </q-card>
@@ -289,26 +289,40 @@ function wppConsultor() {
     window.open('https://wa.me/5561981748795?text=Ola,%20Gostaria%20de%20realizar%20uma%20consultoria%20para%20Potencializar%20a%20Venda%20dos%20meus%20Ingressos%20e%20Escalar%20o%20Lucro%20dos%20Meus%20Eventos%20com%20a%20Midnight%20Tickets!', '_blank');
 }
 
-async function sendForm() {    
-    if (contato.value.email === '' || !contato.value.email.includes('@')) {
+async function fastEmailGetter() {
+    if(!checkEmail()){
+        return false
+    }else {
+        scrollToBottom()
+        await sendForm('Agradecemos o interesse! Em breve novas informações sobre a Midnight Tickets!')    }
+}
+
+const checkEmail = () => {
+    if (!contato.value.email || contato.value.email === '' || !contato.value.email.includes('@')) {
         $q.notify({
-            message: 'Por favor, insira um email válido',
+            message: 'Campo de Email inválido',
             color: 'red',
             position: 'top',
             icon: 'email',
         });
+        return false
+    }
+    return true
+}
+
+async function sendForm(msg) {    
+    if(!checkEmail()){
         return
     }
     sendLoading.value = true
     await api.post('/landing/email', contato.value).then(() => {
         $q.notify({
-            message: 'Formulário enviado com sucesso, em breve estaremos entrando em contato!',
+            message: msg || 'Formulário enviado com sucesso, em breve entraremos em contato',
             color: 'green',
             position: 'top',
             icon: 'email',
             timeout: 6000
         });
-        clearForm()
     }).catch(() => {
         $q.notify({
             message: 'Erro ao enviar formulário',
@@ -316,7 +330,6 @@ async function sendForm() {
             position: 'top',
             icon: 'email',
         });
-        contato.value.email = ''
     })
     .finally(() => {
         setTimeout(() => {
@@ -325,25 +338,6 @@ async function sendForm() {
     })
 }
 
-function clearForm() {
-    contato.value = {
-        email: '',
-        form: {
-            name: '',
-            phone: '',
-            companyName: '',
-            maxCapacity: '',
-            eventType: '',
-            mediumEventCapacity: '',
-            mediumProfits: '',
-            mercadopago: false,
-            tiposIngresso: '',
-            mediaValorIngressos: '',
-            localizacao: '',
-        },
-        dispositivo: window.innerWidth < 900 ? 'Mobile' : 'Desktop'
-    }
-}
 
 function scrollTop() {
     window.scrollTo(0, 0);
