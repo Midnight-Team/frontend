@@ -30,6 +30,14 @@ export const useAuthStore = defineStore('auth', {
       }
       return null; // Ou um valor padrão, se necessário
     },
+    getInfoRazao() {
+      const userLogado = sessionStorage.getItem('userLogado');
+      if (userLogado) {
+        const user = JSON.parse(userLogado);
+        return user.nome_razao;
+      }
+      return null; // Ou um valor padrão, se necessário
+    },
     getInfoLogin(){
       const userLogado = sessionStorage.getItem('userLogado');
       if (userLogado) {
@@ -58,8 +66,8 @@ export const useAuthStore = defineStore('auth', {
     getInfoRole(){
       const roleUserLogado = sessionStorage.getItem('role');
       if (roleUserLogado) {
-        const user = JSON.parse(roleUserLogado);
-        return user.role;
+        const role = JSON.parse(roleUserLogado);
+        return role;
       }
       return null; // Ou um valor padrão, se necessário
     }

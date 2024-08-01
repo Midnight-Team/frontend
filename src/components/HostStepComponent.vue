@@ -6,9 +6,9 @@
     </div>
     <div class="column q-gutter-y-md q-pa-md q-mb-xl text-primary text-bold text-center">
       <div>
-        <div class="mid-opacity">Eu confirmo a criação do Evento<br> 50 Ingressos por 1 PurpleCoins<q-icon size="xs" class="q-pl-xs" name="paid" color="primary" /> </div>
+        <div class="mid-opacity">Confirmo a Criação do Evento:<br>{{ pacote.label }}<q-icon size="xs" class="q-pl-xs" name="paid" color="primary" /> </div>
       </div>
-      <q-input outlined v-model="host.senha" maxlength="15" :type="!host.lockpassword ? 'password' : 'text'"
+      <q-input outlined v-model="host.senha" maxlength="20" :type="!host.lockpassword ? 'password' : 'text'"
         label="Senha*">
         <template v-slot:prepend>
           <q-icon name="lock" color="primary" />
@@ -20,7 +20,7 @@
       </q-input>
 
       <div class="w100 hline bg-primary"></div>
-      <q-btn label="Criar Evento" color="green" @click="goNext()" icon-right="post_add" />
+      <q-btn  :disabled="check()"  label="Criar Evento" color="green" @click="goNext()" icon-right="post_add" />
       <q-btn label="voltar" flat color="primary" @click="goPrev()" />
     </div>
 
@@ -30,9 +30,9 @@
 <script setup>
 import { ref, defineEmits, onMounted } from "vue";
 
-const emit = defineEmits(['next'])
+const emit = defineEmits(['next', 'prev'])
 const goNext = () => {
-  emit('next', 'prev')
+  emit('next')
 }
 
 const goPrev = () => {
@@ -43,12 +43,21 @@ const goPrev = () => {
 const host = ref({
   login: '',
   senha: '',
-  saldo_pc: '3 PurpleCoins',
   lockpassword: false
 })
 
+const pacote = ref('')
+
+const check = () => {
+  return host.value.senha.length == 0
+}
+
 onMounted(() => {
   window.scrollTo(0, 0);
+  const es1Storage = sessionStorage.getItem('eventoStep1')
+  const es1 = JSON.parse(es1Storage)
+  pacote.value = es1.qtd_ingressos_inicial
+
 })
 </script>
 
@@ -59,7 +68,5 @@ onMounted(() => {
   background: #efefef4d;
   backdrop-filter: blur(2px);
   z-index: 1;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
 }
 </style>

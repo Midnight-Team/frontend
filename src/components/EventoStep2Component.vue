@@ -1,42 +1,49 @@
- <template>
+<template>
     <div class="es1 bg-white q-mx-sm  rounded-borders shadow-4 relative">
         <div class="title-1 w100 text-h6 row items-center text-primary shadow-1 q-py-xs justify-center text-bold">
             <q-icon size="md" color="primary" name="confirmation_number" class="q-pr-sm" />
             Configuração de Ingressos
         </div>
         <div class="column q-gutter-y-md q-pa-md q-mb-xl">
-            <q-input outlined class="q-mt-lg" v-model="ingressoHandler.titulo" label="Título Tipo do Ingresso*" />
-            <q-input outlined maxlength="7" prefix="R$" v-model="ingressoHandler.valor" label="Valor do Ingresso*" reverse-fill-mask mask="####,##">
+            <q-input outlined class="q-mt-lg" v-model="ingressoHandler.titulo"
+                placeholder="Ex: Entrada Meia, Camarote, Pista Inteira" label="Título Tipo do Ingresso*" />
+            <q-input outlined maxlength="7" prefix="R$" v-model="ingressoHandler.valor" label="Valor do Ingresso*"
+                reverse-fill-mask mask="####,##">
                 <template v-slot:append>
                     <q-icon name="payments" color="primary" />
                 </template>
             </q-input>
-            <q-input outlined maxlength="6" v-model="ingressoHandler.quantidade" label="Quantidade de Ingressos*" reverse-fill-mask mask="######">
+            <q-input outlined maxlength="6" v-model="ingressoHandler.quantidade" label="Quantidade de Ingressos*"
+                reverse-fill-mask mask="######">
                 <template v-slot:append>
-                    <div class="q-pr-sm">50</div>
+                    <div class="q-pr-sm">{{ ingressosDisponiveis }}</div>
                     <q-icon name="confirmation_number" color="primary" />
                 </template>
             </q-input>
-            <q-btn label="Adicionar Tipo Ingresso" color="blue" :disable="validaIngresso()" @click="addIngresso()" icon-right="add_circle"/>
+            <q-btn label="Adicionar Tipo Ingresso" color="blue" :disable="validaIngresso()" @click="addIngresso()"
+                icon-right="add_circle" />
             <div class="w100 hline bg-primary"></div>
-            <div class="text-bold mid-opacity text-primary text-center">Tipos Ingressos - Total: {{ ingressos.length }}</div>
+            <div class="text-bold mid-opacity text-primary text-center">Tipos Ingressos - Total: {{ ingressos.length }}
+            </div>
             <div id="list-ingressos" class="column q-gutter-y-md">
-                <div v-for="(ingresso, index) in ingressos" :key="index" class="row no-wrap items-center q-mt-md justify-between">
-                    <q-btn icon="local_activity" flat color="primary" @click="removeIngresso(index)"/>
+                <div v-for="(ingresso, index) in ingressos" :key="index"
+                    class="row no-wrap items-center q-mt-md justify-between">
+                    <q-btn :label="ingresso.quantidade" icon="local_activity" flat color="primary" />
                     <div class="text-bold text-primary">{{ format(ingresso.titulo) }}</div>
                     <div class="text-bold text-primary">R$ {{ ingresso.valor }}</div>
-                    <q-btn icon="delete" flat color="red" @click="removeIngresso(index)"/>
+                    <q-btn icon="delete" flat color="red" @click="removeIngresso(index)" />
                 </div>
             </div>
             <div class="w100 hline bg-primary"></div>
-            <q-btn label="próximo" color="primary" @click="goNext()" icon-right="skip_next"/>
-            <q-btn label="voltar" flat color="primary" @click="goPrev()"/>
+            <q-btn :disabled="checkNext()" label="próximo" color="primary" @click="goNext()" icon-right="skip_next" />
+            <q-btn label="voltar" flat color="primary" @click="goPrev()" />
         </div>
-    
-      </div>
+
+    </div>
 </template>
 
-<script setup >
+<script setup>
+import { useQuasar } from "quasar";
 import { ref, defineEmits, onMounted } from "vue";
 
 const emit = defineEmits(['next', 'prev'])
@@ -44,65 +51,102 @@ const emit = defineEmits(['next', 'prev'])
 const ingressoHandler = ref({
     titulo: '',
     valor: '',
-    quantidade: 0,
+    quantidade: '',
 })
+
+const $q = useQuasar()
+
+const ingressosDisponiveis = ref(0)
 
 const ingressos = ref([])
 
 const addIngresso = () => {
-    ingressos.value.push(ingressoHandler.value)
-    ingressoHandler.value = {
-        titulo: '',
-        valor: '',
+    if (ingressoHandler.value.quantidade > ingressosDisponiveis.value) {
+        $q.notify({
+            color: 'red',
+            position: 'top',
+            message: 'Quantidade de ingressos maior do que o disponível',
+            icon: 'report_problem'
+        })
+        ingressoHandler.value.quantidade = 0
+        return
+    } else {
+        ingressosDisponiveis.value -= Number(ingressoHandler.value.quantidade)
+        ingressos.value.push(ingressoHandler.value)
+        ingressoHandler.value = {
+            titulo: '',
+            valor: '',
+            quantidade: '',
+        }
     }
 }
 
-function validaIngresso(){
-    return ingressoHandler.value.titulo == '' || ingressoHandler.value.valor == ''
+function validaIngresso() {
+    return ingressoHandler.value.titulo == '' || ingressoHandler.value.valor == '' || ingressoHandler.value.quantidade == 0 || ingressoHandler.value.quantidade == null
 
 }
 
-function format(text){
-    if(text.length > 10){
+function format(text) {
+    if (text.length > 20) {
         return text.substring(0, 10) + '...'
     }
     return text
 }
 
-function removeIngresso(index){
+function removeIngresso(index) {
+    ingressosDisponiveis.value += Number(ingressos.value[index].quantidade)
     ingressos.value.splice(index, 1)
-}   
+}
 
 const goNext = () => {
-    emit('next')
+    if(ingressosDisponiveis.value > 0){
+        const confirm = window.confirm('Você ainda possui Ingressos Disponíveis para uso.\nCaso não os utilize eles irão se transformar em SubCoins automaticamente.\nDeseja Continuar?')
+        if(confirm){
+            sessionStorage.setItem('eventoStep2', JSON.stringify(ingressos.value))
+            emit('next')
+        }
+        else {
+            return
+        }
+    } else {
+        sessionStorage.setItem('eventoStep2', JSON.stringify(ingressos.value))
+        emit('next')
+    }
 }
 
 const goPrev = () => {
     emit('prev')
 }
 
-const evento = ref({
-    titulo: '',
-    descricao: '',
-
-})
-
-
 onMounted(() => {
     window.scrollTo(0, 0);
+    const es2Storage = sessionStorage.getItem('eventoStep2')
+    const es2 = JSON.parse(es2Storage)
+    if(es2){
+        ingressos.value = es2
+    } else {
+        const es1Storage = sessionStorage.getItem('eventoStep1')
+        const es1 = JSON.parse(es1Storage)
+        ingressosDisponiveis.value = es1.qtd_ingressos_inicial.max_ingressos
+    }
 })
+
+const checkNext = () => {
+    if(ingressos.value.length == 0){
+        return true
+    } else {
+        return false
+    }
+}
 
 </script>
 
 <style scoped>
-.title-1{
+.title-1 {
     position: sticky;
     top: 138px;
     background: #efefef4d;
     backdrop-filter: blur(4px);
     z-index: 1;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
 }
-
 </style>
