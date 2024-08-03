@@ -35,8 +35,8 @@
                         PARE de PAGAR TAXAS excessivas na VENDA de SEUS INGRESSOS e REALIZE seus EVENTOS com 0% de TAXA!!
                     </div>
                     <q-card class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-3s">
-                        <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Receba notificações sobre o LANÇAMENTO do nosso SERVIÇO e
-                            POTENCIALIZE seu FATURAMENTO!!</p>
+                        <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Digite seu EMAIL abaixo e SAIBA COMO o nosso SERVIÇO pode
+                            POTENCIALIZAR o seu FATURAMENTO!!</p>
                         <q-input v-model="contato.email" class="bg-white" filled label="Seu melhor email">
                             <template v-slot:prepend>
                                 <q-icon name="email" color="primary" />
@@ -240,7 +240,7 @@
                                 <q-spinner-bars v-if="sendLoading" class="q-mt-md"
                                 color="primary"
                                 size="2em"
-                              />
+                            />
                             </div>
                         </q-card>
                     </div>
@@ -293,8 +293,7 @@ async function fastEmailGetter() {
     if(!checkEmail()){
         return false
     }else {
-        scrollToBottom()
-        await sendForm('Agradecemos o interesse! Em breve novas informações sobre a Midnight Tickets!')    }
+        await sendForm('Entraremos em Contato em Breve! Continue navegando pelo site para mais informações')}
 }
 
 const checkEmail = () => {
