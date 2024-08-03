@@ -289,11 +289,17 @@ function wppConsultor() {
     window.open('https://wa.me/5561981748795?text=Ola,%20Gostaria%20de%20realizar%20uma%20consultoria%20para%20Potencializar%20a%20Venda%20dos%20meus%20Ingressos%20e%20Escalar%20o%20Lucro%20dos%20Meus%20Eventos%20com%20a%20Midnight%20Tickets!', '_blank');
 }
 
+const lowDownScrolling = () => {
+    window.scrollTo(0, 500);
+}
+
 async function fastEmailGetter() {
     if(!checkEmail()){
         return false
     }else {
-        await sendForm('Entraremos em Contato em Breve! Continue navegando pelo site para mais informações')}
+        lowDownScrolling()
+        await sendForm('Entraremos em Contato em Breve! Continue navegando pelo site para mais informações')
+    }
 }
 
 const checkEmail = () => {
@@ -415,8 +421,6 @@ a {
 }
 
 div {
-    border-radius: 10px;
 }
 
-#contato {}
 </style>
