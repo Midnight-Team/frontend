@@ -51,13 +51,17 @@ const criarEvento = async () => {
       message: res.data.message,
       icon: 'local_activity',
       position: 'top',
+      timeout: 2000,
     });
     $q.notify({
       color: 'primary',
       message: res.data.evento.msgPurpleCoins,
       icon: 'paid',
       position: 'bottom',
+      timeout: 3000,
     });
+    authStore.setInfoPurpleCoins(res.data.evento.host.purpleCoins);
+    authStore.setInfoSubCoins(res.data.evento.host.subCoins);
     sessionStorage.removeItem('eventoStep1');
     sessionStorage.removeItem('eventoStep2');
     sessionStorage.removeItem('eventoStep3');

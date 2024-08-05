@@ -79,6 +79,22 @@ export const useAuthStore = defineStore('auth', {
         return role;
       }
       return null; // Ou um valor padrão, se necessário
-    }
+    },
+    setInfoPurpleCoins(purpleCoins){
+      const userLogado = sessionStorage.getItem('userLogado');
+      if (userLogado) {
+        const user = JSON.parse(userLogado);
+        user.purpleCoins = purpleCoins;
+        sessionStorage.setItem('userLogado', JSON.stringify(user));
+      }
+    },
+    setInfoSubCoins(subCoins){
+      const userLogado = sessionStorage.getItem('userLogado');
+      if (userLogado) {
+        const user = JSON.parse(userLogado);
+        user.subCoins = subCoins;
+        sessionStorage.setItem('userLogado', JSON.stringify(user));
+      }
+    },
   }
 });
