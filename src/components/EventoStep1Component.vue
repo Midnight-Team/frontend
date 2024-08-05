@@ -63,9 +63,9 @@
                 </div>
                 <q-btn label="Recarregar PurpleCoins" color="primary" icon-right="currency_exchange" to="/app/recarregar" />
             </div>
-            <q-select outlined v-model="evento.qtd_ingressos_inicial" @update:model-value="checkSaldoToQtdIngressos()" label="Quantidade de Ingressos Inicial*"
-                :options="qtd_ingressos_inicialOptions" />
-            <q-input maxlength="250" placeholder="Insira a url do banner" filled v-model="evento.img_url" label="URL da Imagem do Evento">
+            <q-select outlined v-model="evento.pacote" @update:model-value="checkSaldoToQtdIngressos()" label="Quantidade de Ingressos Inicial*"
+                :options="pacoteOptions" />
+            <q-input maxlength="250" placeholder="Insira a url do banner" filled v-model="evento.img_url" label="URL da Imagem do Evento*">
                 <template v-slot:append>
                     <q-btn flat icon="image" @click="verImg(evento.img_url)" color="primary" />
                 </template>
@@ -94,30 +94,6 @@ const router = useRouter()
 const emit = defineEmits(['next', 'prev'])
 const $q = useQuasar()
 
-const goNext = () => {
-    sessionStorage.setItem('eventoStep1', JSON.stringify(evento.value))
-    emit('next')
-}
-
-const returnEventos = () => {
-    router.push('/evento')
-}
-
-const checkRequiredFields = () => {
-    if (evento.value.titulo == '' || evento.value.endereco == '' || evento.value.contato == '' || evento.value.hora_evento == '' || evento.value.data_evento == '' || evento.value.qtd_ingressos_inicial == null) {
-        return true
-    } else {
-        return false
-    }
-}
-const qtd_ingressos_inicialOptions = [
-        { value: 1, label: '6% de Cada Ingresso - 1000 ingressos 🎟️', purpleCoins: 0, max_ingressos: 1000, },
-        { value: 2, label: '0% de taxa - 100 ingressos por 1 PurpleCoin🟣', purpleCoins: 1, max_ingressos: 100, },
-        { value: 3, label: '0% de taxa - 200 ingressos por 2 PurpleCoins🟣', purpleCoins: 2, max_ingressos: 200 },
-        { value: 4, label: '0% de taxa - 300 ingressos por 3 PurpleCoins🟣', purpleCoins: 3, max_ingressos: 300 },
-        { value: 5, label: '0% de taxa - 2000 ingressos por 10 PurpleCoins🟣', purpleCoins: 10, max_ingressos: 2000 }
-]
-
 const evento = ref({
     titulo: '',
     descricao: '',
@@ -127,12 +103,35 @@ const evento = ref({
     data_evento: '',
     hora_evento: '',
     hora_final: '',
-    qtd_ingressos_inicial: null,
-
+    pacote: null,
     img_url: '',
-    tipos_ingressos: [],
-    ingressos: [],
 })
+
+const goNext = () => {
+    evento.value.data_evento = evento.value.data_evento.slice(0, 10)
+    sessionStorage.setItem('eventoStep1', JSON.stringify(evento.value))
+    emit('next')
+}
+
+const returnEventos = () => {
+    router.push('/evento')
+}
+
+const checkRequiredFields = () => {
+    if (evento.value.titulo == '' || evento.value.endereco == '' || evento.value.contato == '' || evento.value.hora_evento == '' || evento.value.data_evento == '' || evento.value.pacote == null) {
+        return true
+    } else {
+        return false
+    }
+}
+const pacoteOptions = [
+        { value: 1, label: '6% de Cada Ingresso - 1000 ingressos 🎟️', purpleCoins: 0, max_ingressos: 1000, },
+        { value: 2, label: '0% de taxa - 100 ingressos por 1 PurpleCoin🟣', purpleCoins: 1, max_ingressos: 100, },
+        { value: 3, label: '0% de taxa - 200 ingressos por 2 PurpleCoins🟣', purpleCoins: 2, max_ingressos: 200 },
+        { value: 4, label: '0% de taxa - 300 ingressos por 3 PurpleCoins🟣', purpleCoins: 3, max_ingressos: 300 },
+        { value: 5, label: '0% de taxa - 2000 ingressos por 10 PurpleCoins🟣', purpleCoins: 10, max_ingressos: 2000 }
+]
+
 
 function verImg(url) {
     window.open(url, '_blank')
@@ -149,14 +148,14 @@ const helpLocGoogle = () => {
 }
 
 const checkSaldoToQtdIngressos = () => {
-    if(authStore.getInfoPurpleCoins() < evento.value.qtd_ingressos_inicial.purpleCoins){
+    if(authStore.getInfoPurpleCoins() < evento.value.pacote.purpleCoins){
         $q.notify({
             message: 'Você não tem saldo suficiente para essa quantidade de ingressos',
             color: 'negative',
             position: 'top',
             icon: 'savings'
         })
-        evento.value.qtd_ingressos_inicial = null
+        evento.value.pacote = null
     }
 }
 

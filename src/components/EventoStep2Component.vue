@@ -13,8 +13,8 @@
                     <q-icon name="payments" color="primary" />
                 </template>
             </q-input>
-            <q-input outlined maxlength="6" v-model="ingressoHandler.quantidade" label="Quantidade de Ingressos*"
-                reverse-fill-mask mask="######">
+            <q-input outlined mask="#####" maxlength="4" v-model="ingressoHandler.quantidade" label="Quantidade de Ingressos*"
+                reverse-fill-mask >
                 <template v-slot:append>
                     <div class="q-pr-sm">{{ ingressosDisponiveis }}</div>
                     <q-icon name="confirmation_number" color="primary" />
@@ -27,11 +27,16 @@
             </div>
             <div id="list-ingressos" class="column q-gutter-y-md">
                 <div v-for="(ingresso, index) in ingressos" :key="index"
-                    class="row no-wrap items-center q-mt-md justify-between">
-                    <q-btn :label="ingresso.quantidade" icon="local_activity" flat color="primary" />
-                    <div class="text-bold text-primary">{{ format(ingresso.titulo) }}</div>
-                    <div class="text-bold text-primary">R$ {{ ingresso.valor }}</div>
+                    class="column no-wrap items-center rounded-borders shadow-4 bg-grad-3 q-mt-md justify-between">
+                    <div class="row q-gutter-x-md q-py-sm">
+                        <div class="text-bold text-white">{{ format(ingresso.titulo) }}</div>
+                        <div class="text-bold text-grey-4">R$ {{ ingresso.valor }}</div>
+                    </div>
+                    <div class="w100 bg-primary mid-opacity q-mx-md" style="height: 2px"></div>
+                    <div class="row w100 justify-center">
+                        <q-btn :label="ingresso.quantidade" icon="local_activity" flat color="white" />
                     <q-btn icon="delete" flat color="red" @click="removeIngresso(index)" />
+                    </div>
                 </div>
             </div>
             <div class="w100 hline bg-primary"></div>
@@ -59,7 +64,26 @@ const $q = useQuasar()
 const ingressosDisponiveis = ref(0)
 
 const ingressos = ref([])
+function formatToNumber(inputString) {
+    // Remove todos os caracteres que não sejam dígitos ou vírgula
+    let cleanString = inputString.replace(/[^\d,]/g, '');
 
+    // Substitui vírgula por ponto para lidar com números decimais
+    let numericString = cleanString.replace(',', '.');
+
+    // Converte para número e força duas casas decimais
+    let number = parseFloat(numericString).toFixed(2);
+
+    // Se a conversão não resultar em um número válido, retorna 0.00
+    if (isNaN(number)) {
+        number = '0.00';
+    }
+
+    // Converte de volta para string e substitui ponto por vírgula
+    let formattedString = number.toString().replace('.', ',');
+
+    return formattedString;
+}
 const addIngresso = () => {
     if (ingressoHandler.value.quantidade > ingressosDisponiveis.value) {
         $q.notify({
@@ -71,7 +95,9 @@ const addIngresso = () => {
         ingressoHandler.value.quantidade = 0
         return
     } else {
-        ingressosDisponiveis.value -= Number(ingressoHandler.value.quantidade)
+        ingressoHandler.value.quantidade = Number(ingressoHandler.value.quantidade)
+        ingressosDisponiveis.value -= ingressoHandler.value.quantidade
+        ingressoHandler.value.valor = formatToNumber(ingressoHandler.value.valor)
         ingressos.value.push(ingressoHandler.value)
         ingressoHandler.value = {
             titulo: '',
@@ -94,8 +120,11 @@ function format(text) {
 }
 
 function removeIngresso(index) {
-    ingressosDisponiveis.value += Number(ingressos.value[index].quantidade)
-    ingressos.value.splice(index, 1)
+    const confirm = window.confirm('Deseja realmente remover este tipo de ingresso?')
+    if (confirm) {
+        ingressosDisponiveis.value += Number(ingressos.value[index].quantidade)
+        ingressos.value.splice(index, 1)
+    }
 }
 
 const goNext = () => {
@@ -127,14 +156,15 @@ onMounted(() => {
     } else {
         const es1Storage = sessionStorage.getItem('eventoStep1')
         const es1 = JSON.parse(es1Storage)
-        ingressosDisponiveis.value = es1.qtd_ingressos_inicial.max_ingressos
+        ingressosDisponiveis.value = es1.pacote.max_ingressos
     }
 })
 
 const checkNext = () => {
     if(ingressos.value.length == 0){
         return true
-    } else {
+    } 
+    else {
         return false
     }
 }

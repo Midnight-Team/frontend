@@ -74,7 +74,6 @@ const login = async () => {
             console.log(err)
         })
     }
-    console.log('subhost: ' + JSON.stringify(usuario.value));
 }
 
 function colarAcessCode() {

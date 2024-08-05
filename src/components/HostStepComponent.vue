@@ -8,12 +8,12 @@
       <div>
         <div class="mid-opacity">Confirmo a Criação do Evento:<br>{{ pacote.label }}<q-icon size="xs" class="q-pl-xs" name="paid" color="primary" /></div>
       </div>
-      <q-input outlined v-model="host.senha" maxlength="20" :type="!host.lockpassword ? 'password' : 'text'" label="Senha*">
+      <q-input outlined v-model="host.senha" maxlength="20" :type="!lockpassword ? 'password' : 'text'" label="Senha*">
         <template v-slot:prepend>
           <q-icon name="lock" color="primary" />
         </template>
         <template v-slot:append>
-          <q-btn flat :icon="host.lockpassword ? 'visibility' : 'visibility_off'" @click="host.lockpassword = !host.lockpassword" color="primary" />
+          <q-btn flat :icon="lockpassword ? 'visibility' : 'visibility_off'" @click="lockpassword = !lockpassword" color="primary" />
         </template>
       </q-input>
 
@@ -26,25 +26,60 @@
 
 <script setup>
 import { ref, defineEmits, onMounted } from "vue";
-import bcrypt from 'bcryptjs';
+import { useAuthStore } from 'src/stores/authStore';
+import { api } from 'src/boot/axios';
+import { useQuasar } from "quasar";
+import { useRouter } from "vue-router";
 
+const $q = useQuasar();
+const authStore = useAuthStore();
 const emit = defineEmits(['next', 'prev']);
+const host = ref({
+  id: authStore.getInfoId(),
+  senha: '',
+});
+const router = useRouter();
+
 const criarEvento = async () => {
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(host.value.senha, salt);
-  const hostEncripted = { ...host.value, senha: hashedPassword };
-  console.log(JSON.stringify(hostEncripted));
+  const step1 = JSON.parse(sessionStorage.getItem('eventoStep1'));
+  const step2 = JSON.parse(sessionStorage.getItem('eventoStep2'));
+  const evento = { evento: { tipos_ingressos: step2 ,...step1}, host: host.value }
+  console.log("EVENTO: " + JSON.stringify(evento));
+  await api.post('/create_evento', evento).then(res => {
+    $q.notify({
+      color: 'positive',
+      message: res.data.message,
+      icon: 'local_activity',
+      position: 'top',
+    });
+    $q.notify({
+      color: 'primary',
+      message: res.data.evento.msgPurpleCoins,
+      icon: 'paid',
+      position: 'bottom',
+    });
+    sessionStorage.removeItem('eventoStep1');
+    sessionStorage.removeItem('eventoStep2');
+    sessionStorage.removeItem('eventoStep3');
+
+    router.push('/evento');
+  }).catch(err => {
+    $q.notify({
+      color: 'negative',
+      message: err.response.data.error,
+      icon: 'error',
+      position: 'top',
+    });
+    host.value.senha = '';
+  });
 };
 
 const goPrev = () => {
   emit('prev');
 };
 
-const host = ref({
-  login: '',
-  senha: '',
-  lockpassword: false,
-});
+
+const lockpassword = ref(false)
 
 const pacote = ref('');
 
@@ -56,8 +91,9 @@ onMounted(() => {
   window.scrollTo(0, 0);
   const es1Storage = sessionStorage.getItem('eventoStep1');
   const es1 = JSON.parse(es1Storage);
-  pacote.value = es1.qtd_ingressos_inicial;
+  pacote.value = es1.pacote;
 });
+
 </script>
 
 <style scoped>

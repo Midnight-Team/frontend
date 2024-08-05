@@ -47,6 +47,15 @@ export const useAuthStore = defineStore('auth', {
       }
       return null; // Ou um valor padrão, se necessário
     },
+    getInfoId(){
+      const userLogado = sessionStorage.getItem('userLogado');
+      if (userLogado) {
+        const user = JSON.parse(userLogado);
+        return user.id;
+      }
+      return null; // Ou um valor padrão, se necessário
+    }
+    ,
     getInfoImg(){
       const userLogado = sessionStorage.getItem('userLogado');
       if (userLogado) {

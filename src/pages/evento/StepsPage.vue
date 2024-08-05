@@ -18,7 +18,7 @@ import EventoStep1Component from 'src/components/EventoStep1Component.vue'
 import EventoStep2Component from 'src/components/EventoStep2Component.vue'
 import HostStepComponent from 'src/components/HostStepComponent.vue'
 import FooterComponent from 'src/components/FooterComponent.vue'
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount, onBeforeUnmount, ref } from 'vue'
 
 const step = ref(1)
 
@@ -31,6 +31,12 @@ function prev(){
 }
 
 onBeforeMount(() => {
+    sessionStorage.removeItem('eventoStep1')
+    sessionStorage.removeItem('eventoStep2')
+    sessionStorage.removeItem('eventoStep3')
+})
+
+onBeforeUnmount(() => {
     sessionStorage.removeItem('eventoStep1')
     sessionStorage.removeItem('eventoStep2')
     sessionStorage.removeItem('eventoStep3')
