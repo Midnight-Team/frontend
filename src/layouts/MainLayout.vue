@@ -15,28 +15,30 @@
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
 
-      <q-tabs align="left">
-        <q-route-tab to="/" label="Buscar" />
+      <q-tabs align="center">
+        <q-route-tab v-if="isAuthenticated && isHost" to="/evento" label="Meus Eventos" />
+        <q-route-tab to="/app" label="Buscar" />
         <q-route-tab v-if="!isAuthenticated" to="/login" label="Login/Registar-se" />
-        <q-route-tab v-if="isAuthenticated" to="/evento" label="Meus Eventos" />
       </q-tabs>
     </q-header>
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" side="right">
+    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grey-3" style="border-left: 4px solid #6310E1">
       <!-- <div class="w100 flex q-my-lg flex-center">
         <q-avatar style="width:120px;height:120px">
           <img src="https://lh3.googleusercontent.com/p/AF1QipN7ksUb-WdGYoJGLfo_79Mxnf0GNpk1cxsicgm6=s1360-w1360-h1020" alt="">
         </q-avatar>
-      </div>
-      <div class="text-center text-bold text-primary">Midnight Produções</div> -->
-      <!-- <div class="text-center text-primary mid-opacity text-bold q-mb-md ">host</div> -->
+      </div> -->
+      <p class="text-h6 text-primary text-bold mid-opacity q-pl-md q-mt-sm">Bem Vindo(a)</p>
+      <div v-if="isHost" class="text-center text-bold text-primary">{{authStore.getInfoRazao()}}</div>
+      <div class="text-center text-primary mid-opacity text-bold q-mb-md ">{{ authStore.getInfoRole() }}</div>
       <q-list class="text-bold text-primary">
-        <q-item v-for="item in menuOptions.items" :key="item.label" clickable @click="goTo(item.to)">
-          <q-item-section avatar>
-            <q-icon :name="item.icon" />
-          </q-item-section>
+        <q-item v-for="item in menuOptions.items" :key="item.label"
+           clickable @click="goTo(item.to)" style="border-radius: 12px;border-right: 3px solid;border-top: 3px solid;" class="q-mt-md q-mx-md bg-purple-2">
           <q-item-section>
             <q-item-label>{{ item.label }}</q-item-label>
+          </q-item-section>
+          <q-item-section avatar>
+            <q-icon :name="item.icon" />
           </q-item-section>
         </q-item>
         <div v-if="!isAuthenticated" class="w100 row items-center justify-center q-mt-xl">
@@ -80,19 +82,9 @@ import { useAuthStore } from 'src/stores/authStore';
 const authStore = useAuthStore();
 const isAuthenticated = computed(() => authStore.isAuthenticated);
 const rightDrawerOpen = ref(false)
-const saldo = ref('R$ *****,**')
-const saldoHandler = ref('R$ 1.200,00')
+const isHost = computed(() => authStore.getInfoRole() == 'host')
 const router = useRouter()
 const landingLink = !window.location.href.includes('localhost') ? 'https://midnightickets.com' : 'http://localhost:9000'
-
-function changeVisibility() {
-  if (saldo.value.includes('*')) {
-    saldo.value = saldoHandler.value
-  } else {
-    saldoHandler.value = saldo.value
-    saldo.value = 'R$ ****,**'
-  }
-}
 
 function goTo(to) {
   router.push(to)
@@ -100,11 +92,13 @@ function goTo(to) {
 
 const menuOptions = ref({
   items: [
+    // HOST MENUS
+    { label: 'Novo Evento', icon: 'add_box', to: '/evento/steps', role: 'host' },
+    { label: 'Meus Eventos', icon: 'date_range', to: '/evento', role: 'host'  },
+    { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/app/recarregar', role: 'host' },
     // { label: 'Meu perfil', icon: 'person', to: '/page3' },
-    { label: 'Meus Eventos', icon: 'date_range', to: '/evento' },
     // { label: 'Saldo e Vendas', icon: 'payments', to: '/page3' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
-    { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/app/recarregar' },
     // { label: 'Validar Ingresso', icon: 'sensor_occupied', to: '/page3' },
     // { label: 'Test', icon: 'bug_report', to: '/test' }
   ]
@@ -119,3 +113,8 @@ const toggleRightDrawer = () => {
   rightDrawerOpen.value = !rightDrawerOpen.value
 }
 </script>
+<style scoped>
+.bg-purple-2{
+    background-color: #8025e22b!important;
+}
+</style>

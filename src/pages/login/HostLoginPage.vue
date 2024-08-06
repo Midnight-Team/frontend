@@ -10,7 +10,7 @@
                 Login {{ usuario.isSubhost ? 'Subhost' : 'Host' }}
             </div>
             <q-card-section>
-                <q-form @submit="login">
+                <div>
                     <q-input maxlength="30" filled v-model="usuario.login" :label="usuario.isSubhost ? 'CPF*' : 'Login*'" />
                     <q-input maxlength="20" filled class="q-mt-md" v-if="!usuario.isSubhost" v-model="usuario.senha" label="Senha*"
                         :type="showPassword ? 'text' : 'password'">
@@ -28,7 +28,7 @@
                     </q-input>
                     <q-btn @click="login()" type="submit" :label="usuario.isSubhost ? 'Escanear Ingressos' : 'Entrar'" color="primary"
                         :icon-right="usuario.isSubhost ? 'document_scanner' : 'login'" class="w100 q-mt-md" />
-                </q-form>
+                </div>
             </q-card-section>
         </q-card>
     </div>
@@ -38,7 +38,6 @@
 import { useQuasar } from "quasar";
 import { api } from "src/boot/axios";
 import { onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
 
 const $q = useQuasar();
 const showPassword = ref(false);
@@ -75,7 +74,6 @@ const login = async () => {
             console.log(err)
         })
     }
-    console.log('subhost: ' + JSON.stringify(usuario.value));
 }
 
 function colarAcessCode() {

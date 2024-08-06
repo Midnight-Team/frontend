@@ -5,12 +5,11 @@
             Informações do Evento
         </div>
         <div class="column q-gutter-y-md q-pa-md q-mb-xl">
-            <q-input filled class="q-mt-lg" v-model="evento.titulo" label="Título*" />
-            <q-input filled type="textarea" v-model="evento.descricao" label="Descrição*" />
+            <div class="text-center w100 text-primary text-bold mid-opacity">Preencha as informações necessárias para criação do seu evento:</div>
+            <q-input filled class="q-mt-lg" v-model="evento.titulo"  label="Título*" />
+            <q-input filled type="textarea" v-model="evento.descricao" label="Descrição" />
             <q-input filled type="textarea" v-model="evento.endereco" label="Endereço*" />
             <q-input filled type="textarea" v-model="evento.contato" label="Contato*" />
-            <q-input filled v-model="evento.categoria" label="Categoria*"
-                placeholder="ex: Evento Automobilístico, Festas de Fim de Ano..." />
             <div class="q-gutter-y-sm column">
                 <div class="row items-center text-h6 text-primary justify-center no-wrap q-gutter-x-sm">
                     <q-icon color="primary" size="md" name="schedule" />
@@ -34,7 +33,7 @@
                             </q-icon>
                         </template>
                     </q-input>
-                    <q-input label="Hora Fim*" class="q-mt-md q-ml-md" style="width: 45%;" outlined
+                    <q-input label="Hora Fim" class="q-mt-md q-ml-md" style="width: 45%;" outlined
                         v-model="evento.hora_final" mask="time" :rules="['time']">
                         <template v-slot:append>
                             <q-icon name="access_time" color="primary" class="cursor-pointer">
@@ -62,22 +61,22 @@
                     <div class="text-bold mid-opacity text-primary">PurpleCoins</div>
                     <q-icon name="paid" size="md" class="q-pr-sm" color="primary" />
                 </div>
-                <q-btn label="Recarregar PurpleCoins" icon-right="currency_exchange" to="/app/recarregar" />
+                <q-btn label="Recarregar PurpleCoins" color="primary" icon-right="currency_exchange" to="/app/recarregar" />
             </div>
-            <q-select outlined v-model="evento.qtd_ingressos_inicial" label="Quantidade de Ingressos Inicial*"
-                :options="evento.qtd_ingressos_inicialOptions" />
-            <q-input filled v-model="evento.img_url" label="URL da Imagem do Evento">
+            <q-select outlined v-model="evento.pacote" @update:model-value="checkSaldoToQtdIngressos()" label="Quantidade de Ingressos Inicial*"
+                :options="pacoteOptions" />
+            <q-input maxlength="250" placeholder="Insira a url do banner" filled v-model="evento.img_url" label="URL da Imagem do Evento*">
                 <template v-slot:append>
                     <q-btn flat icon="image" @click="verImg(evento.img_url)" color="primary" />
                 </template>
             </q-input>
-            <q-input filled v-model="evento.localizacao" label="Localização Google Maps">
+            <q-input  placeholder="Clique no ícone ao lado para ajuda" maxlength="500" filled v-model="evento.localizacao" label="Localização Google Maps">
                 <template v-slot:append>
-                    <q-btn flat icon="pin_drop" @click="window.open(evento.localizacao)" color="primary" />
+                    <q-btn flat icon="pin_drop" @click="helpLocGoogle()" color="primary" />
                 </template>
             </q-input>
             <div class="w100 hline bg-primary"></div>
-            <q-btn label="próximo" color="primary" @click="goNext()" icon-right="skip_next" />
+            <q-btn :disabled="checkRequiredFields()"  label="próximo" color="primary" @click="goNext()" icon-right="skip_next" />
             <q-btn label="meus eventos" flat color="primary" @click="returnEventos()" />
         </div>
 
@@ -88,12 +87,29 @@
 import { ref, defineEmits, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from 'src/stores/authStore';
+import { useQuasar } from "quasar";
 
 const authStore = useAuthStore();
 const router = useRouter()
 const emit = defineEmits(['next', 'prev'])
+const $q = useQuasar()
+
+const evento = ref({
+    titulo: '',
+    descricao: '',
+    endereco: '',
+    contato: '',
+    localizacao: '',
+    data_evento: '',
+    hora_evento: '',
+    hora_final: '',
+    pacote: null,
+    img_url: '',
+})
 
 const goNext = () => {
+    evento.value.data_evento = evento.value.data_evento.slice(0, 10)
+    sessionStorage.setItem('eventoStep1', JSON.stringify(evento.value))
     emit('next')
 }
 
@@ -101,37 +117,59 @@ const returnEventos = () => {
     router.push('/evento')
 }
 
-const evento = ref({
-    titulo: '',
-    descricao: '',
-    endereco: '',
-    categoria: '',
-    contato: '',
-    localizacao: '',
-    data_evento: '',
-    hora_evento: '',
-    hora_final: '',
-    qtd_ingressos_inicial: null,
-    qtd_ingressos_inicialOptions: [
-        { value: 1, label: '6% de Cada Ingresso - 1000 ingressos', purpleCoins: 0, max_ingressos: 1000, },
+const checkRequiredFields = () => {
+    if (evento.value.titulo == '' || evento.value.endereco == '' || evento.value.contato == '' || evento.value.hora_evento == '' || evento.value.data_evento == '' || evento.value.pacote == null) {
+        return true
+    } else {
+        return false
+    }
+}
+const pacoteOptions = [
+        { value: 1, label: '6% de Cada Ingresso - 1000 ingressos 🎟️', purpleCoins: 0, max_ingressos: 1000, },
         { value: 2, label: '0% de taxa - 100 ingressos por 1 PurpleCoin🟣', purpleCoins: 1, max_ingressos: 100, },
         { value: 3, label: '0% de taxa - 200 ingressos por 2 PurpleCoins🟣', purpleCoins: 2, max_ingressos: 200 },
         { value: 4, label: '0% de taxa - 300 ingressos por 3 PurpleCoins🟣', purpleCoins: 3, max_ingressos: 300 },
         { value: 5, label: '0% de taxa - 2000 ingressos por 10 PurpleCoins🟣', purpleCoins: 10, max_ingressos: 2000 }
-    ],
-    img_url: '',
-    tipos_ingressos: [],
-    ingressos: [],
-})
+]
+
 
 function verImg(url) {
     window.open(url, '_blank')
 }
 
+const helpLocGoogle = () => {
+    $q.notify({
+        message: 'Para buscar a localização do seu evento acesse o Google Maps, pesquise o local do seu evento, clique em "Compartilhar" e depois em "Incorporar um mapa". Copie e cole o html(iframe) no campo localização.',
+        color: 'blue-8',
+        position: 'top',
+        icon: 'pin_drop',
+        timeout: 10000
+    })
+}
+
+const checkSaldoToQtdIngressos = () => {
+    if(authStore.getInfoPurpleCoins() < evento.value.pacote.purpleCoins){
+        $q.notify({
+            message: 'Você não tem saldo suficiente para essa quantidade de ingressos',
+            color: 'negative',
+            position: 'top',
+            icon: 'savings'
+        })
+        evento.value.pacote = null
+    }
+}
+
 onMounted(() => {
+    const es1Storage = sessionStorage.getItem('eventoStep1')
+    const es1 = JSON.parse(es1Storage)
+    if(es1){
+        evento.value = es1
+    }
     window.scrollTo(0, 0);
 })
+
 </script>
+
 
 <style scoped>
 
@@ -142,7 +180,5 @@ onMounted(() => {
     background: #efefef4d;
     backdrop-filter: blur(2px);
     z-index: 1;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
 }
 </style>

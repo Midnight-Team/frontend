@@ -20,6 +20,11 @@
                         Produções</div>
                         <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
+                        <q-input maxlength="100" class="q-mb-md" outlined label="Procurar Evento">
+                            <template v-slot:append>
+                                <q-btn icon="search" color="primary" />
+                            </template>
+                        </q-input>
                         <q-table class="text-primary q-mb-md" :rows="rows" :columns="columns" row-key="eventName" />
                     </div>
                 </div>
@@ -209,13 +214,18 @@ onMounted(() => {
 .q-page{
     min-height: 100vh;
 }
+
+@media (min-width: 1100px) {
+    .es1{
+        margin: 16px 100px;
+    }
+}
+
 .title-1 {
     position: sticky;
     top: 96px;
     background: #efefef4d;
     backdrop-filter: blur(4px);
     z-index: 1;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
 }
 </style>
