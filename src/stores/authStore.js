@@ -80,6 +80,14 @@ export const useAuthStore = defineStore('auth', {
       }
       return null; // Ou um valor padrão, se necessário
     },
+    getInfoSaldo(){
+      const userLogado = sessionStorage.getItem('userLogado');
+      if (userLogado) {
+        const user = JSON.parse(userLogado);
+        return user.saldo;
+      }
+      return null; // Ou um valor padrão, se necessário
+    },
     setInfoPurpleCoins(purpleCoins){
       const userLogado = sessionStorage.getItem('userLogado');
       if (userLogado) {

@@ -8,7 +8,7 @@
                     {{authStore.getInfoPurpleCoins()}} <div class="q-pl-sm mid-opacity">PurpleCoins</div>
                 </div>
                 <div class="row no-wrap items-center">
-                    <div class="mid-opacity">R$ 22.300,00</div>
+                    <div class="mid-opacity">R$ {{formatToNumber(authStore.getInfoSaldo().toString())}}</div>
                     <q-icon size="sm" color="orange" name="paid" class="q-pl-sm" />
                 </div>
             </div>
@@ -20,41 +20,53 @@
                         Produções</div>
                         <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
-                        <q-input maxlength="100" class="q-mb-md" outlined label="Procurar Evento">
+                        <q-input v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined label="Procurar Evento">
                             <template v-slot:append>
-                                <q-btn icon="search" color="primary" />
+                                <q-btn icon="search" color="primary" @click="getEventos()"/>
                             </template>
                         </q-input>
-                        <q-table class="text-primary q-mb-md" :rows="rows" :columns="columns" row-key="eventName" />
+                        <q-toggle v-model="buscarEvento.status" @update:model-value="getEventos()" :label="buscarEvento.status ? 'Em andamento' : 'Todos'" class="q-mb-md text-primary text-bold"/>
+                        <q-table class="my-sticky-column-table text-primary q-mb-md w100" :rows="rows"  :columns="columns"  hide-pagination>
+                            <template v-slot:body-cell-acoes="props">
+                                    <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
+                                        <q-btn icon="visibility" color="primary" />
+                                        <q-btn icon="person_add " color="blue"  />
+                                    </div>
+                            </template>
+                        </q-table>
+
                     </div>
                 </div>
             </div>
         </div>
-        <FooterComponent />
     </q-page>
 </template>
 
 <script setup>
-import { ref, defineEmits, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import FooterComponent from "../../components/FooterComponent.vue";
 import { useAuthStore } from 'src/stores/authStore';
+import { api } from 'src/boot/axios';
 
 const authStore = useAuthStore();
 const router = useRouter();
 
+const buscarEvento = ref({
+    titulo: '',
+    status: true
+})
+
 const navigateTo = (url) => {
     router.push(url);
 }
+const rows = ref([]);
 const columns = [
     {
-        name: 'eventName',
+        name: 'titulo',
         required: true,
-        label: 'Nome do Evento',
+        label: 'Título',
         align: 'left',
-        field: row => row.eventName,
-        format: val => `${val}`,
-        sortable: true
+        field: 'titulo'
     },
     {
         name: 'status',
@@ -63,156 +75,87 @@ const columns = [
         field: 'status'
     },
     {
-        name: 'revenue',
+        name: 'pacote',
+        required: true,
+        label: 'Pacote',
         align: 'left',
-        label: 'Faturamento',
-        field: 'revenue',
-        sortable: true,
-        format: val => `R$ ${val.toFixed(2).toString().replace('.', ',')}`,
-        sort: (a, b) => a - b
+        field: 'pacote'
     },
     {
-        name: 'ingressos',
+        name: 'tipos_ingressos',
         align: 'left',
-        label: 'Ingressos Vendidos',
-        field: 'ingressos'
+        label: 'Tipos Ingressos',
+        field: 'tipos_ingressos'
     },
     {
-        name: 'accessCode',
+        name: 'qtd_ingressos',
         align: 'left',
-        label: 'Access Code',
-        field: 'accessCode'
+        label: 'Ingressos Disponíveis',	
+        field: 'qtd_ingressos'
     },
     {
-        name: 'creationDate',
+        name: 'subhosts',
         align: 'left',
-        label: 'Data Criação',
-        field: 'creationDate',
-        format: val => formatDate(val),
-        sortable: true
+        label: 'Subhosts',
+        field: 'subhosts'
     },
     {
-        name: 'eventDate',
+        name: 'data_evento',
         align: 'left',
         label: 'Data do Evento',
-        field: 'eventDate',
-        format: val => formatDate(val),
-        sortable: true
+        field: 'data_evento',
     },
+    {
+        name: 'acoes',
+        align: 'left',
+        label: 'Ações',
+        field: 'acoes',
+    },
+
 ]
-const rows = [
-    {
-        eventName: 'Concerto de Rock',
-        creationDate: '2024-01-01T10:00:00',
-        eventDate: '2024-07-22T18:00:00',
-        ingressos: '303/2000',
-        accessCode: '1234',
-        status: '🟢 Em andamento',
-        revenue: 3200.00
-    },
-    {
-        eventName: 'Festival de Jazz',
-        creationDate: '2024-02-15T09:00:00',
-        eventDate: '2024-08-10T20:00:00',
-        accessCode: '5678',
-        ingressos: '133/200',
-        status: '🟣 Finalizado',
-        revenue: 3500.00
-    },
-    {
-        eventName: 'Feira de Tecnologia',
-        creationDate: '2024-03-10T08:30:00',
-        eventDate: '2024-09-05T19:00:00',
-        ingressos: '230/300',
-        accessCode: '9101',
-        status: '🟢 Em andamento',
-        revenue: 2320.00
-    },
-    {
-        eventName: 'Exposição de Arte',
-        creationDate: '2024-04-20T11:15:00',
-        eventDate: '2024-10-15T17:00:00',
-        accessCode: '1121',
-        ingressos: '0/150',
-        status: '🟡 Agendado',
-        revenue: 0.00
-    },
-    {
-        eventName: 'Maratona de Cinema',
-        creationDate: '2024-05-05T14:45:00',
-        ingressos: '199/250',
-        status: '🟣 Finalizado',
-        eventDate: '2024-11-22T22:00:00',
-        accessCode: '3141',
-        revenue: 2340.00
-    },
-    {
-        eventName: 'Workshop de Fotografia',
-        creationDate: '2024-06-10T10:00:00',
-        eventDate: '2024-12-01T09:00:00',
-        ingressos: '80/140',
-        accessCode: '2255',
-        status: '🟢 Em andamento',
-        revenue: 5000.00
-    },
-    {
-        eventName: 'Seminário de Marketing',
-        creationDate: '2024-07-01T11:00:00',
-        eventDate: '2024-12-15T10:00:00',
-        ingressos: '1240/2000',
-        accessCode: '3344',
-        status: '🟢 Em andamento',
-        revenue: 7000.00
-    },
-    {
-        eventName: 'Feira de Artesanato',
-        creationDate: '2024-08-20T12:00:00',
-        eventDate: '2025-01-10T11:00:00',
-        ingressos: '12/150',
-        accessCode: '4455',
-        status: '🔴 Cancelado',
-        revenue: 90.00
-    },
-    {
-        eventName: 'Congresso de Medicina',
-        creationDate: '2024-09-15T13:00:00',
-        eventDate: '2025-02-20T14:00:00',
-        ingressos: '200/200',
-        accessCode: '5566',
-        status: '🟢 Em andamento',
-        revenue: 15000.00
-    },
-    {
-        eventName: 'Festival de Cinema',
-        creationDate: '2024-10-25T14:30:00',
-        eventDate: '2025-03-05T15:00:00',
-        ingressos: '250/300',
-        accessCode: '6677',
-        status: '🟢 Em andamento',
-        revenue: 18000.00
+
+function formatToNumber(inputString) {
+    let cleanString = inputString.replace(/[^\d,]/g, '');
+    let numericString = cleanString.replace(',', '.');
+    let number = parseFloat(numericString).toFixed(2);
+    if (isNaN(number)) {
+        number = '0.00';
     }
-]
+    let formattedString = number.toString().replace('.', ',');
 
-
-const formatDate = (dateString) => {
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    };
-    return new Intl.DateTimeFormat('pt-BR', options).format(new Date(dateString));
+    return formattedString;
 }
-onMounted(() => {
+
+async function getEventos() {
+    const req = {
+        host: authStore.getInfoId(),
+        evento: {
+            titulo: buscarEvento.value.titulo,
+            status: buscarEvento.value.status
+        }
+    }
+    await api.post('/get_eventos', req)
+    .then((response) => {
+        rows.value = response.data;
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+}
+
+onMounted(async() => {
     window.scrollTo(0, 0);
+    await getEventos();
 })
 </script>
 
 <style scoped>
 .q-page{
     min-height: 100vh;
+}
+
+.q-table{
+    position: relative;
 }
 
 @media (min-width: 1100px) {
@@ -224,8 +167,26 @@ onMounted(() => {
 .title-1 {
     position: sticky;
     top: 96px;
-    background: #efefef4d;
+    background: #dacaff56;
     backdrop-filter: blur(4px);
-    z-index: 1;
+    z-index: 2;
 }
+</style>
+<style lang="sass">
+.my-sticky-column-table
+
+  thead tr:first-child th:first-child
+    /* bg color is important for th; just specify one */
+    background-color: #c7afff
+
+  td:first-child
+    background-color: #c7afff
+
+  th:first-child,
+  td:first-child
+    position: sticky
+    font-weight: bold
+    left: 0
+    z-index: 1
+    border-right: 2px solid #5D0CE0
 </style>

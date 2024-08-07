@@ -1,7 +1,7 @@
 <template>
   <div class="fullscreen bg-grad-4 text-white text-center q-pa-md flex flex-center">
     <div>
-      <div style="font-size: 10vh">
+      <div style="font-size: 6vh">
         Eita! Essa página não existe 🥲
       </div>
 
