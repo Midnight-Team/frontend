@@ -17,8 +17,7 @@
 
       <q-tabs align="center">
         <q-route-tab v-if="isAuthenticated && isHost" to="/evento" label="Meus Eventos" />
-        <q-route-tab to="/app" label="Buscar" />
-        <q-route-tab v-if="!isAuthenticated" to="/login" label="Login/Registar-se" />
+        <q-route-tab to="/app" label="Perfil" />
       </q-tabs>
     </q-header>
 
@@ -76,7 +75,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from 'src/stores/authStore';
 
@@ -91,17 +90,25 @@ function goTo(to) {
   router.push(to)
 }
 
+function cleanSessionStorage() {
+  sessionStorage.clear()
+}
+
+onBeforeUnmount(() => {
+  cleanSessionStorage()
+})
+
 const menuOptions = ref({
   items: [
     // HOST MENUS
-    { label: 'Meu perfil', icon: 'person', to: '/page3' },
     { label: 'Gerenciar Subhosts', icon: 'sensor_occupied', to: '/evento/steps', role: 'host' },
     // { label: 'Meus Eventos', icon: 'date_range', to: '/evento', role: 'host'  },
-    { label: 'Ingressos', icon: 'confirmation_number', to: '/page3' },
-    { label: 'Vendas', icon: 'payments', to: '/page3' },
+    { label: 'Ingressos', icon: 'confirmation_number', to: '/app/#' },
+    { label: 'Vendas', icon: 'payments', to: '/app/#' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
     { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/app/recarregar', role: 'host' },
-    { label: 'Suporte', icon: 'contact_support', to: '/test' }
+    { label: 'Suporte', icon: 'contact_support', to: '/app/#' },
+    { label: 'Logout', icon: 'logout', to: '/' }
   ]
 
 })

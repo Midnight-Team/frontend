@@ -3,25 +3,27 @@
         <q-header class="fixed bg-grad-3 text-white animate__animated animate__backInDown animate__slow"
             height-hint="98">
             <div style="font-size: 1rem;" class=" q-py-md w100 row no-wrap items-center  justify-evenly">
-                <a v-if="!isMobile" @click="scrollTop()" class="menu-item row items-center">
-                    <q-icon class="q-pr-xs" name="local_activity" size="sm"/> Midnight Tickets
+                <a v-if="!isMobile" @click="scrollBot()" class="menu-item row items-center">
+                    <q-icon class="q-pr-xs" name="local_activity" size="sm" /> Midnight Tickets
                 </a>
-                <a v-else @click="scrollTop()" class="menu-item row items-center">
-                    <q-icon name="local_activity" size="lg"/>
-                </a>
-                <a class="menu-item" href="#beneficios">
-                    Vantagens
+                <a v-else @click="scrollBot()" class="menu-item row items-center">
+                    <q-icon name="local_activity" size="lg" />
                 </a>
                 <a class="menu-item" @click="scrollToBottom()">
                     Contato
+                </a>
+                <a class="menu-item bg-primary q-pa-md text-purple-1 row items-center q-gutter-x-sm"
+                    style="border-radius:8px" @click="navigateTo('/login')">
+                    Entrar
+                    <q-icon name="login" size="sm" />
                 </a>
             </div>
 
         </q-header>
         <q-page-container>
             <q-page class="">
-                <div id="home" style="border: 4px solid #984BE7"
-                    class="q-mb-xl q-px-xs q-pb-xl animate__animated animate__zoomIn animate__slower">
+                <div id="home" style="border: 4px solid #984BE7;border-radius: 8px;"
+                    class="q-mt-md q-mb-xl q-px-xs q-pb-xl animate__animated animate__zoomIn animate__slower">
                     <q-toolbar class="bg-grad-4">
                         <q-toolbar-title
                             class="row justify-center q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
@@ -31,13 +33,17 @@
                             </div>
                         </q-toolbar-title>
                     </q-toolbar>
-                    <div class="space bg-grad-2 w100 text-center text-white q-py-md text-bold q-px-md high-opacity" style="font-size:1.1rem">
-                        PARE de PAGAR TAXAS excessivas na VENDA de SEUS INGRESSOS e REALIZE seus EVENTOS com 0% de TAXA!!
+                    <div class="space bg-grad-2 w100 text-center text-white q-py-md text-bold q-px-md high-opacity"
+                        style="font-size:1.1rem">
+                        PARE de PAGAR TAXAS excessivas na VENDA de SEUS INGRESSOS e REALIZE seus EVENTOS com 0% de
+                        TAXA!!
                     </div>
-                    <q-card class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-3s">
-                        <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Digite seu EMAIL abaixo e SAIBA COMO o nosso SERVIÇO pode
+                    <q-card
+                        class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-3s">
+                        <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Digite seu EMAIL abaixo e SAIBA
+                            COMO o nosso SERVIÇO pode
                             POTENCIALIZAR o seu FATURAMENTO!!</p>
-                        <q-input v-model="contato.email" class="bg-white" filled label="Seu melhor email">
+                        <q-input v-model="contato.email" type="email" class="bg-white" filled label="Seu melhor email">
                             <template v-slot:prepend>
                                 <q-icon name="email" color="primary" />
                             </template>
@@ -66,7 +72,9 @@
                         class="q-mb-md bg-grad-2 text-white high-opacity text-bold q-px-sm q-py-md text-right">
                         Maximizamos seus lucros na venda de ingressos de forma escalável com serviços personalizados,
                         transparência, suporte e uma
-                        interface amigável. Seus ingressos mais caros são os que mais pagam taxas abusivas, mas pra nós o ingresso é apenas um dado e por isso não devem ser taxados mais do que outros.
+                        interface amigável. Seus ingressos mais caros são os que mais pagam taxas abusivas, mas pra nós
+                        o ingresso é apenas
+                        um dado e por isso não devem ser taxados mais do que outros.
                         <br>
                     </div>
                     <div class="w100 img-wrapper column">
@@ -80,7 +88,8 @@
                         pequenos encontros a grandes festivais, nossa plataforma se adapta às suas necessidades e
                         POTENCIALIZA seus ganhos.
                         Na Midnight Tickets, entendemos que cada evento é único. Oferecemos opções flexíveis que se
-                        ajustam ao porte do seu evento, permitindo que você personalize sua experiência de acordo com sua demanda
+                        ajustam ao porte do seu evento, permitindo que você personalize sua experiência de acordo com
+                        sua demanda
                     </div>
                 </div>
                 <div id="beneficios" style="border: 4px solid #984BE7;">
@@ -93,7 +102,8 @@
                             </div>
                         </q-toolbar-title>
                     </q-toolbar>
-                    <div class="text-h5 text-center w100 text-white text-bold q-pt-md q-pb-md bg-grad-2 q-my-md">💰 Vantagens</div>
+                    <div class="text-h5 text-center w100 text-white text-bold q-pt-md q-pb-md bg-grad-2 q-my-md">💰
+                        Vantagens</div>
                     <div class="w100 text-h6 text-bold bg-white text-primary text-center q-px-md q-py-sm border-bottom">
                         Veja
                         como
@@ -102,9 +112,13 @@
                         🟢 <strong class="text-green">Modalidade Grátis:</strong> Crie Eventos <strong>sem
                             custos</strong> e pague <strong>apenas 6% de taxa</strong>
                         por
-                        ingresso vendido. Ingressos ilimitados e uma <strong>solução simples para qualquer porte de evento</strong>.
-                        <br>🟣 <strong class="text-primary">Modalidade Purplecoins:</strong> Nossa <strong>moeda virtual</strong>
-                        permite realizar <strong>Eventos</strong> com com <strong>0% de taxa</strong> por ingresso vendido. Obtenha <strong>100% do
+                        ingresso vendido. Ingressos ilimitados e uma <strong>solução simples para qualquer porte de
+                            evento</strong>.
+                        <br>🟣 <strong class="text-primary">Modalidade Purplecoins:</strong> Nossa <strong>moeda
+                            virtual</strong>
+                        permite realizar <strong>Eventos</strong> com com <strong>0% de taxa</strong> por ingresso
+                        vendido. Obtenha
+                        <strong>100% do
                             lucro</strong> e ainda <strong>GANHE CASHBACK</strong> com cada ingresso
                         não vendido
                         <br>🔵 <strong class="text-blue">Saque Automático:</strong> também disponibilizamos a
@@ -130,127 +144,141 @@
                             instalação</strong> de aplicativos pra todos os tipos de usuário
                         <br>
                         🧑🏼‍💻 <strong style="font-size:1.2rem" class="text-primary text-bold">Suporte Humanizado e
-                            Eficaz:</strong> Nosso serviço é monitorado constantemente, focado em <strong>otimizar os custos</strong>
-                        para todos e <strong>gratificar os usuários</strong> com nossas <strong>moedas virtuais</strong>.
-                        Nosso serviço de suporte é <strong>humanizado e rápido</strong> para atender o quanto antes suas dúvidas
+                            Eficaz:</strong> Nosso serviço é monitorado constantemente, focado em <strong>otimizar os
+                            custos</strong>
+                        para todos e <strong>gratificar os usuários</strong> com nossas <strong>moedas
+                            virtuais</strong>.
+                        Nosso serviço de suporte é <strong>humanizado e rápido</strong> para atender o quanto antes suas
+                        dúvidas
                         <br>
                         🖥️ <strong style="font-size:1.2rem" class="text-primary text-bold">Consultoria
-                            Especializada:</strong> Nossos <strong>desenvolvedores</strong> possuem experiências profisionais em diversos <strong>projetos
-                        nacionais e internacionais</strong> em Bancos e Software Houses, e estarão a
+                            Especializada:</strong> Nossos <strong>desenvolvedores</strong> possuem experiências
+                        profisionais em
+                        diversos <strong>projetos
+                            nacionais e internacionais</strong> em Bancos e Software Houses, e estarão a
                         disposição para
                         suporte, <strong>sugestões de melhorias e correções
-                        de bugs</strong>
+                            de bugs</strong>
                         <br>
                         📲 <strong style="font-size:1.2rem" class="text-primary text-bold">Tecnologia de Ponta:</strong>
-                        Nosso WebApp é desenvolvido com as <strong>melhores tecnologias</strong> do mercado e hospedada na nuvem com
-                        serviços da AWS, <strong>garantindo segurança e escalabilidade</strong> para <strong>todos os tipos de eventos e usuários</strong>
+                        Nosso WebApp é desenvolvido com as <strong>melhores tecnologias</strong> do mercado e hospedada
+                        na nuvem com
+                        serviços da AWS, <strong>garantindo segurança e escalabilidade</strong> para <strong>todos os
+                            tipos de eventos e
+                            usuários</strong>
                     </div>
                 </div>
-                <q-carousel
-                v-model="slide"
-                transition-prev="scale"
-                transition-next="scale"
-                swipeable
-                animated
-                control-color="white"
-                navigation
-                autoplay="true"
-                infinite
-                padding
-                arrows
-                class="bg-primary text-white shadow-1 q-mt-md"
-              >
-                <q-carousel-slide :name="1" img-src="~/assets/landing-images/login.png" class="column no-wrap flex-center">
-                </q-carousel-slide>
-                <q-carousel-slide :name="2" img-src="~/assets/landing-images/evento.png" class="column no-wrap flex-center">
-                </q-carousel-slide>
-                <q-carousel-slide :name="3" img-src="~/assets/landing-images/evento2.png" class="column no-wrap flex-center">
-                </q-carousel-slide>
-                <q-carousel-slide v-if="isMobile" :name="4" img-src="~/assets/landing-images/evento3.png" class="column no-wrap flex-center">
-                </q-carousel-slide>
-              </q-carousel>
+                <q-carousel v-model="slide" transition-prev="scale" transition-next="scale" swipeable animated
+                    control-color="white" navigation autoplay="true" infinite padding arrows
+                    class="bg-primary text-white shadow-1 q-mt-md">
+                    <q-carousel-slide :name="1" img-src="~/assets/landing-images/login.png"
+                        class="column no-wrap flex-center">
+                    </q-carousel-slide>
+                    <q-carousel-slide :name="2" img-src="~/assets/landing-images/evento.png"
+                        class="column no-wrap flex-center">
+                    </q-carousel-slide>
+                    <q-carousel-slide :name="3" img-src="~/assets/landing-images/evento2.png"
+                        class="column no-wrap flex-center">
+                    </q-carousel-slide>
+                    <q-carousel-slide v-if="isMobile" :name="4" img-src="~/assets/landing-images/evento3.png"
+                        class="column no-wrap flex-center">
+                    </q-carousel-slide>
+                </q-carousel>
                 <div id="form" class=" relative">
-                    <div class="text-h4 text-bold q-py-md text-white text-center bg-grad-1 border-bottom q-mt-md">🚀 Fale
+                    <div class="text-h4 text-bold q-py-md text-white text-center bg-grad-1 border-bottom q-mt-md">🚀
+                        Fale
                         Conosco</div>
-                    
-                    <div class="space rounded-borders q-my-md  " style="border-bottom: 8px solid #3C0783;z-index: -10">
-                        <q-card class="q-pa-md collumn q-gutter-y-md rounded-borders " style="border: 15px solid #6310E1; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
-                            <div class="w100 text-center text-primary text-bold mid-opacity ">Os campos abaixos são opcionais. Preencha-os e PARE de pagar TAXAS ABUSIVAS.</div>
-                            <q-input maxlength="200" filled v-model="contato.form.name" label="Nome Completo">
+
+                    <div class="space rounded-borders q-my-md  " style="border-radius: 20px;border-bottom: 8px solid #3C0783;z-index: -10">
+                        <q-card class="q-pa-md collumn q-gutter-y-md rounded-borders "
+                            style="border: 15px solid #6310E1; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                            <div class="w100 text-center text-primary text-bold mid-opacity ">Todos campos abaixos são
+                                OPCIONAIS.
+                                Preencha-os e PARE de pagar TAXAS ABUSIVAS.</div>
+                            <q-input maxlength="200" filled v-model="contato.form.name" label="1.Qual é o seu nome?">
                                 <template v-slot:append>
                                     <q-icon name="person" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="200" filled v-model="contato.form.companyName" label="Nome Empresa/Razão Social">
+                            <q-input maxlength="200" filled v-model="contato.form.companyName"
+                                label="2.Nome Empresa/Razão Social">
                                 <template v-slot:append>
                                     <q-icon name="business" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input mask="(##) #####-####" maxlength="200" filled v-model="contato.form.phone" label="Telefone">
+                            <q-input mask="(##) #####-####" placeholder="ex: (12) 34567-8910" type="tel" maxlength="200" filled v-model="contato.form.phone"
+                                label="3.Telefone/WhatsApp">
                                 <template v-slot:append>
                                     <q-icon name="phone" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="200" filled v-model="contato.email" label="Email">
+                            <q-input placeholder="ex: Shows, baile funk, festival de eletrônica..." maxlength="200"
+                                filled v-model="contato.form.eventType" label="4.Tipos de Eventos">
                                 <template v-slot:append>
-                                    <q-icon name="email" color="primary" />
+                                    <q-icon name="nightlife" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input placeholder="ex: Shows, baile funk, festival de eletrônica..." maxlength="200" filled v-model="contato.form.eventType" label="Tipos de Eventos">
-                                <template v-slot:append>
-                                    <q-icon name="event" color="primary" />
-                                </template>
-                            </q-input>
-                            <q-input suffix="pessoas" mask="#####" filled v-model="contato.form.maxCapacity" label="Capacidade máxima de público">
+                            <q-input suffix="pessoas" mask="#####" filled v-model="contato.form.maxCapacity"
+                                label="5.Capacidade máxima de público">
                                 <template v-slot:append>
                                     <q-icon name="groups" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input suffix="pessoas" mask="#####" filled v-model="contato.form.mediumEventCapacity" label="Média de público por evento">
+                            <q-input suffix="pessoas" mask="#####" filled v-model="contato.form.mediumEventCapacity"
+                                label="6.Média de público por evento">
                                 <template v-slot:append>
                                     <q-icon name="people" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="5" mask="#####"  filled v-model="contato.form.mediumVendaIngressos" placeholder="Média qtd. de Ingressos vendidos" label="Quantidade de Ingressos Digitais ">
+                            <q-input maxlength="5" mask="#####" filled v-model="contato.form.mediumVendaIngressos"
+                                placeholder="Média qtd. de Ingressos vendidos"
+                                label="7.Quantidade de Ingressos Digitais ">
                                 <template v-slot:append>
                                     <q-icon name="123" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="9" prefix="R$" reverse-fill-mask  mask="##.###,##" filled v-model="contato.form.mediaValorIngressos" placeholder="Média do valor de 1 ingresso" label="Valor médio do Ingresso">
+                            <q-input maxlength="3" suffix="%" reverse-fill-mask mask="###" filled
+                                v-model="contato.form.percentAvista" label="8.Percentual de Vendas à Vista"
+                                placeholder="ex: 60%">
                                 <template v-slot:append>
                                     <q-icon name="payments" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="9" prefix="R$" reverse-fill-mask  mask="##.###,##" filled v-model="contato.form.mediumProfits" placeholder="Média de faturamento por evento" label="Lucro por evento em Ingressos Digitais">
+                            <q-input maxlength="9" prefix="R$" reverse-fill-mask mask="##.###,##" filled
+                                v-model="contato.form.mediumProfits" placeholder="Média de faturamento por evento"
+                                label="9.Lucro por evento em Ingressos Digitais">
                                 <template v-slot:append>
                                     <q-icon name="paid" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="200" filled v-model="contato.form.localizacao" label="Localização" placeholder="Ex: Asa Sul - Brasília, Goiânia - GO...">
+                            <q-input maxlength="200" filled v-model="contato.form.localizacao" label="10.Localização"
+                                placeholder="Ex: Asa Sul - Brasília, Goiânia - GO...">
                                 <template v-slot:append>
                                     <q-icon name="location_on" color="primary" />
                                 </template>
                             </q-input>
-                            <div class="text-primary text-bold row no-wrap items-center w100 justify-center">Utiliza Mercado Pago?
-                                <q-toggle  v-model="contato.form.mercadopago" class="text-bold" :label="contato.form.mercadopago ? 'sim' : 'não'"/>
-                            </div>
-                            <q-btn v-if="!sendLoading" @click="sendForm()" class="q-pa-md w100" color="primary" icon-right="description"
-                                label="Enviar formulário" />
+                            <q-btn v-if="!sendLoading" @click="sendForm()" class="q-pa-md w100" color="primary"
+                                icon-right="description" label="Enviar formulário" />
                             <div class="w100 row justify-center">
-                                <q-spinner-bars v-if="sendLoading" class="q-mt-md"
-                                color="primary"
-                                size="2em"
-                            />
+                                <q-spinner-bars v-if="sendLoading" class="q-mt-md" color="primary" size="2em" />
                             </div>
                         </q-card>
                     </div>
                     <div class="space rounded-borders q-my-md ">
                         <q-btn @click="wppConsultor()" class="q-pa-md w100" color="green" icon-right="sms"
                             label="Fale Agora Com um de nossos Consultores" />
-                    </div>
+                        </div>
+                        <div  class="w100 text-bold rounded-borders column bg-grad-2 items-center justify-center text-white q-pa-md text-center q-mt-md ">
+                            <div class="column text-h5 text-white text-bold">LOGIN HOST</div>
+                            <div class="text-purple-2">É Produtor de Eventos ou Subhost??</div>
+                            <q-btn icon-right="admin_panel_settings"
+                                label="Faça login Aqui" dense class="q-mt-sm q-pa-md" color="primary" to="/login/host" />
+                        </div>
                 </div>
-                <div class="w100 text-white text-bold text-center">
-                    Siga-nos no <a href="https://www.instagram.com/midnightickets" class="text-blue" target="_blank">Instagram</a> e acompanhe o nosso desenvolvimento!
+                <div class="w100 text-white text-bold text-center q-mt-md">
+                    Siga-nos no <a href="https://www.instagram.com/midnightickets" class="text-blue"
+                        target="_blank">Instagram</a> e
+                    acompanhe o nosso desenvolvimento!
                 </div>
             </q-page>
         </q-page-container>
@@ -262,7 +290,9 @@ import { useQuasar } from "quasar";
 import { ref } from "vue";
 import { api } from 'src/boot/axios';
 import FooterComponent from "../components/FooterComponent.vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter()
 const $q = useQuasar()
 const slide = ref(1)
 const isMobile = window.innerWidth < 500
@@ -279,7 +309,7 @@ const contato = ref({
         mediumProfits: '',
         mediumVendaIngressos: '',
         mercadopago: false,
-        mediaValorIngressos: '',
+        percentAvista: '',
         localizacao: '',
     },
     dispositivo: window.innerWidth < 900 ? 'Mobile' : 'Desktop'
@@ -293,10 +323,14 @@ const lowDownScrolling = () => {
     window.scrollTo(0, 500);
 }
 
+function navigateTo(to) {
+    router.push(to)
+}
+
 async function fastEmailGetter() {
-    if(!checkEmail()){
+    if (!checkEmail()) {
         return false
-    }else {
+    } else {
         lowDownScrolling()
         await sendForm('Entraremos em Contato em Breve! Continue navegando pelo site para mais informações')
     }
@@ -315,8 +349,8 @@ const checkEmail = () => {
     return true
 }
 
-async function sendForm(msg) {    
-    if(!checkEmail()){
+async function sendForm(msg) {
+    if (!checkEmail()) {
         return
     }
     sendLoading.value = true
@@ -336,20 +370,20 @@ async function sendForm(msg) {
             icon: 'email',
         });
     })
-    .finally(() => {
-        setTimeout(() => {
-            sendLoading.value = false
-        }, 1000)
-    })
+        .finally(() => {
+            setTimeout(() => {
+                sendLoading.value = false
+            }, 1000)
+        })
 }
 
 
-function scrollTop() {
-    window.scrollTo(0, 0);
+function scrollBot() {
+    window.scrollTo(0, document.body.scrollHeight);
 }
 
 function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight - 1770);
+    window.scrollTo(0, document.body.scrollHeight - 1740);
 }
 
 
@@ -367,6 +401,7 @@ function scrollToBottom() {
 .q-page-container {
     z-index: 1;
     padding: 0 6px;
+    overflow: hidden
 }
 
 .border-bottom {
@@ -388,21 +423,32 @@ function scrollToBottom() {
     border-radius: 10px;
 }
 
+.q-btn {
+    transition: all 0.2s linear;
+}
 a {
     color: white;
     text-decoration: none;
     border-radius: 2px;
-    transition: all 0.4s linear;
+    transition: all 0.2s linear;
     font-weight: bold;
     cursor: pointer;
+}
+.menu-item {
+    font-size: 1.2rem;
+}
+.q-btn:hover {
+    opacity: 0.6;
 }
 
 .menu-item:hover {
     color: #6310E1;
-    background: #ebd3ff;
-    padding: 8px;
-    border-radius: 12px;
+    background: #ebd3ffde;
+    filter: brightness(1.2);
+    border-top-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
+
 .q-carousel {
     height: 400px;
 }
@@ -412,15 +458,15 @@ a {
         padding: 0 300px;
         margin: 0 30px;
     }
+
     .q-carousel {
         height: 90vh;
     }
+
     .img {
         max-width: 620px;
     }
 }
 
-div {
-}
-
+div {}
 </style>

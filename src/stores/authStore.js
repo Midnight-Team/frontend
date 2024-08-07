@@ -72,6 +72,14 @@ export const useAuthStore = defineStore('auth', {
       }
       return null; // Ou um valor padrão, se necessário
     },
+    getInfoSubCoins(){
+      const userLogado = sessionStorage.getItem('userLogado');
+      if (userLogado) {
+        const user = JSON.parse(userLogado);
+        return user.subCoins;
+      }
+      return null; // Ou um valor padrão, se necessário
+    },
     getInfoRole(){
       const roleUserLogado = sessionStorage.getItem('role');
       if (roleUserLogado) {

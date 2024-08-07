@@ -1,8 +1,8 @@
 <template>
     <div id="hostlogin-wrapper" class="animate__animated animate__zoomIn  flex flex-center">
-        <q-toggle class="animate__animated animate__flipInX animate__slower animate__delay-1s w100 row text-bold text-primary bg-white rounded-borders q-mt-md justify-center" @update:model-value="usuario.senha = ''"
-            v-model="usuario.isSubhost" :label="usuario.isSubhost ? 'Sou Subhost' : 'Sou Host'"
-            color="primary" />
+            <q-toggle class="animate__animated animate__flipInX animate__slower animate__delay-1s w100 row text-bold bg-grad-1 text-white  rounded-borders justify-center" @update:model-value="usuario.senha = ''"
+                v-model="usuario.isSubhost" :label="usuario.isSubhost ? 'Sou Subhost' : 'Sou Host'"
+                color="white" />
         <q-card class="shadow-9  q-mt-md " id="card-login">
             <div class="text-h5 q-pl-md q-pt-md text-primary text-bold row items-center">
                 <q-icon :name="usuario.isSubhost ? 'sensor_occupied' : 'admin_panel_settings'" size="lg"
@@ -56,7 +56,7 @@ const login = async () => {
             sessionStorage.setItem('role', JSON.stringify(res.data.role));
             $q.notify({
                 color: 'positive',
-                message: 'Login efetuado com sucesso!',
+                message: 'Login efetuado com sucesso',
                 icon: 'local_activity',
                 position: 'top',
             });

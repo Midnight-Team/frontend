@@ -1,83 +1,20 @@
 <template>
   <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-1">
     <div class="home-wrapper">
-      <div id="home-card" class="w100 row justify-center" style="" >
-        <q-input color="primary" outlined dense class="text-primary text-bold relative" style="width:90%;"  label="Buscar evento" >
-          <template v-slot:append>
-            <q-icon id="search-btn" name="search" color="white" style="border-top-right-radius: 4px;border-bottom-right-radius: 4px" class="absolute-right cursor-pointer bg-primary q-pa-sm"/>
-          </template>
-        </q-input>
-      </div>
 
       <div class="w100 row justify-center q-mt-md items-center text-white text-bold" style="border-radius: 20px; ">
         <q-avatar>
           <q-icon size="md" color="white" name="local_activity"/>
         </q-avatar>
-        <div class="text-h5 text-bold">
-          Midnight Tickets
+        <div class="text-h5 text-bold q-pa-md text-center">
+          PAGINA PARA GERENCIAR O PERFIL DO HOST
         </div>
       </div>
-      <div id="home-card-2">
-        <div class="q-mt-md row justify-center">
-          <q-card-section class="q-mb-md text-primary bg-white q-pa-md" style="border-top-right-radius: 40px;border-bottom-left-radius: 40px;width:80%">
-            <div class="text-h5 text-bold text-center">Quem Somos??🫰🏽💰💵</div>
-            <div class="text-body1 text-center text-bold opacity-8">Serviço de Bilheteria Premium sem taxa por ingresso e gerenciamento de vendas de ingressos!!</div>
-          </q-card-section>
-          <!-- Primeiro card existente -->
-          <q-card class="q-mb-md q-ml-md" style="width: 70%;">
-            <q-card-section>
-              <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url2" alt="">Taxas ??💰💵</div>
-              <div class="text-body2 border-top q-pt-sm text-bold opacity-8">NÃO! Aqui voce paga apenas o valor do pacote com a quatidade de purple coins🪙 desejadas. Cada purple coin equivale a um evento seu gerenciado pelo nosso App <strong>isento de taxa</strong>!!</div>
-            </q-card-section>
-          </q-card>
-  
-          <!-- Segundo card existente -->
-          <q-card class="q-mt-md q-ml-xl" style="width: 70%;">
-            <q-card-section>
-              <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url4" alt="">O que consigo fazer no App ??⚙️📲📱</div>
-              <div class="text-body2 q-pt-sm border-top opacity-8 text-bold">Comprar e Validar Ingressos, Criar Eventos e Vender Ingressos além de Gerenciar e Monitorar as vendas de seus eventos na palma da sua mão!!</div>
-            </q-card-section>
-          </q-card>
-          <!-- Terceiro card existente -->
-          <q-card class="q-mt-md q-mb-lg" style="margin-left: 25%;width: 70%;">
-            <q-card-section>
-              <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url1" alt="">Preciso Baixar Aplicativo??⚙️📲📱</div>
-              <div class="text-body2 opacity-8 text-bold q-pt-sm border-top">Não! Nosso serviço é um WebApp hospedado na Nuvem pelas melhores tecnologias do mercado e pode ser totalmento utilizado por qualquer navegador, inclusive diretamente do Instagram📸!!</div>
-            </q-card-section>
-          </q-card>
-            <div class="w100 flex flex-center q-py-md border-bt">
-              <q-btn label="Solicitar Abertura de Conta Host com um de Nossos consultores" class="w80 q-mb-md q-py-md" color="green" icon="person_add"/>
-            </div>
-  
-          <q-card class="q-mt-md" style="margin-left: 9%;width: 65%;">
-            <q-card-section>
-              <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url3" alt="">Suporte 24/7 ??📞📧</div>
-              <div class="text-body2 q-pt-sm border-top opacity-8 text-bold">Oferecemos suporte ao cliente 24 horas por dia, 7 dias por semana, para garantir que todos os seus problemas e dúvidas sejam resolvidos rapidamente!</div>
-            </q-card-section>
-            <q-card-actions align="right">
-              <q-btn class="text-bold" flat label="Entrar em Contato" icon-right="contact_support" color="primary" />
-            </q-card-actions>
-          </q-card>
-  
-          <q-card class="q-mt-md" style="margin-left: 5%;width: 75%;">
-            <q-card-section>
-              <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url5" alt="">Feedback dos Usuários ??📝💬</div>
-              <div class="text-body2 q-pt-md border-top opacity-8 text-bold">Receba feedback instantâneo dos seus clientes para melhorar continuamente seus eventos e serviços. Sua satisfação é nossa prioridade!</div>
-            </q-card-section>
-          </q-card>
-  
-          <q-card class="q-mt-md q-mb-sm" style="margin-left: -20%;width: 65%;">
-            <q-card-section>
-              <div class="text-h6 text-bold row items-center no-wrap text-primary"><img class="q-mr-md img-avatar" :src="avatar.url6" alt="">Segurança Garantida ??🔒🔐</div>
-              <div class="text-body2 q-pt-md border-top opacity-8 text-bold">Todos os pagamentos e dados pessoais são protegidos com os mais altos padrões de segurança utilizando o Mercado Pago, garantindo uma experiência segura e confiável para todos os usuários. Todos os dados sensíveis relacionados ao Midnight Tickets são criptografados.</div>
-            </q-card-section>
-          </q-card>
-        </div>
       </div>
-    </div>
-    <div class="w100 q-mt-xl bg-white">
+    
+    <!-- <div class="w100 q-mt-xl bg-white">
       <FooterComponent />
-    </div>
+    </div> -->
   </q-page>
 </template>
 
