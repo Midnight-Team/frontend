@@ -44,7 +44,7 @@ const criarEvento = async () => {
   const step1 = JSON.parse(sessionStorage.getItem('eventoStep1'));
   const step2 = JSON.parse(sessionStorage.getItem('eventoStep2'));
   const evento = { evento: { tipos_ingressos: step2 ,...step1}, host: host.value }
-  console.log("EVENTO: " + JSON.stringify(evento));
+  // console.log("EVENTO: " + JSON.stringify(evento));
   await api.post('/create_evento', evento).then(res => {
     $q.notify({
       color: 'positive',

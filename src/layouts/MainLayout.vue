@@ -22,23 +22,24 @@
       </q-tabs>
     </q-header>
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grey-3" style="border-left: 4px solid #6310E1">
+    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grad-4" style="border: 8px solid #6310E1">
       <!-- <div class="w100 flex q-my-lg flex-center">
         <q-avatar style="width:120px;height:120px">
           <img src="https://lh3.googleusercontent.com/p/AF1QipN7ksUb-WdGYoJGLfo_79Mxnf0GNpk1cxsicgm6=s1360-w1360-h1020" alt="">
         </q-avatar>
       </div> -->
-      <p class="text-h6 text-primary text-bold mid-opacity q-pl-md q-mt-sm">Bem Vindo(a)</p>
-      <div v-if="isHost" class="text-center text-bold text-primary">{{authStore.getInfoRazao()}}</div>
-      <div class="text-center text-primary mid-opacity text-bold q-mb-md ">{{ authStore.getInfoRole() }}</div>
-      <q-list class="text-bold text-primary">
+      <p style="letter-spacing:4px" class="text-h6 text-white text-bold text-center q-mt-sm">MENU</p>
+      <p class="text-h6 text-purple-2 text-bold mid-opacity q-pl-md">Bem Vindo(a)</p>
+      <div v-if="isHost" class="text-center text-bold text-purple-2">{{authStore.getInfoRazao()}}</div>
+      <div class="text-center text-purple-2 mid-opacity text-bold q-mb-md ">{{ authStore.getInfoRole() }}</div>
+      <q-list class="text-bold text-white">
         <q-item v-for="item in menuOptions.items" :key="item.label"
-           clickable @click="goTo(item.to)" style="border-radius: 12px;border-right: 3px solid;border-top: 3px solid;" class="q-mt-md q-mx-md bg-purple-2">
+           clickable @click="goTo(item.to)" style="border-radius: 12px;" class="shadow-2 q-mt-md q-mx-md bg-grad-1">
           <q-item-section>
-            <q-item-label>{{ item.label }}</q-item-label>
+            <q-item-label class="text-grey-3">{{ item.label }}</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-icon :name="item.icon" />
+            <q-icon :name="item.icon" color="purple-2" />
           </q-item-section>
         </q-item>
         <div v-if="!isAuthenticated" class="w100 row items-center justify-center q-mt-xl">
@@ -93,14 +94,14 @@ function goTo(to) {
 const menuOptions = ref({
   items: [
     // HOST MENUS
-    { label: 'Novo Evento', icon: 'add_box', to: '/evento/steps', role: 'host' },
-    { label: 'Meus Eventos', icon: 'date_range', to: '/evento', role: 'host'  },
-    { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/app/recarregar', role: 'host' },
-    // { label: 'Meu perfil', icon: 'person', to: '/page3' },
-    // { label: 'Saldo e Vendas', icon: 'payments', to: '/page3' },
+    { label: 'Meu perfil', icon: 'person', to: '/page3' },
+    { label: 'Gerenciar Subhosts', icon: 'sensor_occupied', to: '/evento/steps', role: 'host' },
+    // { label: 'Meus Eventos', icon: 'date_range', to: '/evento', role: 'host'  },
+    { label: 'Ingressos', icon: 'confirmation_number', to: '/page3' },
+    { label: 'Vendas', icon: 'payments', to: '/page3' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
-    // { label: 'Validar Ingresso', icon: 'sensor_occupied', to: '/page3' },
-    // { label: 'Test', icon: 'bug_report', to: '/test' }
+    { label: 'Recarregar PurpleCoins', icon: 'currency_exchange', to: '/app/recarregar', role: 'host' },
+    { label: 'Suporte', icon: 'contact_support', to: '/test' }
   ]
 
 })

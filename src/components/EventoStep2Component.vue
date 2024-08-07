@@ -23,14 +23,14 @@
             <q-btn label="Adicionar Tipo Ingresso" color="blue" :disable="validaIngresso()" @click="addIngresso()"
                 icon-right="add_circle" />
             <div class="w100 hline bg-primary"></div>
-            <div class="text-bold mid-opacity text-primary text-center">Tipos Ingressos - Total: {{ ingressos.length }}
+            <div class="text-bold mid-opacity text-primary text-center">Tipos Ingressos
             </div>
             <div id="list-ingressos" class="column q-gutter-y-md">
                 <div v-for="(ingresso, index) in ingressos" :key="index"
-                    class="column no-wrap items-center rounded-borders shadow-4 bg-grad-3 q-mt-md justify-between">
+                    class="column no-wrap items-center rounded-borders shadow-4 bg-grad-3  justify-between">
                     <div class="row q-gutter-x-md q-py-sm">
                         <div class="text-bold text-white">{{ format(ingresso.titulo) }}</div>
-                        <div class="text-bold text-grey-4">R$ {{ ingresso.valor }}</div>
+                        <div class="text-bold text-blue-5">R$ {{ ingresso.valor }}</div>
                     </div>
                     <div class="w100 bg-primary mid-opacity q-mx-md" style="height: 2px"></div>
                     <div class="row w100 justify-center">
