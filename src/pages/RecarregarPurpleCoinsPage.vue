@@ -3,10 +3,10 @@
         <div class="w100 row no-wrap justify-between q-px-xs q-py-sm" id="fixed-saldo">
             <div class="row items-center">
                 <q-icon name="paid" color=primary size="md" />
-                <div class="text-bold text-primary q-px-sm">3 PurpleCoins</div>
+                <div class="text-bold text-primary q-px-sm">{{authStore.getInfoPurpleCoins()}} PurpleCoins</div>
             </div>
             <div class="row items-center">
-                <div class="text-bold text-blue q-px-sm">200 SubCoins</div>
+                <div class="text-bold text-blue q-px-sm">{{ authStore.getInfoSubCoins() }} SubCoins</div>
                 <q-icon name="savings" color="blue" size="md" />
             </div>
         </div>
@@ -60,7 +60,9 @@
 <script setup>
 import { ref } from "vue";
 import FooterComponent from "../components/FooterComponent.vue";
+import { useAuthStore } from 'src/stores/authStore';
 
+const authStore = useAuthStore();
 const pacotesCoins = ref(
     [
         { value: 1, label: '1 PurpleCoin', preco: 120, valorAvista: 120 },

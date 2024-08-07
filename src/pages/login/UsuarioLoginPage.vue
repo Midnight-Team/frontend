@@ -18,7 +18,7 @@
                     </q-input>
                     <div v-if="registrando" class="q-my-sm text-h6 text-primary">Data de Nascimento:*</div>
                     <q-date class="w100 row justify-center q-mb-md" v-if="registrando" v-model="usuario.dataNascimento" mask="DD-MM-YYYY HH:mm" color="primary" />
-                    <q-btn v-if="registrando" type="submit" label="Registrar" color="green" icon-right="person_add" class="w100 q-mt-md"/>
+                    <q-btn v-if="registrando" type="submit" label="Registrar" color="green" icon-right="person_add" class="w100 q-mt-md q-pa-md"/>
                     <q-btn v-if="!registrando" type="submit" label="Entrar" color="primary" icon-right="login" class="w100 q-mt-md"/>
                 </q-form>
             </q-card-section>

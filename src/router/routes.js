@@ -6,7 +6,7 @@ const routes = [
   },
   {
     path: '/app',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('src/layouts/HostLayout.vue'),
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'recarregar', component: () => import('pages/RecarregarPurpleCoinsPage.vue') },
@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path: '/evento',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('src/layouts/HostLayout.vue'),
     children: [
       { path: '', component: () => import('pages/evento/MeusEventosPage.vue') },
       { path: 'steps', component: () => import('pages/evento/StepsPage.vue') },
@@ -22,7 +22,7 @@ const routes = [
   },
   {
     path: '/test',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('src/layouts/HostLayout.vue'),
     children: [
       { path: '', component: () => import('pages/TestPage.vue') },
     ]

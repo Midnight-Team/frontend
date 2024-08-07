@@ -9,17 +9,9 @@
             </div>
         </div>
         <router-view></router-view>
-        <q-card id="card-login"
-            class=" animate__animated animate__jackInTheBox animate__slower text-bold column bg-grad-2 items-center justify-center text-white q-pa-md text-center q-mt-md shadow-8"
-            v-if="!isLoginHost && !isHostUrl">
-            <div class="column text-h5 text-white text-bold">LOGIN HOST</div>
-            <div>É Produtor de Eventos ou Subhost??</div>
-            <q-btn @click="isLoginHost = !isLoginHost" icon-right="admin_panel_settings" label="Faça login Aqui"
-            dense class="q-mt-md q-pa-md" color="primary" to="/login/host" />
-        </q-card>
         <q-card class="q-mt-md column animate__delay-1s bg-primary-3" style="box-shadow: none!important;">
             <q-btn @click="isLoginHost = !isLoginHost"  v-if="isLoginHost" label="voltar" icon-right="keyboard_return" color="primary" class="bg-white text-primary q-mb-xl" flat to="/login"/>
-            <q-btn icon="home" label="página inicial" color="white" flat to="/app" />
+            <q-btn icon="home" label="página inicial" color="white" flat to="/" />
         </q-card>
     </q-layout>
 </template>
@@ -28,7 +20,6 @@
 import { ref } from "vue";
 const isLoginHost = ref(false);
 
-const isHostUrl = window.location.href.includes('/host')
 </script>
 
 <style>
