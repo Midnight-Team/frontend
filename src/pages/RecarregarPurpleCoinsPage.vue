@@ -59,7 +59,7 @@
                 <div class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center" >
                     <q-btn class="" label="Cancelar" flat color="purple-2" @click="openPaymentModal = false" />
                     <div class="q-pa-md">💰 Compra de<br> {{ itemSelected.label }} por {{ formatString(itemSelected.preco) }}</div>
-                <BricksPaymentComponent/>
+                <RecargaBricksPaymentComponent/>
             </div>
         </q-dialog>
         <div class="w100 q-mt-lg">
@@ -71,7 +71,7 @@
 <script setup>
 import { onBeforeUnmount, ref } from "vue";
 import FooterComponent from "../components/FooterComponent.vue";
-import BricksPaymentComponent from "../components/BricksPaymentComponent.vue";
+import RecargaBricksPaymentComponent from "../components/RecargaBricksPaymentComponent.vue";
 import { useAuthStore } from 'src/stores/authStore';
 const itemSelected = ref('');
 const openPaymentModal = ref(false);
