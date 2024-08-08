@@ -89,7 +89,8 @@ const pacotesCoins = ref(
         { tipo: 'recarga de purplecoins', id: 2,value: 2, label: '3 PurpleCoins', preco: 300, valorAvista: 300 },
         { tipo: 'recarga de purplecoins', id: 3,value: 3, label: '5 PurpleCoins', preco: 500, valorAvista: 500 },
         { tipo: 'recarga de purplecoins', id: 4,value: 4, label: '12 PurpleCoins', preco: 1000, valorAvista: 1000 },
-        { tipo: 'recarga de purplecoins', id: 5,value: 5, label: '25 PurpleCoins', preco: 2000, valorAvista: 2000 }
+        { tipo: 'recarga de purplecoins', id: 5,value: 5, label: '25 PurpleCoins', preco: 2000, valorAvista: 2000 },
+        { tipo: 'teste 1 real', id: 6,value: 6, label: 'teste PurpleCoins', preco: 1, valorAvista: 1 }
     ]
 )
 
