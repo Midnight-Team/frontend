@@ -33,8 +33,8 @@
                             </div>
                         </q-toolbar-title>
                     </q-toolbar>
-                    <div class="space bg-grad-2 w100 text-center text-white q-py-md text-bold q-px-md high-opacity"
-                        style="font-size:1.1rem">
+                    <div class="space bg-grad-2 w100 text-center text-purple-1 q-py-md text-bold q-px-md high-opacity"
+                        style="font-size:1.05rem">
                         PARE de PAGAR TAXAS excessivas na VENDA de SEUS INGRESSOS e REALIZE seus EVENTOS com 0% de
                         TAXA!!
                     </div>

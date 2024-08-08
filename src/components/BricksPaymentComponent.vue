@@ -1,13 +1,17 @@
 <template>
     <div class="wrapper">
-        <!-- <div id="paymentBrick_container"></div> -->
+        <div id="paymentBrick_container">
+        </div>
     </div>
 </template>
 
 <script setup>
 import { onBeforeMount, ref } from "vue";
 import { useQuasar } from 'quasar';
+import { useAuthStore } from 'src/stores/authStore';
+import { api } from "src/boot/axios";
 
+const authStore = useAuthStore();
 const $q = useQuasar()
 const loadScript = (src) => {
     return new Promise((resolve, reject) => {
@@ -26,61 +30,59 @@ function openPixWindow() {
         color: 'primary',
         position: 'top',
         icon: 'payments',
-        timeout: 600000,
-        actions: [{ label: 'Abrir Pix', color: 'white', class:'bg-green', handler: () => { window.open(pixWindow.value, '_blank'); } }]
+        timeout: 60000,
+        actions: [{ label: 'Abrir Pix', color: 'white', class: 'bg-green', handler: () => { window.open(pixWindow.value, '_blank'); } }]
     });
     setTimeout(() => {
         window.open(pixWindow.value, '_blank');
     }, 2000);
 }
-const isProd = ref(false)
-const baseURL = ref('')
+const valorPagar = ref()
 
 onBeforeMount(async () => {
-    isProd.value = !window.location.href.includes('localhost');
-    baseURL.value = isProd.value ? 'https://midnightickets-api.onrender.com/api' : 'http://localhost:3333/api';
     try {
+        const pctStr = sessionStorage.getItem('recargaPacote');
+        const recargaPacote = JSON.parse(pctStr);
         await loadScript('https://sdk.mercadopago.com/js/v2');
         const mp = new MercadoPago(process.env.PROD_PUBLIC_KEY, { locale: 'pt-BR' });
         const bricksBuilder = mp.bricks();
         const createPreference = async () => {
-            const response = await fetch(baseURL.value + '/create_preference', {
-                method: 'POST',
-                headers: {  
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    items: [
-                        {
-                            id: 'item-ID-1234',
-                            title: 'Ingresso',
-                            quantity: 1,
-                            unit_price: 10.00
-                        }
-                    ],
-                    purpose: 'wallet_purchase'
-                })
+            await api.post('/create_preference', {
+                items: [
+                    {
+                        id: recargaPacote.id,
+                        title: 'Compra de ' + recargaPacote.label,
+                        quantity: 1,
+                        unit_price: recargaPacote.preco,
+                        tipo: recargaPacote.tipo,
+                    }
+                ],
+                purpose: 'wallet_purchase'
+            }).then(response => {
+                valorPagar.value = recargaPacote.preco;
+                return response.data.id;
+            }).catch(error => {
+                $q.notify({
+                    message: 'Erro ao criar preferência de pagamento',
+                    color: 'negative',
+                    position: 'top',
+                    icon: 'error',
+                    timeout: 3000
+                });
             });
-
-            if (!response.ok) {
-                throw new Error('Failed to create preference');
-            }
-
-            const data = await response.json();
-            return data.id;
-        };
+        }
 
         const preferenceId = await createPreference();
 
         const renderPaymentBrick = async (bricksBuilder) => {
             const settings = {
                 initialization: {
-                    amount: 10,
+                    amount: recargaPacote.preco,
                     preferenceId: preferenceId,
                     payer: {
-                        firstName: "comprador teste",
-                        lastName: "da silva",
-                        email: "comprador@gmail.com",
+                        firstName: authStore.getInfoNome(),
+                        lastName: authStore.getInfoRazao(),
+                        email: authStore.getInfoEmail(),
                     },
                 },
                 customization: {
@@ -91,8 +93,6 @@ onBeforeMount(async () => {
                     },
                     paymentMethods: {
                         creditCard: "all",
-                        debitCard: "all",
-                        ticket: "all",
                         bankTransfer: "all",
                         atm: "all",
                         onboarding_credits: "all",
@@ -106,18 +106,22 @@ onBeforeMount(async () => {
                     },
                     onSubmit: ({ selectedPaymentMethod, formData }) => {
                         return new Promise((resolve, reject) => {
-                            fetch(baseURL.value + '/process_payment', {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify(formData),
-                            })
-                                .then((response) => response.json())
+                            api.post('/process_payment', formData)
                                 .then((response) => {
+                                    const host = JSON.parse(sessionStorage.getItem('userLogado'));
+                                    api.post('/save_recarga_payment', {
+                                        payment_id: response.data.id,
+                                        specs: {
+                                            host_name: host.nome_razao,
+                                            transactionData: response.data.point_of_interaction.transaction_data,
+                                            paymentMethod: selectedPaymentMethod,
+                                            valorPagar: valorPagar.value
+                                        },
+                                        host: authStore.getInfoId()
+                                    }).then(()=> resolve())
                                     // console.log('Payment response:', JSON.stringify(response.point_of_interaction.transaction_data));
-                                    if(formData.payment_method_id === 'pix') {
-                                        pixWindow.value = response.point_of_interaction.transaction_data.ticket_url;
+                                    if (formData.payment_method_id === 'pix') {
+                                        pixWindow.value = response.data.point_of_interaction.transaction_data.ticket_url;
                                         resolve();
                                         openPixWindow();
                                         return;
@@ -150,8 +154,4 @@ onBeforeMount(async () => {
 });
 </script>
 
-<style scoped>
-.wrapper {
-    padding: 20px;
-}
-</style>
+<style scoped></style>
