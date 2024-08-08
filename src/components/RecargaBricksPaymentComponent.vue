@@ -44,7 +44,7 @@ onBeforeMount(async () => {
         const pctStr = sessionStorage.getItem('recargaPacote');
         const recargaPacote = JSON.parse(pctStr);
         await loadScript('https://sdk.mercadopago.com/js/v2');
-        const mp = new MercadoPago(process.env.PROD_PUBLIC_KEY, { locale: 'pt-BR' });
+        const mp = new MercadoPago(process.env.PROD == 'true' ? process.env.PROD_PUBLIC_KEY : process.env.MP_PUBLIC_KEY, { locale: 'pt-BR' });
         const bricksBuilder = mp.bricks();
         const createPreference = async () => {
             await api.post('/create_preference', {
@@ -113,7 +113,7 @@ onBeforeMount(async () => {
                                         payment_id: response.data.id,
                                         specs: {
                                             host_name: host.nome_razao,
-                                            transactionData: response.data.point_of_interaction.transaction_data,
+                                            transactionData: response.data.point_of_interaction.transaction_data || response.data,
                                             paymentMethod: selectedPaymentMethod,
                                             valorPagar: valorPagar.value
                                         },
@@ -126,6 +126,7 @@ onBeforeMount(async () => {
                                         openPixWindow();
                                         return;
                                     }
+                                    console.log(JSON.stringify(response.data));
                                     resolve();
 
                                 })

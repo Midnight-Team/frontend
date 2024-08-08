@@ -1,14 +1,14 @@
 <template>
     <q-page>
         <div class="q-mt-md q-mx-md rounded-borders bg-white shadow-4">
-            <BricksPaymentComponent/>
+            <RecargaBricksPaymentComponent/>
         </div>
     </q-page>
 </template>
 
 <script setup>
 // import FormCheckoutComponent from 'src/components/FormCheckoutComponent.vue';
-import BricksPaymentComponent from 'src/components/BricksPaymentComponent.vue';
+import RecargaBricksPaymentComponent from 'src/components/RecargaBricksPaymentComponent.vue';
 </script>
 
 <style scoped>

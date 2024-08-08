@@ -65,6 +65,7 @@ module.exports = configure(function (/* ctx */) {
       // publicPath: '/',
       // analyze: true,
       env: {
+        PROD: process.env.PROD,
         MP_PUBLIC_KEY: process.env.MP_PUBLIC_KEY,
         MP_ACCESS_TOKEN: process.env.MP_ACCESS_TOKEN,
         PROD_PUBLIC_KEY: process.env.PROD_PUBLIC_KEY,

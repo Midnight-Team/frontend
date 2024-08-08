@@ -5,10 +5,10 @@
                 class="title-1 w100 q-px-sm row items-center text-primary shadow-1 q-py-xs justify-between no-wrap text-bold">
                 <div class="row no-wrap items-center">
                     <q-icon size="sm" color="primary" name="paid" class="q-pr-sm" />
-                    {{authStore.getInfoPurpleCoins()}} <div class="q-pl-sm mid-opacity">PurpleCoins</div>
+                    {{ authStore.getInfoPurpleCoins() }} <div class="q-pl-sm mid-opacity">PurpleCoins</div>
                 </div>
                 <div class="row no-wrap items-center">
-                    <div class="mid-opacity">R$ {{formatToNumber(authStore.getInfoSaldo().toString())}}</div>
+                    <div class="mid-opacity">R$ {{ formatToNumber(authStore.getInfoSaldo().toString()) }}</div>
                     <q-icon size="sm" color="orange" name="paid" class="q-pl-sm" />
                 </div>
             </div>
@@ -18,20 +18,33 @@
                 <div id="table-eventos" class="q-mt-md w100">
                     <div class="text-h6 text-primary q-mb-sm w100 q-px-md text-center text-bold">Eventos de Midnight
                         Produções</div>
-                        <div class="q-px-sm">
+                    <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
-                        <q-input v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined label="Procurar Evento">
+                        <q-input v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined
+                            label="Procurar Evento">
                             <template v-slot:append>
-                                <q-btn icon="search" color="primary" @click="getEventos()"/>
+                                <q-btn icon="search" color="primary" @click="getEventos()" />
                             </template>
                         </q-input>
-                        <q-toggle v-model="buscarEvento.status" @update:model-value="getEventos()" :label="buscarEvento.status ? 'Em andamento' : 'Todos'" class="q-mb-md text-primary text-bold"/>
-                        <q-table class="my-sticky-column-table text-primary q-mb-md w100" :rows="rows"  :columns="columns"  hide-pagination>
+                        <q-toggle v-model="buscarEvento.status" @update:model-value="getEventos()"
+                            :label="buscarEvento.status ? 'Em andamento' : 'Todos'"
+                            class="q-mb-md text-primary text-bold" />
+                        <q-table no-data-label="Nenhum evento encontrado 😢" separator="cell"
+                            class="my-sticky-column-table text-primary q-mb-md w100 text-bold" :rows="rows"
+                            :columns="columns" hide-pagination>
                             <template v-slot:body-cell-acoes="props">
-                                    <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
-                                        <q-btn icon="visibility" color="primary" />
-                                        <q-btn icon="person_add " color="blue"  />
-                                    </div>
+                                <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
+                                    <q-btn icon="visibility" color="primary">
+                                        <q-tooltip>
+                                            Visualizar Evento
+                                        </q-tooltip>
+                                    </q-btn>
+                                    <q-btn icon="sell " color="green">
+                                        <q-tooltip>
+                                            Virar lote de ingressos
+                                        </q-tooltip>
+                                    </q-btn>
+                                </div>
                             </template>
                         </q-table>
 
@@ -90,7 +103,7 @@ const columns = [
     {
         name: 'qtd_ingressos',
         align: 'left',
-        label: 'Ingressos Disponíveis',	
+        label: 'Ingressos Disponíveis',
         field: 'qtd_ingressos'
     },
     {
@@ -135,31 +148,31 @@ async function getEventos() {
         }
     }
     await api.post('/get_eventos', req)
-    .then((response) => {
-        rows.value = response.data;
-    })
-    .catch((error) => {
-        console.log(error);
-    })
+        .then((response) => {
+            rows.value = response.data;
+        })
+        .catch((error) => {
+            console.log(error);
+        })
 }
 
-onMounted(async() => {
+onMounted(async () => {
     window.scrollTo(0, 0);
     await getEventos();
 })
 </script>
 
 <style scoped>
-.q-page{
+.q-page {
     min-height: 100vh;
 }
 
-.q-table{
+.q-table {
     position: relative;
 }
 
 @media (min-width: 1100px) {
-    .es1{
+    .es1 {
         margin: 16px 100px;
     }
 }
@@ -174,6 +187,8 @@ onMounted(async() => {
 </style>
 <style lang="sass">
 .my-sticky-column-table
+  thead
+    background-color: #c7afff
 
   thead tr:first-child th:first-child
     /* bg color is important for th; just specify one */
