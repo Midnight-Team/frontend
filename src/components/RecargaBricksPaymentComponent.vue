@@ -105,7 +105,6 @@ onBeforeMount(async () => {
                     },
                     onSubmit: ({ selectedPaymentMethod, formData }) => {
                         formData.notification_url = process.env.PROD == 'true' ? process.env.PROD_NOTIFICATION_URL : process.env.DEV_NOTIFICATION_URL;
-                        formData.preferenceId = preferenceId.value;
                         return new Promise((resolve, reject) => {
                             api.post('/process_payment', formData)
                                 .then((response) => {
