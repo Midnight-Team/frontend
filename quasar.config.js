@@ -71,7 +71,9 @@ module.exports = configure(function (/* ctx */) {
         PROD_PUBLIC_KEY: process.env.PROD_PUBLIC_KEY,
         PROD_ACCESS_TOKEN: process.env.PROD_ACCESS_TOKEN,
         PROD_BACKEND_URL: process.env.PROD_BACKEND_URL,
-        DEV_BACKEND_URL: process.env.DEV_BACKEND_URL
+        DEV_BACKEND_URL: process.env.DEV_BACKEND_URL,
+        PROD_NOTIFICATION_URL: process.env.PROD_NOTIFICATION_URL,
+        DEV_NOTIFICATION_URL: process.env.DEV_NOTIFICATION_URL,
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

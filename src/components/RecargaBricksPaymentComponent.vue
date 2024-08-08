@@ -38,6 +38,7 @@ function openPixWindow() {
     }, 2000);
 }
 const valorPagar = ref()
+const preferenceId = ref('')
 
 onBeforeMount(async () => {
     try {
@@ -60,7 +61,7 @@ onBeforeMount(async () => {
                 purpose: 'wallet_purchase'
             }).then(response => {
                 valorPagar.value = recargaPacote.preco;
-                return response.data.id;
+                preferenceId.value = response.data.id;
             }).catch(error => {
                 $q.notify({
                     message: 'Erro ao criar preferência de pagamento',
@@ -71,14 +72,13 @@ onBeforeMount(async () => {
                 });
             });
         }
-
-        const preferenceId = await createPreference();
+        await createPreference();
 
         const renderPaymentBrick = async (bricksBuilder) => {
             const settings = {
                 initialization: {
                     amount: recargaPacote.preco,
-                    preferenceId: preferenceId,
+                    preferenceId: preferenceId.value,
                     payer: {
                         firstName: authStore.getInfoNome(),
                         lastName: authStore.getInfoRazao(),
@@ -98,17 +98,19 @@ onBeforeMount(async () => {
                         onboarding_credits: "all",
                         wallet_purchase: "all",
                         maxInstallments: 10
+                    }
                     },
-                },
                 callbacks: {
                     onReady: () => {
                         console.log('Brick is ready');
                     },
                     onSubmit: ({ selectedPaymentMethod, formData }) => {
+                        formData.notification_url = process.env.PROD == 'true' ? process.env.PROD_NOTIFICATION_URL : process.env.DEV_NOTIFICATION_URL;
                         return new Promise((resolve, reject) => {
                             api.post('/process_payment', formData)
                                 .then((response) => {
                                     const host = JSON.parse(sessionStorage.getItem('userLogado'));
+                                    console.log(JSON.stringify(formData))
                                     api.post('/save_recarga_payment', {
                                         payment_id: response.data.id,
                                         specs: {
@@ -126,7 +128,7 @@ onBeforeMount(async () => {
                                         openPixWindow();
                                         return;
                                     }
-                                    console.log(JSON.stringify(response.data));
+                                    // console.log(JSON.stringify(response.data));
                                     resolve();
 
                                 })
