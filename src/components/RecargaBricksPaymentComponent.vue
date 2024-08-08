@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, onBeforeUnmount, ref } from "vue";
 import { useQuasar } from 'quasar';
 import { useAuthStore } from 'src/stores/authStore';
 import { api } from "src/boot/axios";
@@ -39,6 +39,16 @@ function openPixWindow() {
 }
 const valorPagar = ref()
 const preferenceId = ref('')
+
+onBeforeUnmount(async () => {
+    const host = JSON.parse(sessionStorage.getItem('userLogado'));
+    await api.post('/update_moneys', {id: host.id})
+        .then((res) => {
+            sessionStorage.removeItem('userLogado');
+            sessionStorage.setItem('userLogado', JSON.stringify(res.data));
+            window.location.reload();
+        })
+})
 
 onBeforeMount(async () => {
     try {
