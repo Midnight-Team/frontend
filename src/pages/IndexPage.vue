@@ -23,7 +23,7 @@
           </p>
           <p class="row no-wrap items-center justify-between">
             PurpleCoins: {{ host.purpleCoins }}🟣
-            <q-btn to="/app/recarregar" label="Recarregar" class="q-ml-md" icon-right="currency_exchange"
+            <q-btn to="/app/recarregar" label="" class="q-ml-md" icon-right="currency_exchange"
               color="primary" />
           </p>
           <strong class="text-blue">SubCoins: {{ host.subCoins }}🔵</strong>
