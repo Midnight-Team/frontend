@@ -1,6 +1,6 @@
 <template>
     <q-layout class="relative animate__animated animate__fadeIn bg-primary">
-        <q-header class="fixed bg-grad-3 text-white animate__animated animate__backInDown animate__slow"
+        <q-header class="fixed bg-grad-3 text-white animate__animated animate__backInDown animate__slow shadow-1"
             height-hint="98">
             <div style="font-size: 1rem;" class=" q-py-md w100 row no-wrap items-center  justify-evenly">
                 <a v-if="!isMobile" @click="scrollBot()" class="menu-item row items-center">
@@ -104,18 +104,13 @@
                     </q-toolbar>
                     <div class="text-h5 text-center w100 text-white text-bold q-pt-md q-pb-md bg-grad-2 q-my-md">💰
                         Vantagens</div>
-                    <div class="w100 text-h6 text-bold bg-white text-primary text-center q-px-md q-py-sm border-bottom">
+                    <div class="w100 text-h6 text-bold bg-grey-3 text-primary text-center q-px-md q-py-sm border-bottom">
                         Veja
                         como
                         nossa Plataforma pode aumentar o Faturamento do seu Evento!!</div>
                     <div style="font-size:1rem" class="q-px-md   bg-white text-left q-py-md rounded-borders">
-                        🟢 <strong class="text-green">Modalidade Grátis:</strong> Crie Eventos <strong>sem
-                            custos</strong> e pague <strong>apenas 6% de taxa</strong>
-                        por
-                        ingresso vendido. Ingressos ilimitados e uma <strong>solução simples para qualquer porte de
-                            evento</strong>.
-                        <br>🟣 <strong class="text-primary">Modalidade Purplecoins:</strong> Nossa <strong>moeda
-                            virtual</strong>
+                        🟣 <strong class="text-primary">Modalidade Purplecoins:</strong> Nossa <strong>moeda
+                        virtual</strong>
                         permite realizar <strong>Eventos</strong> com com <strong>0% de taxa</strong> por ingresso
                         vendido. Obtenha
                         <strong>100% do
@@ -126,13 +121,10 @@
                         <strong>lucro de suas vendas automaticamente em tempo real na sua conta</strong> enquanto
                         acontece o seu evento
                     </div>
-                    <div class="w100 img-wrapper column">
-                        <img class="img" src="~/assets/landing-images/recarga.png" alt="">
-                    </div>
                     <div
                         class="w100 text-h5 text-bold bg-white text-primary text-center q-px-md rounded-borders q-py-sm border-bottom q-mt-md">
                         🪙 Benefícios</div>
-                    <div style="font-size:1rem" class="q-px-md bg-white q-py-md rounded-borders border-bottom">
+                    <div style="font-size:1rem" class="q-px-md bg-grey-3 q-py-md rounded-borders border-bottom">
                         💸 <strong style="font-size:1.2rem" class="text-primary text-bold">Pagamentos e Menores
                             Taxa:</strong> Estamos integrados ao <strong>Mercado Pago</strong> com segurança
                         e confidencialidade. Além de possuir <strong>as menores taxas de
@@ -183,13 +175,20 @@
                     <q-carousel-slide v-if="isMobile" :name="4" img-src="~/assets/landing-images/evento3.png"
                         class="column no-wrap flex-center">
                     </q-carousel-slide>
+                    <q-carousel-slide :name="5" img-src="~/assets/landing-images/evento4.png"
+                        class="column no-wrap flex-center">
+                    </q-carousel-slide>
+                    <q-carousel-slide :name="6" img-src="~/assets/landing-images/evento5.png"
+                        class="column no-wrap flex-center">
+                    </q-carousel-slide>
                 </q-carousel>
                 <div id="form" class=" relative">
                     <div class="text-h4 text-bold q-py-md text-white text-center bg-grad-1 border-bottom q-mt-md">🚀
                         Fale
                         Conosco</div>
 
-                    <div class="space rounded-borders q-my-md  " style="border-radius: 20px;border-bottom: 8px solid #3C0783;z-index: -10">
+                    <div class="space rounded-borders q-my-md  "
+                        style="border-radius: 20px;border-bottom: 8px solid #3C0783;z-index: -10">
                         <q-card class="q-pa-md collumn q-gutter-y-md rounded-borders "
                             style="border: 15px solid #6310E1; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
                             <div class="w100 text-center text-primary text-bold mid-opacity ">Todos campos abaixos são
@@ -206,8 +205,8 @@
                                     <q-icon name="business" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input mask="(##) #####-####" placeholder="ex: (12) 34567-8910" type="tel" maxlength="200" filled v-model="contato.form.phone"
-                                label="3.Telefone/WhatsApp">
+                            <q-input mask="(##) #####-####" placeholder="ex: (12) 34567-8910" type="tel" maxlength="200"
+                                filled v-model="contato.form.phone" label="3.Telefone/WhatsApp">
                                 <template v-slot:append>
                                     <q-icon name="phone" color="primary" />
                                 </template>
@@ -267,13 +266,14 @@
                     <div class="space rounded-borders q-my-md ">
                         <q-btn @click="wppConsultor()" class="q-pa-md w100" color="green" icon-right="sms"
                             label="Fale Agora Com um de nossos Consultores" />
-                        </div>
-                        <div  class="w100 text-bold rounded-borders column bg-grad-2 items-center justify-center text-white q-pa-md text-center q-mt-md ">
-                            <div class="column text-h5 text-white text-bold">LOGIN HOST</div>
-                            <div class="text-purple-2">É Produtor de Eventos ou Subhost??</div>
-                            <q-btn icon-right="admin_panel_settings"
-                                label="Faça login Aqui" dense class="q-mt-sm q-pa-md" color="primary" to="/login/host" />
-                        </div>
+                    </div>
+                    <div
+                        class="w100 text-bold rounded-borders column bg-grad-2 items-center justify-center text-white q-pa-md text-center q-mt-md ">
+                        <div class="column text-h5 text-white text-bold">LOGIN HOST</div>
+                        <div class="text-purple-2">É Produtor de Eventos ou Subhost??</div>
+                        <q-btn icon-right="admin_panel_settings" label="Faça login Aqui" dense class="q-mt-sm q-pa-md"
+                            color="primary" to="/login/host" />
+                    </div>
                 </div>
                 <div class="w100 text-white text-bold text-center q-mt-md">
                     Siga-nos no <a href="https://www.instagram.com/midnightickets" class="text-blue"
@@ -383,7 +383,7 @@ function scrollBot() {
 }
 
 function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight - 1740);
+    window.scrollTo(0, document.body.scrollHeight - 1840);
 }
 
 
@@ -426,6 +426,7 @@ function scrollToBottom() {
 .q-btn {
     transition: all 0.2s linear;
 }
+
 a {
     color: white;
     text-decoration: none;
@@ -434,9 +435,11 @@ a {
     font-weight: bold;
     cursor: pointer;
 }
+
 .menu-item {
     font-size: 1.2rem;
 }
+
 .q-btn:hover {
     opacity: 0.6;
 }

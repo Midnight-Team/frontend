@@ -32,6 +32,13 @@
                         <q-table no-data-label="Nenhum evento encontrado 😢" separator="cell"
                             class="my-sticky-column-table text-primary q-mb-md w100 text-bold" :rows="rows"
                             :columns="columns" hide-pagination>
+                            <template v-slot:body-cell-titulo="props">
+                                <q-td :props="props">
+                                    <div class="q-gutter-y-xs q-py-sm">
+                                        {{ formatBigString(props.row.titulo) }}
+                                    </div>
+                                </q-td>
+                            </template>
                             <template v-slot:body-cell-acoes="props">
                                 <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
                                     <q-btn icon="visibility" color="primary">
@@ -126,6 +133,13 @@ const columns = [
     },
 
 ]
+
+function formatBigString(str){
+    if(str.length > 15){
+        return str.substring(0, 15) + '...';
+    }
+    return str;
+}
 
 function formatToNumber(inputString) {
     let cleanString = inputString.replace(/[^\d,]/g, '');

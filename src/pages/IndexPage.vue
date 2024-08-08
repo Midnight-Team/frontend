@@ -3,8 +3,7 @@
     <div class="home-wrapper q-px-md q-pb-xl">
       <div class="w100  column justify-center q-mt-xs q-gutter-y-md items-center text-white text-bold"
         style="border-radius: 20px; ">
-        <div class="w100 text-h5 text-bold text-center bg-grad-1 q-pa-sm rounded-borders shadow-1 text-white"
-          style="letter-spacing: 1px">
+        <div class="w100 text-h5 text-bold text-center bg-grad-1 q-pa-md rounded-borders shadow-1 text-white">
           {{ host.nome_razao }}<br>
           <div class="mid-opacity" style="font-size: 1rem">host</div>
         </div>
