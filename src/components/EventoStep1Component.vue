@@ -63,7 +63,7 @@
                 </div>
                 <q-btn label="Recarregar PurpleCoins" color="primary" icon-right="currency_exchange" to="/app/recarregar" />
             </div>
-            <q-select outlined v-model="evento.pacote" @update:model-value="checkSaldoToQtdIngressos()" label="Quantidade de Ingressos Inicial*"
+            <q-select outlined v-model="evento.pacote"  @click="openSelect()"  @update:model-value="checkSaldoToQtdIngressos()" label="Quantidade de Ingressos Inicial*"
                 :options="pacoteOptions" />
             <q-input maxlength="250" placeholder="Insira a url do banner" filled v-model="evento.img_url" label="URL da Imagem do Evento*">
                 <template v-slot:append>
@@ -125,11 +125,12 @@ const checkRequiredFields = () => {
     }
 }
 const pacoteOptions = [
-        { value: 1, label: '6% de Cada Ingresso - 1000 ingressos 🎟️', purpleCoins: 0, max_ingressos: 1000, },
-        { value: 2, label: '0% de taxa - 100 ingressos por 1 PurpleCoin🟣', purpleCoins: 1, max_ingressos: 100, },
-        { value: 3, label: '0% de taxa - 200 ingressos por 2 PurpleCoins🟣', purpleCoins: 2, max_ingressos: 200 },
-        { value: 4, label: '0% de taxa - 300 ingressos por 3 PurpleCoins🟣', purpleCoins: 3, max_ingressos: 300 },
-        { value: 5, label: '0% de taxa - 2000 ingressos por 10 PurpleCoins🟣', purpleCoins: 10, max_ingressos: 2000 }
+    { value: 1, label: '0% taxa - 50 ingressos por 1p🟣', purpleCoins: 1, max_ingressos: 50, },
+    { value: 2, label: '0% taxa - 100 ingressos por 2p🟣', purpleCoins: 2, max_ingressos: 100, },
+    { value: 3, label: '0% taxa - 300 ingressos por 3p🟣', purpleCoins: 2, max_ingressos: 300 },
+    { value: 4, label: '0% taxa - 600 ingressos por 5p🟣', purpleCoins: 5, max_ingressos: 600 },
+    { value: 5, label: '0% taxa - 2000 ingressos por 10p🟣', purpleCoins: 10, max_ingressos: 2000 },
+    { value: 6, label: '0% taxa - 5000 ingressos por 20p🟣', purpleCoins: 20, max_ingressos: 5000 }
 ]
 
 
@@ -147,7 +148,17 @@ const helpLocGoogle = () => {
     })
 }
 
+function openSelect(){
+    $q.notify({
+            message: 'p🟣 = purpleCoins',
+            color: 'primary',
+            position: 'top',
+            icon: 'paid'
+        })
+}
+
 const checkSaldoToQtdIngressos = () => {
+
     if(authStore.getInfoPurpleCoins() < evento.value.pacote.purpleCoins){
         $q.notify({
             message: 'Você não tem saldo suficiente para essa quantidade de ingressos',
