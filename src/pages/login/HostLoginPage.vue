@@ -26,8 +26,13 @@
                                 @click="colarAcessCode()" />
                         </template>
                     </q-input>
-                    <q-btn @click="login()" type="submit" :label="usuario.isSubhost ? 'Escanear Ingressos' : 'Entrar'" color="primary"
-                        :icon-right="usuario.isSubhost ? 'document_scanner' : 'login'" class="w100 q-mt-md" />
+                    <q-btn v-if="!loading" @click="login()" type="submit" :label="usuario.isSubhost ? 'Escanear Ingressos' : 'Entrar'" color="primary"
+                        :icon-right="usuario.isSubhost ? 'document_scanner' : 'login'" class="w100 q-mt-md q-py-xs" />
+                        <div v-if="loading" class="row w100 justify-center">
+                            <q-spinner-ball color="primary" size="lg"/>
+                            <q-spinner-ball color="primary" size="lg"/>
+                            <q-spinner-ball color="primary" size="lg"/>
+                        </div>
                 </div>
             </q-card-section>
         </q-card>
@@ -39,6 +44,7 @@ import { useQuasar } from "quasar";
 import { api } from "src/boot/axios";
 import { onMounted, ref } from "vue";
 
+const loading = ref(false);
 const $q = useQuasar();
 const showPassword = ref(false);
 const usuario = ref({
@@ -49,6 +55,7 @@ const usuario = ref({
 
 const login = async () => {
     if (!usuario.value.isSubhost) {
+        loading.value = true;
         usuario.value.login = usuario.value.login.toLowerCase();
         await api.post('/login_host', usuario.value).then(res => {
             sessionStorage.clear();
@@ -70,6 +77,7 @@ const login = async () => {
                 icon: 'report_problem',
                 position: 'top',
             });
+            loading.value = false;
             usuario.value.senha = '';
             console.log(err)
         })

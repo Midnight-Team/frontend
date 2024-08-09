@@ -29,7 +29,12 @@
                         <q-toggle v-model="buscarEvento.status" @update:model-value="getEventos()"
                             :label="buscarEvento.status ? 'Em andamento' : 'Todos'"
                             class="q-mb-md text-primary text-bold" />
-                        <q-table no-data-label="Nenhum evento encontrado 😢" separator="cell"
+                            <div v-if="loading" class="row w100 justify-center">
+                                <q-spinner-ball color="primary" size="lg"/>
+                                <q-spinner-ball color="primary" size="lg"/>
+                                <q-spinner-ball color="primary" size="lg"/>
+                            </div>
+                        <q-table no-data-label="Nenhum evento encontrado 🌆" separator="cell"
                             class="my-sticky-column-table text-primary q-mb-md w100 text-bold" :rows="rows"
                             :columns="columns" hide-pagination>
                             <template v-slot:body-cell-titulo="props">
@@ -68,6 +73,7 @@ import { useRouter } from "vue-router";
 import { useAuthStore } from 'src/stores/authStore';
 import { api } from 'src/boot/axios';
 
+const loading = ref(false);
 const authStore = useAuthStore();
 const router = useRouter();
 
@@ -154,6 +160,7 @@ function formatToNumber(inputString) {
 }
 
 async function getEventos() {
+    loading.value = true;
     const req = {
         host: authStore.getInfoId(),
         evento: {
@@ -168,6 +175,9 @@ async function getEventos() {
         .catch((error) => {
             console.log(error);
         })
+        .finally(() => {
+            loading.value = false;
+        });
 }
 
 onMounted(async () => {
