@@ -12,16 +12,13 @@
 
 <script setup>
 import { onBeforeMount, onBeforeUnmount, ref } from "vue";
-import { useQuasar } from 'quasar';
 import { useAuthStore } from 'src/stores/authStore';
 import { api } from "src/boot/axios";
 import { useRouter } from "vue-router";
 
 const authStore = useAuthStore();
-const $q = useQuasar()
 const pixWindow = ref('');
 const valorPagar = ref()
-const preferenceId = ref('')
 const router = useRouter()
 const loading = ref(true)
 
@@ -85,13 +82,17 @@ onBeforeMount(async () => {
         // await createPreference();
 
         const renderPaymentBrick = async (bricksBuilder) => {
+            const host = JSON.parse(sessionStorage.getItem('userLogado'));
             const settings = {
                 initialization: {
                     amount: recargaPacote.preco,
                     payer: {
-                        firstName: authStore.getInfoNome(),
-                        lastName: authStore.getInfoRazao(),
-                        email: authStore.getInfoEmail(),
+                        firstName: host.nome_razao,
+                        email: host.email,
+                        identification: {
+                            type: host.cpf_cnpj.length > 11 ? 'CNPJ' : 'CPF',
+                            number: host.cpf_cnpj
+                        },
                     },
                 },
                 customization: {
@@ -116,7 +117,6 @@ onBeforeMount(async () => {
                     },
                     onSubmit: ({ selectedPaymentMethod, formData }) => {
                         formData.notification_url = process.env.PROD == 'true' ? process.env.PROD_NOTIFICATION_URL : process.env.PROD_NOTIFICATION_URL;
-                        const host = JSON.parse(sessionStorage.getItem('userLogado'));
                         formData.additional_info = {
                             items:
                                 [
@@ -136,10 +136,6 @@ onBeforeMount(async () => {
                                     number: host.telefone.substring(2, 11)
                                 },
                             }
-                        }
-                        formData.payer.identification = {
-                            type: host.cpf_cnpj.length > 11 ? 'CNPJ' : 'CPF',
-                            number: host.cpf_cnpj
                         }
                         formData.description = "Compra de " + recargaPacote.label + 'por R$ ' + recargaPacote.preco.toFixed(2).toString().replace('.', ',');
                         return new Promise((resolve, reject) => {
