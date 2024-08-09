@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 import FooterComponent from 'src/components/FooterComponent.vue';
 import { useRouter } from 'vue-router';
 import { api } from "src/boot/axios";
@@ -150,8 +150,8 @@ function formatToNumber(inputString) {
   
   return formattedString;
 }
-onMounted(async () => {
-  await updateMoneys(false)
+onBeforeMount(async () => {
+  await updateMoneys()
    
 })
 </script>
