@@ -106,22 +106,16 @@ import { useRouter } from 'vue-router';
 import { api } from "src/boot/axios";
 
 const router = useRouter();
-const host = ref({
-  nome_razao: '',
-  saldo: 0,
-  purpleCoins: 0,
-  subCoins: 0
-})
+const host = JSON.parse(sessionStorage.getItem('userLogado'));
 
 async function updateMoneys(isFromBtn) {
-  const host = JSON.parse(sessionStorage.getItem('userLogado'));
   await api.post('/update_moneys', { id: host.id })
     .then((res) => {
       sessionStorage.removeItem('userLogado');
       const updateUser = res.data
       updateUser.updatedSessionAt = new Date()
       sessionStorage.setItem('userLogado', JSON.stringify(updateUser));
-      host.value = res.data
+      host = res.data
     })
     .catch((err) => {
       console.log(err)
