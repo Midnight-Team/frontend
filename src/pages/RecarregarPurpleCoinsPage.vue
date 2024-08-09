@@ -14,21 +14,7 @@
             <div
                 class="w100 row items-center justify-center q-py-md q-mb-md q-mt-xl rounded-borders shadow-4 text-white bg-grad-2">
                 <q-icon size="md" color="blue-1" name="currency_exchange" />
-                <div class="text-center text-h6 text-bold q-px-md ">Recarregar PurpleCoins</div>
-            </div>
-            <div
-                class="w100 row items-center justify-center q-py-md q-my-md rounded-borders shadow-4 text-primary q-pa-md bg-blue">
-                <q-icon size="md" color="blue-1" name="savings" />
-                <div class="text-white text-bold q-pl-sm">+</div>
-                <q-icon size="sm" class="q-mx-sm" color="white" name="currency_exchange" />
-                <div class="q-pr-xs text-bold text-white">=</div>
-                <q-icon size="md" color="primary" name="paid" />
-                <div class="text-center text-white text-h6 text-bold q-px-md q-pb-sm ">Transforme suas SubCoins em
-                    PurpleCoins</div>
-                <div class="row q-mt-md q-mx-xl no-wrap text-center">
-                    <q-btn label="Trocar 5.000 SubCoins em 1 PurpleCoin" color="primary" class="text-center q-pa-md"
-                        icon-right="paid" />
-                </div>
+                <div class="text-center text-h6 text-bold q-px-md ">Recarregar Coins</div>
             </div>
 
             <q-card style="border-radius: 16px;border: 2px solid #6D2EDD;border-bottom: 10px solid #6D2EDD;"
@@ -46,20 +32,37 @@
                             </q-item-label>
                         </q-item-section>
                         <q-item-section>
-                            <q-btn class="q-ml-sm"
-                                @click="addRecargaPacote(item)"
+                            <q-btn class="q-ml-sm" @click="addRecargaPacote(item)"
                                 :label="'Recarregar ' + (item.valorAvista ? formatString(item.valorAvista) : formatString(item.preco))"
                                 color="primary" icon-right="currency_exchange" />
                         </q-item-section>
                     </q-item>
                 </q-card-section>
             </q-card>
+
+            <div
+                class="w100 row items-center justify-center q-py-md q-my-md rounded-borders shadow-4 text-primary q-pa-md bg-blue">
+                <q-icon size="md" color="blue-1" name="savings" />
+                <div class="text-white text-bold q-pl-sm">+</div>
+                <q-icon size="sm" class="q-mx-sm" color="white" name="currency_exchange" />
+                <div class="q-pr-xs text-bold text-white">=</div>
+                <q-icon size="md" color="primary" name="paid" />
+                <div class="text-center text-white text-h6 text-bold q-px-md q-pb-sm ">Transforme suas SubCoins em
+                    PurpleCoins</div>
+                <div class="row q-mt-md q-mx-xl no-wrap text-center">
+                    <q-btn label="Trocar 5.000 SubCoins em 1 PurpleCoin" color="primary" class="text-center q-pa-md"
+                        icon-right="paid" />
+                </div>
+            </div>
         </div>
-        <q-dialog class="animate__animated animate__fadeIn " v-model="openPaymentModal" style="backdrop-filter: blur(4px);">
-            <div style="border-top-left-radius: 16px;border-bottom-left-radius: 16px;" class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center" >
-                    <q-btn class="" label="voltar" flat color="purple-2" @click="openPaymentModal = false" />
-                    <div class="q-pa-md">💰 Compra de<br> {{ itemSelected.label }} por <br>{{ formatString(itemSelected.preco) }}</div>
-                <RecargaBricksPaymentComponent/>
+        <q-dialog class="animate__animated animate__fadeIn " v-model="openPaymentModal"
+            style="backdrop-filter: blur(4px);">
+            <div style="border-top-left-radius: 16px;border-bottom-left-radius: 16px;"
+                class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center">
+                <q-btn class="" label="voltar" flat color="purple-2" @click="openPaymentModal = false" />
+                <div class="q-pa-md">💰 Compra de<br> {{ itemSelected.label }} por <br>{{
+                    formatString(itemSelected.preco) }}</div>
+                <RecargaBricksPaymentComponent />
             </div>
         </q-dialog>
         <div class="w100 q-mt-lg">
@@ -85,12 +88,12 @@ const addRecargaPacote = (pacote) => {
 const authStore = useAuthStore();
 const pacotesCoins = ref(
     [
-        { tipo: 'recarga de purplecoins', id: 1,value: 1, label: '1 PurpleCoin', preco: 80, valorAvista: 80 },
-        { tipo: 'recarga de purplecoins', id: 2,value: 2, label: '3 PurpleCoins', preco: 300, valorAvista: 300 },
-        { tipo: 'recarga de purplecoins', id: 3,value: 3, label: '5 PurpleCoins', preco: 500, valorAvista: 500 },
-        { tipo: 'recarga de purplecoins', id: 4,value: 4, label: '12 PurpleCoins', preco: 1000, valorAvista: 1000 },
-        { tipo: 'recarga de purplecoins', id: 5,value: 5, label: '25 PurpleCoins', preco: 2000, valorAvista: 2000 },
-        { tipo: 'teste 1 real', id: 6,value: 6, label: '10 SubCoins', preco: 1, valorAvista: 1 }
+        { tipo: 'recarga de purplecoins', id: 1, value: 1, label: '1 PurpleCoin', preco: 120, purpleCoinsCredito: 1, subCoinsCredito: 0 },
+        { tipo: 'recarga de purplecoins', id: 2, value: 2, label: '3 PurpleCoins', preco: 300, purpleCoinsCredito: 3, subCoinsCredito: 0 },
+        { tipo: 'recarga de purplecoins', id: 3, value: 3, label: '5 PurpleCoins', preco: 500, purpleCoinsCredito: 5, subCoinsCredito: 0 },
+        { tipo: 'recarga de purplecoins', id: 4, value: 4, label: '12 PurpleCoins + 50 SubCoins', preco: 1000, purpleCoinsCredito: 12, subCoinsCredito: 50 },
+        { tipo: 'recarga de purplecoins', id: 5, value: 5, label: '25 PurpleCoins + 150 SubCoins', preco: 2000, purpleCoinsCredito: 25, subCoinsCredito: 150 },
+        { tipo: 'teste 1 real', id: 6, value: 6, label: '10 SubCoins', preco: 1, purpleCoinsCredito: 0, subCoinsCredito: 10 },
     ]
 )
 onMounted(() => {
@@ -150,5 +153,4 @@ function formatString(value) {
         border-bottom-right-radius: 4px;
     }
 }
-
 </style>

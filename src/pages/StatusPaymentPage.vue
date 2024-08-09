@@ -11,7 +11,7 @@
             <div id="statusScreenBrick_container"></div>
             <div v-if="loading" class="row w100 justify-center q-mt-md q-mb-md">
                 <q-spinner-ball color="blue" size="xl"/>
-                <q-spinner-ball color="purple-3" size="xl"/>
+                <q-spinner-ball color="blue" size="xl"/>
                 <q-spinner-ball color="blue" size="xl"/>
             </div>
             <q-card class="q-mt-md shadow-3" v-if="!loading">
@@ -37,6 +37,9 @@
                     />
                 </q-card-section>
             </q-card>
+            <q-card class="q-pa-md q-mt-md q-mb-xl shadow-2 bg-grad-1">
+                <q-btn @click="updateMoneys(true)" style="height:8vh" label="Confirmar Pagamento" icon="paid" icon-right="check" class="w100" color="green"/>
+            </q-card>
         </div>
         <FooterComponent />
     </q-page>
@@ -46,7 +49,9 @@
 import { onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import FooterComponent from "../components/FooterComponent.vue";
 import { api } from "src/boot/axios";
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const pctStr = sessionStorage.getItem('recargaPacote');
 const recargaPacote = JSON.parse(pctStr);
 
@@ -68,13 +73,25 @@ function formatString(value) {
     return 'R$ ' + (value).toFixed(2).replace('.', ',')
 }
 
-onBeforeUnmount(async () => {
+async function updateMoneys(isFromBtn) {
     const host = JSON.parse(sessionStorage.getItem('userLogado'));
     await api.post('/update_moneys', {id: host.id})
         .then((res) => {
             sessionStorage.removeItem('userLogado');
-            sessionStorage.setItem('userLogado', JSON.stringify(res.data));
+            const updateUser = res.data
+            updateUser.updatedSessionAt = new Date()
+            sessionStorage.setItem('userLogado', JSON.stringify(updateUser));
         })
+        .catch((err) => {
+            console.log(err)
+        })
+        if(isFromBtn) {
+            router.push('/evento')
+        }
+}
+
+onBeforeUnmount(async () => {
+    await updateMoneys(false)
     sessionStorage.getItem('paymentId') && sessionStorage.removeItem('paymentId')
 
 });

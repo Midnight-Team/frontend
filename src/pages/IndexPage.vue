@@ -3,7 +3,7 @@
     <div class="home-wrapper q-px-md q-pb-xl">
       <div class="w100  column justify-center q-mt-xs q-gutter-y-md items-center text-white text-bold"
         style="border-radius: 20px; ">
-        <div class="w100 text-h5 text-bold text-center bg-grad-1 q-pa-md rounded-borders shadow-1 text-white">
+        <div id="title" class="w100 text-h5 text-bold text-center bg-grad-1 q-pa-md rounded-borders shadow-1 text-purple-1">
           {{ host.nome_razao }}<br>
           <div class="mid-opacity" style="font-size: 1rem">host</div>
         </div>
@@ -46,7 +46,7 @@
             <q-btn icon-right="sensor_occupied" color="blue" />
           </div>
         </q-card>
-        <q-card class="w100 text-primary column q-gutter-y-md items-center q-pb-md q-px-md bg-grey-3">
+        <!-- <q-card class="w100 text-primary column q-gutter-y-md items-center q-pb-md q-px-md bg-grey-3">
           <div class="w100 row q-pb-xs rounded-borders" style="border-bottom:4px solid #8527e26c">
             <q-icon size="xl" color="primary" name="local_activity" />
           </div>
@@ -88,8 +88,8 @@
             Cashback: 1860🔵
           </div>
         </q-card>
-        <q-btn label="Entender Análises de Dados" icon="equalizer" class="w100" color="blue" />
-        <q-btn label="Suporte" icon="help" class="w100" color="primary" />
+        <q-btn label="Entender Análises de Dados" icon="equalizer" class="w100" color="blue" /> -->
+        <q-btn label="Solicitar Suporte" @click="wppConsultor()" icon-right="contact_support" class="w100" color="primary" />
       </div>
     </div>
     <div class="w100 q-mt-xl bg-white">
@@ -102,21 +102,28 @@
 import { onMounted, ref } from 'vue';
 import FooterComponent from 'src/components/FooterComponent.vue';
 import { useRouter } from 'vue-router';
+import { api } from "src/boot/axios";
 
 const router = useRouter();
 const host = ref(JSON.parse(sessionStorage.getItem('userLogado')))
-
-const avatar = ref({
-  url1: 'https://55knots.com.au/wp-content/uploads/2021/01/Zanj-Avatar-scaled.jpg',
-  url2: 'https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png',
-  url3: 'https://st3.depositphotos.com/1007566/13175/v/450/depositphotos_131750410-stock-illustration-woman-female-avatar-character.jpg',
-  url4: 'https://static.vecteezy.com/system/resources/previews/012/941/847/original/illustration-of-avatar-girl-nice-smiling-woman-with-black-hair-flat-icon-on-purple-background-vector.jpg',
-  url5: 'https://55knots.com.au/wp-content/uploads/2020/07/John-Avatar-Color-1-01-scaled.jpg',
-  url6: 'https://static.vecteezy.com/system/resources/previews/000/242/730/original/vector-police-officer-avatar-illustration.jpg'
-})
-
-const navigateTo = (path) => {
-  router.push(path);
+async function updateMoneys(isFromBtn) {
+  const host = JSON.parse(sessionStorage.getItem('userLogado'));
+  await api.post('/update_moneys', {id: host.id})
+  .then((res) => {
+    sessionStorage.removeItem('userLogado');
+    const updateUser = res.data
+    updateUser.updatedSessionAt = new Date()
+    sessionStorage.setItem('userLogado', JSON.stringify(updateUser));
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+  if(isFromBtn) {
+            router.push('/evento')
+          }
+        }
+        function wppConsultor() {
+          window.open('https://wa.me/5561996459013?text=Ola,%20Gostaria%20de%20solicitar%20um%20suporte%20como%20Host.', '_blank');
 }
 
 function formatToNumber(inputString) {
@@ -126,23 +133,27 @@ function formatToNumber(inputString) {
   }
   // Remove todos os caracteres que não sejam dígitos ou vírgula
   let cleanString = inputString.replace(/[^\d,]/g, '');
-
+  
   // Substitui vírgula por ponto para lidar com números decimais
   let numericString = cleanString.replace(',', '.');
-
+  
   // Converte para número e força duas casas decimais
   let number = parseFloat(numericString).toFixed(2);
-
+  
   // Se a conversão não resultar em um número válido, retorna 0.00
   if (isNaN(number)) {
     number = '0.00';
   }
-
+  
   // Converte de volta para string e substitui ponto por vírgula
   let formattedString = number.toString().replace('.', ',');
-
+  
   return formattedString;
 }
+onMounted(async () => {
+  await updateMoneys(false)
+   
+})
 </script>
 
 <style scoped>
@@ -210,4 +221,10 @@ function formatToNumber(inputString) {
 #search-btn:hover {
   opacity: 0.8;
 }
+#title {
+  font-family: "Rowdies", sans-serif;
+  letter-spacing: 1px;
+  font-size: 40px;
+}
+
 </style>

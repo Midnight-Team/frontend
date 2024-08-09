@@ -4,7 +4,7 @@
         </div>
         <div v-if="loading" class="row w100 justify-center q-mt-md q-pb-xl">
             <q-spinner-ball color="blue" size="xl"/>
-            <q-spinner-ball color="purple-3" size="xl"/>
+            <q-spinner-ball color="blue" size="xl"/>
             <q-spinner-ball color="blue" size="xl"/>
         </div>
     </div>
@@ -36,14 +36,6 @@ const loadScript = (src) => {
     });
 };
 function openPixWindow() {
-    $q.notify({
-        message: 'Você será redirecionado para o pagamento via PIX',
-        color: 'primary',
-        position: 'top',
-        icon: 'payments',
-        timeout: 6000,
-        actions: [{ label: 'Abrir Pix', color: 'white', class: 'bg-green', handler: () => { window.open(pixWindow.value, '_blank'); } }]
-    });
     setTimeout(() => {
         window.open(pixWindow.value, '_blank');
     }, 2000);
@@ -65,32 +57,32 @@ onBeforeMount(async () => {
         await loadScript('https://sdk.mercadopago.com/js/v2');
         const mp = new MercadoPago(process.env.PROD == 'true' ? process.env.PROD_PUBLIC_KEY : process.env.MP_PUBLIC_KEY, { locale: 'pt-BR' });
         const bricksBuilder = mp.bricks();
-        const createPreference = async () => {
-            await api.post('/create_preference', {
-                items: [
-                    {
-                        id: recargaPacote.id,
-                        title: 'Compra de ' + recargaPacote.label,
-                        quantity: 1,
-                        unit_price: recargaPacote.preco,
-                        tipo: recargaPacote.tipo,
-                    }
-                ],
-                purpose: 'wallet_purchase'
-            }).then(response => {
-                valorPagar.value = recargaPacote.preco;
-                preferenceId.value = response.data.id;
-            }).catch(error => {
-                $q.notify({
-                    message: 'Erro ao criar preferência de pagamento',
-                    color: 'negative',
-                    position: 'top',
-                    icon: 'error',
-                    timeout: 3000
-                });
-            });
-        }
-        await createPreference();
+        // const createPreference = async () => {
+        //     await api.post('/create_preference', {
+        //         items: [
+        //             {
+        //                 id: recargaPacote.id,
+        //                 title: 'Compra de ' + recargaPacote.label,
+        //                 quantity: 1,
+        //                 unit_price: recargaPacote.preco,
+        //                 tipo: recargaPacote.tipo,
+        //             }
+        //         ],
+        //         purpose: 'wallet_purchase'
+        //     }).then(response => {
+        //         valorPagar.value = recargaPacote.preco;
+        //         preferenceId.value = response.data.id;
+        //     }).catch(error => {
+        //         $q.notify({
+        //             message: 'Erro ao criar preferência de pagamento',
+        //             color: 'negative',
+        //             position: 'top',
+        //             icon: 'error',
+        //             timeout: 3000
+        //         });
+        //     });
+        // }
+        // await createPreference();
 
         const renderPaymentBrick = async (bricksBuilder) => {
             const settings = {
@@ -138,6 +130,7 @@ onBeforeMount(async () => {
                                             paymentMethod: selectedPaymentMethod,
                                             valorPagar: valorPagar.value
                                         },
+                                        pacote: recargaPacote,
                                         host: authStore.getInfoId()
                                     }).then(()=> resolve())
                                     // console.log('Payment response:', JSON.stringify(response.point_of_interaction.transaction_data));
@@ -167,7 +160,7 @@ onBeforeMount(async () => {
                 settings
             );
         };
-        renderPaymentBrick(bricksBuilder);
+        await renderPaymentBrick(bricksBuilder);
     } catch (error) {
         console.error(error);
     }

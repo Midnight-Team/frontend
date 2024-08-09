@@ -29,7 +29,7 @@
                         <q-toggle v-model="buscarEvento.status" @update:model-value="getEventos()"
                             :label="buscarEvento.status ? 'Em andamento' : 'Todos'"
                             class="q-mb-md text-primary text-bold" />
-                            <div v-if="loading" class="row w100 justify-center">
+                            <div v-if="loading" class="row w100 q-pb-md justify-center">
                                 <q-spinner-ball color="primary" size="lg"/>
                                 <q-spinner-ball color="primary" size="lg"/>
                                 <q-spinner-ball color="primary" size="lg"/>

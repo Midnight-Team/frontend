@@ -28,7 +28,7 @@
                     </q-input>
                     <q-btn v-if="!loading" @click="login()" type="submit" :label="usuario.isSubhost ? 'Escanear Ingressos' : 'Entrar'" color="primary"
                         :icon-right="usuario.isSubhost ? 'document_scanner' : 'login'" class="w100 q-mt-md q-py-xs" />
-                        <div v-if="loading" class="row w100 justify-center">
+                        <div v-if="loading" class="row w100 q-pt-md justify-center">
                             <q-spinner-ball color="primary" size="lg"/>
                             <q-spinner-ball color="primary" size="lg"/>
                             <q-spinner-ball color="primary" size="lg"/>
