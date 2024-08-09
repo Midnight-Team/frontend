@@ -3,9 +3,9 @@
         <div id="paymentBrick_container">
         </div>
         <div v-if="loading" class="row w100 justify-center q-mt-md q-pb-xl">
-            <q-spinner-ball color="blue" size="xl"/>
-            <q-spinner-ball color="blue" size="xl"/>
-            <q-spinner-ball color="blue" size="xl"/>
+            <q-spinner-ball color="blue" size="xl" />
+            <q-spinner-ball color="blue" size="xl" />
+            <q-spinner-ball color="blue" size="xl" />
         </div>
     </div>
 </template>
@@ -43,7 +43,7 @@ function openPixWindow() {
 
 onBeforeUnmount(async () => {
     const host = JSON.parse(sessionStorage.getItem('userLogado'));
-    await api.post('/update_moneys', {id: host.id})
+    await api.post('/update_moneys', { id: host.id })
         .then((res) => {
             sessionStorage.removeItem('userLogado');
             sessionStorage.setItem('userLogado', JSON.stringify(res.data));
@@ -108,31 +108,56 @@ onBeforeMount(async () => {
                         wallet_purchase: "all",
                         maxInstallments: 10
                     }
-                    },
+                },
                 callbacks: {
                     onReady: () => {
                         loading.value = false;
                         console.log('Brick is ready');
                     },
                     onSubmit: ({ selectedPaymentMethod, formData }) => {
-                        formData.notification_url = process.env.PROD == 'true' ? process.env.PROD_NOTIFICATION_URL : process.env.DEV_NOTIFICATION_URL;
+                        formData.notification_url = process.env.PROD == 'true' ? process.env.PROD_NOTIFICATION_URL : process.env.PROD_NOTIFICATION_URL;
+                        const host = JSON.parse(sessionStorage.getItem('userLogado'));
+                        formData.additional_info = {
+                            items:
+                                [
+                                    {
+                                        id: recargaPacote.id,
+                                        title: recargaPacote.label,
+                                        description: recargaPacote.label,
+                                        quantity: 1,
+                                        unit_price: recargaPacote.preco,
+                                        category_id: recargaPacote.tipo,
+                                    }
+                                ],
+                            payer: {
+                                first_name: host.nome_razao,
+                                phone: {
+                                    area_code: host.telefone.substring(0, 2),
+                                    number: host.telefone.substring(2, 11)
+                                },
+                            }
+                        }
+                        formData.payer.identification = {
+                            type: host.cpf_cnpj.length > 11 ? 'CNPJ' : 'CPF',
+                            number: host.cpf_cnpj
+                        }
+                        formData.description = "Compra de " + recargaPacote.label + 'por R$ ' + recargaPacote.preco.toFixed(2).toString().replace('.', ',');
                         return new Promise((resolve, reject) => {
                             api.post('/process_payment', formData)
                                 .then((response) => {
-                                    const host = JSON.parse(sessionStorage.getItem('userLogado'));
-                                    // console.log(JSON.stringify(formData))
                                     sessionStorage.setItem('paymentId', JSON.stringify(response.data.id))
                                     api.post('/save_recarga_payment', {
                                         payment_id: response.data.id,
                                         specs: {
                                             host_name: host.nome_razao,
-                                            transactionData: response.data.point_of_interaction.transaction_data || response.data,
+                                            transactionData: response.data,
                                             paymentMethod: selectedPaymentMethod,
                                             valorPagar: valorPagar.value
                                         },
                                         pacote: recargaPacote,
+                                        status: 'bricks payment frontend created',
                                         host: authStore.getInfoId()
-                                    }).then(()=> resolve())
+                                    }).then(() => resolve())
                                     // console.log('Payment response:', JSON.stringify(response.point_of_interaction.transaction_data));
                                     if (formData.payment_method_id === 'pix') {
                                         pixWindow.value = response.data.point_of_interaction.transaction_data.ticket_url;

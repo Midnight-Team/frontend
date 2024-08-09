@@ -37,9 +37,6 @@
                     />
                 </q-card-section>
             </q-card>
-            <q-card class="q-pa-md q-mt-md q-mb-xl shadow-2 bg-grad-1">
-                <q-btn @click="updateMoneys(true)" style="height:8vh" label="Confirmar Pagamento" icon="paid" icon-right="check" class="w100" color="green"/>
-            </q-card>
         </div>
         <FooterComponent />
     </q-page>

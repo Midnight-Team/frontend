@@ -3,7 +3,8 @@
     <div class="home-wrapper q-px-md q-pb-xl">
       <div class="w100  column justify-center q-mt-xs q-gutter-y-md items-center text-white text-bold"
         style="border-radius: 20px; ">
-        <div id="title" class="w100 text-h5 text-bold text-center bg-grad-1 q-pa-md rounded-borders shadow-1 text-purple-1">
+        <div id="title"
+          class="w100 text-h5 text-bold text-center bg-grad-1 q-pa-md rounded-borders shadow-1 text-purple-1">
           {{ host.nome_razao }}<br>
           <div class="mid-opacity" style="font-size: 1rem">host</div>
         </div>
@@ -22,8 +23,7 @@
           </p>
           <p class="row no-wrap items-center justify-between">
             PurpleCoins: {{ host.purpleCoins }}🟣
-            <q-btn to="/app/recarregar" label="" class="q-ml-md" icon-right="currency_exchange"
-              color="primary" />
+            <q-btn to="/app/recarregar" label="" class="q-ml-md" icon-right="currency_exchange" color="primary" />
           </p>
           <strong class="text-blue">SubCoins: {{ host.subCoins }}🔵</strong>
         </q-card>
@@ -89,7 +89,8 @@
           </div>
         </q-card>
         <q-btn label="Entender Análises de Dados" icon="equalizer" class="w100" color="blue" /> -->
-        <q-btn label="Solicitar Suporte" @click="wppConsultor()" icon-right="contact_support" class="w100" color="primary" />
+        <q-btn label="Solicitar Suporte" @click="wppConsultor()" icon-right="contact_support" class="w100"
+          color="primary" />
       </div>
     </div>
     <div class="w100 q-mt-xl bg-white">
@@ -105,25 +106,33 @@ import { useRouter } from 'vue-router';
 import { api } from "src/boot/axios";
 
 const router = useRouter();
-const host = ref(JSON.parse(sessionStorage.getItem('userLogado')))
+const host = ref({
+  nome_razao: '',
+  saldo: 0,
+  purpleCoins: 0,
+  subCoins: 0
+})
+
 async function updateMoneys(isFromBtn) {
   const host = JSON.parse(sessionStorage.getItem('userLogado'));
-  await api.post('/update_moneys', {id: host.id})
-  .then((res) => {
-    sessionStorage.removeItem('userLogado');
-    const updateUser = res.data
-    updateUser.updatedSessionAt = new Date()
-    sessionStorage.setItem('userLogado', JSON.stringify(updateUser));
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-  if(isFromBtn) {
-            router.push('/evento')
-          }
-        }
-        function wppConsultor() {
-          window.open('https://wa.me/5561996459013?text=Ola,%20Gostaria%20de%20solicitar%20um%20suporte%20como%20Host.', '_blank');
+  await api.post('/update_moneys', { id: host.id })
+    .then((res) => {
+      sessionStorage.removeItem('userLogado');
+      const updateUser = res.data
+      updateUser.updatedSessionAt = new Date()
+      sessionStorage.setItem('userLogado', JSON.stringify(updateUser));
+      host.value = res.data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  if (isFromBtn) {
+    router.push('/evento')
+  }
+}
+
+function wppConsultor() {
+  window.open('https://wa.me/5561996459013?text=Ola,%20Gostaria%20de%20solicitar%20um%20suporte%20como%20Host.', '_blank');
 }
 
 function formatToNumber(inputString) {
@@ -133,26 +142,25 @@ function formatToNumber(inputString) {
   }
   // Remove todos os caracteres que não sejam dígitos ou vírgula
   let cleanString = inputString.replace(/[^\d,]/g, '');
-  
+
   // Substitui vírgula por ponto para lidar com números decimais
   let numericString = cleanString.replace(',', '.');
-  
+
   // Converte para número e força duas casas decimais
   let number = parseFloat(numericString).toFixed(2);
-  
+
   // Se a conversão não resultar em um número válido, retorna 0.00
   if (isNaN(number)) {
     number = '0.00';
   }
-  
+
   // Converte de volta para string e substitui ponto por vírgula
   let formattedString = number.toString().replace('.', ',');
-  
+
   return formattedString;
 }
 onBeforeMount(async () => {
-  await updateMoneys()
-   
+  await updateMoneys(false)
 })
 </script>
 
@@ -221,10 +229,10 @@ onBeforeMount(async () => {
 #search-btn:hover {
   opacity: 0.8;
 }
+
 #title {
   font-family: "Rowdies", sans-serif;
   letter-spacing: 1px;
   font-size: 40px;
 }
-
 </style>
