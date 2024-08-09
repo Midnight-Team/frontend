@@ -2,6 +2,11 @@
     <div class="wrapper">
         <div id="paymentBrick_container">
         </div>
+        <div v-if="loading" class="row w100 justify-center q-mt-md q-pb-xl">
+            <q-spinner-ball color="blue" size="xl"/>
+            <q-spinner-ball color="purple-3" size="xl"/>
+            <q-spinner-ball color="blue" size="xl"/>
+        </div>
     </div>
 </template>
 
@@ -10,9 +15,16 @@ import { onBeforeMount, onBeforeUnmount, ref } from "vue";
 import { useQuasar } from 'quasar';
 import { useAuthStore } from 'src/stores/authStore';
 import { api } from "src/boot/axios";
+import { useRouter } from "vue-router";
 
 const authStore = useAuthStore();
 const $q = useQuasar()
+const pixWindow = ref('');
+const valorPagar = ref()
+const preferenceId = ref('')
+const router = useRouter()
+const loading = ref(true)
+
 const loadScript = (src) => {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
@@ -23,22 +35,19 @@ const loadScript = (src) => {
         document.head.appendChild(script);
     });
 };
-const pixWindow = ref('');
 function openPixWindow() {
     $q.notify({
         message: 'Você será redirecionado para o pagamento via PIX',
         color: 'primary',
         position: 'top',
         icon: 'payments',
-        timeout: 60000,
+        timeout: 6000,
         actions: [{ label: 'Abrir Pix', color: 'white', class: 'bg-green', handler: () => { window.open(pixWindow.value, '_blank'); } }]
     });
     setTimeout(() => {
         window.open(pixWindow.value, '_blank');
     }, 2000);
 }
-const valorPagar = ref()
-const preferenceId = ref('')
 
 onBeforeUnmount(async () => {
     const host = JSON.parse(sessionStorage.getItem('userLogado'));
@@ -46,7 +55,6 @@ onBeforeUnmount(async () => {
         .then((res) => {
             sessionStorage.removeItem('userLogado');
             sessionStorage.setItem('userLogado', JSON.stringify(res.data));
-            window.location.reload();
         })
 })
 
@@ -111,6 +119,7 @@ onBeforeMount(async () => {
                     },
                 callbacks: {
                     onReady: () => {
+                        loading.value = false;
                         console.log('Brick is ready');
                     },
                     onSubmit: ({ selectedPaymentMethod, formData }) => {
@@ -119,7 +128,8 @@ onBeforeMount(async () => {
                             api.post('/process_payment', formData)
                                 .then((response) => {
                                     const host = JSON.parse(sessionStorage.getItem('userLogado'));
-                                    console.log(JSON.stringify(formData))
+                                    // console.log(JSON.stringify(formData))
+                                    sessionStorage.setItem('paymentId', JSON.stringify(response.data.id))
                                     api.post('/save_recarga_payment', {
                                         payment_id: response.data.id,
                                         specs: {
@@ -133,13 +143,11 @@ onBeforeMount(async () => {
                                     // console.log('Payment response:', JSON.stringify(response.point_of_interaction.transaction_data));
                                     if (formData.payment_method_id === 'pix') {
                                         pixWindow.value = response.data.point_of_interaction.transaction_data.ticket_url;
-                                        resolve();
                                         openPixWindow();
-                                        return;
                                     }
                                     // console.log(JSON.stringify(response.data));
+                                    router.push('/status-payment')
                                     resolve();
-
                                 })
                                 .catch((error) => {
                                     console.error('Payment error:', error);

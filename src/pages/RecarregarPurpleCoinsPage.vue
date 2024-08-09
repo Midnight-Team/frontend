@@ -56,9 +56,9 @@
             </q-card>
         </div>
         <q-dialog class="animate__animated animate__fadeIn " v-model="openPaymentModal" style="backdrop-filter: blur(4px);">
-                <div class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center" >
-                    <q-btn class="" label="Cancelar" flat color="purple-2" @click="openPaymentModal = false" />
-                    <div class="q-pa-md">💰 Compra de<br> {{ itemSelected.label }} por {{ formatString(itemSelected.preco) }}</div>
+            <div style="border-top-left-radius: 16px;border-bottom-left-radius: 16px;" class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center" >
+                    <q-btn class="" label="voltar" flat color="purple-2" @click="openPaymentModal = false" />
+                    <div class="q-pa-md">💰 Compra de<br> {{ itemSelected.label }} por <br>{{ formatString(itemSelected.preco) }}</div>
                 <RecargaBricksPaymentComponent/>
             </div>
         </q-dialog>
@@ -69,7 +69,7 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, ref } from "vue";
+import { onMounted, ref } from "vue";
 import FooterComponent from "../components/FooterComponent.vue";
 import RecargaBricksPaymentComponent from "../components/RecargaBricksPaymentComponent.vue";
 import { useAuthStore } from 'src/stores/authStore';
@@ -90,14 +90,12 @@ const pacotesCoins = ref(
         { tipo: 'recarga de purplecoins', id: 3,value: 3, label: '5 PurpleCoins', preco: 500, valorAvista: 500 },
         { tipo: 'recarga de purplecoins', id: 4,value: 4, label: '12 PurpleCoins', preco: 1000, valorAvista: 1000 },
         { tipo: 'recarga de purplecoins', id: 5,value: 5, label: '25 PurpleCoins', preco: 2000, valorAvista: 2000 },
-        { tipo: 'teste 1 real', id: 6,value: 6, label: '999 SubCoins', preco: 1, valorAvista: 1 }
+        { tipo: 'teste 1 real', id: 6,value: 6, label: '10 SubCoins', preco: 1, valorAvista: 1 }
     ]
 )
-
-onBeforeUnmount(() => {
+onMounted(() => {
     sessionStorage.getItem('recargaPacote') && sessionStorage.removeItem('recargaPacote')
 })
-
 function formatString(value) {
     return 'R$ ' + (value).toFixed(2).replace('.', ',')
 }

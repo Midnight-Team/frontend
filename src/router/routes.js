@@ -21,10 +21,10 @@ const routes = [
     ]
   },
   {
-    path: '/test',
+    path: '/status-payment',
     component: () => import('src/layouts/HostLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/TestPage.vue') },
+      { path: '', component: () => import('pages/StatusPaymentPage.vue') },
     ]
   },
   {
