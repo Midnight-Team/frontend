@@ -1,8 +1,8 @@
 <template>
-    <q-page class="animate__animated animate__fadeIn">
-        <div class="es1 bg-white q-ma-sm  rounded-borders shadow-4 relative">
+    <q-page class="animate__animated animate__fadeIn bg-grad-2 q-pb-xl">
+        <div class="es1 bg-white q-mx-sm  rounded-borders shadow-4 relative">
             <div
-                class="title-1 w100 q-px-sm row items-center text-primary shadow-1 q-py-xs justify-between no-wrap text-bold">
+                class="title-1 w100 q-px-sm row items-center text-primary shadow-1 q-py-md justify-between no-wrap text-bold">
                 <div class="row no-wrap items-center">
                     <q-icon size="sm" color="primary" name="paid" class="q-pr-sm" />
                     {{ authStore.getInfoPurpleCoins() }} <div class="q-pl-sm mid-opacity">PurpleCoins</div>
@@ -16,8 +16,7 @@
                     @click="navigateTo('/evento/steps')" icon="today" icon-right="add" /></div>
             <div class="column q-mb-xl">
                 <div id="table-eventos" class="q-mt-md w100">
-                    <div class="text-h6 text-primary q-mb-sm w100 q-px-md text-center text-bold">Eventos de Midnight
-                        Produções</div>
+                    <div id="title-menu" class=" text-primary q-mb-sm w100 q-px-md text-center text-bold">Eventos de {{ authStore.getInfoRazao()}}</div>
                     <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
                         <q-input v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined
@@ -44,9 +43,16 @@
                                     </div>
                                 </q-td>
                             </template>
+                            <template v-slot:body-cell-pacote="props">
+                                <q-td :props="props">
+                                    <div class="q-gutter-y-xs q-py-sm">
+                                        {{ formatBigPct(props.row.pacote) }}
+                                    </div>
+                                </q-td>
+                            </template>
                             <template v-slot:body-cell-acoes="props">
                                 <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
-                                    <q-btn icon="visibility" color="primary" @click="openDialogEvento(props.row.id)" >
+                                    <q-btn icon="visibility" color="primary" @click="openMeuEventoPage(props.row.id)" >
                                         <q-tooltip anchor="center left" self="center right" :offset="[10, 10]">
                                             Visualizar Evento
                                         </q-tooltip>
@@ -59,10 +65,6 @@
                                 </div>
                             </template>
                         </q-table>
-                        <q-dialog v-model="dialogEvento"  style="backdrop-filter:blur(5px)">
-                        <!-- <q-dialog v-model="dialogEvento" persistent style="backdrop-filter:blur(5px)"> -->
-                            <EventoUnicoHost @getEventos="getEventos()" :eventoHandlerId="eventoHandlerId"/>
-                        </q-dialog>
                     </div>
                 </div>
             </div>
@@ -75,21 +77,18 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from 'src/stores/authStore';
 import { api } from 'src/boot/axios';
-import EventoUnicoHost from 'src/components/EventoUnicoHost.vue';
+import { nextTick } from 'vue';
 const loading = ref(false);
 const authStore = useAuthStore();
 const router = useRouter();
-const dialogEvento = ref(false);
 const buscarEvento = ref({
     titulo: '',
     status: true
 })
 
-const eventoHandlerId = ref('');
-
-function openDialogEvento(eventoId) {
-    eventoHandlerId.value = eventoId;
-    dialogEvento.value = true;
+function openMeuEventoPage(eventoId) {
+    sessionStorage.setItem('eventoHandlerId', eventoId);
+    router.push('/evento/meu-evento');
 }
 
 const navigateTo = (url) => {
@@ -157,6 +156,10 @@ function formatBigString(str){
     return str;
 }
 
+function formatBigPct(pact){
+    return pact.substring(12)
+}
+
 function formatToNumber(inputString) {
     let cleanString = inputString.replace(/[^\d,]/g, '');
     let numericString = cleanString.replace(',', '.');
@@ -170,7 +173,6 @@ function formatToNumber(inputString) {
 }
 
 async function getEventos() {
-    dialogEvento.value = false;
     loading.value = true;
     const req = {
         host: authStore.getInfoId(),
@@ -208,7 +210,7 @@ onMounted(async () => {
 
 @media (min-width: 1100px) {
     .es1 {
-        margin: 16px 100px;
+        margin: 0px 100px;
     }
 }
 
@@ -216,7 +218,7 @@ onMounted(async () => {
     position: sticky;
     top: 96px;
     background: #dacaff56;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(12px);
     z-index: 2;
 }
 </style>

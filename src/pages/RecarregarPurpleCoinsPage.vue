@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <q-dialog class="animate__animated animate__fadeIn " v-model="openPaymentModal"
+        <q-dialog class="animate__animated animate__fadeIn " persistent v-model="openPaymentModal"
             style="backdrop-filter: blur(4px);">
             <div style="border-top-left-radius: 16px;border-bottom-left-radius: 16px;"
                 class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center">

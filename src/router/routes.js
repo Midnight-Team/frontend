@@ -18,6 +18,7 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/evento/MeusEventosPage.vue') },
       { path: 'steps', component: () => import('pages/evento/StepsPage.vue') },
+      { path: 'meu-evento', component: () => import('pages/evento/EventoUnicoHostPage.vue') },
     ]
   },
   {

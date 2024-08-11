@@ -36,6 +36,23 @@ html {
     background: -webkit-linear-gradient(to right, #682edc, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #682edc, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+.bg-grad-5 {
+    background: #3b3b3b;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #3b3b3b, #272727);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #3b3b3b, #272727); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.bg-grad-6 {
+    background: #3b3b3b;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #3b3b3bbf, #2A2A2A);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #3b3b3bbf, #2A2A2A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-glass-1{
+  background: #D3CCE3;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+}
 
 .w100{
     width: 100%;
@@ -100,4 +117,13 @@ th{
   font-family: "Rowdies", sans-serif;
   letter-spacing: 1px;
   font-size: 40px;
+}
+#title-menu {
+  font-family: "Rowdies", sans-serif;
+  letter-spacing: 1px;
+  font-size: 26px;
+}
+#title-layout {
+  font-family: "Rowdies", sans-serif;
+  font-size: 20px;
 }

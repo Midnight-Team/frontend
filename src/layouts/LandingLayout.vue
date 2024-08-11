@@ -1,13 +1,13 @@
 <template>
     <q-layout class="relative animate__animated animate__fadeIn bg-primary">
-        <q-header class="fixed bg-grad-3 text-white animate__animated animate__backInDown animate__slow shadow-1"
+        <q-header class="fixed bg-grad-2 text-white animate__animated animate__backInDown animate__slow shadow-1"
             height-hint="98">
             <div style="font-size: 1rem;" class=" q-py-md w100 row no-wrap items-center  justify-evenly">
-                <a v-if="!isMobile" @click="scrollBot()" class="menu-item row items-center">
-                    <q-icon class="q-pr-xs" name="local_activity" size="sm" /> Midnight Tickets
+                <a v-if="!isMobile" @click="scrollBot()" class="menu-item row items-center" id="title-menu">
+                    <q-icon class="q-pr-xs" name="local_activity" size="xl"/> Midnight Tickets
                 </a>
                 <a v-else @click="scrollBot()" class="menu-item row items-center">
-                    <q-icon name="local_activity" size="lg" />
+                    <q-icon name="local_activity" size="xl" />
                 </a>
                 <a class="menu-item" @click="scrollToBottom()">
                     Contato
@@ -27,10 +27,10 @@
                     <q-toolbar class="bg-grad-4">
                         <q-toolbar-title
                             class="row justify-center q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
-                            <q-icon size="xl" color="white" name="local_activity" />
-                            <div>
+                            <div id="title-menu">
                                 MIDNIGHT TICKETS
                             </div>
+                            <q-icon size="xl" color="white" name="local_activity" />
                         </q-toolbar-title>
                     </q-toolbar>
                     <div class="space bg-grad-2 w100 text-center text-purple-1 q-py-md text-bold q-px-md high-opacity"
@@ -383,7 +383,7 @@ function scrollBot() {
 }
 
 function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight - 1840);
+    window.scrollTo(0, document.body.scrollHeight - 1830);
 }
 
 

@@ -1,30 +1,30 @@
 <template>
-  <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-1">
+  <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-5">
     <div class="home-wrapper q-px-md q-pb-xl">
       <div class="w100  column justify-center q-mt-xs q-gutter-y-md items-center text-white text-bold"
         style="border-radius: 20px; ">
         <div id="title"
-          class="w100 text-h5 text-bold text-center bg-grad-1 q-pa-md rounded-borders shadow-1 text-purple-1">
+          class="w100 text-h5 text-bold text-center bg-grad-6 q-pa-md q-pb-lg rounded-borders  text-purple-1">
           {{ host.nome_razao }}<br>
-          <div class="mid-opacity" style="font-size: 1rem">host</div>
+          <div class="high-opacity text-secondary" style="font-size: 1rem">host</div>
         </div>
-        <q-card class="w100 column text-primary q-pa-md bg-grey-3">
-          <div class="row q-pb-xs rounded-borders q-mb-md" style="border-bottom:4px solid #8527e26c">
-            <q-icon size="xl" color="primary" name="payments" />
+        <div class="rounded-borders w100 column text-secondary q-pa-md" style="border-bottom: 2px solid grey;">
+          <div class="row q-pb-xs rounded-borders " >
+            <q-icon size="xl" color="secondary" name="payments" />
           </div>
-          <p class="row no-wrap items-center justify-between">
+          <p class="row no-wrap items-center justify-between ">
             Saldo: R$ {{ formatToNumber(host.saldo) }}
-            <q-btn label="Sacar" class="q-ml-md" icon-right="attach_money" color="blue" />
+            <q-btn label="Sacar" class="q-ml-md" icon-right="attach_money" color="primary" />
           </p>
           <p class="row no-wrap items-center justify-between">
             PurpleCoins: {{ host.purpleCoins }}🟣
             <q-btn to="/app/recarregar" label="" class="q-ml-md" icon-right="currency_exchange" color="primary" />
           </p>
-          <strong class="text-blue">SubCoins: {{ host.subCoins }}🔵</strong>
-        </q-card>
-        <q-card class="w100 text-primary column q-gutter-y-md items-center q-pb-md q-px-md bg-grey-3">
-          <div class="w100 row q-pb-xs rounded-borders" style="border-bottom:4px solid #8527e26c">
-            <q-icon size="xl" color="primary" name="person" />
+          <strong class="text-blue q-mt-xs">SubCoins: {{ host.subCoins }}🔵</strong>
+        </div>
+        <q-card class="w100 text-secondary column q-gutter-y-md items-center q-pb-md q-px-md bg-primary">
+          <div class="w100 row rounded-borders">
+            <q-icon size="xl" color="secondary" name="person" />
           </div>
           <div class="row no-wrap w100">
             <q-input color="primary" readonly filled v-model="host.nome_razao" label="Nome/Razão Social" class="bg-grey-2 w100">
@@ -110,7 +110,7 @@
           color="primary" />
       </div>
     </div>
-    <div class="w100 q-mt-xl bg-white">
+    <div class="w100 q-mt-md bg-white">
       <FooterComponent />
     </div>
   </q-page>
