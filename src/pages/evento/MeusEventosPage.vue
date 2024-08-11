@@ -46,20 +46,23 @@
                             </template>
                             <template v-slot:body-cell-acoes="props">
                                 <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
-                                    <q-btn icon="visibility" color="primary">
-                                        <q-tooltip>
+                                    <q-btn icon="visibility" color="primary" @click="openDialogEvento(props.row.id)" >
+                                        <q-tooltip anchor="center left" self="center right" :offset="[10, 10]">
                                             Visualizar Evento
                                         </q-tooltip>
                                     </q-btn>
                                     <q-btn icon="sell " color="green">
-                                        <q-tooltip>
+                                        <q-tooltip anchor="center left" self="center right" :offset="[10, 10]">
                                             Virar lote de ingressos
                                         </q-tooltip>
                                     </q-btn>
                                 </div>
                             </template>
                         </q-table>
-
+                        <q-dialog v-model="dialogEvento"  style="backdrop-filter:blur(5px)">
+                        <!-- <q-dialog v-model="dialogEvento" persistent style="backdrop-filter:blur(5px)"> -->
+                            <EventoUnicoHost @getEventos="getEventos()" :eventoHandlerId="eventoHandlerId"/>
+                        </q-dialog>
                     </div>
                 </div>
             </div>
@@ -72,15 +75,22 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from 'src/stores/authStore';
 import { api } from 'src/boot/axios';
-
+import EventoUnicoHost from 'src/components/EventoUnicoHost.vue';
 const loading = ref(false);
 const authStore = useAuthStore();
 const router = useRouter();
-
+const dialogEvento = ref(false);
 const buscarEvento = ref({
     titulo: '',
     status: true
 })
+
+const eventoHandlerId = ref('');
+
+function openDialogEvento(eventoId) {
+    eventoHandlerId.value = eventoId;
+    dialogEvento.value = true;
+}
 
 const navigateTo = (url) => {
     router.push(url);
@@ -160,6 +170,7 @@ function formatToNumber(inputString) {
 }
 
 async function getEventos() {
+    dialogEvento.value = false;
     loading.value = true;
     const req = {
         host: authStore.getInfoId(),

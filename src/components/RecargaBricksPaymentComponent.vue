@@ -40,7 +40,7 @@ function openPixWindow() {
 
 onBeforeUnmount(async () => {
     const host = JSON.parse(sessionStorage.getItem('userLogado'));
-    await api.post('/update_moneys', { id: host.id })
+    await api.post('/update_moneys', { id: host.id, senha: host.senha })
         .then((res) => {
             sessionStorage.removeItem('userLogado');
             sessionStorage.setItem('userLogado', JSON.stringify(res.data));

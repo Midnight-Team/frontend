@@ -98,7 +98,11 @@ onMounted(() => {
 #card-login {
     width: 600px;
 }
-
+#hostlogin-wrapper{
+    background-color: #2d2d2d;
+    border-radius: 20px;
+    padding-bottom: 24px;
+}
 @media (max-width: 600px) {
     #card-login {
         width: 90vw;

@@ -8,11 +8,6 @@
           {{ host.nome_razao }}<br>
           <div class="mid-opacity" style="font-size: 1rem">host</div>
         </div>
-        <q-card>
-          <div class="row no-wrap items-center justify-center">
-            <q-btn label="Editar Perfil" color="green" icon-right="edit" />
-          </div>
-        </q-card>
         <q-card class="w100 column text-primary q-pa-md bg-grey-3">
           <div class="row q-pb-xs rounded-borders q-mb-md" style="border-bottom:4px solid #8527e26c">
             <q-icon size="xl" color="primary" name="payments" />
@@ -29,22 +24,44 @@
         </q-card>
         <q-card class="w100 text-primary column q-gutter-y-md items-center q-pb-md q-px-md bg-grey-3">
           <div class="w100 row q-pb-xs rounded-borders" style="border-bottom:4px solid #8527e26c">
-            <q-icon size="xl" color="primary" name="celebration" />
+            <q-icon size="xl" color="primary" name="person" />
+          </div>
+          <div class="row no-wrap w100">
+            <q-input color="primary" readonly filled v-model="host.nome_razao" label="Nome/Razão Social" class="bg-grey-2 w100">
+              <template v-slot:append>
+                <q-icon name="home_work" color="primary"/>
+              </template>
+            </q-input>
+          </div>
+          <div class="row no-wrap w100">
+            <q-input color="primary" readonly filled v-model="host.cpf_cnpj" label="CPF/CNPJ" class="bg-grey-2 w100">
+              <template v-slot:append>
+                <q-icon name="badge" color="primary"/>
+              </template>
+            </q-input>
+          </div>
+          <div class="row no-wrap w100">
+            <q-input color="primary" readonly filled v-model="host.login" label="Login" class="bg-grey-2 w100">
+              <template v-slot:append>
+                <q-icon name="login" color="primary"/>
+              </template>
+            </q-input>
+          </div>
+          <div class="row no-wrap w100">
+            <q-input color="primary" readonly filled v-model="host.email" label="Email" class="bg-grey-2 w100">
+              <template v-slot:append>
+                <q-icon name="email" color="primary"/>
+              </template>
+            </q-input>
           </div>
           <div class="row no-wrap w100 items-center justify-between">
-            Eventos em andamento: 4
-            <q-btn to="/evento" icon-right="event" color="primary" />
+            <q-input color="primary" readonly filled v-model="host.telefone" label="Telefone" class="bg-grey-2 w100">
+              <template v-slot:append>
+                <q-icon name="phone" color="primary"/>
+              </template>
+            </q-input>
           </div>
-          <div class="row no-wrap w100">
-            Total Eventos: 12
-          </div>
-          <div class="row no-wrap w100">
-            Eventos Cancelados: 1
-          </div>
-          <div class="row no-wrap w100 justify-between items-center">
-            Subhosts Cadastrado: 4
-            <q-btn icon-right="sensor_occupied" color="blue" />
-          </div>
+          <q-btn label="Editar Perfil" color="green" icon-right="edit" class="w100"/>
         </q-card>
         <!-- <q-card class="w100 text-primary column q-gutter-y-md items-center q-pb-md q-px-md bg-grey-3">
           <div class="w100 row q-pb-xs rounded-borders" style="border-bottom:4px solid #8527e26c">
@@ -89,7 +106,7 @@
           </div>
         </q-card>
         <q-btn label="Entender Análises de Dados" icon="equalizer" class="w100" color="blue" /> -->
-        <q-btn label="Solicitar Suporte" @click="wppConsultor()" icon-right="contact_support" class="w100"
+        <q-btn label="Solicitar Suporte" @click="wppConsultor()" icon-right="contact_support" class="q-mt-xl w100"
           color="primary" />
       </div>
     </div>
@@ -109,7 +126,7 @@ const router = useRouter();
 const host = JSON.parse(sessionStorage.getItem('userLogado'));
 
 async function updateMoneys(isFromBtn) {
-  await api.post('/update_moneys', { id: host.id })
+  await api.post('/update_moneys', { id: host.id, senha: host.senha })
     .then((res) => {
       sessionStorage.removeItem('userLogado');
       const updateUser = res.data
