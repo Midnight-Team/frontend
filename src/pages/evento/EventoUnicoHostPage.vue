@@ -13,7 +13,7 @@
             :icon-right="editando ? 'close' : 'edit'" :label="editando ? 'Cancelar edição' : 'Editar Evento'"></q-btn>
         <div id="evento-info" v-if="eventoLoaded"
             class="q-px-md q-gutter-y-md q-mt-sm bg-glass-1 rounded-borders q-pb-md">
-            <div class="text-h6 text-primary text-bold" id="text-menu">
+            <div class="text-h5 text-primary text-bold row items-center" id="text-menu">
                 <q-icon name="nightlife" size="md" class="text-primary" />
                 EVENTO
             </div>
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div id="subhost-info" class="bg-glass-1 rounded-borders q-pa-md q-mt-md">
-            <div class="text-h6 text-primary text-bold " id="text-menu">
+            <div class="row items-center text-h5 text-primary text-bold " id="text-menu">
                 <q-icon name="confirmation_number" size="md" class="text-primary" />
                 INGRESSOS
             </div>
@@ -93,8 +93,8 @@
                 color="primary"></q-btn>
         </div>
         <div id="pacote-info" class="bg-glass-1 rounded-borders q-pa-md q-mt-md">
-            <div class="text-h6 text-primary text-bold" id="text-menu">
-                <q-icon name="local_atm" size="md" class="text-primary" />
+            <div class="text-h5 row items-center text-primary text-bold" id="text-menu">
+                <q-icon name="credit_card" size="md" class="text-primary" />
                 PACOTES
             </div>
             <div class="w100 text-primary text-bold mid-opacity q-pt-md">
@@ -106,9 +106,9 @@
             </div>
         </div>
         <div id="subhost-info" class="bg-glass-1 rounded-borders q-pa-md q-mb-xl q-mt-md">
-            <div class="text-h6 text-primary text-bold " id="text-menu">
-                <q-icon name="groups" size="md" class="text-primary" />
-                ACESSO
+            <div class="text-h5 row items-center text-primary text-bold " id="text-menu">
+                <q-icon name="groups" size="md" class="text-primary q-pr-xs" />
+                ACESSOS
             </div>
             <div class="w100 text-primary text-bold mid-opacity q-pb-md">
                 <!-- faça um v-for no evento.subhosts mostrando o id e o nome -->
