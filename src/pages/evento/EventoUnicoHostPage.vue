@@ -1,48 +1,71 @@
 <template>
     <q-page class="animate__animated animate__fadeIn  column bg-grad-3 q-px-md q-pb-xl relative" id="dialog-evento"
         v-if="pageLoaded">
+        <div class="w100 rounded-borders q-mt-md">
+            <div id="title-menu" class="text-h5 text-center text-purple-1 rounded-borders bg-grad-1 q-pa-md  text-bold">
+                {{ evento.titulo }}
+            </div>
+        </div>
         <div class="w100 q-mt-sm">
             <img class="shadow-2" id="img-evento" style="border: 4px solid #610FE1" :src="evento.img_url" alt="">
         </div>
-        <div id="evento-info" v-if="eventoLoaded" class="q-px-md q-gutter-y-md q-mt-sm bg-glass-1 rounded-borders q-pb-md">
-            <div class="w100 rounded-borders">
-                <div id="title-menu"
-                    class="text-h5 text-center text-purple-1 rounded-borders bg-grad-1 q-pa-md  text-bold">
-                    {{ evento.titulo }}
-                </div>
-            </div>
-            <q-btn @click="editando = !editando" class="q-mt-sm q-py-sm" :color="editando ? 'orange-8' : 'blue'"
-                :icon-right="editando ? 'close' : 'edit'"
-                :label="editando ? 'Cancelar edição' : 'Editar Evento'"></q-btn>
+        <q-btn @click="editando = !editando" class="q-mt-sm q-py-sm" :color="editando ? 'orange-8' : 'blue'"
+            :icon-right="editando ? 'close' : 'edit'" :label="editando ? 'Cancelar edição' : 'Editar Evento'"></q-btn>
+        <div id="evento-info" v-if="eventoLoaded"
+            class="q-px-md q-gutter-y-md q-mt-sm bg-glass-1 rounded-borders q-pb-md">
             <div class="text-h6 text-primary text-bold" id="text-menu">
                 <q-icon name="nightlife" size="md" class="text-primary" />
                 EVENTO
             </div>
+            <q-input v-if="editando" label="Título do Evento*" v-model="evento.titulo" outlined
+                color="primary"></q-input>
             <q-input v-if="editando" label="Link da Imagem" v-model="evento.img_url" outlined color="primary">
                 <template v-slot:append>
                     <q-icon @click="openImgur()" name="image" color="primary" />
                 </template>
             </q-input>
-            <q-input v-if="editando" label="Título do Evento*" v-model="evento.titulo" outlined
-                color="primary"></q-input>
             <div class="w100">
                 {{ evento.status }}
             </div>
             <q-input type="textarea" label="Descrição" v-model="evento.descricao" outlined :readonly="!editando"
                 :filled="!editando"></q-input>
-            <q-input :readonly="!editando" label="Contato*" v-model="evento.contato" type="textarea" outlined
-                color="primary"></q-input>
+            <q-input :readonly="!editando" :filled="!editando" label="Contato*" v-model="evento.contato" type="textarea"
+                outlined color="primary"></q-input>
             <!-- <q-input label="Data" v-model="evento.data_evento" outlined color="primary" :readonly="!editando" :filled="!editando"></q-input> -->
             <div class="row q-gutter-x-md justify-center no-wrap">
-                <q-input label="Horário de Início*" v-model="evento.hora_evento" outlined color="primary"
-                    :readonly="!editando" :filled="!editando"></q-input>
-                <q-input v-if="evento.hora_final" label="Horário de Término" v-model="evento.hora_final" outlined
-                    color="primary" :readonly="!editando" :filled="!editando"></q-input>
+                <q-input :filled="!editando" :readonly="!editando" label="Hora Início*" class="q-mt-md q-ml-md"
+                    style="width: 45%;" outlined v-model="evento.hora_evento" mask="time" :rules="['time']">
+                    <template v-if="editando" v-slot:append>
+                        <q-icon name="access_time" color="primary" class="cursor-pointer">
+                            <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                                <q-time v-model="evento.hora_evento">
+                                    <div class="row items-center justify-end">
+                                        <q-btn v-close-popup label="Close" color="primary" flat />
+                                    </div>
+                                </q-time>
+                            </q-popup-proxy>
+                        </q-icon>
+                    </template>
+                </q-input>
+                <q-input :filled="!editando" :readonly="!editando" label="Hora Fim" class="q-mt-md q-ml-md"
+                    style="width: 45%;" outlined v-model="evento.hora_final" mask="time" :rules="['time']">
+                    <template v-if="editando" v-slot:append>
+                        <q-icon name="access_time" color="primary" class="cursor-pointer">
+                            <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                                <q-time v-model="evento.hora_final">
+                                    <div class="row items-center justify-end">
+                                        <q-btn v-close-popup label="Close" color="primary" flat />
+                                    </div>
+                                </q-time>
+                            </q-popup-proxy>
+                        </q-icon>
+                    </template>
+                </q-input>
             </div>
             <q-date v-model="evento.data_evento" :color="editando ? 'primary' : 'grey-8'" :readonly="!editando"
                 class="w100" mask="DD-MM-YYYY" />
-            <q-input label="Endereço" v-model="evento.endereco" type="textarea" outlined color="primary" readonly
-                filled></q-input>
+            <q-input label="Endereço" v-model="evento.endereco" type="textarea" outlined color="primary"
+                :readonly="!editando" :filled="!editando"></q-input>
             <div v-if="evento.localizacao && !evento.localizacao.trim() == ''" class="w100 q-mt-md rounded-borders">
                 <iframe :src="evento.localizacao" class="w100 rounded-borders shadow-2" height="200" style="border:0;"
                     allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -140,7 +163,7 @@ onBeforeUnmount(() => {
 })
 
 async function salvarAlteracoes() {
-    await api.put(`/update_evento`, {evento: evento.value, host: JSON.parse(sessionStorage.getItem('userLogado'))})
+    await api.put(`/update_evento`, { evento: evento.value, host: JSON.parse(sessionStorage.getItem('userLogado')) })
         .then(response => {
             $q.notify({
                 color: 'green-8',

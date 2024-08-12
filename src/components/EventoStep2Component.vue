@@ -27,7 +27,7 @@
             </div>
             <div id="list-ingressos" class="column">
                 <div v-for="(ingresso, index) in ingressos" :key="index"
-                    class="column no-wrap items-center rounded-borders shadow-4 bg-grad-2  justify-between">
+                    class="column no-wrap items-center rounded-borders shadow-4 bg-grad-2 q-mb-md  justify-between">
                     <div class="row q-py-xs items-center">
                         <div class="text-bold text-white">{{ format(ingresso.titulo) }}</div>
                     </div>
