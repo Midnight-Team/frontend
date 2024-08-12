@@ -105,7 +105,7 @@
                 <div class="w100 rounded-borders bg-primary mid-opacity q-mt-md" style="height:4px"></div>
             </div>
         </div>
-        <div id="subhost-info" class="bg-glass-1 rounded-borders q-pa-md q-mb-xl q-mt-md">
+        <div id="subhost-info" class="bg-glass-1 rounded-borders q-pa-md q-mb-md q-mt-md">
             <div class="text-h5 row items-center text-primary text-bold " id="text-menu">
                 <q-icon name="groups" size="md" class="text-primary q-pr-xs" />
                 ACESSOS
@@ -124,6 +124,7 @@
             <q-btn v-if="!editando" label="Adicionar Subhost" icon-right="person_add" class="q-mt-md"
                 color="primary"></q-btn>
         </div>
+        <div class="w100 q-my-lg" v-if="editando"></div>
         <q-btn v-if="!editando" class=" w100  q-py-xl q-mb-md" label="Painel de Vendas" icon-right="payments"
             icon="insert_chart" color="primary"></q-btn>
         <q-btn v-if="!editando" class=" w100  q-py-lg " label="Visualizar Convite" icon-right="visibility"
@@ -131,7 +132,7 @@
         <q-btn v-if="!editando" class="w100 q-mt-md q-mb-lg" label="Cancelar Evento" icon-right="cancel"
             color="red-8"></q-btn>
         <div class="w100 q-pb-xl"></div>
-        <q-btn @click="salvarAlteracoes()" v-if="editando" class=" w100 q-mt-md q-py-xl fixed"
+        <q-btn @click="salvarAlteracoes()" v-if="editando" class=" w100 q-mt-md q-py-lg fixed"
             style="bottom:0px;left:0px;z-index: 9;" label="Salvar Alterações" icon-right="save" color="green-7"></q-btn>
     </q-page>
     <q-page v-else>

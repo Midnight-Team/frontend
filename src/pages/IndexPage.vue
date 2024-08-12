@@ -1,20 +1,20 @@
 <template>
   <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-5" v-if="pageLoaded">
     <div class="home-wrapper q-px-md q-pb-xl">
-      <div class="w100  column justify-center q-mt-xs items-center text-white text-bold"
-        style="border-radius: 20px; ">
+      <div class="w100  column justify-center q-mt-xs items-center text-white text-bold" style="border-radius: 20px; ">
         <div class="w100 flex q-mb-lg flex-center q-mt-lg">
           <q-avatar style="width:110px;height:110px;" class="shadow-2">
             <img :src="host.img" alt="">
           </q-avatar>
         </div>
         <div id="title"
-          class="w100 text-h5 text-bold text-center bg-grad-6 q-pa-md q-pb-lg rounded-borders  text-purple-1" style="border-top: 2px solid #9573f3;">
+          class="w100 text-h5 text-bold text-center bg-grad-6 q-pa-md q-pb-lg rounded-borders  text-purple-1"
+          style="border-top: 2px solid #9573f3;">
           {{ host.nome_razao }}<br>
           <div class="high-opacity text-secondary" style="font-size: 1rem">host</div>
         </div>
         <div class="rounded-borders w100 column text-secondary q-pa-md" style="border-bottom: 2px solid #9573f3;">
-          <div class="row q-pb-xs rounded-borders " >
+          <div class="row q-pb-xs rounded-borders ">
             <q-icon size="xl" color="secondary" name="payments" />
           </div>
           <p class="row no-wrap items-center justify-between ">
@@ -27,46 +27,29 @@
           </p>
           <strong class="text-blue q-mt-xs">SubCoins: {{ host.subCoins }}🔵</strong>
         </div>
-        <div class="w100 text-secondary column q-gutter-y-md q-mt-md items-center q-pb-md q-px-md rounded-borders" style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
-          <div class="w100 row rounded-borders">
-            <q-icon size="xl" color="secondary" name="person" />
+        <div class="w100 text-secondary column q-gutter-y-md q-mt-md items-center q-pb-md q-px-md rounded-borders"
+          style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
+          <div class="row no-wrap w100 items-center ">
+            <q-icon name="person" size="lg" color="secondary" class="q-mr-md" />
+            {{ host.login }}
           </div>
-          <div class="row no-wrap w100">
-            <q-input color="primary" disable outlined v-model="host.nome_razao" label="Nome/Razão Social" class="bg-grey-4 text-bold rounded-borders w100">
-              <template v-slot:append>
-                <q-icon name="home_work" color="primary"/>
-              </template>
-            </q-input>
+          <div class="row no-wrap w100 items-center ">
+            <q-icon name="home_work" size="lg" color="secondary" class="q-mr-md" />
+            {{ host.nome_razao }}
           </div>
-          <div class="row no-wrap w100">
-            <q-input color="primary" disable outlined v-model="host.cpf_cnpj" label="CPF/CNPJ" class="bg-grey-4 text-bold rounded-borders w100">
-              <template v-slot:append>
-                <q-icon name="badge" color="primary"/>
-              </template>
-            </q-input>
+          <div class="row no-wrap w100 items-center ">
+            <q-icon name="badge" size="lg" color="secondary" class="q-mr-md" />
+            {{ host.cpf_cnpj }}
           </div>
-          <div class="row no-wrap w100">
-            <q-input color="primary" disable outlined v-model="host.login" label="Login" class="bg-grey-4 text-bold rounded-borders w100">
-              <template v-slot:append>
-                <q-icon name="login" color="primary"/>
-              </template>
-            </q-input>
+          <div class="row no-wrap w100 items-center ">
+            <q-icon name="email" size="lg" color="secondary" class="q-mr-md" />
+            {{ host.email }}
           </div>
-          <div class="row no-wrap w100">
-            <q-input color="primary" disable outlined v-model="host.email" label="Email" class="bg-grey-4 text-bold rounded-borders w100">
-              <template v-slot:append>
-                <q-icon name="email" color="primary"/>
-              </template>
-            </q-input>
+          <div class="row no-wrap w100 items-center ">
+            <q-icon name="phone" size="lg" color="secondary" class="q-mr-md" />
+            {{ host.telefone }}
           </div>
-          <div class="row no-wrap w100 items-center justify-between">
-            <q-input color="primary" disable outlined v-model="host.telefone" label="Telefone" class="bg-grey-4 text-bold rounded-borders w100">
-              <template v-slot:append>
-                <q-icon name="phone" color="primary"/>
-              </template>
-            </q-input>
-          </div>
-          <q-btn label="Editar Perfil" color="blue"  icon-right="edit" class="w100 q-py-md"/>
+          <q-btn label="Solicitar Alterações" color="primary" icon-right="edit" class="w100" />
         </div>
         <!-- <q-card class="w100 text-primary column q-gutter-y-md items-center q-pb-md q-px-md bg-grey-3">
           <div class="w100 row q-pb-xs rounded-borders" style="border-bottom:4px solid #8527e26c">
@@ -120,10 +103,10 @@
   </q-page>
   <q-page v-else>
     <div class="row w100 q-pt-md justify-center">
-      <q-spinner-ball color="blue" size="lg"/>
-      <q-spinner-ball color="blue" size="lg"/>
-      <q-spinner-ball color="blue" size="lg"/>
-  </div>
+      <q-spinner-ball color="blue" size="lg" />
+      <q-spinner-ball color="blue" size="lg" />
+      <q-spinner-ball color="blue" size="lg" />
+    </div>
   </q-page>
 </template>
 
@@ -261,10 +244,12 @@ onBeforeMount(async () => {
   letter-spacing: 1px;
   font-size: 40px;
 }
-.q-field__label{
-  color: #7734c4!important;
+
+.q-field__label {
+  color: #7734c4 !important;
 }
+
 .q-input {
-  font-weight: bold!important;
+  font-weight: bold !important;
 }
 </style>

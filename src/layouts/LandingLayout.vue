@@ -41,7 +41,7 @@
                     <q-card
                         class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-3s">
                         <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Digite seu EMAIL para SOLICITAR
-                            a ABERTURA<br>da sua CONTA, Produtor</p>
+                            a ABERTURA da sua CONTA</p>
                         <q-input v-model="contato.email" type="email" class="bg-white" filled label="Seu melhor email">
                             <template v-slot:prepend>
                                 <q-icon name="email" color="primary" />
