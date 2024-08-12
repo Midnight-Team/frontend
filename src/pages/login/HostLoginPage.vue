@@ -1,32 +1,32 @@
 <template>
-    <div id="hostlogin-wrapper" class="bg-grad-4 animate__animated animate__zoomIn  flex flex-center">
-            <q-toggle class="animate__animated animate__flipInX animate__delay-1s w100 row text-bold bg-grad-4 text-white  rounded-borders justify-center" @update:model-value="usuario.senha = ''"
+    <div id="hostlogin-wrapper" class="bg-dark animate__animated animate__zoomIn  flex flex-center">
+            <q-toggle class=" w100 row text-bold bg-grad-4 rounded-borders text-white  justify-center" @update:model-value="usuario.senha = ''"
                 v-model="usuario.isSubhost" :label="usuario.isSubhost ? 'Sou Subhost' : 'Sou Host'"
                 color="white" />
-        <q-card class="shadow-4" id="card-login">
-            <div class="text-h5 q-pl-md q-pt-md text-primary text-bold row items-center">
+        <div class="rounded-borders" id="card-login">
+            <div class="text-h5  q-pl-md q-pt-md text-secondary text-bold row items-center">
                 <q-icon :name="usuario.isSubhost ? 'sensor_occupied' : 'admin_panel_settings'" size="lg"
                     class="q-mr-md" />
                 Login {{ usuario.isSubhost ? 'Subhost' : 'Host' }}
             </div>
             <q-card-section>
                 <div>
-                    <q-input maxlength="30" filled v-model="usuario.login" :label="usuario.isSubhost ? 'CPF*' : 'Login*'" />
-                    <q-input maxlength="20" filled class="q-mt-md" v-if="!usuario.isSubhost" v-model="usuario.senha" label="Senha*"
+                    <q-input class="bg-grey-4" maxlength="30" filled v-model="usuario.login" :label="usuario.isSubhost ? 'CPF*' : 'Login*'" />
+                    <q-input  maxlength="20" filled class="q-mt-md bg-grey-4" v-if="!usuario.isSubhost" v-model="usuario.senha" label="Senha*"
                         :type="showPassword ? 'text' : 'password'">
                         <template v-slot:append>
                             <q-icon :name="showPassword ? 'visibility' : 'visibility_off'" color="primary"
                                 class="cursor-pointer" @click="showPassword = !showPassword" />
                         </template>
                     </q-input>
-                    <q-input filled class="q-mt-md" v-if="usuario.isSubhost" v-model="usuario.senha"
+                    <q-input filled class="q-mt-md bg-grey-4" v-if="usuario.isSubhost" v-model="usuario.senha"
                         label="Access Code*" type="text">
                         <template v-slot:append>
                             <q-icon name="content_copy" color="primary" class="cursor-pointer"
                                 @click="colarAcessCode()" />
                         </template>
                     </q-input>
-                    <q-btn v-if="!loading" @click="login()" type="submit" :label="usuario.isSubhost ? 'Escanear Ingressos' : 'Entrar'" color="primary"
+                    <q-btn v-if="!loading" @click="login()" type="submit" :label="usuario.isSubhost ? 'Escanear Ingressos' : 'Entrar'" color="secondary"
                         :icon-right="usuario.isSubhost ? 'document_scanner' : 'login'" class="w100 q-mt-md q-py-xs" />
                         <div v-if="loading" class="row w100 q-pt-md justify-center">
                             <q-spinner-ball color="primary" size="lg"/>
@@ -35,7 +35,7 @@
                         </div>
                 </div>
             </q-card-section>
-        </q-card>
+        </div>
     </div>
 </template>
 
@@ -107,4 +107,5 @@ onMounted(() => {
         width: 90vw;
     }
 }
+
 </style>

@@ -4,7 +4,7 @@
             height-hint="98">
             <div style="font-size: 1rem;" class=" q-py-md w100 row no-wrap items-center  justify-evenly">
                 <a v-if="!isMobile" @click="scrollBot()" class="menu-item row items-center" id="title-menu">
-                    <q-icon class="q-pr-xs" name="local_activity" size="xl"/> Midnight Tickets
+                    <q-icon class="q-pr-xs" name="local_activity" size="xl" /> Midnight Tickets
                 </a>
                 <a v-else @click="scrollBot()" class="menu-item row items-center">
                     <q-icon name="local_activity" size="xl" />
@@ -34,15 +34,14 @@
                         </q-toolbar-title>
                     </q-toolbar>
                     <div class="space bg-grad-2 w100 text-center text-purple-1 q-py-md text-bold q-px-md high-opacity"
-                        style="font-size:1.02rem">
+                        style="font-size:1rem">
                         PARE de PAGAR TAXAS excessivas na VENDA de SEUS INGRESSOS e REALIZE seus EVENTOS com 0% de
                         TAXA!!
                     </div>
                     <q-card
                         class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-3s">
-                        <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Digite seu EMAIL abaixo e SAIBA
-                            COMO o nosso SERVIÇO pode
-                            POTENCIALIZAR o seu FATURAMENTO!!</p>
+                        <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Digite seu EMAIL para SOLICITAR
+                            a ABERTURA<br>da sua CONTA, Produtor</p>
                         <q-input v-model="contato.email" type="email" class="bg-white" filled label="Seu melhor email">
                             <template v-slot:prepend>
                                 <q-icon name="email" color="primary" />
@@ -59,7 +58,8 @@
                     <div style="font-size:1.3rem" class=" bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">Quem
                         Somos ?</div>
                     <div style="font-size:1.1rem"
-                        class=" bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm q-py-md text-right">Somos um
+                        class=" bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm q-py-md text-right">Somos
+                        um
                         Serviço de Bilheteria Online e Gerenciador de Eventos Personalizados focados na Escalabilidade
                         de seus Lucros em Venda de Ingressos Digitais</div>
                     <div class="w100 img-wrapper">
@@ -93,26 +93,20 @@
                     </div>
                 </div>
                 <div id="beneficios" style="border: 4px solid #984BE7;">
-                    <q-toolbar class="bg-grad-2">
-                        <q-toolbar-title
-                            class="row justify-center q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
-                            <div id="title-layout">
-                                O QUE OFERECEMOS ?
-                            </div>
-                        </q-toolbar-title>
-                    </q-toolbar>
-                    <div  class="text-h4 text-center w100 text-white text-bold q-pt-md q-pb-md bg-grad-">💰
-                        Vantagens</div>
-                    <div class="w100 text-h6 text-bold bg-grey-3 text-primary text-center q-px-md q-py-sm border-bottom">
+
+                    <div
+                        class="w100 text-h6 text-bold bg-grey-3 text-primary text-center q-px-md q-py-sm border-bottom">
                         Veja
                         como
                         nossa Plataforma pode aumentar o Faturamento do seu Evento!!</div>
+                    <div class="text-h4 text-center w100 text-white text-bold q-pt-md q-pb-md bg-grad-">
+                        Vantagens</div>
                     <div style="font-size:1rem" class="q-px-md   bg-white text-left q-py-md rounded-borders">
-                        🟣 <strong class="text-primary">MODALIDADE PURPLECOINS<br></strong> Nossa <strong>moeda
-                        virtual</strong>
-                        permite realizar <strong>Eventos</strong> com com <strong>0% de taxa</strong> por ingresso
-                        vendido. Obtenha
-                        <strong>100% do
+                        🟣 <strong class="text-primary">SEM TAXA POR VENDA<br></strong> Nossa <strong>moeda
+                            virtual</strong>
+                        permite realizar <strong>Eventos</strong> com <strong>0% de taxa</strong> em ingressos
+                        vendidos. Obtenha
+                        <strong>o máximo do seu 
                             lucro</strong> e ainda <strong>GANHE CASHBACK</strong> com cada ingresso
                         não vendido
                         <br>🔵 <strong class="text-blue">LUCRO EM TEMPO REAL<br></strong> Disponibilizamos a
@@ -122,19 +116,25 @@
                     </div>
                     <div
                         class="w100 text-h4 text-bold bg-white text-primary text-center q-px-md rounded-borders q-py-sm border-bottom q-mt-md">
-                        💷 Benefícios</div>
+                        Benefícios</div>
                     <div style="font-size:1rem" class="q-px-md bg-grey-3 q-py-md rounded-borders border-bottom">
-                        💸 <strong style="font-size:1.2rem" class="text-primary text-bold">AS MENORES TAXAS<br></strong> Estamos integrados ao <strong>Mercado Pago</strong> com segurança
+                        💸 <strong style="font-size:1.2rem" class="text-primary text-bold">AS MENORES TAXAS<br></strong>
+                        Estamos
+                        integrados ao <strong>Mercado Pago</strong> com segurança
                         e confidencialidade. Além de possuir <strong>as menores taxas de
                             transações</strong>
                         <br>
                         <br>
-                        🤳🏼 <strong style="font-size:1.2rem" class="text-primary text-bold">SEM INSTALAÇÃO <br></strong> Gerencie seus eventos, vendas e ingressos na palma da sua mão <strong>sem
+                        🤳🏼 <strong style="font-size:1.2rem" class="text-primary text-bold">SEM INSTALAÇÃO
+                            <br></strong> Gerencie seus
+                        eventos, vendas e ingressos na palma da sua mão <strong>sem
                             necessidade de
-                            instalação</strong> de aplicativos. Nosso webapp é adaptativo para todos os dispositivos.
+                            instalação</strong> de aplicativos. Nosso webapp é adaptativo para todos os dispositivos
                         <br>
                         <br>
-                        🧑🏼‍💻 <strong style="font-size:1.2rem" class="text-primary text-bold">SUPORTE HUMANIZADO<br> </strong> Nosso serviço é monitorado constantemente, focado em <strong>otimizar os
+                        🧑🏼‍💻 <strong style="font-size:1.2rem" class="text-primary text-bold">SUPORTE HUMANIZADO<br>
+                        </strong> Nosso
+                        serviço é monitorado constantemente, focado em <strong>otimizar os
                             custos</strong>
                         para todos e <strong>gratificar os usuários</strong> com nossas <strong>moedas
                             virtuais</strong>.
@@ -142,7 +142,9 @@
                         dúvidas
                         <br>
                         <br>
-                        🖥️ <strong style="font-size:1.2rem" class="text-primary text-bold">CONSULTORIA INDIVIDUAL<br></strong> Nossos <strong>desenvolvedores</strong> possuem experiências
+                        🖥️ <strong style="font-size:1.2rem" class="text-primary text-bold">CONSULTORIA
+                            INDIVIDUAL<br></strong> Nossos
+                        <strong>desenvolvedores</strong> possuem experiências
                         profisionais em
                         diversos <strong>projetos
                             nacionais e internacionais</strong> em Bancos e Software Houses, e estarão a
@@ -151,7 +153,8 @@
                             de bugs</strong>
                         <br>
                         <br>
-                        📲 <strong style="font-size:1.2rem" class="text-primary text-bold">TECNOLOGIA DE PONTA<br></strong>
+                        📲 <strong style="font-size:1.2rem" class="text-primary text-bold">TECNOLOGIA DE
+                            PONTA<br></strong>
                         Nosso WebApp é desenvolvido com as <strong>melhores tecnologias</strong> do mercado e hospedada
                         na nuvem com
                         serviços da AWS, <strong>garantindo segurança e escalabilidade</strong> para <strong>todos os
@@ -191,7 +194,9 @@
                         <q-card class="q-pa-md collumn q-gutter-y-md rounded-borders "
                             style="border: 15px solid #6310E1; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
                             <div class="w100 text-center text-primary text-bold mid-opacity ">
-                                ALAVANQUE seus FATURAMENTO otimizando o LUCRO de suas VENDAS com uma CONSULTORIA PERSONALIZADA para a SUA DEMANDA</div>
+                                ALAVANQUE seus FATURAMENTO otimizando o LUCRO de suas VENDAS com uma CONSULTORIA
+                                PERSONALIZADA para a
+                                SUA DEMANDA</div>
                             <div class="mid-opacity text-blue-6 text-center w100 text-bold">
                                 Todos campos abaixos são opcionais
                             </div>
@@ -384,7 +389,7 @@ function scrollBot() {
 }
 
 function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight - 1830);
+    window.scrollTo(0, document.body.scrollHeight - 1890);
 }
 
 
