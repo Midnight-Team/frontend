@@ -1,8 +1,13 @@
 <template>
   <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-5" v-if="pageLoaded">
     <div class="home-wrapper q-px-md q-pb-xl">
-      <div class="w100  column justify-center q-mt-xs q-gutter-y-md items-center text-white text-bold"
+      <div class="w100  column justify-center q-mt-xs items-center text-white text-bold"
         style="border-radius: 20px; ">
+        <div class="w100 flex q-mb-lg flex-center q-mt-lg">
+          <q-avatar style="width:110px;height:110px;" class="shadow-2">
+            <img :src="host.img" alt="">
+          </q-avatar>
+        </div>
         <div id="title"
           class="w100 text-h5 text-bold text-center bg-grad-6 q-pa-md q-pb-lg rounded-borders  text-purple-1" style="border-top: 2px solid #9573f3;">
           {{ host.nome_razao }}<br>

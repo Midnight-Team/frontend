@@ -14,21 +14,25 @@
                 <q-icon name="nightlife" size="md" class="text-primary" />
                 EVENTO
             </div>
-            <q-input v-if="editando" label="Link da Imagem" v-model="evento.img_url" outlined color="primary"></q-input>
+            <q-input v-if="editando" label="Link da Imagem" v-model="evento.img_url" outlined color="primary">
+                <template v-slot:append>
+                    <q-icon @click="openImgur()" name="image" color="primary"/>
+                </template>
+            </q-input>
             <q-input v-if="editando" label="Título do Evento" v-model="evento.titulo" outlined color="primary"></q-input>
             <div class="w100">
                 {{ evento.status }}
             </div>
-            <q-input :readonly="!editando" label="Contato" v-model="evento.contato" type="textarea" outlined color="primary"></q-input>
-            <q-input type="textarea" label="Descrição" v-model="evento.descricao" outlined color="primary"
+            <q-input type="textarea" label="Descrição" v-model="evento.descricao" outlined
                 :readonly="!editando" :filled="!editando"></q-input>
+            <q-input :readonly="!editando" label="Contato" v-model="evento.contato" type="textarea" outlined color="primary"></q-input>
             <!-- <q-input label="Data" v-model="evento.data_evento" outlined color="primary" :readonly="!editando" :filled="!editando"></q-input> -->
             <div class="row q-gutter-x-md justify-center no-wrap">
                 <q-input label="Horário de Início" v-model="evento.hora_evento" outlined color="primary" :readonly="!editando" :filled="!editando"></q-input>
                 <q-input v-if="evento.hora_final" label="Horário de Término" v-model="evento.hora_final" outlined color="primary"
                 :readonly="!editando" :filled="!editando"></q-input>
             </div>
-            <q-date :readonly="!editando" class="w100" v-model="evento.data_evento" mask="DD-MM-YYYY" color="primary" />
+            <q-date  v-model="evento.data_evento" :color="editando ? 'primary': 'grey-8'" :readonly="!editando" class="w100" mask="DD-MM-YYYY"/>
             <q-input label="Endereço" v-model="evento.endereco" type="textarea" outlined color="primary" readonly filled></q-input>
             <div v-if="evento.localizacao && !evento.localizacao.trim() == ''" class="w100 q-mt-md rounded-borders">
                 <iframe :src="evento.localizacao" class="w100 rounded-borders shadow-2" height="200" style="border:0;" allowfullscreen=""
@@ -106,6 +110,11 @@ import { api } from 'src/boot/axios';
 const evento = ref({})
 const pageLoaded = ref(false)
 const editando = ref(false)
+
+function openImgur() {
+    window.open('https://imgur.com/', '_blank')
+}
+
 onBeforeUnmount(() => {
     // sessionStorage.removeItem('eventoHandlerId')
 })

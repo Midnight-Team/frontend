@@ -16,7 +16,7 @@
                     @click="navigateTo('/evento/steps')" icon="today" icon-right="add" /></div>
             <div class="column q-mb-xl">
                 <div id="table-eventos" class="q-mt-md w100">
-                    <div id="title-menu" class=" text-primary q-mb-sm w100 q-px-md text-center text-bold">Eventos de {{ authStore.getInfoRazao()}}</div>
+                    <div id="title-menu" class=" text-primary q-mb-sm w100 q-px-md text-center text-bold">Eventos de<br>{{ authStore.getInfoRazao()}}</div>
                     <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
                         <q-input v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined

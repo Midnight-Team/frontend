@@ -67,7 +67,7 @@ export const useAuthStore = defineStore('auth', {
       const userLogado = sessionStorage.getItem('userLogado');
       if (userLogado) {
         const user = JSON.parse(userLogado);
-        return user.user_image;
+        return user.img;
       }
       return null; // Ou um valor padrão, se necessário
     },
