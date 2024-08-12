@@ -27,7 +27,7 @@
           </p>
           <strong class="text-blue q-mt-xs">SubCoins: {{ host.subCoins }}🔵</strong>
         </div>
-        <div class="w100 text-secondary column q-gutter-y-md items-center q-pb-md q-px-md rounded-borders" style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
+        <div class="w100 text-secondary column q-gutter-y-md q-mt-md items-center q-pb-md q-px-md rounded-borders" style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
           <div class="w100 row rounded-borders">
             <q-icon size="xl" color="secondary" name="person" />
           </div>
