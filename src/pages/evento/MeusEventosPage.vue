@@ -33,7 +33,7 @@
                                 <q-spinner-ball color="primary" size="lg"/>
                                 <q-spinner-ball color="primary" size="lg"/>
                             </div>
-                        <q-table  no-data-label="Nenhum evento encontrado 🌆" separator="cell"
+                        <q-table  v-if="!loading" no-data-label="Nenhum evento encontrado 🌆" separator="cell"
                             class="my-sticky-column-table text-primary q-mb-md w100 text-bold" :rows="rows"
                             :columns="columns" hide-pagination>
                             <template v-slot:body-cell-titulo="props">
