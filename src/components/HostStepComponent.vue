@@ -8,6 +8,7 @@
       <div>
         <div class="mid-opacity">Confirmo a Criação do Evento:<br>{{ pacote.label }}<q-icon size="xs" class="q-pl-xs" name="paid" color="primary" /></div>
       </div>
+      <div class="w100 hline bg-primary"></div>
       <q-input outlined v-model="host.senha" maxlength="20" :type="!lockpassword ? 'password' : 'text'" label="Senha*">
         <template v-slot:prepend>
           <q-icon name="lock" color="primary" />
@@ -17,8 +18,7 @@
         </template>
       </q-input>
 
-      <div class="w100 hline bg-primary"></div>
-      <q-btn :disabled="check()" label="Criar Evento" color="green" @click="criarEvento()" icon-right="post_add" />
+      <q-btn :disabled="check()" label="Criar Evento" color="primary" class="q-py-md" @click="criarEvento()" icon-right="event" />
       <q-btn label="voltar" flat color="primary" @click="goPrev()" />
     </div>
   </div>

@@ -20,22 +20,22 @@
                     <q-icon name="confirmation_number" color="primary" />
                 </template>
             </q-input>
-            <q-btn label="Adicionar Tipo Ingresso" color="blue" :disable="validaIngresso()" @click="addIngresso()"
+            <q-btn label="Adicionar Ingresso" color="blue" :disable="validaIngresso()" @click="addIngresso()"
                 icon-right="add_circle" />
-            <div class="w100 hline bg-primary"></div>
-            <div class="text-bold mid-opacity text-primary text-center">Tipos Ingressos
+            <div v-if="ingressos.length > 0" class="w100 hline bg-primary"></div>
+            <div v-if="ingressos.length > 0" class="text-bold mid-opacity text-primary text-center">Ingressos
             </div>
-            <div id="list-ingressos" class="column q-gutter-y-md">
+            <div id="list-ingressos" class="column">
                 <div v-for="(ingresso, index) in ingressos" :key="index"
-                    class="column no-wrap items-center rounded-borders shadow-4 bg-grad-3  justify-between">
-                    <div class="row q-gutter-x-md q-py-sm">
+                    class="column no-wrap items-center rounded-borders shadow-4 bg-grad-2  justify-between">
+                    <div class="row q-py-xs items-center">
                         <div class="text-bold text-white">{{ format(ingresso.titulo) }}</div>
-                        <div class="text-bold text-blue-5">R$ {{ ingresso.valor }}</div>
                     </div>
                     <div class="w100 bg-primary mid-opacity q-mx-md" style="height: 2px"></div>
-                    <div class="row w100 justify-center">
-                        <q-btn :label="ingresso.quantidade" icon="local_activity" flat color="white" />
-                    <q-btn icon="delete" flat color="red" @click="removeIngresso(index)" />
+                    <div class="row w100 items-center justify-center">
+                        <q-btn color="red-4" flat icon="delete" @click="removeIngresso(index)" />
+                        <q-btn :label="ingresso.quantidade" icon="local_activity" flat color="blue-3" />
+                        <div class="text-bold text-green-3">R$ {{ ingresso.valor }}</div>
                     </div>
                 </div>
             </div>

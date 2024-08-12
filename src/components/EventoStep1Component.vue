@@ -65,7 +65,7 @@
             </div>
             <q-select outlined v-model="evento.pacote"  @click="openSelect()"  @update:model-value="checkSaldoToQtdIngressos()" label="Quantidade de Ingressos Inicial*"
                 :options="pacoteOptions" />
-            <q-input maxlength="250" placeholder="Insira a url do banner" filled v-model="evento.img_url" label="URL da Imagem do Evento*">
+            <q-input maxlength="250" placeholder="Insira a url do banner" filled v-model="evento.img_url" label="Link da Imagem do Evento">
                 <template v-slot:append>
                     <q-btn flat icon="image" @click="verImg(evento.img_url)" color="primary" />
                 </template>
