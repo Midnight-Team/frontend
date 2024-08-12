@@ -1,9 +1,9 @@
 <template>
-    <div id="hostlogin-wrapper" class="animate__animated animate__zoomIn  flex flex-center">
-            <q-toggle class="animate__animated animate__flipInX animate__slower animate__delay-1s w100 row text-bold bg-grad-1 text-white  rounded-borders justify-center" @update:model-value="usuario.senha = ''"
+    <div id="hostlogin-wrapper" class="bg-grad-4 animate__animated animate__zoomIn  flex flex-center">
+            <q-toggle class="animate__animated animate__flipInX animate__delay-1s w100 row text-bold bg-grad-4 text-white  rounded-borders justify-center" @update:model-value="usuario.senha = ''"
                 v-model="usuario.isSubhost" :label="usuario.isSubhost ? 'Sou Subhost' : 'Sou Host'"
                 color="white" />
-        <q-card class="shadow-9  q-mt-md " id="card-login">
+        <q-card class="shadow-4" id="card-login">
             <div class="text-h5 q-pl-md q-pt-md text-primary text-bold row items-center">
                 <q-icon :name="usuario.isSubhost ? 'sensor_occupied' : 'admin_panel_settings'" size="lg"
                     class="q-mr-md" />
@@ -99,7 +99,6 @@ onMounted(() => {
     width: 600px;
 }
 #hostlogin-wrapper{
-    background-color: #2d2d2d;
     border-radius: 20px;
     padding-bottom: 24px;
 }

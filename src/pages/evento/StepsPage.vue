@@ -1,5 +1,5 @@
 <template>
-    <q-page class="bg-primary animate__animated animate__fadeIn relative">
+    <q-page class="bg-grad-2 animate__animated animate__fadeIn relative">
         <div class="steps w100 row justify-center bg-grad-2 q-py-xs">
             <div  id="step-1" :class=" step == 1 ?  'bg-grey-4' : 'bg-primary'"></div>
             <div  id="step-2" :class=" step == 2 ? 'bg-grey-4' : 'bg-primary'"></div>

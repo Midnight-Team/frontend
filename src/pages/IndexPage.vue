@@ -1,5 +1,5 @@
 <template>
-  <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-5">
+  <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-5" v-if="pageLoaded">
     <div class="home-wrapper q-px-md q-pb-xl">
       <div class="w100  column justify-center q-mt-xs q-gutter-y-md items-center text-white text-bold"
         style="border-radius: 20px; ">
@@ -8,7 +8,7 @@
           {{ host.nome_razao }}<br>
           <div class="high-opacity text-secondary" style="font-size: 1rem">host</div>
         </div>
-        <div class="rounded-borders w100 column text-secondary q-pa-md" style="border-bottom: 2px solid grey;">
+        <div class="rounded-borders w100 column text-secondary q-pa-md" style="border-bottom: 2px solid #9573f3;">
           <div class="row q-pb-xs rounded-borders " >
             <q-icon size="xl" color="secondary" name="payments" />
           </div>
@@ -22,40 +22,40 @@
           </p>
           <strong class="text-blue q-mt-xs">SubCoins: {{ host.subCoins }}🔵</strong>
         </div>
-        <q-card class="w100 text-secondary column q-gutter-y-md items-center q-pb-md q-px-md bg-primary">
+        <q-card class="w100 text-secondary column q-gutter-y-md items-center q-pb-md q-px-md bg-grad-4">
           <div class="w100 row rounded-borders">
             <q-icon size="xl" color="secondary" name="person" />
           </div>
           <div class="row no-wrap w100">
-            <q-input color="primary" readonly filled v-model="host.nome_razao" label="Nome/Razão Social" class="bg-grey-2 w100">
+            <q-input color="primary" readonly filled v-model="host.nome_razao" label="Nome/Razão Social" class="bg-purple-1 rounded-borders w100">
               <template v-slot:append>
                 <q-icon name="home_work" color="primary"/>
               </template>
             </q-input>
           </div>
           <div class="row no-wrap w100">
-            <q-input color="primary" readonly filled v-model="host.cpf_cnpj" label="CPF/CNPJ" class="bg-grey-2 w100">
+            <q-input color="primary" readonly filled v-model="host.cpf_cnpj" label="CPF/CNPJ" class="bg-purple-1 rounded-borders w100">
               <template v-slot:append>
                 <q-icon name="badge" color="primary"/>
               </template>
             </q-input>
           </div>
           <div class="row no-wrap w100">
-            <q-input color="primary" readonly filled v-model="host.login" label="Login" class="bg-grey-2 w100">
+            <q-input color="primary" readonly filled v-model="host.login" label="Login" class="bg-purple-1 rounded-borders w100">
               <template v-slot:append>
                 <q-icon name="login" color="primary"/>
               </template>
             </q-input>
           </div>
           <div class="row no-wrap w100">
-            <q-input color="primary" readonly filled v-model="host.email" label="Email" class="bg-grey-2 w100">
+            <q-input color="primary" readonly filled v-model="host.email" label="Email" class="bg-purple-1 rounded-borders w100">
               <template v-slot:append>
                 <q-icon name="email" color="primary"/>
               </template>
             </q-input>
           </div>
           <div class="row no-wrap w100 items-center justify-between">
-            <q-input color="primary" readonly filled v-model="host.telefone" label="Telefone" class="bg-grey-2 w100">
+            <q-input color="primary" readonly filled v-model="host.telefone" label="Telefone" class="bg-purple-1 rounded-borders w100">
               <template v-slot:append>
                 <q-icon name="phone" color="primary"/>
               </template>
@@ -106,13 +106,19 @@
           </div>
         </q-card>
         <q-btn label="Entender Análises de Dados" icon="equalizer" class="w100" color="blue" /> -->
-        <q-btn label="Solicitar Suporte" @click="wppConsultor()" icon-right="contact_support" class="q-mt-xl w100"
-          color="primary" />
+        <!-- <q-btn label="Solicitar Suporte" @click="wppConsultor()" icon-right="contact_support" class="q-mt-xl w100" color="primary" /> -->
       </div>
     </div>
-    <div class="w100 q-mt-md bg-white">
+    <div class="w100 bg-white">
       <FooterComponent />
     </div>
+  </q-page>
+  <q-page v-else>
+    <div class="row w100 q-pt-md justify-center">
+      <q-spinner-ball color="primary" size="lg"/>
+      <q-spinner-ball color="primary" size="lg"/>
+      <q-spinner-ball color="primary" size="lg"/>
+  </div>
   </q-page>
 </template>
 
@@ -122,17 +128,18 @@ import FooterComponent from 'src/components/FooterComponent.vue';
 import { useRouter } from 'vue-router';
 import { api } from "src/boot/axios";
 
+const pageLoaded = ref(false);
 const router = useRouter();
-const host = JSON.parse(sessionStorage.getItem('userLogado'));
+const host = ref({})
 
 async function updateMoneys(isFromBtn) {
-  await api.post('/update_moneys', { id: host.id, senha: host.senha })
+  await api.post('/update_moneys', { id: host.value.id, senha: host.value.senha })
     .then((res) => {
       sessionStorage.removeItem('userLogado');
       const updateUser = res.data
       updateUser.updatedSessionAt = new Date()
       sessionStorage.setItem('userLogado', JSON.stringify(updateUser));
-      host = res.data
+      host.value = res.data
     })
     .catch((err) => {
       console.log(err)
@@ -171,7 +178,10 @@ function formatToNumber(inputString) {
   return formattedString;
 }
 onBeforeMount(async () => {
-  await updateMoneys(false)
+  host.value = JSON.parse(sessionStorage.getItem('userLogado'));
+  await updateMoneys(false).then(() => {
+    pageLoaded.value = true;
+  })
 })
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="footer" class="bg-grad-1 w100 text-primary text-bold">
-    <div id="instagram" class="w100 row no-wrap items-center justify-center text-white bg-grad-4 q-py-md">
+    <div id="instagram" class="w100 row no-wrap items-center justify-center text-white bg-grad-2 q-py-md">
       <img src="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" alt="">
       <a class="text-center text-white q-pl-sm" href="https://www.instagram.com/midnightickets/" target="_blank"
         style="font-size: 1rem;text-decoration: none;">
@@ -10,15 +10,15 @@
     </div>
     <div class="row bg-white justify-center items-center q-py-lg">
       <a target="_blank" class="text-primary text-center"
-        href="https://samuelvictorol.github.io/portfolio/contato">Suporte</a>
-      <q-icon size="md" name="help" class="q-pl-md" />
+        href="https://samuelvictorol.github.io/portfolio/contato">Contato</a>
+      <q-icon size="md" name="support_agent" class="q-pl-md" />
     </div>
     <div class="row bg-white justify-center items-center q-py-lg">
       <img class="q-pl-sm"
         src="https://http2.mlstatic.com/frontend-assets/mp-web-navigation/ui-navigation/6.7.19/mercadopago/logo__large.png"
         alt="">
     </div>
-    <div style="border-top: 2px solid #7734c4;" class="row bg-white justify-center items-center q-py-lg">
+    <div style="border-top: 4px solid #8044e2;" class="row bg-white justify-center items-center q-py-lg">
       <q-icon size="md" name="local_activity" class="q-pr-md" />
       <a class="text-primary text-center cursor-pointer" @click="modal = !modal">Midnight Tickets<br>Development Team</a>
       <q-icon size="md" name="groups" class="q-pl-md" />

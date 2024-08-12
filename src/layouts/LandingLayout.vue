@@ -1,5 +1,5 @@
 <template>
-    <q-layout class="relative animate__animated animate__fadeIn bg-primary">
+    <q-layout class="relative animate__animated animate__fadeIn bg-grad-4">
         <q-header class="fixed bg-grad-2 text-white animate__animated animate__backInDown animate__slow shadow-1"
             height-hint="98">
             <div style="font-size: 1rem;" class=" q-py-md w100 row no-wrap items-center  justify-evenly">
@@ -30,11 +30,11 @@
                             <div id="title-menu">
                                 MIDNIGHT TICKETS
                             </div>
-                            <q-icon size="xl" color="white" name="local_activity" />
+                            <q-icon v-if="!isMobile" size="xl" color="white" name="local_activity" />
                         </q-toolbar-title>
                     </q-toolbar>
                     <div class="space bg-grad-2 w100 text-center text-purple-1 q-py-md text-bold q-px-md high-opacity"
-                        style="font-size:1.05rem">
+                        style="font-size:1.02rem">
                         PARE de PAGAR TAXAS excessivas na VENDA de SEUS INGRESSOS e REALIZE seus EVENTOS com 0% de
                         TAXA!!
                     </div>
@@ -59,7 +59,7 @@
                     <div style="font-size:1.3rem" class=" bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">Quem
                         Somos ?</div>
                     <div style="font-size:1.1rem"
-                        class=" bg-grad-2 text-white high-opacity text-bold q-px-sm q-py-md text-right">Somos um
+                        class=" bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm q-py-md text-right">Somos um
                         Serviço de Bilheteria Online e Gerenciador de Eventos Personalizados focados na Escalabilidade
                         de seus Lucros em Venda de Ingressos Digitais</div>
                     <div class="w100 img-wrapper">
@@ -69,7 +69,7 @@
                     <div style="font-size:1.3rem" class=" bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">O
                         que Fazemos ?</div>
                     <div style="font-size:1.1rem"
-                        class="q-mb-md bg-grad-2 text-white high-opacity text-bold q-px-sm q-py-md text-right">
+                        class="q-mb-md bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm q-py-md text-right">
                         Maximizamos seus lucros na venda de ingressos de forma escalável com serviços personalizados,
                         transparência, suporte e uma
                         interface amigável. Seus ingressos mais caros são os que mais pagam taxas abusivas, mas pra nós
@@ -84,7 +84,7 @@
                         fazemos isso ?
                     </div>
                     <div style="font-size:1.1rem;border-bottom-left-radius: 40px;"
-                        class="bg-grad-2 text-white high-opacity text-bold q-px-sm  q-py-md text-right">Desde
+                        class="bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm  q-py-md text-right">Desde
                         pequenos encontros a grandes festivais, nossa plataforma se adapta às suas necessidades e
                         POTENCIALIZA seus ganhos.
                         Na Midnight Tickets, entendemos que cada evento é único. Oferecemos opções flexíveis que se
@@ -93,58 +93,56 @@
                     </div>
                 </div>
                 <div id="beneficios" style="border: 4px solid #984BE7;">
-                    <q-toolbar class="bg-grad-4">
+                    <q-toolbar class="bg-grad-2">
                         <q-toolbar-title
                             class="row justify-center q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
-                            <q-icon size="xl" color="white" name="local_activity" />
-                            <div>
-                                MIDNIGHT TICKETS
+                            <div id="title-layout">
+                                O QUE OFERECEMOS ?
                             </div>
                         </q-toolbar-title>
                     </q-toolbar>
-                    <div class="text-h5 text-center w100 text-white text-bold q-pt-md q-pb-md bg-grad-2 q-my-md">💰
+                    <div  class="text-h4 text-center w100 text-white text-bold q-pt-md q-pb-md bg-grad-">💰
                         Vantagens</div>
                     <div class="w100 text-h6 text-bold bg-grey-3 text-primary text-center q-px-md q-py-sm border-bottom">
                         Veja
                         como
                         nossa Plataforma pode aumentar o Faturamento do seu Evento!!</div>
                     <div style="font-size:1rem" class="q-px-md   bg-white text-left q-py-md rounded-borders">
-                        🟣 <strong class="text-primary">Modalidade Purplecoins:</strong> Nossa <strong>moeda
+                        🟣 <strong class="text-primary">MODALIDADE PURPLECOINS<br></strong> Nossa <strong>moeda
                         virtual</strong>
                         permite realizar <strong>Eventos</strong> com com <strong>0% de taxa</strong> por ingresso
                         vendido. Obtenha
                         <strong>100% do
                             lucro</strong> e ainda <strong>GANHE CASHBACK</strong> com cada ingresso
                         não vendido
-                        <br>🔵 <strong class="text-blue">Saque Automático:</strong> também disponibilizamos a
+                        <br>🔵 <strong class="text-blue">LUCRO EM TEMPO REAL<br></strong> Disponibilizamos a
                         possibilidade de receber o
                         <strong>lucro de suas vendas automaticamente em tempo real na sua conta</strong> enquanto
                         acontece o seu evento
                     </div>
                     <div
-                        class="w100 text-h5 text-bold bg-white text-primary text-center q-px-md rounded-borders q-py-sm border-bottom q-mt-md">
-                        🪙 Benefícios</div>
+                        class="w100 text-h4 text-bold bg-white text-primary text-center q-px-md rounded-borders q-py-sm border-bottom q-mt-md">
+                        💷 Benefícios</div>
                     <div style="font-size:1rem" class="q-px-md bg-grey-3 q-py-md rounded-borders border-bottom">
-                        💸 <strong style="font-size:1.2rem" class="text-primary text-bold">Pagamentos e Menores
-                            Taxa:</strong> Estamos integrados ao <strong>Mercado Pago</strong> com segurança
+                        💸 <strong style="font-size:1.2rem" class="text-primary text-bold">AS MENORES TAXAS<br></strong> Estamos integrados ao <strong>Mercado Pago</strong> com segurança
                         e confidencialidade. Além de possuir <strong>as menores taxas de
                             transações</strong>
                         <br>
-                        🤳🏼 <strong style="font-size:1.2rem" class="text-primary text-bold">Sem Necessidade De
-                            Instalação:</strong> Gerencie seus eventos e vendas na palma da sua mão <strong>sem
-                            necessidade de
-                            instalação</strong> de aplicativos pra todos os tipos de usuário
                         <br>
-                        🧑🏼‍💻 <strong style="font-size:1.2rem" class="text-primary text-bold">Suporte Humanizado e
-                            Eficaz:</strong> Nosso serviço é monitorado constantemente, focado em <strong>otimizar os
+                        🤳🏼 <strong style="font-size:1.2rem" class="text-primary text-bold">SEM INSTALAÇÃO <br></strong> Gerencie seus eventos, vendas e ingressos na palma da sua mão <strong>sem
+                            necessidade de
+                            instalação</strong> de aplicativos. Nosso webapp é adaptativo para todos os dispositivos.
+                        <br>
+                        <br>
+                        🧑🏼‍💻 <strong style="font-size:1.2rem" class="text-primary text-bold">SUPORTE HUMANIZADO<br> </strong> Nosso serviço é monitorado constantemente, focado em <strong>otimizar os
                             custos</strong>
                         para todos e <strong>gratificar os usuários</strong> com nossas <strong>moedas
                             virtuais</strong>.
                         Nosso serviço de suporte é <strong>humanizado e rápido</strong> para atender o quanto antes suas
                         dúvidas
                         <br>
-                        🖥️ <strong style="font-size:1.2rem" class="text-primary text-bold">Consultoria
-                            Especializada:</strong> Nossos <strong>desenvolvedores</strong> possuem experiências
+                        <br>
+                        🖥️ <strong style="font-size:1.2rem" class="text-primary text-bold">CONSULTORIA INDIVIDUAL<br></strong> Nossos <strong>desenvolvedores</strong> possuem experiências
                         profisionais em
                         diversos <strong>projetos
                             nacionais e internacionais</strong> em Bancos e Software Houses, e estarão a
@@ -152,7 +150,8 @@
                         suporte, <strong>sugestões de melhorias e correções
                             de bugs</strong>
                         <br>
-                        📲 <strong style="font-size:1.2rem" class="text-primary text-bold">Tecnologia de Ponta:</strong>
+                        <br>
+                        📲 <strong style="font-size:1.2rem" class="text-primary text-bold">TECNOLOGIA DE PONTA<br></strong>
                         Nosso WebApp é desenvolvido com as <strong>melhores tecnologias</strong> do mercado e hospedada
                         na nuvem com
                         serviços da AWS, <strong>garantindo segurança e escalabilidade</strong> para <strong>todos os
@@ -160,7 +159,7 @@
                             usuários</strong>
                     </div>
                 </div>
-                <q-carousel v-model="slide" transition-prev="scale" transition-next="scale" swipeable animated
+                <!-- <q-carousel v-model="slide" transition-prev="scale" transition-next="scale" swipeable animated
                     control-color="white" navigation autoplay="true" infinite padding arrows
                     class="bg-primary text-white shadow-1 q-mt-md">
                     <q-carousel-slide :name="1" img-src="~/assets/landing-images/login.png"
@@ -181,7 +180,7 @@
                     <q-carousel-slide :name="6" img-src="~/assets/landing-images/evento5.png"
                         class="column no-wrap flex-center">
                     </q-carousel-slide>
-                </q-carousel>
+                </q-carousel> -->
                 <div id="form" class=" relative">
                     <div class="text-h4 text-bold q-py-md text-white text-center bg-grad-1 border-bottom q-mt-md">🚀
                         Fale
@@ -191,9 +190,11 @@
                         style="border-radius: 20px;border-bottom: 8px solid #3C0783;z-index: -10">
                         <q-card class="q-pa-md collumn q-gutter-y-md rounded-borders "
                             style="border: 15px solid #6310E1; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
-                            <div class="w100 text-center text-primary text-bold mid-opacity ">Todos campos abaixos são
-                                OPCIONAIS.
-                                Preencha-os e PARE de pagar TAXAS ABUSIVAS.</div>
+                            <div class="w100 text-center text-primary text-bold mid-opacity ">
+                                ALAVANQUE seus FATURAMENTO otimizando o LUCRO de suas VENDAS com uma CONSULTORIA PERSONALIZADA para a SUA DEMANDA</div>
+                            <div class="mid-opacity text-blue-6 text-center w100 text-bold">
+                                Todos campos abaixos são opcionais
+                            </div>
                             <q-input maxlength="200" filled v-model="contato.form.name" label="1.Qual é o seu nome?">
                                 <template v-slot:append>
                                     <q-icon name="person" color="primary" />

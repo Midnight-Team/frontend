@@ -12,7 +12,7 @@
         </div>
         <div class="wrapper-responsive q-mt-lg q-px-sm">
             <div
-                class="w100 row items-center justify-center q-py-md q-mb-md q-mt-xl rounded-borders shadow-4 text-white bg-grad-2">
+                class="w100 row items-center justify-center q-py-md q-mb-md q-mt-xl rounded-borders text-white bg-grad-4">
                 <q-icon size="md" color="blue-1" name="currency_exchange" />
                 <div class="text-center text-h6 text-bold q-px-md ">Recarregar Coins</div>
             </div>
