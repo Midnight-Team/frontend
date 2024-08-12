@@ -101,9 +101,9 @@ onBeforeUnmount(() => {
 const menuOptions = ref({
   items: [
     // HOST MENUS
-    { label: 'Vendas', icon: 'payments', to: '/app/#' },
-    { label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host' },
+    // { label: 'Vendas', icon: 'payments', to: '/app/#' },
     { label: 'Subhosts', icon: 'sensor_occupied', to: '/evento/steps', role: 'host' },
+    { label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host' },
     // { label: 'Meus Eventos', icon: 'date_range', to: '/evento', role: 'host'  },
     // { label: 'Ingressos', icon: 'confirmation_number', to: '/app/#' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },

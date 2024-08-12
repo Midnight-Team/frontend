@@ -33,14 +33,17 @@
                                 <q-spinner-ball color="primary" size="lg"/>
                                 <q-spinner-ball color="primary" size="lg"/>
                             </div>
-                        <q-table no-data-label="Nenhum evento encontrado 🌆" separator="cell"
+                        <q-table  no-data-label="Nenhum evento encontrado 🌆" separator="cell"
                             class="my-sticky-column-table text-primary q-mb-md w100 text-bold" :rows="rows"
                             :columns="columns" hide-pagination>
                             <template v-slot:body-cell-titulo="props">
                                 <q-td :props="props">
                                     <div class="q-gutter-y-xs q-py-sm">
-                                        {{ formatBigString(props.row.titulo) }}
+                                        {{ isMobile ? formatBigString(props.row.titulo) : props.row.titulo }}
                                     </div>
+                                    <q-tooltip anchor="center right" self="center right" :offset="[10, 10]">
+                                        {{ props.row.titulo }}
+                                    </q-tooltip>
                                 </q-td>
                             </template>
                             <template v-slot:body-cell-pacote="props">
@@ -86,6 +89,8 @@ const buscarEvento = ref({
     status: true
 })
 
+const isMobile = window.innerWidth < 1100;
+
 function openMeuEventoPage(eventoId) {
     sessionStorage.setItem('eventoHandlerId', eventoId);
     router.push('/evento/meu-evento');
@@ -99,9 +104,15 @@ const columns = [
     {
         name: 'titulo',
         required: true,
-        label: 'Título',
+        label: 'Evento',
         align: 'left',
         field: 'titulo'
+    },
+    {
+        name: 'acoes',
+        align: 'left',
+        label: 'Ações',
+        field: 'acoes',
     },
     {
         name: 'status',
@@ -140,18 +151,11 @@ const columns = [
         label: 'Data do Evento',
         field: 'data_evento',
     },
-    {
-        name: 'acoes',
-        align: 'left',
-        label: 'Ações',
-        field: 'acoes',
-    },
-
 ]
 
 function formatBigString(str){
     if(str.length > 15){
-        return str.substring(0, 15) + '...';
+        return str.substring(0, 12) + '...';
     }
     return str;
 }

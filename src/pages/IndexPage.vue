@@ -4,7 +4,7 @@
       <div class="w100  column justify-center q-mt-xs q-gutter-y-md items-center text-white text-bold"
         style="border-radius: 20px; ">
         <div id="title"
-          class="w100 text-h5 text-bold text-center bg-grad-6 q-pa-md q-pb-lg rounded-borders  text-purple-1">
+          class="w100 text-h5 text-bold text-center bg-grad-6 q-pa-md q-pb-lg rounded-borders  text-purple-1" style="border-top: 2px solid #9573f3;">
           {{ host.nome_razao }}<br>
           <div class="high-opacity text-secondary" style="font-size: 1rem">host</div>
         </div>
@@ -22,47 +22,47 @@
           </p>
           <strong class="text-blue q-mt-xs">SubCoins: {{ host.subCoins }}🔵</strong>
         </div>
-        <q-card class="w100 text-secondary column q-gutter-y-md items-center q-pb-md q-px-md bg-grad-4">
+        <div class="w100 text-secondary column q-gutter-y-md items-center q-pb-md q-px-md rounded-borders" style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
           <div class="w100 row rounded-borders">
             <q-icon size="xl" color="secondary" name="person" />
           </div>
           <div class="row no-wrap w100">
-            <q-input color="primary" readonly filled v-model="host.nome_razao" label="Nome/Razão Social" class="bg-purple-1 rounded-borders w100">
+            <q-input color="primary" disable outlined v-model="host.nome_razao" label="Nome/Razão Social" class="bg-grey-4 text-bold rounded-borders w100">
               <template v-slot:append>
                 <q-icon name="home_work" color="primary"/>
               </template>
             </q-input>
           </div>
           <div class="row no-wrap w100">
-            <q-input color="primary" readonly filled v-model="host.cpf_cnpj" label="CPF/CNPJ" class="bg-purple-1 rounded-borders w100">
+            <q-input color="primary" disable outlined v-model="host.cpf_cnpj" label="CPF/CNPJ" class="bg-grey-4 text-bold rounded-borders w100">
               <template v-slot:append>
                 <q-icon name="badge" color="primary"/>
               </template>
             </q-input>
           </div>
           <div class="row no-wrap w100">
-            <q-input color="primary" readonly filled v-model="host.login" label="Login" class="bg-purple-1 rounded-borders w100">
+            <q-input color="primary" disable outlined v-model="host.login" label="Login" class="bg-grey-4 text-bold rounded-borders w100">
               <template v-slot:append>
                 <q-icon name="login" color="primary"/>
               </template>
             </q-input>
           </div>
           <div class="row no-wrap w100">
-            <q-input color="primary" readonly filled v-model="host.email" label="Email" class="bg-purple-1 rounded-borders w100">
+            <q-input color="primary" disable outlined v-model="host.email" label="Email" class="bg-grey-4 text-bold rounded-borders w100">
               <template v-slot:append>
                 <q-icon name="email" color="primary"/>
               </template>
             </q-input>
           </div>
           <div class="row no-wrap w100 items-center justify-between">
-            <q-input color="primary" readonly filled v-model="host.telefone" label="Telefone" class="bg-purple-1 rounded-borders w100">
+            <q-input color="primary" disable outlined v-model="host.telefone" label="Telefone" class="bg-grey-4 text-bold rounded-borders w100">
               <template v-slot:append>
                 <q-icon name="phone" color="primary"/>
               </template>
             </q-input>
           </div>
-          <q-btn label="Editar Perfil" color="green" icon-right="edit" class="w100"/>
-        </q-card>
+          <q-btn label="Editar Perfil" color="blue"  icon-right="edit" class="w100 q-py-md"/>
+        </div>
         <!-- <q-card class="w100 text-primary column q-gutter-y-md items-center q-pb-md q-px-md bg-grey-3">
           <div class="w100 row q-pb-xs rounded-borders" style="border-bottom:4px solid #8527e26c">
             <q-icon size="xl" color="primary" name="local_activity" />
@@ -109,15 +109,15 @@
         <!-- <q-btn label="Solicitar Suporte" @click="wppConsultor()" icon-right="contact_support" class="q-mt-xl w100" color="primary" /> -->
       </div>
     </div>
-    <div class="w100 bg-white">
+    <div class="w100 bg-white q-mt-xl">
       <FooterComponent />
     </div>
   </q-page>
   <q-page v-else>
     <div class="row w100 q-pt-md justify-center">
-      <q-spinner-ball color="primary" size="lg"/>
-      <q-spinner-ball color="primary" size="lg"/>
-      <q-spinner-ball color="primary" size="lg"/>
+      <q-spinner-ball color="blue" size="lg"/>
+      <q-spinner-ball color="blue" size="lg"/>
+      <q-spinner-ball color="blue" size="lg"/>
   </div>
   </q-page>
 </template>
@@ -255,5 +255,11 @@ onBeforeMount(async () => {
   font-family: "Rowdies", sans-serif;
   letter-spacing: 1px;
   font-size: 40px;
+}
+.q-field__label{
+  color: #7734c4!important;
+}
+.q-input {
+  font-weight: bold!important;
 }
 </style>

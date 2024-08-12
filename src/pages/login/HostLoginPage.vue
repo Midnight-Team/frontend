@@ -62,7 +62,7 @@ const login = async () => {
             sessionStorage.setItem('userLogado', JSON.stringify(res.data.host));
             sessionStorage.setItem('role', JSON.stringify(res.data.role));
             $q.notify({
-                color: 'positive',
+                color: 'dark',
                 message: 'Login efetuado com sucesso',
                 icon: 'local_activity',
                 position: 'top',
