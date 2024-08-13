@@ -86,6 +86,7 @@ onBeforeMount(async () => {
             const settings = {
                 initialization: {
                     amount: recargaPacote.preco,
+                    transaction_amount: recargaPacote.preco,
                     payer: {
                         firstName: host.nome_razao,
                         email: host.email,
@@ -139,9 +140,9 @@ onBeforeMount(async () => {
                         }
                         formData.description = "💷 Compra de " + recargaPacote.label + 'por R$ ' + recargaPacote.preco.toFixed(2).toString().replace('.', ',');
                         return new Promise((resolve, reject) => {
-                            api.post('/process_payment', formData)
+                            api.post('/process_payment', JSON.stringify(formData))
                                 .then((response) => {
-                                    sessionStorage.setItem('paymentId', JSON.stringify(response.data.id))
+                                    sessionStorage.setItem('paymentId', response.data.id)
                                     api.post('/save_recarga_payment', {
                                         payment_id: response.data.id,
                                         specs: {
