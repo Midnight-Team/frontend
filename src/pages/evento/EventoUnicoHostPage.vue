@@ -1,12 +1,12 @@
 <template>
-    <q-page class="animate__animated animate__fadeIn  column bg-grad-3 q-px-md q-pb-xl relative" id="dialog-evento"
+    <q-page class="animate__animated animate__fadeIn  column bg-grad-2 q-px-md q-pb-xl relative" id="dialog-evento"
         v-if="pageLoaded">
         <div class="w100 rounded-borders q-mt-md">
-            <div id="title-menu" class="text-h5 text-center text-purple-1 rounded-borders bg-grad-1 q-pa-md  text-bold">
+            <div id="title-menu" class="text-shadow q-mb-sm text-h5 text-center text-purple-1 rounded-borders bg-grad-1 shadow-1 q-pa-md  text-bold">
                 {{ evento.titulo }}
             </div>
         </div>
-        <div class="w100 q-mt-sm">
+        <div class="w100">
             <img class="shadow-2" id="img-evento" style="border: 4px solid #610FE1" :src="evento.img_url" alt="">
         </div>
         <q-btn @click="editando = !editando" class="q-mt-sm q-py-sm" :color="editando ? 'orange-8' : 'blue'"
@@ -75,9 +75,6 @@
             <div class="row items-center text-h5 text-primary text-bold " id="text-menu">
                 <q-icon name="confirmation_number" size="md" class="text-primary" />
                 INGRESSOS
-                <div class="absolute-right" style="">
-                    extra:
-                </div>
             </div>
             <div class="text-bold text-secondary q-mt-sm">Ingressos Disponíveis: 74/{{ evento.qtd_ingressos }}</div>
             <div class="w100 text-primary text-bold mid-opacity">
@@ -86,7 +83,7 @@
                     v-for="ingresso in evento.tipos_ingressos" :key="ingresso.id" style="border: 2px solid #872DE1">
                     <q-icon name="local_activity" size="xl"></q-icon>
                     <div class="column q-ml-sm">
-                        <div class="text-black text-h6">{{ ingresso.titulo }}</div>
+                        <div style="font-size: .9rem;text-transform: uppercase;" class="text-black">{{ ingresso.titulo }}</div>
                         <div>R$ {{ ingresso.valor }}</div>
                         <div> 34/{{ ingresso.quantidade }} Ingressos</div>
                     </div>
@@ -119,12 +116,12 @@
                     :key="subhost.id" style="border-bottom: 4px solid #872DE1;border-top: 4px solid #872DE1">
                     <q-icon name="person" size="xl"></q-icon>
                     <div class="column q-ml-sm">
-                        <div>{{ subhost.nome }}</div>
+                        <div class="text-black text-uppercase">{{ subhost.nome }}</div>
                         <div>{{ subhost.id }}</div>
                     </div>
                 </div>
             </div>
-            <q-btn v-if="!editando" label="Adicionar Subhost" icon-right="person_add" class="q-mt-md"
+            <q-btn v-if="!editando" label="Adicionar Subhost" icon-right="person_add" class=""
                 color="primary"></q-btn>
         </div>
         <div class="w100 q-my-lg" v-if="editando"></div>
@@ -225,7 +222,11 @@ onBeforeMount(async () => {
 #img-evento {
     width: 100%;
     height: 200px;
+}
+
+img{
     border-radius: 10px;
+
 }
 
 @media (min-width: 1100px) {

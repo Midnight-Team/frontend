@@ -8,10 +8,10 @@
           </q-avatar>
         </div>
         <div id="title"
-          class="w100 text-h5 text-bold text-center bg-grad-6 q-pa-md q-pb-lg rounded-borders  text-purple-1"
+          class="w100 text-h5 text-bold text-center bg-grad-6 q-pa-md q-pb-md rounded-borders  text-purple-1"
           style="border-top: 2px solid #9573f3;">
           {{ host.nome_razao }}<br>
-          <div class="high-opacity text-secondary" style="font-size: 1rem">host</div>
+          <div class="high-opacity text-secondary q-mt-sm" style="font-size: 1rem">host</div>
         </div>
         <div class="rounded-borders w100 column text-secondary q-pa-md" style="border-bottom: 2px solid #9573f3;">
           <div class="row q-pb-xs rounded-borders ">

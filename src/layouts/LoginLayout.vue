@@ -5,13 +5,13 @@
                 <q-icon size="xl" color="white" name="local_activity" />
             </q-avatar>
             <div class="q-pl-sm" id="title-menu">
-                Midnight Tickets
+                Entrar
             </div>
         </div>
         <router-view></router-view>
         <q-card class="q-mt-md column animate__delay-1s bg-primary" style="box-shadow: none!important;">
             <q-btn @click="isLoginHost = !isLoginHost"  v-if="isLoginHost" label="voltar" icon-right="keyboard_return" color="primary" class="bg-white text-primary q-mb-xl" flat to="/login"/>
-            <q-btn icon="home" label="página inicial" color="white" flat to="/" />
+            <q-btn class="high-opacity" icon="home" label="página inicial" color="purple-1" flat to="/" />
         </q-card>
     </q-layout>
 </template>

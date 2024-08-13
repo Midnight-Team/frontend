@@ -7,7 +7,7 @@
           <q-avatar>
             <q-icon size="md" color="purple-1" name="local_activity" />
           </q-avatar>
-          <a :href="landingLink" style="text-decoration: none;" id="title-layout" class="text-purple-1 q-pl-xs text-bold">
+          <a @click="goTo('/app')" style="text-decoration: none;" id="title-layout" class="text-purple-1 q-pl-xs text-bold">
             Midnight Tickets
           </a>
         </q-toolbar-title>
@@ -22,9 +22,9 @@
     </q-header>
 
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grad-1">
-      <div class="w100 flex q-mb-lg flex-center q-mt-lg">
+      <div class="w100 flex q-mb-md flex-center q-mt-lg">
         <q-avatar style="width:110px;height:110px;" class="shadow-2">
-          <img style="border-bottom: 6px solid #4f0ca0;" :src="authStore.getInfoImg()" alt="">
+          <img  :src="authStore.getInfoImg()" alt="">
         </q-avatar>
       </div>
       <div v-if="isHost" class="text-center text-bold text-purple-1">{{authStore.getInfoRazao()}}</div>
@@ -83,7 +83,7 @@ const rightDrawerOpen = ref(false)
 const isHost = computed(() => authStore.getInfoRole() == 'host')
 const router = useRouter()
 const landingLink = !window.location.href.includes('localhost') ? 'https://midnightickets.com' : 'http://localhost:9000'
-
+const isMobile = window.innerWidth < 600
 function goTo(to) {
   router.push(to)
 }
@@ -100,11 +100,10 @@ const menuOptions = ref({
   items: [
     // HOST MENUS
     // { label: 'Vendas', icon: 'payments', to: '/app/#' },
-    { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Subhosts', icon: 'sensor_occupied', to: '/evento/steps', role: 'host', selected: false,},
+    { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Acesso', icon: 'sensor_occupied', to: '/evento/steps', role: 'host', selected: false,},
     { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false,},
     { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Suporte', icon: 'contact_support', to: '/app/#', selected: false },
     { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Logout', icon: 'logout', to: '/', selected: false }
-    // { label: 'Meus Eventos', icon: 'date_range', to: '/evento', role: 'host'  },
     // { label: 'Ingressos', icon: 'confirmation_number', to: '/app/#' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
   ]

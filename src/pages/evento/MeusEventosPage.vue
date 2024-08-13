@@ -12,7 +12,7 @@
                     <q-icon size="sm" color="orange" name="paid" class="q-pl-sm" />
                 </div>
             </div>
-            <div class="w100 q-ml-sm q-mt-md"><q-btn label="Novo Evento" color="primary"
+            <div class="w100 q-ml-sm q-mt-md"><q-btn class="q-py-md" label="Novo Evento" color="primary"
                     @click="navigateTo('/evento/steps')" icon="today" icon-right="add" /></div>
             <div class="column q-mb-xl">
                 <div id="table-eventos" class="q-mt-md w100">

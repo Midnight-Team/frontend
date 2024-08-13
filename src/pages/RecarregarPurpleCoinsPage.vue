@@ -57,13 +57,16 @@
         </div>
         <q-dialog class="animate__animated animate__fadeIn " persistent v-model="openPaymentModal"
             style="backdrop-filter: blur(4px);">
-            <div style="border-top-left-radius: 16px;border-bottom-left-radius: 16px;"
-                class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center">
-                <q-btn class="" label="voltar" flat color="purple-2" @click="openPaymentModal = false" />
-                <div class="q-pa-md">💰 Compra de<br> {{ itemSelected.label }} por <br>{{
-                    formatString(itemSelected.preco) }}</div>
-                <RecargaBricksPaymentComponent />
-            </div>
+            <div style="border-radius: 16px"
+            class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center">
+            <div class="q-pa-md" id="title-menu" >Confirmar Compra
+                </div>
+                <div class="q-mb-md q-px-md text-purple-1">
+                    {{ itemSelected.label }} por<br> {{
+                        formatString(itemSelected.preco) }} </div> 
+                        <RecargaBricksPaymentComponent />
+                        <q-btn class=""  label="cancelar" flat color="purple-2" @click="openPaymentModal = false" />
+                    </div>
         </q-dialog>
         <div class="w100 q-mt-lg">
             <FooterComponent />

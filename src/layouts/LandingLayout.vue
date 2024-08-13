@@ -1,5 +1,5 @@
 <template>
-    <q-layout class="relative animate__animated animate__fadeIn bg-grad-4">
+    <q-layout class="relative animate__animated animate__fadeIn bg-grad-6">
         <q-header class="fixed bg-grad-2 text-white animate__animated animate__backInDown animate__slow shadow-1"
             height-hint="98">
             <div style="font-size: 1rem;" class=" q-py-md w100 row no-wrap items-center  justify-evenly">
@@ -7,23 +7,34 @@
                     <q-icon class="q-pr-xs" name="local_activity" size="xl" /> Midnight Tickets
                 </a>
                 <a v-else @click="scrollBot()" class="menu-item row items-center">
-                    <q-icon name="local_activity" size="xl" />
+                    <q-icon  name="local_activity" size="65px"/>
                 </a>
-                <a class="menu-item" @click="scrollToBottom()">
-                    Contato
-                </a>
-                <a class="menu-item bg-primary q-pa-md text-purple-1 row items-center q-gutter-x-sm"
-                    style="border-radius:8px" @click="navigateTo('/login')">
-                    Entrar
-                    <q-icon name="login" size="sm" />
-                </a>
+                <div class="row items-center no-wrap q-gutter-x-sm">
+                    <a v-if="!isMobile" class="menu-item q-mr-md q-px-md" href="#vantagens">
+                        Vantagens
+                    </a>
+                    <a v-if="isMobile" class="menu-item" @click="scrollToVantagem()">
+                        <q-btn icon="redeem" color="secondary"></q-btn>
+                    </a>
+                    <a v-if="!isMobile" class="menu-item q-mr-md q-px-md" href="#contato">
+                        Contato
+                    </a>
+                    <a v-if="isMobile" class="menu-item" @click="scrollToBottom()">
+                        <q-btn icon="contact_support" color="secondary"></q-btn>
+                    </a>
+                    <a class="menu-item bg-primary q-pa-md text-purple-1 row items-center q-gutter-x-sm"
+                        style="border-radius:8px" @click="navigateTo('/login')">
+                        Entrar
+                        <q-icon name="login" size="md" />
+                    </a>
+                </div>
             </div>
 
         </q-header>
         <q-page-container>
             <q-page class="">
-                <div id="home" style="border: 4px solid #984BE7;border-radius: 8px;"
-                    class="q-mt-md q-mb-xl q-px-xs q-pb-xl animate__animated animate__zoomIn animate__slower">
+                <div id="home" style="border: 8px solid #692EDD;border-radius: 8px;"
+                    class="q-mt-md q-mb-xl animate__animated animate__zoomIn animate__slower">
                     <q-toolbar class="bg-grad-4">
                         <q-toolbar-title
                             class="row justify-center q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
@@ -33,7 +44,7 @@
                             <q-icon v-if="!isMobile" size="xl" color="white" name="local_activity" />
                         </q-toolbar-title>
                     </q-toolbar>
-                    <div class="space bg-grad-2 w100 text-center text-purple-1 q-py-md text-bold q-px-md high-opacity"
+                    <div class="text-shadow space bg-grad-2 w100 text-center text-purple-1 q-py-md text-bold q-px-md high-opacity"
                         style="font-size:1rem">
                         PARE de PAGAR TAXAS excessivas na VENDA de SEUS INGRESSOS e REALIZE seus EVENTOS com 0% de
                         TAXA!!
@@ -58,7 +69,7 @@
                     <div style="font-size:1.3rem" class=" bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">Quem
                         Somos ?</div>
                     <div style="font-size:1.1rem"
-                        class=" bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm q-py-md text-right">Somos
+                        class=" bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm q-py-md text-right text-shadow">Somos
                         um
                         Serviço de Bilheteria Online e Gerenciador de Eventos Personalizados focados na Escalabilidade
                         de seus Lucros em Venda de Ingressos Digitais</div>
@@ -69,7 +80,7 @@
                     <div style="font-size:1.3rem" class=" bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">O
                         que Fazemos ?</div>
                     <div style="font-size:1.1rem"
-                        class="q-mb-md bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm q-py-md text-right">
+                        class="text-shadow q-mb-md bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm q-py-md text-right">
                         Maximizamos seus lucros na venda de ingressos de forma escalável com serviços personalizados,
                         transparência, suporte e uma
                         interface amigável. Seus ingressos mais caros são os que mais pagam taxas abusivas, mas pra nós
@@ -83,8 +94,8 @@
                     <div style="font-size:1.3rem" class="bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">Como
                         fazemos isso ?
                     </div>
-                    <div style="font-size:1.1rem;border-bottom-left-radius: 40px;"
-                        class="bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm  q-py-md text-right">Desde
+                    <div  id="vantagens" style="font-size:1.1rem;"
+                        class="text-shadow bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm  q-py-md text-right">Desde
                         pequenos encontros a grandes festivais, nossa plataforma se adapta às suas necessidades e
                         POTENCIALIZA seus ganhos.
                         Na Midnight Tickets, entendemos que cada evento é único. Oferecemos opções flexíveis que se
@@ -92,16 +103,15 @@
                         sua demanda
                     </div>
                 </div>
-                <div id="beneficios" style="border: 4px solid #984BE7;">
-
-                    <div
-                        class="w100 text-h6 text-bold bg-grey-3 text-primary text-center q-px-md q-py-sm border-bottom">
+                <div class="rounded-borders" style="border: 4px solid #692EDD;">
+                    <div  style="letter-spacing:1px"
+                        class="text-shadow text-h6 w100 text-bold text-secondary text-center q-px-md q-py-sm border-bottom">
                         Veja
                         como
                         nossa Plataforma pode aumentar o Faturamento do seu Evento!!</div>
-                    <div class="text-h4 text-center w100 text-white text-bold q-pt-md q-pb-md bg-grad-">
+                    <div class="text-h4 bg-white text-primary text-center w100 border-bottom text-bold q-pt-md q-pb-md">
                         Vantagens</div>
-                    <div style="font-size:1rem" class="q-px-md   bg-white text-left q-py-md rounded-borders">
+                    <div style="font-size:1.1rem" class="text-shadow q-px-md bg-grey-5 text-left q-py-md rounded-borders">
                         🟣 <strong class="text-primary">SEM TAXA POR VENDA<br></strong> Nossa <strong>moeda
                             virtual</strong>
                         permite realizar <strong>Eventos</strong> com <strong>0% de taxa</strong> em ingressos
@@ -109,7 +119,7 @@
                         <strong>o máximo do seu 
                             lucro</strong> e ainda <strong>GANHE CASHBACK</strong> com cada ingresso
                         não vendido
-                        <br>🔵 <strong class="text-blue">LUCRO EM TEMPO REAL<br></strong> Disponibilizamos a
+                        <br>🟣 <strong class="text-primary">LUCRO EM TEMPO REAL<br></strong> Disponibilizamos a
                         possibilidade de receber o
                         <strong>lucro de suas vendas automaticamente em tempo real na sua conta</strong> enquanto
                         acontece o seu evento
@@ -117,7 +127,7 @@
                     <div
                         class="w100 text-h4 text-bold bg-white text-primary text-center q-px-md rounded-borders q-py-sm border-bottom q-mt-md">
                         Benefícios</div>
-                    <div style="font-size:1rem" class="q-px-md bg-grey-3 q-py-md rounded-borders border-bottom">
+                    <div style="font-size:1.1rem" class="text-shadow q-px-md bg-grey-5 q-py-md rounded-borders border-bottom">
                         💸 <strong style="font-size:1.2rem" class="text-primary text-bold">AS MENORES TAXAS<br></strong>
                         Estamos
                         integrados ao <strong>Mercado Pago</strong> com segurança
@@ -153,11 +163,11 @@
                             de bugs</strong>
                         <br>
                         <br>
-                        📲 <strong style="font-size:1.2rem" class="text-primary text-bold">TECNOLOGIA DE
+                        📲 <strong  style="font-size:1.2rem" class="text-primary text-bold">TECNOLOGIA DE
                             PONTA<br></strong>
-                        Nosso WebApp é desenvolvido com as <strong>melhores tecnologias</strong> do mercado e hospedada
+                        Nosso WebApp é desenvolvido com as <strong id="contato">melhores tecnologias</strong> do mercado e hospedada
                         na nuvem com
-                        serviços da AWS, <strong>garantindo segurança e escalabilidade</strong> para <strong>todos os
+                        serviços da AWS, <strong >garantindo segurança e escalabilidade</strong> para <strong>todos os
                             tipos de eventos e
                             usuários</strong>
                     </div>
@@ -184,8 +194,8 @@
                         class="column no-wrap flex-center">
                     </q-carousel-slide>
                 </q-carousel> -->
-                <div id="form" class=" relative">
-                    <div class="text-h4 text-bold q-py-md text-white text-center bg-grad-1 border-bottom q-mt-md">🚀
+                <div class=" relative">
+                    <div class="text-h4 text-bold q-py-md text-white text-center bg-grad-4 border-bottom q-mt-md">🚀
                         Fale
                         Conosco</div>
 
@@ -193,7 +203,7 @@
                         style="border-radius: 20px;border-bottom: 8px solid #3C0783;z-index: -10">
                         <q-card class="q-pa-md collumn q-gutter-y-md rounded-borders "
                             style="border: 15px solid #6310E1; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
-                            <div class="w100 text-center text-primary text-bold mid-opacity ">
+                            <div class="text-shadow w100 text-center text-primary text-bold mid-opacity ">
                                 ALAVANQUE seus FATURAMENTO otimizando o LUCRO de suas VENDAS com uma CONSULTORIA
                                 PERSONALIZADA para a
                                 SUA DEMANDA</div>
@@ -278,10 +288,10 @@
                         <div class="column text-h5 text-white text-bold">LOGIN HOST</div>
                         <div class="text-purple-2">É Produtor de Eventos ou Subhost??</div>
                         <q-btn icon-right="admin_panel_settings" label="Faça login Aqui" dense class="q-mt-sm q-pa-md"
-                            color="primary" to="/login/host" />
+                            color="dark" to="/login/host" />
                     </div>
                 </div>
-                <div class="w100 text-white text-bold text-center q-mt-md">
+                <div class="w100 text-secondary text-purple-1 text-bold text-center q-mt-md">
                     Siga-nos no <a href="https://www.instagram.com/midnightickets" class="text-blue"
                         target="_blank">Instagram</a> e
                     acompanhe o nosso desenvolvimento!
@@ -391,6 +401,9 @@ function scrollBot() {
 function scrollToBottom() {
     window.scrollTo(0, document.body.scrollHeight - 1890);
 }
+function scrollToVantagem() {
+    window.scrollTo(0, document.body.scrollHeight - 3740);
+}
 
 
 </script>
@@ -411,7 +424,7 @@ function scrollToBottom() {
 }
 
 .border-bottom {
-    border-bottom: 4px solid #6d16e0be;
+    border-bottom: 4px solid #692EDD;
 }
 
 .img-wrapper {
@@ -422,11 +435,10 @@ function scrollToBottom() {
     margin-top: 20px;
 }
 
-.img {
+.img, img {
     width: 100%;
     max-width: 800px;
     height: auto;
-    border-radius: 10px;
 }
 
 .q-btn {
