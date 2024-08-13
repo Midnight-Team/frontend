@@ -71,10 +71,13 @@
                     allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
-        <div id="subhost-info" class="bg-glass-1 rounded-borders q-pa-md q-mt-md">
+        <div id="subhost-info" class="relative bg-glass-1 rounded-borders q-pa-md q-mt-md">
             <div class="row items-center text-h5 text-primary text-bold " id="text-menu">
                 <q-icon name="confirmation_number" size="md" class="text-primary" />
                 INGRESSOS
+                <div class="absolute-right" style="">
+                    extra:
+                </div>
             </div>
             <div class="text-bold text-secondary q-mt-sm">Ingressos Disponíveis: 74/{{ evento.qtd_ingressos }}</div>
             <div class="w100 text-primary text-bold mid-opacity">

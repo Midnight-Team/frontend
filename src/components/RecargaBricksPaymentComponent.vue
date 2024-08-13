@@ -137,7 +137,7 @@ onBeforeMount(async () => {
                                 },
                             }
                         }
-                        formData.description = "Compra de " + recargaPacote.label + 'por R$ ' + recargaPacote.preco.toFixed(2).toString().replace('.', ',');
+                        formData.description = "💷 Compra de " + recargaPacote.label + 'por R$ ' + recargaPacote.preco.toFixed(2).toString().replace('.', ',');
                         return new Promise((resolve, reject) => {
                             api.post('/process_payment', formData)
                                 .then((response) => {
