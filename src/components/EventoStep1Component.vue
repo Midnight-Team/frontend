@@ -128,7 +128,7 @@ const checkRequiredFields = () => {
 const pacoteOptions = [
     { value: 1, label: '0% taxa - 50 ingressos por 1p🟣', purpleCoins: 1, max_ingressos: 50, },
     { value: 2, label: '0% taxa - 100 ingressos por 2p🟣', purpleCoins: 2, max_ingressos: 100, },
-    { value: 3, label: '0% taxa - 300 ingressos por 3p🟣', purpleCoins: 2, max_ingressos: 300 },
+    { value: 3, label: '0% taxa - 300 ingressos por 3p🟣', purpleCoins: 3, max_ingressos: 300 },
     { value: 4, label: '0% taxa - 600 ingressos por 5p🟣', purpleCoins: 5, max_ingressos: 600 },
     { value: 5, label: '0% taxa - 2000 ingressos por 10p🟣', purpleCoins: 10, max_ingressos: 2000 },
     { value: 6, label: '0% taxa - 5000 ingressos por 20p🟣', purpleCoins: 20, max_ingressos: 5000 }

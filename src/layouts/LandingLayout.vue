@@ -116,7 +116,7 @@
                             virtual</strong>
                         permite realizar <strong>Eventos</strong> com <strong>0% de taxa</strong> em ingressos
                         vendidos. Obtenha
-                        <strong>o máximo do seu 
+                        o <strong>máximo do seu 
                             lucro</strong> e ainda <strong>GANHE CASHBACK</strong> com cada ingresso
                         não vendido
                         <br>🟣 <strong class="text-primary">LUCRO EM TEMPO REAL<br></strong> Disponibilizamos a

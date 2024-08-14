@@ -11,7 +11,7 @@
                     <q-checkbox class=" w100 bg-grad-6 row text-bold rounded-borders text-secondary " @update:model-value="usuario.senha = ''"
                         v-model="usuario.isHost" :label="!usuario.isHost ? 'Sou Subhost' : 'Sou Host' "
                          color="secondary" />
-                    <q-input class="bg-grey-3" maxlength="30" filled v-model="usuario.login" :label="isHost ? 'Login': 'SubHost'">
+                    <q-input class="bg-grey-3" maxlength="30" filled v-model="usuario.login" :label="usuario.isHost ? 'Login' : 'SubHost'">
                         <template v-slot:prepend>
                             <q-icon size="md" name="person" color="primary" />
                         </template>

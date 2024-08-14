@@ -13,21 +13,19 @@
                         </q-card-title>
                     </q-card-section>
                     <q-card-section>
-                        <div class="w100 row justify-between q-pb-xs">
-                            <div class="text-secondary text-bold">PACOTE</div>
-                            <div class="text-secondary text-bold">STATUS</div>
-                        </div>
-                        <q-list separator bordered class="rounded-borders bg-white">
+                            <q-list separator bordered class="rounded-borders bg-white">
                             <q-item clickable v-for="pagamento in pagamentos" :key="pagamento.id">
                                 <q-item-section>
-                                    <q-item-label class="row items-center text-bold text-primary justify-between q-pb-xs">
-                                        <div>{{ pagamento.pacote.label }}<br> R$ {{ pagamento.pacote.preco.toFixed(2).toString().replace('.', ',') }}<br> <strong class="mid-opacity">{{ pagamento.pacote.tipo }}</strong></div>
-                                        <q-badge :color="pagamento.status == 'rejected' ? 'red' : (pagamento.status == 'approved' ? 'green' : 'orange')" ></q-badge>
+                                    <q-item-label class="row items-center text-bold text-primary justify-between q-py-sm">
+                                        <div><strong id="title-layout">{{ pagamento.pacote.label }}</strong>  R$ {{ pagamento.pacote.preco.toFixed(2).toString().replace('.', ',') }}<br><strong class="mid-opacity">{{ pagamento.pacote.tipo }}</strong></div>
                                     </q-item-label>
                                     <q-item-label class="row text-bold text-secondary">
                                         🟣 {{ pagamento.pacote.purpleCoinsCredito }} <strong class="text-blue">🔵 {{ pagamento.pacote.subCoinsCredito }}</strong>
                                     </q-item-label>
                                     <q-item-label  caption class="column items-end q-py-sm text-bold">
+                                        <div class="q-pb-sm row justify-end">
+                                            <q-badge :label="pagamento.status" :color="pagamento.status == 'rejected' ? 'red' : (pagamento.status == 'approved' ? 'green' : 'orange')" ></q-badge>
+                                        </div>
                                         <div>
                                             Criado em {{ formatarDataISO(pagamento.createdAt) }} 
                                         </div>

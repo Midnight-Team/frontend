@@ -10,13 +10,13 @@
                 <q-icon name="savings" color="blue" size="md" />
             </div>
         </div>
-        <div class="wrapper-responsive q-mt-lg q-px-sm">
+
+        <div class="wrapper-responsive q-mt-xl  q-px-sm">
             <div
-                class="w100 row items-center justify-center q-py-md q-mb-md q-mt-xl rounded-borders text-white bg-grad-4">
+                class="w100 row items-center justify-center q-py-md q-mt-md q-mb-md  rounded-borders text-white bg-grad-1 shadow-1">
                 <q-icon size="md" color="blue-1" name="currency_exchange" />
                 <div class="text-center text-h6 text-bold q-px-md ">Recarregar Coins</div>
             </div>
-
             <q-card style="border-radius: 16px;border: 2px solid #6D2EDD;border-bottom: 10px solid #6D2EDD;"
                 class="bg-blue-1 w100 shadow-3 animate__animated animate__zoomIn animate__delay-1s">
                 <q-card-section>
@@ -39,9 +39,30 @@
                     </q-item>
                 </q-card-section>
             </q-card>
-
+            <div class="wrapper-responsive q-px-sm">
+                <div
+                    class="w100 row items-center justify-center q-py-md q-mb-md q-mt-md rounded-borders text-white bg-grad-1 shadow-1">
+                    <q-icon size="md" color="blue-1" name="confirmation_number" />
+                    <div class="text-center text-h6 text-bold q-px-md ">Pacotes de Ingressos</div>
+                </div>
+    
+                <div id="tabela-pacotes">
+                    <q-card style="border-radius: 16px;border: 2px solid #6D2EDD;border-bottom: 10px solid #6D2EDD;"
+                        class="bg-blue-1 w100 shadow-3 animate__animated animate__zoomIn animate__delay-1s">
+                        <q-card-section>
+                            <q-item class="q-mb-sm option" style="border-radius: 12px;border: 2px solid #6310E1;"
+                                v-for="item in pacoteOptions" :key="item.label" clickable>
+                                <q-item-section class="text-bold text-primary">
+                                    <q-item-label>🎫 {{ item.max_ingressos }} Ingressos por {{ item.purpleCoins }}
+                                        PurpleCoin</q-item-label>
+                                </q-item-section>
+                            </q-item>
+                        </q-card-section>
+                    </q-card>
+                </div>
+            </div>
             <div
-                class="w100 row items-center justify-center q-py-md q-my-md rounded-borders shadow-4 text-primary q-pa-md bg-blue">
+                class="w100 row items-center justify-center q-py-md q-mt-md  q-mb-md rounded-borders shadow-4 text-primary q-pa-md bg-blue">
                 <q-icon size="md" color="blue-1" name="savings" />
                 <div class="text-white text-bold q-pl-sm">+</div>
                 <q-icon size="sm" class="q-mx-sm" color="white" name="currency_exchange" />
@@ -58,15 +79,15 @@
         <q-dialog class="animate__animated animate__fadeIn " persistent v-model="openPaymentModal"
             style="backdrop-filter: blur(4px);">
             <div style="border-radius: 16px"
-            class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center">
-            <div class="q-pa-md" id="title-menu" >Confirmar Compra
+                class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center">
+                <div class="q-pa-md" id="title-menu">Confirmar Compra
                 </div>
                 <div class="q-mb-md q-px-md text-purple-1">
                     {{ itemSelected.label }} por<br> {{
-                        formatString(itemSelected.preco) }} </div> 
-                        <RecargaBricksPaymentComponent />
-                        <q-btn class=""  label="cancelar" flat color="purple-2" @click="openPaymentModal = false" />
-                    </div>
+                        formatString(itemSelected.preco) }} </div>
+                <RecargaBricksPaymentComponent />
+                <q-btn class="" label="cancelar" flat color="purple-2" @click="openPaymentModal = false" />
+            </div>
         </q-dialog>
         <div class="w100 q-mt-lg">
             <FooterComponent />
@@ -89,6 +110,16 @@ const addRecargaPacote = (pacote) => {
     openPaymentModal.value = true;
 }
 const authStore = useAuthStore();
+
+const pacoteOptions = [
+    { value: 1, label: '0% taxa 50 ingressos por 1p🟣', purpleCoins: 1, max_ingressos: 50, },
+    { value: 2, label: '0% taxa 100 ingressos por 2p🟣', purpleCoins: 2, max_ingressos: 100, },
+    { value: 3, label: '0% taxa 300 ingressos por 3p🟣', purpleCoins: 3, max_ingressos: 300 },
+    { value: 4, label: '0% taxa 600 ingressos por 5p🟣', purpleCoins: 5, max_ingressos: 600 },
+    { value: 5, label: '0% taxa 2000 ingressos por 10p🟣', purpleCoins: 10, max_ingressos: 2000 },
+    { value: 6, label: '0% taxa 5000 ingressos por 20p🟣', purpleCoins: 20, max_ingressos: 5000 }
+]
+
 const pacotesCoins = ref(
     [
         { tipo: 'recarga de purplecoins', id: 1, value: 1, label: '1 PurpleCoin', preco: 120, purpleCoinsCredito: 1, subCoinsCredito: 0 },
@@ -96,7 +127,7 @@ const pacotesCoins = ref(
         { tipo: 'recarga de purplecoins', id: 3, value: 3, label: '5 PurpleCoins', preco: 500, purpleCoinsCredito: 5, subCoinsCredito: 0 },
         { tipo: 'recarga de purplecoins', id: 4, value: 4, label: '12 PurpleCoins', preco: 1000, purpleCoinsCredito: 12, subCoinsCredito: 50 },
         { tipo: 'recarga de purplecoins', id: 5, value: 5, label: '25 PurpleCoins', preco: 2000, purpleCoinsCredito: 25, subCoinsCredito: 150 },
-        { tipo: 'teste 1 real', id: 6, value: 6, label: '10 SubCoins', preco: 1, purpleCoinsCredito: 0, subCoinsCredito: 10 },
+        // { tipo: 'teste 1 real', id: 6, value: 6, label: '10 SubCoins', preco: 1, purpleCoinsCredito: 0, subCoinsCredito: 10 },
     ]
 )
 onMounted(() => {
@@ -114,7 +145,6 @@ function formatString(value) {
 }
 
 .wrapper-responsive {
-    min-height: 88vh;
     width: 600px;
 }
 
