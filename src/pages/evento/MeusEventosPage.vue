@@ -1,6 +1,6 @@
 <template>
     <q-page class="animate__animated animate__fadeIn bg-grad-2 q-pb-xl">
-        <div class="es1 bg-white q-mx-sm  rounded-borders shadow-4 relative">
+        <div class="es1 bg-grey-4 q-mx-sm  rounded-borders shadow-4 relative">
             <div
                 class="title-1 w100 q-px-sm row items-center text-primary shadow-1 q-py-md justify-between no-wrap text-bold">
                 <div class="row no-wrap items-center">
@@ -12,13 +12,16 @@
                     <q-icon size="sm" color="orange" name="paid" class="q-pl-sm" />
                 </div>
             </div>
-            <div class="w100 q-ml-sm q-mt-md"><q-btn class="q-py-md" label="Novo Evento" color="primary"
-                    @click="navigateTo('/evento/steps')" icon="today" icon-right="add" /></div>
             <div class="column q-mb-xl">
-                <div id="table-eventos" class="q-mt-md w100">
-                    <div id="title-menu" class=" text-primary q-mb-sm w100 q-px-md text-center text-bold">Eventos de<br>{{ authStore.getInfoRazao()}}</div>
+                <div id="table-eventos" class="q-mt-sm w100">
+                    <div id="title-menu" class=" text-primary q-mb-sm w100 q-px-md text-center text-bold">Eventos
+                        de<br>{{ authStore.getInfoRazao() }}</div>
                     <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
+                        <div class="w100 q-my-md">
+                            <q-btn class="q-py-sm" label="Novo Evento" color="primary"
+                                @click="navigateTo('/evento/steps')" icon="today" icon-right="add" />
+                        </div>
                         <q-input v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined
                             label="Procurar Evento">
                             <template v-slot:append>
@@ -28,12 +31,12 @@
                         <q-toggle v-model="buscarEvento.status" @update:model-value="getEventos()"
                             :label="buscarEvento.status ? 'Em andamento' : 'Todos'"
                             class="q-mb-md text-primary text-bold" />
-                            <div v-if="loading" class="row w100 q-pb-md justify-center">
-                                <q-spinner-ball color="primary" size="lg"/>
-                                <q-spinner-ball color="primary" size="lg"/>
-                                <q-spinner-ball color="primary" size="lg"/>
-                            </div>
-                        <q-table  v-if="!loading" no-data-label="Nenhum evento encontrado 🌆" separator="cell"
+                        <div v-if="loading" class="row w100 q-pb-md justify-center">
+                            <q-spinner-ball color="primary" size="lg" />
+                            <q-spinner-ball color="primary" size="lg" />
+                            <q-spinner-ball color="primary" size="lg" />
+                        </div>
+                        <q-table v-if="!loading" no-data-label="Nenhum evento encontrado 🌆" separator="cell"
                             class="my-sticky-column-table text-primary q-mb-md w100 text-bold" :rows="rows"
                             :columns="columns" hide-pagination>
                             <template v-slot:body-cell-titulo="props">
@@ -41,7 +44,7 @@
                                     <div class="q-gutter-y-xs q-py-sm">
                                         {{ isMobile ? formatBigString(props.row.titulo) : props.row.titulo }}
                                     </div>
-                                    <q-tooltip anchor="center right" self="center right" :offset="[10, 10]">
+                                    <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                                         {{ props.row.titulo }}
                                     </q-tooltip>
                                 </q-td>
@@ -55,13 +58,13 @@
                             </template>
                             <template v-slot:body-cell-acoes="props">
                                 <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
-                                    <q-btn icon="visibility" color="primary" @click="openMeuEventoPage(props.row.id)" >
+                                    <q-btn icon="visibility" color="primary" @click="openMeuEventoPage(props.row.id)">
                                         <q-tooltip anchor="center left" self="center right" :offset="[10, 10]">
                                             Visualizar Evento
                                         </q-tooltip>
                                     </q-btn>
                                     <q-btn icon="sell " color="green">
-                                        <q-tooltip anchor="center left" self="center right" :offset="[10, 10]">
+                                        <q-tooltip anchor="center left" self="center left" :offset="[-5, 10]">
                                             Virar lote de ingressos
                                         </q-tooltip>
                                     </q-btn>
@@ -153,14 +156,14 @@ const columns = [
     },
 ]
 
-function formatBigString(str){
-    if(str.length > 15){
+function formatBigString(str) {
+    if (str.length > 15) {
         return str.substring(0, 12) + '...';
     }
     return str;
 }
 
-function formatBigPct(pact){
+function formatBigPct(pact) {
     return pact.substring(12)
 }
 

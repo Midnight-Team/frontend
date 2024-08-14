@@ -16,7 +16,7 @@
                             <q-icon size="md" name="person" color="primary" />
                         </template>
                     </q-input>
-                    <q-input  maxlength="20" filled class="q-mt-md bg-grey-3" v-if="usuario.isHost" v-model="usuario.senha" label="Senha"
+                    <q-input  maxlength="20" filled class="q-mt-md bg-grey-3" v-if="usuario.isHost"  @keyup.enter="login()" v-model="usuario.senha" label="Senha"
                         :type="showPassword ? 'text' : 'password'">
                         <template v-slot:prepend>
                             <q-icon size="md" name="lock" color="primary" />
@@ -36,13 +36,14 @@
                                 @click="colarAcessCode()" />
                         </template>
                     </q-input>
-                    <q-input maxlength="4" mask="####" filled class="q-mt-md bg-grey-3" v-if="!usuario.isHost" v-model="usuario.access_code"
+                    <q-input  @keyup.enter="login()" maxlength="4" mask="####" filled class="q-mt-md bg-grey-3" v-if="!usuario.isHost" v-model="usuario.access_code"
                         label="Código de Acesso" type="text">
                         <template v-slot:prepend>
                             <q-icon name="vpn_key" size="md" color="primary" class="cursor-pointer"/>
                         </template>
                     </q-input>
-                    <q-btn v-if="!loading" @click="login()" type="submit" :label="!usuario.isHost ? 'Escanear Ingressos' : 'Entrar'" color="primary"
+                    <q-btn v-if="!loading"  @click="login()"
+                     type="submit" :label="!usuario.isHost ? 'Escanear Ingressos' : 'Entrar'" color="primary"
                         :icon-right="!usuario.isHost ? 'document_scanner' : 'login'" class="w100 q-mt-md q-py-md" />
                         <div v-if="loading" class="row w100 q-pt-md justify-center">
                             <q-spinner-ball color="secondary" size="lg"/>

@@ -10,14 +10,12 @@
             <EventoStep2Component v-if="step == 2" @next="next" @prev="prev"/>
             <HostStepComponent v-if="step == 3" @next="next" @prev="prev"/>
         </div>
-        <FooterComponent/>
     </q-page>
 </template>
 <script setup>
 import EventoStep1Component from 'src/components/EventoStep1Component.vue'
 import EventoStep2Component from 'src/components/EventoStep2Component.vue'
 import HostStepComponent from 'src/components/HostStepComponent.vue'
-import FooterComponent from 'src/components/FooterComponent.vue'
 import { onBeforeMount, onBeforeUnmount, ref } from 'vue'
 
 const step = ref(1)

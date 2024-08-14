@@ -92,7 +92,7 @@ onBeforeMount(async () => {
             });
         }
         await createPreference();
-        console.log('preferenceId = ' + preferenceId.value);
+        // console.log('preferenceId = ' + preferenceId.value);
         mp.bricks().create("wallet", "wallet_container", {
             initialization: {
                 preferenceId: preferenceId.value,

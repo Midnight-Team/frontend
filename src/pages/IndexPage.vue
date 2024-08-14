@@ -1,7 +1,7 @@
 <template>
   <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-5" v-if="pageLoaded">
     <div class="home-wrapper q-px-md q-pb-xl">
-      <div class="w100  column justify-center q-mt-xs items-center text-white text-bold" style="border-radius: 20px; ">
+      <div class="w100  column justify-center items-center text-white text-bold" style="border-radius: 20px; ">
         <div class="w100 flex q-mb-lg flex-center q-mt-lg">
           <q-avatar style="width:110px;height:110px;" class="shadow-2">
             <img :src="host.img" alt="">
@@ -13,44 +13,50 @@
           {{ host.nome_razao }}<br>
           <div class="high-opacity text-secondary q-mt-sm" style="font-size: 1rem">host</div>
         </div>
-        <div class="rounded-borders w100 column text-secondary q-pa-md" style="border-bottom: 2px solid #9573f3;">
-          <div class="row q-pb-xs rounded-borders ">
+        <div class="rounded-borders w100 column text-secondary q-pa-md q-mt-md" style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
+          <div class="row q-pb-xs rounded-borders items-center w100 q-mb-md">
             <q-icon size="xl" color="secondary" name="payments" />
+            <div id="title-menu" class="q-ml-xs">Saldo e Coins</div>
           </div>
-          <p class="row no-wrap items-center justify-between ">
-            Saldo: R$ {{ formatToNumber(host.saldo) }}
-            <q-btn label="Sacar" class="q-ml-md" icon-right="attach_money" color="primary" />
+          <p class="row no-wrap items-center justify-between text-green text-shadow">
+            R$ {{ formatToNumber(host.saldo) }}
+            <q-btn label="Sacar" class="q-ml-md" icon-right="attach_money" color="green" />
           </p>
-          <p class="row no-wrap items-center justify-between">
-            PurpleCoins: {{ host.purpleCoins }}🟣
-            <q-btn to="/app/recarregar" label="" class="q-ml-md" icon-right="currency_exchange" color="primary" />
+          <p class="row no-wrap items-center justify-between text-shadow">
+            🟣 {{ host.purpleCoins }}
+            <q-btn to="/app/recarregar" dense label="" class="q-px-md q-ml-md" icon-right="currency_exchange" color="primary" />
           </p>
-          <strong class="text-blue q-mt-xs">SubCoins: {{ host.subCoins }}🔵</strong>
+          <strong class="text-blue q-mt-xs text-shadow">🔵 {{ host.subCoins }}</strong>
         </div>
         <div class="w100 text-secondary column q-gutter-y-md q-mt-md items-center q-pb-md q-px-md rounded-borders"
           style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
-          <div class="row no-wrap w100 items-center ">
-            <q-icon name="person" size="lg" color="secondary" class="q-mr-md" />
+          <div class="row no-wrap w100 items-center justify-end">
             {{ host.login }}
+            <q-icon name="person" size="lg" color="secondary" class="q-ml-md" />
           </div>
-          <div class="row no-wrap w100 items-center ">
-            <q-icon name="home_work" size="lg" color="secondary" class="q-mr-md" />
+          <div class="row no-wrap w100 items-center justify-end ">
             {{ host.nome_razao }}
+            <q-icon name="home_work" size="lg" color="secondary" class="q-ml-md" />
           </div>
-          <div class="row no-wrap w100 items-center ">
-            <q-icon name="badge" size="lg" color="secondary" class="q-mr-md" />
+          <div class="row no-wrap w100 items-center justify-end ">
             {{ host.cpf_cnpj }}
+            <q-icon name="badge" size="lg" color="secondary" class="q-ml-md" />
           </div>
-          <div class="row no-wrap w100 items-center ">
-            <q-icon name="email" size="lg" color="secondary" class="q-mr-md" />
+          <div class="row no-wrap w100 items-center justify-end ">
             {{ host.email }}
+            <q-icon name="email" size="lg" color="secondary" class="q-ml-md" />
           </div>
-          <div class="row no-wrap w100 items-center ">
-            <q-icon name="phone" size="lg" color="secondary" class="q-mr-md" />
+          <div class="row no-wrap w100 items-center justify-end ">
             {{ host.telefone }}
+            <q-icon name="phone" size="lg" color="secondary" class="q-ml-md" />
           </div>
-          <q-btn label="Solicitar Alterações" color="primary" icon-right="edit" class="w100" />
+          <div class="row no-wrap w100 items-center justify-end ">
+            <q-btn @click="dialog.historico = !dialog.historico" label="Histórico de Recargas" color="secondary" icon-right="history" class="q-px-md" dense />
+            <q-icon name="shopping_cart" size="lg" color="secondary" class="q-ml-md" />
+
+          </div>
         </div>
+        <q-btn label="Solicitar Alterações" color="primary" icon-right="edit" class="w100 q-mt-md" />
         <!-- <q-card class="w100 text-primary column q-gutter-y-md items-center q-pb-md q-px-md bg-grey-3">
           <div class="w100 row q-pb-xs rounded-borders" style="border-bottom:4px solid #8527e26c">
             <q-icon size="xl" color="primary" name="local_activity" />
@@ -97,6 +103,9 @@
         <!-- <q-btn label="Solicitar Suporte" @click="wppConsultor()" icon-right="contact_support" class="q-mt-xl w100" color="primary" /> -->
       </div>
     </div>
+    <q-dialog v-model="dialog.historico" style="backdrop-filter: blur(4px);">
+      <HistoricoPagamentoComponent />
+    </q-dialog>
     <div class="w100 bg-white q-mt-xl">
       <FooterComponent />
     </div>
@@ -113,12 +122,16 @@
 <script setup>
 import { onBeforeMount, onMounted, ref } from 'vue';
 import FooterComponent from 'src/components/FooterComponent.vue';
+import HistoricoPagamentoComponent from 'src/components/HistoricoPagamentoComponent.vue';
 import { useRouter } from 'vue-router';
 import { api } from "src/boot/axios";
 
 const pageLoaded = ref(false);
 const router = useRouter();
 const host = ref({})
+const dialog = ref({
+  historico: false
+})
 
 async function updateMoneys(isFromBtn) {
   await api.post('/update_moneys', { id: host.value.id, senha: host.value.senha })
