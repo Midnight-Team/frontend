@@ -22,14 +22,14 @@
     </q-header>
 
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grad-1">
-      <div class="w100 flex q-mb-md flex-center q-mt-lg">
+      <div v-if="isAuthenticated"  class="w100 flex q-mb-md flex-center q-mt-lg">
         <q-avatar style="width:110px;height:110px;" class="shadow-2">
           <img  :src="authStore.getInfoImg()" alt="">
         </q-avatar>
       </div>
       <div v-if="isHost" class="text-center text-bold text-purple-1">{{authStore.getInfoRazao()}}</div>
       <div class="text-center text-purple-1 mid-opacity text-bold q-mb-md ">{{ authStore.getInfoRole() }}</div>
-      <q-list class="text-bold text-white">
+      <q-list v-if="isAuthenticated"  class="text-bold text-white">
         <q-item v-for="item in menuOptions.items" :key="item.label"
            clickable @click="goTo(item.to)" style="border-radius: 12px;" :class="item.class">
           <q-item-section>
@@ -39,30 +39,24 @@
             <q-icon :name="item.icon" color="secondary" />
           </q-item-section>
         </q-item>
-        <div v-if="!isAuthenticated" class="w100 row items-center justify-center q-mt-xl">
-          <div class="text-center q-mb-md q-mx-md">
-            Registre-se ou Faça Login para ter acesso aos seus Eventos e Ingressos!!
-          </div>
-          <div class="row items-center q-mt-xl">
-            <q-avatar>
-              <q-icon size="md" color="primary" name="local_activity" />
-            </q-avatar>
-            Midnight Tickets
-          </div>
-          <q-btn v-if="!isAuthenticated" class="q-mt-lg" @click="loginLayout('/login')" label="Login ou Criar Conta" color="primary"
-            icon="login" />
-        </div>
-        <div class="absolute-bottom w100  row no-wrap items-center justify-center q-mt-xl text-primary q-py-sm">
-          <div class="row items-center ">
-            <q-avatar>
-              <q-icon size="md" color="white" name="local_activity" />
-            </q-avatar>
-            <a href="/app" style="text-decoration: none;" class="text-white q-pl-xs text-bold">
-              Midnight Tickets
-            </a>
-          </div>
-        </div>
       </q-list>
+      <div v-if="!isAuthenticated" class="w100 text-white text-bold row items-center justify-center q-mt-xl">
+        <div class="text-center q-mb-md q-mx-md">
+          Registre-se ou Faça Login para ter acesso aos seus Eventos e Ingressos!!
+        </div>
+        <q-btn v-if="!isAuthenticated" class="q-mt-lg" to="/" label="Página Inicial" color="primary"
+          icon="home" />
+      </div>
+      <div class="absolute-bottom w100  row no-wrap items-center justify-center q-mt-xl text-primary q-py-sm">
+        <div class="row items-center ">
+          <q-avatar>
+            <q-icon size="md" color="white" name="local_activity" />
+          </q-avatar>
+          <a href="/app" style="text-decoration: none;" class="text-white q-pl-xs text-bold">
+            Midnight Tickets
+          </a>
+        </div>
+      </div>
     </q-drawer>
 
     <q-page-container>
@@ -100,10 +94,10 @@ const menuOptions = ref({
   items: [
     // HOST MENUS
     // { label: 'Vendas', icon: 'payments', to: '/app/#' },
-    { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Acesso', icon: 'sensor_occupied', to: '/evento/steps', role: 'host', selected: false,},
+    { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false,},
     { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false,},
     { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Suporte', icon: 'contact_support', to: '/app/#', selected: false },
-    { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Logout', icon: 'logout', to: '/', selected: false }
+    { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Sair', icon: 'logout', to: '/', selected: false }
     // { label: 'Ingressos', icon: 'confirmation_number', to: '/app/#' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
   ]

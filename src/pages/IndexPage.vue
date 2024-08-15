@@ -16,15 +16,14 @@
         <div class="rounded-borders w100 column text-secondary q-pa-md q-mt-md" style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
           <div class="row q-pb-xs rounded-borders items-center w100 q-mb-md">
             <q-icon size="xl" color="secondary" name="payments" />
-            <div id="title-menu" class="q-ml-xs">Saldo e Coins</div>
           </div>
-          <p class="row no-wrap items-center justify-between text-green text-shadow">
+          <p style="font-size:1rem" class="row no-wrap items-center justify-between text-green-4 text-shadow">
             R$ {{ formatToNumber(host.saldo) }}
-            <q-btn label="Sacar" class="q-ml-md" icon-right="attach_money" color="green" />
+            <q-btn label="Sacar" class="q-pa-md" icon-right="attach_money" color="green" />
           </p>
           <p class="row no-wrap items-center justify-between text-shadow">
             🟣 {{ host.purpleCoins }}
-            <q-btn to="/app/recarregar" dense label="" class="q-px-md q-ml-md" icon-right="currency_exchange" color="primary" />
+            <q-btn to="/app/recarregar" dense label="recarregar" class="q-px-md q-ml-md" icon-right="currency_exchange" color="primary" />
           </p>
           <strong class="text-blue q-mt-xs text-shadow">🔵 {{ host.subCoins }}</strong>
         </div>

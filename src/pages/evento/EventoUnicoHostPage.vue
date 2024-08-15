@@ -17,16 +17,25 @@
                 <q-icon name="nightlife" size="md" class="text-primary" />
                 EVENTO
             </div>
+            <div class="w100">
+                {{ evento.status }}
+            </div>
             <q-input v-if="editando" label="Título do Evento*" v-model="evento.titulo" outlined
-                color="primary"></q-input>
+                color="primary">
+                <template v-slot:append>
+                    <q-icon name="nightlife" color="primary" />
+                </template>
+            </q-input>
             <q-input v-if="editando" label="Link da Imagem" v-model="evento.img_url" outlined color="primary">
                 <template v-slot:append>
                     <q-icon @click="openImgur()" name="image" color="primary" />
                 </template>
             </q-input>
-            <div class="w100">
-                {{ evento.status }}
-            </div>
+            <q-input :readonly="!editando" :filled="!editando" mask="####" maxlength="4" label="Código de Acesso" v-model="evento.access_code" outlined color="primary">
+                <template v-slot:append>
+                    <q-icon name="lock" color="primary" />
+                </template>
+            </q-input>
             <q-input type="textarea" label="Descrição" v-model="evento.descricao" outlined :readonly="!editando"
                 :filled="!editando"></q-input>
             <q-input :readonly="!editando" :filled="!editando" label="Contato*" v-model="evento.contato" type="textarea"

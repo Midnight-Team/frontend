@@ -10,6 +10,8 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'recarregar', component: () => import('pages/RecarregarPurpleCoinsPage.vue') },
+      { path: 'acesso', component: () => import('pages/AcessoPage.vue'),
+      },
     ]
   },
   {
@@ -21,13 +23,13 @@ const routes = [
       { path: 'meu-evento', component: () => import('pages/evento/EventoUnicoHostPage.vue') },
     ]
   },
-  {
-    path: '/status-payment',
-    component: () => import('src/layouts/HostLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/StatusPaymentPage.vue') },
-    ]
-  },
+  // {
+  //   path: '/status-payment',
+  //   component: () => import('src/layouts/HostLayout.vue'),
+  //   children: [
+  //     { path: '', component: () => import('pages/StatusPaymentPage.vue') },
+  //   ]
+  // },
   {
     path: '/login',
     component: () => import('layouts/LoginLayout.vue'),

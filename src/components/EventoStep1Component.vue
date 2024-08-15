@@ -68,7 +68,7 @@
 
             <q-input maxlength="250" placeholder="Insira a url do banner" filled v-model="evento.img_url" label="Link da Imagem do Evento">
                 <template v-slot:append>
-                    <q-btn flat icon="image" @click="verImg(evento.img_url)" color="primary" />
+                    <q-btn flat icon="image" @click="openImgur()" color="primary" />
                 </template>
             </q-input>
             <q-input  placeholder="Clique no ícone ao lado para ajuda" maxlength="500" filled v-model="evento.localizacao" label="Localização Google Maps">
@@ -107,6 +107,10 @@ const evento = ref({
     pacote: null,
     img_url: '',
 })
+
+function openImgur() {
+    window.open('https://imgur.com/', '_blank')
+}
 
 const goNext = () => {
     evento.value.data_evento = evento.value.data_evento.slice(0, 10)

@@ -1,13 +1,13 @@
         <template>
-    <div class="wrapper q-px-md bg-white">
+    <div class="wrapper ">
         <!-- <div id="paymentBrick_container">
         </div> -->
         <div id="wallet_container">
         </div>
         <div v-if="loading" class="row w100 justify-center q-mt-md q-py-xl">
-            <q-spinner-ball color="primary" size="xl" />
-            <q-spinner-ball color="primary" size="xl" />
-            <q-spinner-ball color="primary" size="xl" />
+            <q-spinner-ball color="blue" size="xl" />
+            <q-spinner-ball color="blue" size="xl" />
+            <q-spinner-ball color="blue" size="xl" />
         </div>
     </div>
 </template>
@@ -219,4 +219,8 @@ onBeforeMount(async () => {
 });
 </script>
 
-<style scoped></style>
+<style>
+.grey-3WMlEf.svelte-1a1oxv8.svelte-1a1oxv8{
+    color: rgba(255, 255, 255, 0.824)!important;
+}
+</style>

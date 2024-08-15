@@ -15,27 +15,27 @@
             <div
                 class="w100 row items-center justify-center q-py-md q-mt-md q-mb-md  rounded-borders text-white bg-grad-1 shadow-1">
                 <q-icon size="md" color="blue-1" name="currency_exchange" />
-                <div class="text-center text-h6 text-bold q-px-md ">Recarregar Coins</div>
+                <div class="text-center text-h6 text-bold q-px-md ">Recarregar Moedas</div>
             </div>
             <q-card style="border-radius: 16px;border: 2px solid #6D2EDD;border-bottom: 10px solid #6D2EDD;"
                 class="bg-blue-1 w100 shadow-3 animate__animated animate__zoomIn animate__delay-1s">
                 <q-card-section>
-                    <q-item class="q-mb-sm option" style="border-radius: 12px;border: 2px solid #6310E1;"
+                    <q-item class="column q-mb-sm option" style="border-radius: 12px;border: 2px solid #6310E1;"
                         v-for="item in pacotesCoins" :key="item.label" clickable>
-                        <q-item-section avatar>
-                            <q-icon color="primary" size="md" name="paid" />
+                        <q-item-section avatar >
+                            <q-icon color="secondary" size="sm" name="paid" />
                         </q-item-section>
-                        <q-item-section class="text-bold text-primary">
+                        <q-item-section  style="font-size:1rem" class="text-bold text-primary q-px-xs q-pb-md q-pt-sm">
                             <q-item-label>{{ item.label }}
                                 <div class="text-blue" v-if="item.value == 4">+ 50 subcoins</div>
                                 <div class="text-blue" v-if="item.value == 5">+ 150 subcoins</div>
                             </q-item-label>
                         </q-item-section>
-                        <q-item-section>
-                            <q-btn class="q-ml-sm" @click="addRecargaPacote(item)"
-                                :label="'Recarregar ' + (item.valorAvista ? formatString(item.valorAvista) : formatString(item.preco))"
-                                color="primary" icon-right="currency_exchange" />
-                        </q-item-section>
+                        <div>
+                            <q-btn class="absolute-right" style="border-radius:10px;width:45%" dense @click="addRecargaPacote(item)"
+                                :label="(item.valorAvista ? formatString(item.valorAvista) : formatString(item.preco))"
+                                color="green-6" icon="shopping_cart" />
+                        </div>
                     </q-item>
                 </q-card-section>
             </q-card>
@@ -76,17 +76,22 @@
                 </div>
             </div>
         </div>
-        <q-dialog class="animate__animated animate__fadeIn " persistent v-model="openPaymentModal"
+        <q-dialog class="animate__animated animate__fadeIn" persistent v-model="openPaymentModal"
             style="backdrop-filter: blur(4px);">
             <div style="border-radius: 16px"
-                class="item-selecionado bg-grad-4 q-mb-md rounded-borders  text-h6 text-white text-bold text-center">
-                <div class="q-pa-md" id="title-menu">Confirmar Compra
-                </div>
-                <div class="q-mb-md q-px-md text-purple-1">
-                    {{ itemSelected.label }} por<br> {{
-                        formatString(itemSelected.preco) }} </div>
-                <RecargaBricksPaymentComponent />
-                <q-btn class="" label="cancelar" flat color="purple-2" @click="openPaymentModal = false" />
+            class="item-selecionado bg-primary q-mb-md rounded-borders q-pa-md text-h3 text-blue-2 text-bold">
+            <div class="q-pa-md" >Confirmar Recarga
+            </div>
+            <div id="title-menu" class="text-center text-white q-my-md">
+                {{ itemSelected.label }} por<br> {{
+                    formatString(itemSelected.preco) }} </div>
+                    <!-- <div style="font-size:.5rem" class=" text-bold text-blue-2">
+                        Você será Redirecionado para o Ambiente de Pagamento
+                    </div> -->
+                    <RecargaBricksPaymentComponent />
+                    <div class="row w100 justify-center">
+                        <q-btn class="" label="voltar" flat color="secondary" @click="openPaymentModal = false" />
+                    </div>
             </div>
         </q-dialog>
         <div class="w100 q-mt-lg">
@@ -166,7 +171,7 @@ function formatString(value) {
 }
 
 .option:hover {
-    background-color: #4eb2ffbf;
+    background-color: #37fc9348;
     border-radius: 12px;
 }
 
@@ -185,5 +190,9 @@ function formatString(value) {
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
     }
+}
+
+.text-blue-2{
+    color:#71c4f7!important;
 }
 </style>
