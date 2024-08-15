@@ -14,44 +14,43 @@
           <div class="high-opacity text-secondary q-mt-sm" style="font-size: 1rem">host</div>
         </div>
         <div class="rounded-borders w100 column text-secondary q-pa-md q-mt-md" style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
-          <div class="row q-pb-xs rounded-borders items-center w100 q-mb-md">
-            <q-icon size="xl" color="secondary" name="payments" />
+          <div class="row q-pb-xs rounded-borders items-center no-wrap w100 q-mb-md justify-between">
+            <div class="text-h6 row items-center text-green-2">
+              R$ {{ formatToNumber(host.saldo) }}
+            </div>
+            <q-btn label="Sacar" class="q-px-md" icon-right="attach_money" color="green" />
           </div>
-          <p style="font-size:1rem" class="row no-wrap items-center justify-between text-green-4 text-shadow">
-            R$ {{ formatToNumber(host.saldo) }}
-            <q-btn label="Sacar" class="q-pa-md" icon-right="attach_money" color="green" />
-          </p>
           <p class="row no-wrap items-center justify-between text-shadow">
             🟣 {{ host.purpleCoins }}
+            <strong class="text-blue text-shadow">🔵 {{ host.subCoins }}</strong>
             <q-btn to="/app/recarregar" dense label="recarregar" class="q-px-md q-ml-md" icon-right="currency_exchange" color="primary" />
           </p>
-          <strong class="text-blue q-mt-xs text-shadow">🔵 {{ host.subCoins }}</strong>
         </div>
         <div class="w100 text-secondary column q-gutter-y-md q-mt-md items-center q-pb-md q-px-md rounded-borders"
           style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
-          <div class="row no-wrap w100 items-center justify-end">
+          <div class="row no-wrap w100 items-center ">
+            <q-icon name="person" size="lg" color="secondary" class="q-mr-md" />
             {{ host.login }}
-            <q-icon name="person" size="lg" color="secondary" class="q-ml-md" />
           </div>
-          <div class="row no-wrap w100 items-center justify-end ">
+          <div class="row no-wrap w100 items-center">
+            <q-icon name="home_work" size="lg" color="secondary" class="q-mr-md" />
             {{ host.nome_razao }}
-            <q-icon name="home_work" size="lg" color="secondary" class="q-ml-md" />
           </div>
-          <div class="row no-wrap w100 items-center justify-end ">
+          <div class="row no-wrap w100 items-center">
+            <q-icon name="badge" size="lg" color="secondary" class="q-mr-md" />
             {{ host.cpf_cnpj }}
-            <q-icon name="badge" size="lg" color="secondary" class="q-ml-md" />
           </div>
-          <div class="row no-wrap w100 items-center justify-end ">
+          <div class="row no-wrap w100 items-center">
+            <q-icon name="email" size="lg" color="secondary" class="q-mr-md" />
             {{ host.email }}
-            <q-icon name="email" size="lg" color="secondary" class="q-ml-md" />
           </div>
-          <div class="row no-wrap w100 items-center justify-end ">
+          <div class="row no-wrap w100 items-center">
+            <q-icon name="phone" size="lg" color="secondary" class="q-mr-md" />
             {{ host.telefone }}
-            <q-icon name="phone" size="lg" color="secondary" class="q-ml-md" />
           </div>
-          <div class="row no-wrap w100 items-center justify-end ">
+          <div class="row no-wrap w100 items-center">
+            <q-icon name="shopping_cart" size="lg" color="secondary" class="q-mr-md" />
             <q-btn @click="dialog.historico = !dialog.historico" label="Histórico de Recargas" color="secondary" icon-right="history" class="q-px-md" dense />
-            <q-icon name="shopping_cart" size="lg" color="secondary" class="q-ml-md" />
 
           </div>
         </div>
