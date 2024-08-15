@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-grad-2 q-px-md q-pt-md animate__animated animate__fadeIn ">
+  <q-page class="bg-grad-2 q-px-md  q-py-md animate__animated animate__fadeIn ">
     <div class="q-mb-md text-h6 text-bold bg-grad-1  rounded-borders text-white row items-center justify-center q-pa-md">
       <q-icon size="md" name="sensor_occupied" color="blue-1" class="q-pr-sm"></q-icon>
       Acessos
@@ -18,7 +18,7 @@
       Acessos Criados
     </div>
       <div v-if="!loading" class="rounded-borders bg-grad-4 row q-pa-md q-mt-md justify-between cards-wrapper">
-          <q-card style="width: 45%" v-for="acesso in acessos" :key="acesso.id" class="bg-blue-1 q-mb-md">
+          <q-card v-for="acesso in acessos" :key="acesso.id" class="w100 bg-blue-1 q-mb-md">
             <q-card-section>
               <q-icon name="person" size="md" color="primary" class="absolute-right q-pa-xs q-pr-sm"></q-icon>
               <div class="text-h6 text-bold text-primary q-pt-lg">{{ acesso.nome }}</div>

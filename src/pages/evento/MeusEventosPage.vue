@@ -59,12 +59,12 @@
                             <template v-slot:body-cell-acoes="props">
                                 <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
                                     <q-btn icon="visibility" color="primary" @click="openMeuEventoPage(props.row.id)">
-                                        <q-tooltip anchor="center left" self="center right" :offset="[10, 10]">
+                                        <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                                             Visualizar Evento
                                         </q-tooltip>
                                     </q-btn>
                                     <q-btn icon="sell " color="green">
-                                        <q-tooltip anchor="center left" self="center left" :offset="[-5, 10]">
+                                        <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                                             Virar lote de ingressos
                                         </q-tooltip>
                                     </q-btn>

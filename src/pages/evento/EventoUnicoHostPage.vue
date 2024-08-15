@@ -130,7 +130,7 @@
                     </div>
                 </div>
             </div>
-            <q-btn v-if="!editando" label="Adicionar Subhost" icon-right="person_add" class=""
+            <q-btn v-if="!editando" @click="dialogAcessos = !dialogAcessos" label="Adicionar Subhost" icon-right="person_add" class=""
                 color="primary"></q-btn>
         </div>
         <div class="w100 q-my-lg" v-if="editando"></div>
@@ -143,6 +143,24 @@
         <div class="w100 q-pb-xl"></div>
         <q-btn @click="salvarAlteracoes()" v-if="editando" class=" w100 q-mt-md q-py-lg fixed"
             style="bottom:0px;left:0px;z-index: 9;" label="Salvar Alterações" icon-right="save" color="green-7"></q-btn>
+            <q-dialog v-model="dialogAcessos">
+                <q-list id="acessos_disponiveis" class="colum bg-white q-px-md q-pt-md">
+                    <div class="w100 q-pa-md row rounded-borders justify-center no-wrap bg-grad-1 text-white text-h6 text-bold">
+                        Acessos Disponíveis
+                    </div>
+                    <div v-if="acessos.length == 0">
+                        <div class="text-secondary text-bold q-mt-md">Nenhum acesso disponível 👮🏼</div>
+                    </div>
+                    <q-btn class="q-my-md" color="blue" label="Registrar Acessos" icon-right="person_add" to="/app/acessos"/>
+                    <q-list-item class="w100 column rounded-borders q-mb-md q-pa-sm" style="border:4px solid #9573f3" v-for="acesso in acessos" :key="acesso.id">
+                        <div class="text-primary text-bold">
+                            {{ acesso.nome }} <br><strong class="text-secondary">{{ acesso.id }}</strong>
+                        </div>
+                        <q-btn class="q-mt-md" color="green" label="Adicionar ao Evento" icon-right="sensor_occupied" @click="updateSubhostsEvento(acesso)"/>
+                    </q-list-item>
+
+                </q-list>
+            </q-dialog>
     </q-page>
     <q-page v-else>
         <div class="row w100 q-pt-md justify-center">
@@ -158,11 +176,14 @@ import { onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import { api } from 'src/boot/axios';
 import { useQuasar } from 'quasar';
 
+const host = JSON.parse(sessionStorage.getItem('userLogado'));
 const evento = ref({})
 const pageLoaded = ref(false)
+const dialogAcessos = ref(false)
 const eventoLoaded = ref(true)
 const editando = ref(false)
 const $q = useQuasar()
+const acessos = ref([])
 
 function openImgur() {
     window.open('https://imgur.com/', '_blank')
@@ -171,6 +192,26 @@ function openImgur() {
 onBeforeUnmount(() => {
     // sessionStorage.removeItem('eventoHandlerId')
 })
+
+async function updateSubhostsEvento(acesso) {
+    acessos.value = acessos.value.filter(ac => ac.id != acesso.id)
+    evento.value.subhosts.push(acesso)
+    await api.put(`/update_subhosts_evento`, {  host: { id:host.id, senha: host.senha },evento: evento.value })
+        .then(response => {
+            acessos.value = response.data
+            dialogAcessos.value = false
+        })
+        .catch(error => {
+            console.log(error)
+            $q.notify({
+                color: 'red-8',
+                textColor: 'white',
+                icon: 'error',
+                message: error.response.data.error,
+                position: 'top'
+            })
+        })
+}
 
 async function salvarAlteracoes() {
     await api.put(`/update_evento`, { evento: evento.value, host: JSON.parse(sessionStorage.getItem('userLogado')) })
@@ -198,8 +239,8 @@ async function salvarAlteracoes() {
         })
 }
 
+
 async function getEvento() {
-    const host = JSON.parse(sessionStorage.getItem('userLogado'));
     await api.post(`/get_evento_host`, {
         evento: {
             id: sessionStorage.getItem('eventoHandlerId')
@@ -218,9 +259,26 @@ async function getEvento() {
             pageLoaded.value = true
         })
 }
-
+async function getAcessos(){
+  const myHost = {
+    id: JSON.parse(sessionStorage.getItem('userLogado')).id,
+    senha: JSON.parse(sessionStorage.getItem('userLogado')).senha
+  }
+  const response = await api.post('/get_access_people', {id: myHost.id, senha: myHost.senha})
+  acessos.value = response.data
+  //remover os acessos que já estão no evento.subhosts
+    acessos.value = acessos.value.filter(acesso => !evento.value.subhosts.find(subhost => subhost.id == acesso.id))
+}
 onBeforeMount(async () => {
     await getEvento()
+    await getAcessos()
+    // await api.put(`/update_subhosts_evento`, {  host: { id:host.id, senha: host.senha },evento: evento.value })
+    //     .then(response => {
+    //         acessos.value = response.data
+    //     })
+    //     .catch(error => {
+    //         console.log(error)
+    //     })
 })
 
 
