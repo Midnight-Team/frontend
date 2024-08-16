@@ -6,10 +6,8 @@
     scroll-behavior: smooth;
 }
 
-html {
-    background: #8E2DE2;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+html,body {
+background: #3D3943
     
 }
 
@@ -24,6 +22,12 @@ html {
     background: -webkit-linear-gradient(to left, #682edc, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #682edc, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
+}
+.bg-glass-2 {
+    background: #682edc9f;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #682edc9f, #8d2de2ab);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #682edc9f, #8d2de2ab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    backdrop-filter: blur(10px);
 }
 .bg-grad-3 {
     background: #8E2DE2;  /* fallback for old browsers */
@@ -129,5 +133,5 @@ th{
 }
 
 .text-shadow {
-  text-shadow: 0px 0px 1px #0000009a;
+  text-shadow: 0px 0px .5px #0000009a;
 }

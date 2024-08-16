@@ -16,9 +16,9 @@
         <div class="rounded-borders w100 column text-secondary q-pa-md q-mt-md" style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
           <div class="row q-pb-xs rounded-borders items-center no-wrap w100 q-mb-md justify-between">
             <div class="text-h6 row items-center text-green-2">
-              R$ {{ formatToNumber(host.saldo) }}
+              <strong class="text-green q-pr-sm">R$ </strong> {{ formatToNumber(host.saldo) }}
             </div>
-            <q-btn label="Sacar" class="q-px-md" icon-right="attach_money" color="green" />
+            <q-btn label="Sacar" class="q-px-md" icon-right="attach_money" color="green-8" />
           </div>
           <p class="row no-wrap items-center justify-between text-shadow">
             🟣 {{ host.purpleCoins }}

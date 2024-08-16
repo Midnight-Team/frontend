@@ -11,12 +11,12 @@
                     <q-checkbox class=" w100 bg-grad-6 row text-bold rounded-borders text-secondary " @update:model-value="usuario.senha = ''"
                         v-model="usuario.isHost" :label="!usuario.isHost ? 'Sou Subhost' : 'Sou Host' "
                          color="secondary" />
-                    <q-input class="bg-grey-3" maxlength="30" filled v-model="usuario.login" :label="usuario.isHost ? 'Login' : 'ID SubHost'">
+                    <q-input :inputStyle="{ fontWeight: 'bold'}" class="bg-grey-3" maxlength="30" filled v-model="usuario.login" :label="usuario.isHost ? 'Login' : 'ID SubHost'">
                         <template v-slot:prepend>
                             <q-icon size="md" name="person" color="primary" />
                         </template>
                     </q-input>
-                    <q-input  maxlength="20" filled class="q-mt-md bg-grey-3" v-if="usuario.isHost"  @keyup.enter="login()" v-model="usuario.senha" label="Senha"
+                    <q-input :inputStyle="{ fontWeight: 'bold'}" maxlength="20" filled class="q-mt-md bg-grey-3" v-if="usuario.isHost"  @keyup.enter="login()" v-model="usuario.senha" label="Senha"
                         :type="showPassword ? 'text' : 'password'">
                         <template v-slot:prepend>
                             <q-icon size="md" name="lock" color="primary" />
@@ -26,7 +26,7 @@
                                 class="cursor-pointer" @click="showPassword = !showPassword" />
                         </template>
                     </q-input>
-                    <q-input maxlength="100" filled class="q-mt-md bg-grey-3" v-if="!usuario.isHost" v-model="usuario.evento_id"
+                    <q-input :inputStyle="{ fontWeight: 'bold'}" maxlength="100" filled class="q-mt-md bg-grey-3" v-if="!usuario.isHost" v-model="usuario.evento_id"
                         label="Evento" type="text">
                         <template v-slot:prepend>
                             <q-icon name="nightlife" size="md" color="primary" class="cursor-pointer"/>
@@ -36,7 +36,7 @@
                                 @click="colarAcessCode()" />
                         </template>
                     </q-input>
-                    <q-input  @keyup.enter="login()" maxlength="4" mask="####" filled class="q-mt-md bg-grey-3" v-if="!usuario.isHost" v-model="usuario.access_code"
+                    <q-input :inputStyle="{ fontWeight: 'bold'}" @keyup.enter="login()" maxlength="4" mask="####" filled class="q-mt-md bg-grey-3" v-if="!usuario.isHost" v-model="usuario.access_code"
                         label="Código de Acesso" type="text">
                         <template v-slot:prepend>
                             <q-icon name="vpn_key" size="md" color="primary" class="cursor-pointer"/>

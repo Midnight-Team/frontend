@@ -5,7 +5,7 @@
       Acessos
     </div>
     <p class="text-center text-white">
-      Os acessos são as contas que você cria para disponibilizar para os colaboradores de seus eventos e
+      Os acessos são as contas que você cria e disponibiliza para os colaboradores de seus eventos
     </p>
     <div class="w100 q-mb-md rounded-borders ">
       <q-input maxlength="20" :input-style="{ fontSize: '1rem', fontWeight: 'bold', color: '#6310E1'}" outlined class="bg-grey-2 rounded-borders q-mb-md" v-model="acesso.id" label="Login do Acesso*"/>

@@ -1,13 +1,13 @@
 <template>
     <q-layout class="relative animate__animated animate__fadeIn bg-grad-6">
-        <q-header class="fixed bg-grad-2 text-white animate__animated animate__backInDown animate__slow shadow-1"
+        <q-header class="fixed bg-glass-2 text-white animate__animated animate__backInDown animate__slow shadow-1"
             height-hint="98">
             <div style="font-size: 1rem;" class=" q-py-md w100 row no-wrap items-center  justify-evenly">
                 <a v-if="!isMobile" @click="scrollBot()" class="menu-item row items-center" id="title-menu">
                     <q-icon class="q-pr-xs" name="local_activity" size="xl" /> Midnight Tickets
                 </a>
                 <a v-else @click="scrollBot()" class="menu-item row items-center">
-                    <q-icon  name="local_activity" size="65px"/>
+                    <q-icon name="local_activity" size="65px" />
                 </a>
                 <div class="row items-center no-wrap q-gutter-x-sm">
                     <a v-if="!isMobile" class="menu-item q-mr-md q-px-md" href="#vantagens">
@@ -32,55 +32,68 @@
 
         </q-header>
         <q-page-container>
+            <div class="w100 row justify-center q-mt-md relative" style="overflow: hidden ">
+                <div class="animate__animated animate__zoomInDown animate__delay-1s animate__slower row no-wrap justify-center q-px-sm  w100" style="overflow: hidden ;z-index: 9;">
+                    <q-btn to="/login/host" class="animate__animated animate__rubberBand animate__delay-3s animate__slower q-pa-xl q-mr-sm rounded-borders" color="dark" icon-right="nightlife"
+                        label="Sou Produtor!" />
+                    <q-btn to="/login" @click="scrollBot()" class="animate__animated animate__rubberBand animate__delay-3s animate__slower q-pa-xl rounded-borders" color="primary" icon-right="confirmation_number"
+                        label="Quero Ingressos!" />
+                </div>
+            </div>
             <q-page class="">
                 <div id="home" style="border: 8px solid #692EDD;border-radius: 8px;"
-                    class="q-mt-md q-mb-xl animate__animated animate__zoomIn animate__slower">
+                    class="q-mt-md q-mb-md animate__animated animate__zoomIn animate__slower ">
                     <q-toolbar class="bg-grad-4">
                         <q-toolbar-title
-                            class="row justify-center q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
-                            <div id="title-menu">
-                                MIDNIGHT TICKETS
+                            class="row justify-center  q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
+                            <div id="title" class="text-center">
+                                MIDNIGHT<br>TICKETS
                             </div>
                             <q-icon v-if="!isMobile" size="xl" color="white" name="local_activity" />
                         </q-toolbar-title>
                     </q-toolbar>
-                    <div class="text-shadow space bg-grad-2 w100 text-center text-purple-1 q-py-md text-bold q-px-md high-opacity"
+                    <div class="text-shadow space bg-grad-2 w100 text-center text-grey-4 q-py-md text-bold q-px-md high-opacity"
                         style="font-size:1rem">
                         PARE de PAGAR TAXAS excessivas na VENDA de SEUS INGRESSOS e REALIZE seus EVENTOS com 0% de
                         TAXA!!
                     </div>
-                    <q-card
-                        class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-3s">
-                        <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Digite seu EMAIL para SOLICITAR
-                            a ABERTURA da sua CONTA</p>
-                        <q-input v-model="contato.email" type="email" class="bg-white" filled label="Seu melhor email">
-                            <template v-slot:prepend>
-                                <q-icon name="email" color="primary" />
-                            </template>
-                            <template v-slot:append>
-                                <q-btn @click="fastEmailGetter()" color="primary" icon="send" label="Enviar" />
-                            </template>
-                        </q-input>
-                    </q-card>
+                    <div class="row justify-center  q-mx-md">
+                        <q-card id="email-card"
+                            class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-3s">
+                            <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Digite seu EMAIL para
+                                SOLICITAR
+                                a ABERTURA da sua CONTA</p>
+                            <q-input v-model="contato.email" type="email" class="bg-white" filled
+                                label="Seu melhor email">
+                                <template v-slot:prepend>
+                                    <q-icon name="email" color="primary" />
+                                </template>
+                                <template v-slot:append>
+                                    <q-btn @click="fastEmailGetter()" color="primary" icon="send" label="Enviar" />
+                                </template>
+                            </q-input>
+                        </q-card>
+                    </div>
                     <div class="w100 img-wrapper">
                         <img class="img"
                             src="https://images.blush.design/UKjlMI8EIiiOMVntZau4?w=920&auto=compress&cs=srgb" alt="">
                     </div>
-                    <div style="font-size:1.3rem" class=" bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">Quem
+                    <div style="font-size:1.3rem" class=" bg-grad-4 text-blue-1 text-bold q-px-sm q-py-md text-left">Quem
                         Somos ?</div>
                     <div style="font-size:1.1rem"
-                        class=" bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm q-py-md text-right text-shadow">Somos
+                        class=" bg-grad-2 text-blue-1 high-opacity text-bold q-px-sm q-py-md text-right text-shadow">
+                        Somos
                         um
-                        Serviço de Bilheteria Online e Gerenciador de Eventos Personalizados focados na Escalabilidade
-                        de seus Lucros em Venda de Ingressos Digitais</div>
+                        Aplicativo Web de Bilheteria Online e Monitoramento de Eventos focados na Escalabilidade
+                        de seus Lucros em Venda de Ingressos Digitais.</div>
                     <div class="w100 img-wrapper">
                         <img class="img"
                             src="https://images.blush.design/PJcHFUF4pMy6BXPLEFnD?w=500&auto=compress&cs=srgb" alt="">
                     </div>
-                    <div style="font-size:1.3rem" class=" bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">O
+                    <div style="font-size:1.3rem" class=" bg-grad-4 text-blue-1 text-bold q-px-sm q-py-md text-left">O
                         que Fazemos ?</div>
                     <div style="font-size:1.1rem"
-                        class="text-shadow q-mb-md bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm q-py-md text-right">
+                        class="text-shadow q-mb-md bg-grad-2 text-blue-1 high-opacity text-bold q-px-sm q-py-md text-right">
                         Maximizamos seus lucros na venda de ingressos de forma escalável com serviços personalizados,
                         transparência, suporte e uma
                         interface amigável. Seus ingressos mais caros são os que mais pagam taxas abusivas, mas pra nós
@@ -91,32 +104,33 @@
                     <div class="w100 img-wrapper column">
                         <img class="img" src="~/assets/landing-images/drawn1.png" alt="">
                     </div>
-                    <div style="font-size:1.3rem" class="bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">Como
+                    <div style="font-size:1.3rem" class="bg-grad-4 text-blue-1 text-bold q-px-sm q-py-md text-left">Como
                         fazemos isso ?
                     </div>
-                    <div  id="vantagens" style="font-size:1.1rem;"
-                        class="text-shadow bg-grad-2 text-purple-1 high-opacity text-bold q-px-sm  q-py-md text-right">Desde
+                    <div style="font-size:1.1rem;"
+                        class="text-shadow bg-grad-2 text-blue-1  text-bold q-px-sm  q-py-md text-right">
+                        Desde
                         pequenos encontros a grandes festivais, nossa plataforma se adapta às suas necessidades e
                         POTENCIALIZA seus ganhos.
-                        Na Midnight Tickets, entendemos que cada evento é único. Oferecemos opções flexíveis que se
+                         Oferecemos opções flexíveis que se
                         ajustam ao porte do seu evento, permitindo que você personalize sua experiência de acordo com
-                        sua demanda
+                        sua demanda.
                     </div>
                 </div>
-                <div class="rounded-borders" style="border: 4px solid #692EDD;">
-                    <div  style="letter-spacing:1px"
-                        class="text-shadow text-h6 w100 text-bold text-secondary text-center q-px-md q-py-sm border-bottom">
-                        Veja
-                        como
-                        nossa Plataforma pode aumentar o Faturamento do seu Evento!!</div>
+                <div  class="rounded-borders" style="border: 4px solid #692EDD;">
+                    <!-- <div style="letter-spacing:1px"
+                        class="text-shadow text-h6 w100 text-bold text-blue-4 text-center q-px-md q-py-sm border-bottom">
+                        Veja como
+                        nossa Plataforma pode aumentar o Faturamento do seu Evento!!</div> -->
                     <div class="text-h4 bg-white text-primary text-center w100 border-bottom text-bold q-pt-md q-pb-md">
                         Vantagens</div>
-                    <div style="font-size:1.1rem" class="text-shadow q-px-md bg-grey-5 text-left q-py-md rounded-borders">
+                    <div style="font-size:1.1rem"
+                        class="text-shadow q-px-md bg-grey-5 text-left q-py-md rounded-borders">
                         🟣 <strong class="text-primary">SEM TAXA POR VENDA<br></strong> Nossa <strong>moeda
                             virtual</strong>
                         permite realizar <strong>Eventos</strong> com <strong>0% de taxa</strong> em ingressos
                         vendidos. Obtenha
-                        o <strong>máximo do seu 
+                        o <strong>máximo do seu
                             lucro</strong> e ainda <strong>GANHE CASHBACK</strong> com cada ingresso
                         não vendido
                         <br>🟣 <strong class="text-primary">LUCRO EM TEMPO REAL<br></strong> Disponibilizamos a
@@ -127,7 +141,8 @@
                     <div
                         class="w100 text-h4 text-bold bg-white text-primary text-center q-px-md rounded-borders q-py-sm border-bottom q-mt-md">
                         Benefícios</div>
-                    <div style="font-size:1.1rem" class="text-shadow q-px-md bg-grey-5 q-py-md rounded-borders border-bottom">
+                    <div style="font-size:1.1rem"
+                        class="text-shadow q-px-md bg-grey-5 q-py-md rounded-borders border-bottom">
                         💸 <strong style="font-size:1.2rem" class="text-primary text-bold">AS MENORES TAXAS<br></strong>
                         Estamos
                         integrados ao <strong>Mercado Pago</strong> com segurança
@@ -163,11 +178,12 @@
                             de bugs</strong>
                         <br>
                         <br>
-                        📲 <strong  style="font-size:1.2rem" class="text-primary text-bold">TECNOLOGIA DE
+                        📲 <strong style="font-size:1.2rem" class="text-primary text-bold">TECNOLOGIA DE
                             PONTA<br></strong>
-                        Nosso WebApp é desenvolvido com as <strong id="contato">melhores tecnologias</strong> do mercado e hospedada
+                        Nosso WebApp é desenvolvido com as <strong id="contato">melhores tecnologias</strong> do mercado
+                        e hospedada
                         na nuvem com
-                        serviços da AWS, <strong >garantindo segurança e escalabilidade</strong> para <strong>todos os
+                        serviços da AWS, <strong>garantindo segurança e escalabilidade</strong> para <strong>todos os
                             tipos de eventos e
                             usuários</strong>
                     </div>
@@ -287,7 +303,7 @@
                         class="w100 text-bold rounded-borders column bg-grad-2 items-center justify-center text-white q-pa-md text-center q-mt-md ">
                         <div class="column text-h5 text-white text-bold">LOGIN HOST</div>
                         <div class="text-purple-2">É Produtor de Eventos ou Subhost??</div>
-                        <q-btn icon-right="admin_panel_settings" label="Faça login Aqui" dense class="q-mt-sm q-pa-md"
+                        <q-btn icon-right="admin_panel_settings" label="Faça login Aqui" dense class="q-mt-sm q-pa-lg rounded-borders"
                             color="dark" to="/login/host" />
                     </div>
                 </div>
@@ -395,11 +411,11 @@ async function sendForm(msg) {
 
 
 function scrollBot() {
-    window.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, document.body.scrollHeight- 810);
 }
 
 function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight - 1890);
+    window.scrollTo(0, document.body.scrollHeight - 1920);
 }
 function scrollToVantagem() {
     window.scrollTo(0, document.body.scrollHeight - 3740);
@@ -435,7 +451,8 @@ function scrollToVantagem() {
     margin-top: 20px;
 }
 
-.img, img {
+.img,
+img {
     width: 100%;
     max-width: 800px;
     height: auto;
@@ -455,7 +472,7 @@ a {
 }
 
 .menu-item {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .q-btn:hover {
@@ -475,9 +492,16 @@ a {
 }
 
 @media(min-width: 1090px) {
-    .q-page-container {
+    .q-page {
         padding: 0 300px;
         margin: 0 30px;
+    }
+    .q-page-container{
+        padding: 0 100px;
+    }
+
+    #email-card {
+        width: 40% !important;
     }
 
     .q-carousel {

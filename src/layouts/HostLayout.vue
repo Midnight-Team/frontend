@@ -12,23 +12,23 @@
           </a>
         </q-toolbar-title>
 
-        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
+        <q-btn style="rounded-borders "  icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
 
-      <q-tabs align="center">
+      <!-- <q-tabs align="center" v-if="!isMobile">
         <q-route-tab class="text-purple-1" to="/app" label="Perfil" />
         <q-route-tab class="text-purple-1" v-if="isAuthenticated && isHost" to="/evento" label="Eventos" />
-      </q-tabs>
+      </q-tabs> -->
     </q-header>
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grad-1">
+    <q-drawer show-if-above v-model="rightDrawerOpen" overlay side="right" class="bg-grad-1">
       <div v-if="isAuthenticated"  class="w100 flex q-mb-md flex-center q-mt-lg">
         <q-avatar style="width:110px;height:110px;" class="shadow-2">
           <img  :src="authStore.getInfoImg()" alt="">
         </q-avatar>
       </div>
       <div v-if="isHost" class="text-center text-bold text-purple-1">{{authStore.getInfoRazao()}}</div>
-      <div class="text-center text-purple-1 mid-opacity text-bold q-mb-md ">{{ authStore.getInfoRole() }}</div>
+      <div class="text-center text-purple-1 mid-opacity text-bold q-mb-md "><q-btn to="/app" label="Perfil" flat ></q-btn></div>
       <q-list v-if="isAuthenticated"  class="text-bold text-white">
         <q-item v-for="item in menuOptions.items" :key="item.label"
            clickable @click="goTo(item.to)" style="border-radius: 12px;" :class="item.class">
@@ -50,10 +50,10 @@
       <div class="absolute-bottom w100  row no-wrap items-center justify-center q-mt-xl text-primary q-py-sm">
         <div class="row items-center ">
           <q-avatar>
-            <q-icon size="md" color="white" name="local_activity" />
+            <q-icon size="md" color="blue-1" name="support_agent" />
           </q-avatar>
-          <a href="/app" style="text-decoration: none;" class="text-white q-pl-xs text-bold">
-            Midnight Tickets
+          <a href="https://samuelvictorol.github.io/portfolio/contato" target="_blank" style="text-decoration: none;" class="text-blue-1 q-pl-xs text-bold">
+            Suporte
           </a>
         </div>
       </div>
@@ -77,7 +77,7 @@ const rightDrawerOpen = ref(false)
 const isHost = computed(() => authStore.getInfoRole() == 'host')
 const router = useRouter()
 const landingLink = !window.location.href.includes('localhost') ? 'https://midnightickets.com' : 'http://localhost:9000'
-const isMobile = window.innerWidth < 600
+const isMobile = window.innerWidth < 800
 function goTo(to) {
   router.push(to)
 }
@@ -94,9 +94,10 @@ const menuOptions = ref({
   items: [
     // HOST MENUS
     // { label: 'Vendas', icon: 'payments', to: '/app/#' },
-    { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false,},
-    { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false,},
-    { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Suporte', icon: 'contact_support', to: '/app/#', selected: false },
+    { class:'q-mt-md q-mx-md text-blue-1 bg-primary shadow-2' ,label: 'Eventos', icon: 'calendar_month', to: '/evento', role: 'host', selected: false,},
+    { class:'q-mt-md q-mx-md text-blue-1 bg-primary shadow-2' ,label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false,},
+    { class:'q-mt-md q-mx-md text-blue-1 bg-primary shadow-2' ,label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false,},
+    // { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Suporte', icon: 'contact_support', to: '/app/#', selected: false },
     { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Sair', icon: 'logout', to: '/', selected: false }
     // { label: 'Ingressos', icon: 'confirmation_number', to: '/app/#' },
     // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },

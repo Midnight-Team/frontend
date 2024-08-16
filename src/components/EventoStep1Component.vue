@@ -203,7 +203,7 @@ onMounted(() => {
 
 .title-1 {
     position: sticky;
-    top: 138px;
+    top: 90px;
     background: #efefef4d;
     backdrop-filter: blur(2px);
     z-index: 1;

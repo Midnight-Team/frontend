@@ -51,7 +51,7 @@ onBeforeUnmount(() => {
 }
 .steps{
     position: sticky;
-    top: 98px;
+    top: 50px;
     z-index: 2;
 }
 

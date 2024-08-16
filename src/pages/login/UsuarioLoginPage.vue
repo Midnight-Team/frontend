@@ -1,17 +1,17 @@
 <template>
     <div id="usuariologin-wrapper" class="animate__animated animate__fadeInLeft flex flex-center">
-        <q-card class="shadow-9  q-mt-md " id="card-login">
+        <q-card class="shadow-9 bg-blue-1 q-mt-md " id="card-login">
             <div class="text-h5 q-pl-md q-pt-md text-primary row items-center">
-                <q-icon :name="registrando ? 'person_add' : 'person'" size="lg" class="q-mr-sm"/>
+                <q-icon  :name="registrando ? 'person_add' : 'person'" size="lg" class="q-mr-sm"/>
                 {{ !registrando ? 'Login': 'Registrar'}} Usuário
             </div>
             <q-card-section>
                 <q-form @submit="submitForm()">
-                    <q-input v-if="registrando" filled class="q-my-md" v-model="usuario.nome" label="Nome*" />
-                    <q-input filled class="q-mb-md" v-model="usuario.cpf" label="CPF*" mask="###.###.###-##"  />
-                    <q-input v-if="registrando" filled class="q-mb-md" v-model="usuario.email" label="Email*" />
-                    <q-input v-if="registrando" filled class="q-mb-md" v-model="usuario.telefone" label="Telefone*"  mask="(##) #####-####" />
-                    <q-input filled v-model="usuario.senha" label="Senha*" :type="showPassword ? 'text' : 'password'">
+                    <q-input :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-my-md" v-model="usuario.nome" label="Nome*" />
+                    <q-input :inputStyle="{ fontWeight: 'bold'}" filled class="q-mb-md" v-model="usuario.cpf" label="CPF*" mask="###.###.###-##"  />
+                    <q-input :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.email" label="Email*" />
+                    <q-input :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.telefone" label="Telefone*"  mask="(##) #####-####" />
+                    <q-input maxlength="20" :inputStyle="{ fontWeight: 'bold'}" filled v-model="usuario.senha" label="Senha*" :type="showPassword ? 'text' : 'password'">
                         <template v-slot:append>
                             <q-icon :name="showPassword ? 'visibility' : 'visibility_off'" color="primary" class="cursor-pointer" @click="showPassword = !showPassword" />
                         </template>

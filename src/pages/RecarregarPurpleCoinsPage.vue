@@ -79,10 +79,10 @@
         <q-dialog class="animate__animated animate__fadeIn" persistent v-model="openPaymentModal"
             style="backdrop-filter: blur(4px);">
             <div style="border-radius: 16px"
-            class="item-selecionado bg-primary q-mb-md rounded-borders q-pa-md text-h3 text-blue-2 text-bold">
-            <div class="q-pa-md" >Confirmar Recarga
+            class="item-selecionado bg-primary q-mb-md rounded-borders q-pa-md text-blue-4 text-bold">
+            <div class="q-pa-md" id="title" >Confirmar Recarga
             </div>
-            <div id="title-menu" class="text-center text-white q-my-md">
+            <div  class="text-center text-h5 text-bold text-grey-3 q-my-md">
                 {{ itemSelected.label }} por<br> {{
                     formatString(itemSelected.preco) }} </div>
                     <!-- <div style="font-size:.5rem" class=" text-bold text-blue-2">
@@ -177,7 +177,7 @@ function formatString(value) {
 
 #fixed-saldo {
     position: fixed !important;
-    top: 6rem;
+    top: 50px;
     z-index: 100;
     background-color: rgba(255, 255, 255, 0.718);
     backdrop-filter: blur(8px);
@@ -186,7 +186,7 @@ function formatString(value) {
 
 @media (min-width: 1000px) {
     #fixed-saldo {
-        width: 80%;
+        width: 60%;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
     }

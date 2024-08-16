@@ -31,7 +31,7 @@
                         <q-toggle v-model="buscarEvento.status" @update:model-value="getEventos()"
                             :label="buscarEvento.status ? 'Em andamento' : 'Todos'"
                             class="q-mb-md text-primary text-bold" />
-                        <div v-if="loading" class="row w100 q-pb-md justify-center">
+                        <div v-if="loading" class="row w100 q-pb-xl justify-center">
                             <q-spinner-ball color="primary" size="lg" />
                             <q-spinner-ball color="primary" size="lg" />
                             <q-spinner-ball color="primary" size="lg" />
@@ -92,8 +92,7 @@ const buscarEvento = ref({
     status: true
 })
 
-const isMobile = window.innerWidth < 1100;
-
+const isMobile = window.innerWidth < 800;
 function openMeuEventoPage(eventoId) {
     sessionStorage.setItem('eventoHandlerId', eventoId);
     router.push('/evento/meu-evento');
@@ -157,8 +156,8 @@ const columns = [
 ]
 
 function formatBigString(str) {
-    if (str.length > 15) {
-        return str.substring(0, 12) + '...';
+    if (str.length > 9) {
+        return str.substring(0, 9) + '...';
     }
     return str;
 }
@@ -223,7 +222,7 @@ onMounted(async () => {
 
 .title-1 {
     position: sticky;
-    top: 96px;
+    top: 50px;
     background: #dacaff56;
     backdrop-filter: blur(12px);
     z-index: 2;

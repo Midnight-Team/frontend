@@ -151,7 +151,7 @@
                     <div v-if="acessos.length == 0">
                         <div class="text-secondary text-bold q-mt-md">Nenhum acesso disponível 👮🏼</div>
                     </div>
-                    <q-btn class="q-my-md" color="blue" label="Registrar Acessos" icon-right="person_add" to="/app/acessos"/>
+                    <q-btn class="q-my-md" color="blue" label="Registrar Acessos" icon-right="person_add" to="/app/acesso"/>
                     <q-list-item class="w100 column rounded-borders q-mb-md q-pa-sm" style="border:4px solid #9573f3" v-for="acesso in acessos" :key="acesso.id">
                         <div class="text-primary text-bold">
                             {{ acesso.nome }} <br><strong class="text-secondary">{{ acesso.id }}</strong>
@@ -200,6 +200,14 @@ async function updateSubhostsEvento(acesso) {
         .then(response => {
             acessos.value = response.data
             dialogAcessos.value = false
+            acessos.value = acessos.value.filter(acesso => !evento.value.subhosts.find(subhost => subhost.id == acesso.id))
+            $q.notify({
+                color: 'green-8',
+                textColor: 'white',
+                icon: 'person_add',
+                message: 'Acesso adicionado com sucesso',
+                position: 'top'
+            })
         })
         .catch(error => {
             console.log(error)
