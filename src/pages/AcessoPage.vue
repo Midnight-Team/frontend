@@ -17,8 +17,8 @@
       <q-icon size="md" name="people" color="blue-1" class="q-pr-sm"></q-icon>
       Acessos Criados
     </div>
-      <div v-if="!loading" class="rounded-borders bg-grad-4 row q-pa-md q-mt-md justify-between cards-wrapper">
-          <q-card v-for="acesso in acessos" :key="acesso.id" class="w100 bg-blue-1 q-mb-md">
+      <div v-if="!loading" class="rounded-borders bg-grad-4 row q-pa-md q-mt-md justify-around cards-wrapper">
+          <q-card id="card-acesso" v-for="acesso in acessos" :key="acesso.id" class="w100 bg-blue-2 q-mb-md">
             <q-card-section>
               <q-icon name="person" size="md" color="primary" class="absolute-right q-pa-xs q-pr-sm"></q-icon>
               <div class="text-h6 text-bold text-primary q-pt-lg">{{ acesso.nome }}</div>
@@ -104,7 +104,6 @@ const columns = [
 const acessos = ref([])
 
 async function getAcessos(){
-  loading.value = true
   const myHost = {
     id: JSON.parse(sessionStorage.getItem('userLogado')).id,
     senha: JSON.parse(sessionStorage.getItem('userLogado')).senha
@@ -115,6 +114,7 @@ async function getAcessos(){
 }
 
 onBeforeMount(async () => {
+  loading.value = true
   await getAcessos()
 })
 
@@ -127,7 +127,10 @@ onBeforeMount(async () => {
 
 @media (min-width: 1100px) {
   .q-page {
-   padding: 16px 220px
+   padding: 16px 320px
+  }
+  #card-acesso{
+    width: 280px;
   }
 }
 
