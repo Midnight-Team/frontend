@@ -1,6 +1,6 @@
 <template>
     <q-page class="animate__animated animate__fadeIn bg-grad-2 q-pb-xl">
-        <div class="es1 bg-grey-4 q-mx-sm  rounded-borders shadow-4 relative">
+        <div class="es1 bg-grey-4 q-mx-sm  rounded-borders  relative">
             <div
                 class="title-1 w100 q-px-sm row items-center text-primary shadow-1 q-py-md justify-between no-wrap text-bold">
                 <div class="row no-wrap items-center">

@@ -21,7 +21,7 @@
       </q-tabs> -->
     </q-header>
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" overlay side="right" class="bg-grad-1">
+    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grad-1">
       <div v-if="isAuthenticated"  class="w100 flex q-mb-md flex-center q-mt-lg">
         <q-avatar style="width:110px;height:110px;" class="shadow-2">
           <img  :src="authStore.getInfoImg()" alt="">

@@ -107,7 +107,7 @@
                     <div style="font-size:1.3rem" class="bg-grad-4 text-blue-1 text-bold q-px-sm q-py-md text-left">Como
                         fazemos isso ?
                     </div>
-                    <div style="font-size:1.1rem;"
+                    <div id="vantagens" style="font-size:1.1rem;"
                         class="text-shadow bg-grad-2 text-blue-1  text-bold q-px-sm  q-py-md text-right">
                         Desde
                         pequenos encontros a grandes festivais, nossa plataforma se adapta às suas necessidades e

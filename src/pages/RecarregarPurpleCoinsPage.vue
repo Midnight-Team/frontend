@@ -1,6 +1,6 @@
 <template>
     <q-page class="relative column no-wrap items-center animate__animated animate__fadeIn bg-grad-2">
-        <div class="w100 row no-wrap justify-between q-px-xs q-py-sm" id="fixed-saldo">
+        <div class="w100 row no-wrap justify-between q-px-xs q-py-md" id="fixed-saldo">
             <div class="row items-center">
                 <q-icon name="paid" color=primary size="md" />
                 <div class="text-bold text-primary q-px-sm">{{ authStore.getInfoPurpleCoins() }} PurpleCoins</div>
@@ -13,7 +13,7 @@
 
         <div class="wrapper-responsive q-mt-xl  q-px-sm">
             <div
-                class="w100 row items-center justify-center q-py-md q-mt-md q-mb-md  rounded-borders text-white bg-grad-1 shadow-1">
+                class="w100 row items-center justify-center q-py-md q-mt-lg q-mb-md  rounded-borders text-white bg-grad-1 shadow-1">
                 <q-icon size="md" color="blue-1" name="currency_exchange" />
                 <div class="text-center text-h6 text-bold q-px-md ">Recarregar Moedas</div>
             </div>
@@ -187,8 +187,8 @@ function formatString(value) {
 @media (min-width: 1000px) {
     #fixed-saldo {
         width: 60%;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
     }
 }
 

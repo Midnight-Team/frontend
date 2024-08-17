@@ -119,15 +119,16 @@
                 <q-icon name="groups" size="md" class="text-primary q-pr-xs" />
                 ACESSOS
             </div>
-            <div class="w100 text-primary text-bold mid-opacity q-pb-md">
+            <div class="w100 text-primary text-bold q-pb-md">
                 <!-- faça um v-for no evento.subhosts mostrando o id e o nome -->
-                <div class="row no-wrap items-center no-wrap q-py-sm q-mt-md" v-for="subhost in evento.subhosts"
+                <div class="row justify-between no-wrap items-center no-wrap q-py-sm q-mt-md" v-for="subhost in evento.subhosts"
                     :key="subhost.id" style="border-bottom: 4px solid #872DE1;border-top: 4px solid #872DE1">
                     <q-icon name="person" size="xl"></q-icon>
-                    <div class="column q-ml-sm">
-                        <div class="text-black text-uppercase">{{ subhost.nome }}</div>
+                    <div class="column q-ml-sm mid-opacity items-center justify-center">
+                        <div class="text-black text-uppercase text-center">{{ subhost.nome }}</div>
                         <div>{{ subhost.id }}</div>
                     </div>
+                    <q-btn @click="removeSubhost(subhost.id)" color="red" flat icon="remove" ></q-btn>
                 </div>
             </div>
             <q-btn v-if="!editando" @click="dialogAcessos = !dialogAcessos" label="Adicionar Subhost" icon-right="person_add" class=""
@@ -221,6 +222,29 @@ async function updateSubhostsEvento(acesso) {
         })
 }
 
+async function removeSubhost(idSubhost) {
+    const confirm = window.confirm('Deseja realmente remover este acesso?')
+    if (!confirm) return
+
+    evento.value.subhosts = evento.value.subhosts.filter(subhost => subhost.id != idSubhost)
+
+    await api.put(`/update_subhosts_evento`, {  host: { id:host.id, senha: host.senha },evento: evento.value })
+        .then(response => {
+            acessos.value = response.data
+            $q.notify({
+                color: 'red-8',
+                textColor: 'white',
+                icon: 'delete',
+                message: 'Acesso removido com sucesso',
+                position: 'top'
+            })
+        })
+        getAcessos()
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 async function salvarAlteracoes() {
     await api.put(`/update_evento`, { evento: evento.value, host: JSON.parse(sessionStorage.getItem('userLogado')) })
         .then(response => {
@@ -288,8 +312,6 @@ onBeforeMount(async () => {
     //         console.log(error)
     //     })
 })
-
-
 
 </script>
 
