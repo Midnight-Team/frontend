@@ -18,9 +18,9 @@
       Acessos Criados
     </div>
       <div v-if="!loading" class="rounded-borders bg-grad-4 row q-pa-md q-mt-md justify-around cards-wrapper">
-          <q-card id="card-acesso" v-for="acesso in acessos" :key="acesso.id" class="w100 bg-blue-2 q-mb-md">
+          <q-card id="card-acesso" v-for="acesso in acessos" :key="acesso.id" class="w100 bg-blue-1 q-mb-md">
             <q-card-section>
-              <q-icon name="person" size="md" color="primary" class="absolute-right q-pa-xs q-pr-sm"></q-icon>
+              <q-icon name="engineering" size="xl" color="primary" class="absolute-right q-pa-xs q-pr-sm"></q-icon>
               <div class="text-h6 text-bold text-primary q-pt-lg">{{ acesso.nome }}</div>
               <div class="text-subtitle2 text-bold text-secondary">{{ acesso.id }}</div>
             </q-card-section>
@@ -29,6 +29,19 @@
             </q-card-actions>
           </q-card>
       </div>
+      <q-dialog v-model="confirm" persistent>
+        <q-card>
+          <q-card-section class="row items-center">
+            <q-avatar icon="signal_wifi_off" color="primary" text-color="white" />
+            <span class="q-ml-sm">You are currently not connected to any network.</span>
+          </q-card-section>
+  
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="primary" v-close-popup />
+            <q-btn flat label="Turn on Wifi" color="primary" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
       <div v-if="loading" class="row w100 q-py-md justify-center">
         <q-spinner-ball color="primary" size="lg" />
         <q-spinner-ball color="primary" size="lg" />
@@ -49,6 +62,7 @@ const acesso = ref({
 })
 
 const loading = ref(false)
+const confirm = ref(false)
 
 function verificaEspacosStr(str) {
   return str.includes(' ')
@@ -93,6 +107,36 @@ async function createAccessPerson(){
       position: 'top'
     })
   })
+}
+
+async function deleteAccessPerson(id){
+  const confirm = window.confirm('Deseja realmente excluir este acesso permanentemente?')
+  if(confirm){
+    const myHost = {
+      id: JSON.parse(sessionStorage.getItem('userLogado')).id,
+      senha: JSON.parse(sessionStorage.getItem('userLogado')).senha
+    }
+    await api.post('/delete_access_person', { host: myHost, acesso: { id: id } })
+    .then(response => {
+      $q.notify({
+        color: 'green',
+        textColor: 'white',
+        icon: 'delete',
+        message: 'Acesso excluído com sucesso!',
+        position: 'top'
+      })
+      getAcessos()
+    })
+    .catch(err=> {
+      $q.notify({
+        color: 'red-4',
+        textColor: 'white',
+        icon: 'error',
+        message: err.response.data.error,
+        position: 'top'
+      })
+    })
+  }
 }
 
 const columns = [

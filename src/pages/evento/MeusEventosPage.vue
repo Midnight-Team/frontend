@@ -8,8 +8,8 @@
                     {{ authStore.getInfoPurpleCoins() }} <div class="q-pl-sm mid-opacity">PurpleCoins</div>
                 </div>
                 <div class="row no-wrap items-center">
-                    <div class="mid-opacity">R$ {{ formatToNumber(authStore.getInfoSaldo().toString()) }}</div>
-                    <q-icon size="sm" color="orange" name="paid" class="q-pl-sm" />
+                    <div class="text-green-7"> <strong class="high-opacity">R$ </strong>{{ formatToNumber(authStore.getInfoSaldo().toString()) }}</div>
+                    <q-icon size="sm" color="green" name="paid" class="q-pl-sm" />
                 </div>
             </div>
             <div class="column q-mb-xl">

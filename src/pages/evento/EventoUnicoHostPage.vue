@@ -2,7 +2,8 @@
     <q-page class="animate__animated animate__fadeIn  column bg-grad-2 q-px-md q-pb-xl relative" id="dialog-evento"
         v-if="pageLoaded">
         <div class="w100 rounded-borders q-mt-md">
-            <div id="title-menu" class="text-shadow q-mb-sm text-h5 text-center text-purple-1 rounded-borders bg-grad-1 shadow-1 q-pa-md  text-bold">
+            <div id="title-menu"
+                class="text-shadow q-mb-sm text-h5 text-center text-purple-1 rounded-borders bg-grad-1 shadow-1 q-pa-md  text-bold">
                 {{ evento.titulo }}
             </div>
         </div>
@@ -12,16 +13,17 @@
         <q-btn @click="editando = !editando" class="q-mt-sm q-py-sm" :color="editando ? 'orange-8' : 'blue'"
             :icon-right="editando ? 'close' : 'edit'" :label="editando ? 'Cancelar edição' : 'Editar Evento'"></q-btn>
         <div id="evento-info" v-if="eventoLoaded"
-            class="q-px-md q-gutter-y-md q-mt-sm bg-glass-1 rounded-borders q-pb-md">
-            <div class="text-h5 text-primary text-bold row items-center" id="text-menu">
-                <q-icon name="nightlife" size="md" class="text-primary" />
-                EVENTO
+            class="w100 q-px-md q-gutter-y-md q-mt-sm bg-glass-1 rounded-borders q-pb-md">
+            <div class="w100 text-h5 text-primary text-bold row items-center justify-between no-wrap " id="text-menu">
+                <div class="row no-wrap items-center">
+                    <q-icon name="nightlife" size="md" class="text-primary" />
+                    EVENTO
+                </div>
+                <div style="font-size: .8rem;" class="text-primary text-bold mid-opacity">
+                    {{ evento.status }}
+                </div>
             </div>
-            <div class="w100">
-                {{ evento.status }}
-            </div>
-            <q-input v-if="editando" label="Título do Evento*" v-model="evento.titulo" outlined
-                color="primary">
+            <q-input v-if="editando" label="Título do Evento*" v-model="evento.titulo" outlined color="primary">
                 <template v-slot:append>
                     <q-icon name="nightlife" color="primary" />
                 </template>
@@ -31,7 +33,8 @@
                     <q-icon @click="openImgur()" name="image" color="primary" />
                 </template>
             </q-input>
-            <q-input :readonly="!editando" :filled="!editando" mask="####" maxlength="4" label="Código de Acesso" v-model="evento.access_code" outlined color="primary">
+            <q-input :readonly="!editando" :filled="!editando" mask="####" maxlength="4" label="Código de Acesso"
+                v-model="evento.access_code" outlined color="primary">
                 <template v-slot:append>
                     <q-icon name="lock" color="primary" />
                 </template>
@@ -92,7 +95,8 @@
                     v-for="ingresso in evento.tipos_ingressos" :key="ingresso.id" style="border: 2px solid #872DE1">
                     <q-icon name="local_activity" size="xl"></q-icon>
                     <div class="column q-ml-sm">
-                        <div style="font-size: .9rem;text-transform: uppercase;" class="text-black">{{ ingresso.titulo }}</div>
+                        <div style="font-size: .9rem;text-transform: uppercase;" class="text-black">{{ ingresso.titulo
+                            }}</div>
                         <div>R$ {{ ingresso.valor }}</div>
                         <div> 34/{{ ingresso.quantidade }} Ingressos</div>
                     </div>
@@ -121,18 +125,19 @@
             </div>
             <div class="w100 text-primary text-bold q-pb-md">
                 <!-- faça um v-for no evento.subhosts mostrando o id e o nome -->
-                <div class="row justify-between no-wrap items-center no-wrap q-py-sm q-mt-md" v-for="subhost in evento.subhosts"
-                    :key="subhost.id" style="border-bottom: 4px solid #872DE1;border-top: 4px solid #872DE1">
-                    <q-icon name="person" size="xl"></q-icon>
+                <div class="row justify-between no-wrap items-center no-wrap q-py-sm q-mt-md"
+                    v-for="subhost in evento.subhosts" :key="subhost.id"
+                    style="border-bottom: 4px solid #872DE1;border-top: 4px solid #872DE1">
+                    <q-icon name="account_circle" size="md"></q-icon>
                     <div class="column q-ml-sm mid-opacity items-center justify-center">
                         <div class="text-black text-uppercase text-center">{{ subhost.nome }}</div>
                         <div>{{ subhost.id }}</div>
                     </div>
-                    <q-btn @click="removeSubhost(subhost.id)" color="red" flat icon="remove" ></q-btn>
+                    <q-btn @click="removeSubhost(subhost.id)" color="secondary" size="xl" flat icon="remove"></q-btn>
                 </div>
             </div>
-            <q-btn v-if="!editando" @click="dialogAcessos = !dialogAcessos" label="Adicionar Subhost" icon-right="person_add" class=""
-                color="primary"></q-btn>
+            <q-btn v-if="!editando" @click="dialogAcessos = !dialogAcessos" label="Adicionar Subhost"
+                icon-right="person_add" class="" color="primary"></q-btn>
         </div>
         <div class="w100 q-my-lg" v-if="editando"></div>
         <q-btn v-if="!editando" class=" w100  q-py-xl q-mb-md" label="Painel de Vendas" icon-right="payments"
@@ -144,24 +149,28 @@
         <div class="w100 q-pb-xl"></div>
         <q-btn @click="salvarAlteracoes()" v-if="editando" class=" w100 q-mt-md q-py-lg fixed"
             style="bottom:0px;left:0px;z-index: 9;" label="Salvar Alterações" icon-right="save" color="green-7"></q-btn>
-            <q-dialog v-model="dialogAcessos">
-                <q-list id="acessos_disponiveis" class="colum bg-white q-px-md q-pt-md">
-                    <div class="w100 q-pa-md row rounded-borders justify-center no-wrap bg-grad-1 text-white text-h6 text-bold">
-                        Acessos Disponíveis
+        <q-dialog v-model="dialogAcessos">
+            <q-list id="acessos_disponiveis" class="colum bg-white q-px-md q-pt-md">
+                <div
+                    class="w100 q-pa-md row rounded-borders justify-center no-wrap bg-grad-1 text-white text-h6 text-bold">
+                    Acessos Disponíveis
+                </div>
+                <div v-if="acessos.length == 0">
+                    <div class="text-secondary text-bold q-mt-md">Nenhum acesso disponível 👮🏼</div>
+                </div>
+                <q-btn class="q-my-md" color="blue" label="Registrar Acessos" icon-right="person_add"
+                    to="/app/acesso" />
+                <q-list-item class="w100 column rounded-borders q-mb-md q-pa-sm" style="border:4px solid #9573f3"
+                    v-for="acesso in acessos" :key="acesso.id">
+                    <div class="text-primary text-bold">
+                        {{ acesso.nome }} <br><strong class="text-secondary">{{ acesso.id }}</strong>
                     </div>
-                    <div v-if="acessos.length == 0">
-                        <div class="text-secondary text-bold q-mt-md">Nenhum acesso disponível 👮🏼</div>
-                    </div>
-                    <q-btn class="q-my-md" color="blue" label="Registrar Acessos" icon-right="person_add" to="/app/acesso"/>
-                    <q-list-item class="w100 column rounded-borders q-mb-md q-pa-sm" style="border:4px solid #9573f3" v-for="acesso in acessos" :key="acesso.id">
-                        <div class="text-primary text-bold">
-                            {{ acesso.nome }} <br><strong class="text-secondary">{{ acesso.id }}</strong>
-                        </div>
-                        <q-btn class="q-mt-md" color="green" label="Adicionar ao Evento" icon-right="sensor_occupied" @click="updateSubhostsEvento(acesso)"/>
-                    </q-list-item>
+                    <q-btn class="q-mt-md" color="green" label="Adicionar ao Evento" icon-right="sensor_occupied"
+                        @click="updateSubhostsEvento(acesso)" />
+                </q-list-item>
 
-                </q-list>
-            </q-dialog>
+            </q-list>
+        </q-dialog>
     </q-page>
     <q-page v-else>
         <div class="row w100 q-pt-md justify-center">
@@ -197,7 +206,7 @@ onBeforeUnmount(() => {
 async function updateSubhostsEvento(acesso) {
     acessos.value = acessos.value.filter(ac => ac.id != acesso.id)
     evento.value.subhosts.push(acesso)
-    await api.put(`/update_subhosts_evento`, {  host: { id:host.id, senha: host.senha },evento: evento.value })
+    await api.put(`/update_subhosts_evento`, { host: { id: host.id, senha: host.senha }, evento: evento.value })
         .then(response => {
             acessos.value = response.data
             dialogAcessos.value = false
@@ -228,18 +237,18 @@ async function removeSubhost(idSubhost) {
 
     evento.value.subhosts = evento.value.subhosts.filter(subhost => subhost.id != idSubhost)
 
-    await api.put(`/update_subhosts_evento`, {  host: { id:host.id, senha: host.senha },evento: evento.value })
+    await api.put(`/update_subhosts_evento`, { host: { id: host.id, senha: host.senha }, evento: evento.value })
         .then(response => {
             acessos.value = response.data
             $q.notify({
-                color: 'red-8',
+                color: 'green',
                 textColor: 'white',
                 icon: 'delete',
                 message: 'Acesso removido com sucesso',
                 position: 'top'
             })
         })
-        getAcessos()
+    getAcessos()
         .catch(error => {
             console.log(error)
         })
@@ -291,14 +300,14 @@ async function getEvento() {
             pageLoaded.value = true
         })
 }
-async function getAcessos(){
-  const myHost = {
-    id: JSON.parse(sessionStorage.getItem('userLogado')).id,
-    senha: JSON.parse(sessionStorage.getItem('userLogado')).senha
-  }
-  const response = await api.post('/get_access_people', {id: myHost.id, senha: myHost.senha})
-  acessos.value = response.data
-  //remover os acessos que já estão no evento.subhosts
+async function getAcessos() {
+    const myHost = {
+        id: JSON.parse(sessionStorage.getItem('userLogado')).id,
+        senha: JSON.parse(sessionStorage.getItem('userLogado')).senha
+    }
+    const response = await api.post('/get_access_people', { id: myHost.id, senha: myHost.senha })
+    acessos.value = response.data
+    //remover os acessos que já estão no evento.subhosts
     acessos.value = acessos.value.filter(acesso => !evento.value.subhosts.find(subhost => subhost.id == acesso.id))
 }
 onBeforeMount(async () => {
@@ -321,7 +330,7 @@ onBeforeMount(async () => {
     height: 200px;
 }
 
-img{
+img {
     border-radius: 10px;
 
 }

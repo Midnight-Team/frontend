@@ -21,8 +21,8 @@
             <q-btn label="Sacar" class="q-px-md" icon-right="attach_money" color="green-8" />
           </div>
           <p class="row no-wrap items-center justify-between text-shadow">
-            🟣 {{ host.purpleCoins }}
-            <strong class="text-blue text-shadow">🔵 {{ host.subCoins }}</strong>
+            <div>            🟣 {{ host.purpleCoins }}
+              <strong class="text-blue text-shadow">🔵 {{ host.subCoins }}</strong></div>
             <q-btn to="/app/recarregar" dense label="recarregar" class="q-px-md q-ml-md" icon-right="currency_exchange" color="primary" />
           </p>
         </div>
@@ -186,8 +186,8 @@ onBeforeMount(async () => {
 
 <style scoped>
 .home-wrapper {
-  margin-left: 14vw;
-  margin-right: 14vw;
+  margin-left: 25vh;
+  margin-right: 25vh;
 }
 
 #home-card {

@@ -34,9 +34,9 @@
         <q-page-container>
             <div class="w100 row justify-center q-mt-md relative" style="overflow: hidden ">
                 <div class="animate__animated animate__zoomInDown animate__delay-1s animate__slower row no-wrap justify-center q-px-sm  w100" style="overflow: hidden ;z-index: 9;">
-                    <q-btn to="/login/host" class="animate__animated animate__rubberBand animate__delay-3s animate__slower q-pa-xl q-mr-sm rounded-borders" color="dark" icon-right="nightlife"
+                    <q-btn to="/login/host" class="animate__animated animate__fadeInRight animate__delay-3s animate__slower q-pa-xl q-mr-sm rounded-borders" style="border-radius: 20px" color="dark" icon-right="nightlife"
                         label="Sou Produtor!" />
-                    <q-btn to="/login" @click="scrollBot()" class="animate__animated animate__rubberBand animate__delay-3s animate__slower q-pa-xl rounded-borders" color="primary" icon-right="confirmation_number"
+                    <q-btn to="/login" @click="scrollBot()" class="animate__animated animate__fadeInLeft animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-radius: 20px" color="primary" icon-right="confirmation_number"
                         label="Quero Ingressos!" />
                 </div>
             </div>
@@ -491,9 +491,9 @@ a {
     height: 400px;
 }
 
-@media(min-width: 1090px) {
+@media(min-width: 1300px) {
     .q-page {
-        padding: 0 300px;
+        padding: 0 400px;
         margin: 0 30px;
     }
     .q-page-container{
@@ -501,7 +501,7 @@ a {
     }
 
     #email-card {
-        width: 40% !important;
+        width: 60% !important;
     }
 
     .q-carousel {
