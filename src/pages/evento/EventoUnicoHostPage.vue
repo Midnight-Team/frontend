@@ -120,23 +120,10 @@
                     </div>
                 </div>
             </div>
-            <q-btn v-if="!editando" label="Adicionar Ingressos" icon-right="confirmation_number" class="q-mt-md"
-                color="primary"></q-btn>
+            <!-- <q-btn v-if="!editando" label="Adicionar Ingressos" icon-right="confirmation_number" class="q-mt-md"
+                color="primary"></q-btn> -->
         </div>
-        <div id="pacote-info" class="bg-glass-1 rounded-borders q-pa-md q-mt-md">
-            <div class="text-h5 row items-center text-primary text-bold" id="text-menu">
-                <q-icon name="credit_card" size="md" class="text-primary" />
-                PACOTES
-            </div>
-            <div class="w100 text-secondary text-bold q-pt-md">
-                <div class="w100 rounded-borders bg-primary mid-opacity q-mb-md" style="height:4px"></div>
-                🌱 PACOTE INICIAL<br>
-                💰 {{ evento.pacote.label }}<br>
-                🎟️ Máximo de Ingressos: {{ evento.pacote.max_ingressos }}<br>
-                <div class="w100 rounded-borders bg-primary mid-opacity q-mt-md" style="height:4px"></div>
-            </div>
-        </div>
-        <div id="subhost-info" class="bg-glass-1 rounded-borders q-pa-md q-mb-md q-mt-md">
+        <div id="subhost-info" class="bg-glass-1 rounded-borders q-pa-md  q-mt-md">
             <div class="text-h5 row items-center text-primary text-bold " id="text-menu">
                 <q-icon name="groups" size="md" class="text-primary q-pr-xs" />
                 ACESSOS
@@ -156,6 +143,19 @@
             </div>
             <q-btn v-if="!editando" @click="dialogAcessos = !dialogAcessos" label="Adicionar Subhost"
                 icon-right="person_add" class="" color="primary"></q-btn>
+        </div>
+        <div id="pacote-info" class="q-mb-md bg-glass-1 rounded-borders q-pa-md q-mt-md">
+            <div class="text-h5 row items-center text-primary text-bold" id="text-menu">
+                <q-icon name="paid" size="md" class="text-primary" />
+                PACOTE
+            </div>
+            <div class="w100 text-secondary text-bold q-pt-md">
+                <div class="w100 rounded-borders bg-primary mid-opacity q-mb-md" style="height:4px"></div>
+                <!-- 🌱 PACOTE INICIAL<br> -->
+                💰 {{ evento.pacote.label }}<br>
+                🎟️ Máximo de Ingressos: {{ evento.pacote.max_ingressos }}<br>
+                <div class="w100 rounded-borders bg-primary mid-opacity q-mt-md" style="height:4px"></div>
+            </div>
         </div>
         <div class="w100 q-my-lg" v-if="editando"></div>
         <q-btn v-if="!editando" class=" w100  q-py-xl q-mb-md" label="Painel de Vendas" icon-right="payments"
