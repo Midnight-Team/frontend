@@ -40,9 +40,17 @@
                 </template>
             </q-input>
             <q-input type="textarea" label="Descrição" v-model="evento.descricao" outlined :readonly="!editando"
-                :filled="!editando"></q-input>
+                :filled="!editando">
+                <template v-slot:append>
+                    <q-icon name="description" color="primary" />
+                </template>
+            </q-input>
             <q-input :readonly="!editando" :filled="!editando" label="Contato*" v-model="evento.contato" type="textarea"
-                outlined color="primary"></q-input>
+                outlined color="primary">
+                <template v-slot:append>
+                    <q-icon name="phone" color="primary" />
+                </template>
+            </q-input>
             <!-- <q-input label="Data" v-model="evento.data_evento" outlined color="primary" :readonly="!editando" :filled="!editando"></q-input> -->
             <div class="row q-gutter-x-md justify-center no-wrap">
                 <q-input :filled="!editando" :readonly="!editando" label="Hora Início*" class="q-mt-md q-ml-md"
@@ -77,8 +85,18 @@
             <q-date v-model="evento.data_evento" :color="editando ? 'primary' : 'grey-8'" :readonly="!editando"
                 class="w100" mask="DD-MM-YYYY" />
             <q-input label="Endereço" v-model="evento.endereco" type="textarea" outlined color="primary"
-                :readonly="!editando" :filled="!editando"></q-input>
-            <div v-if="evento.localizacao && !evento.localizacao.trim() == ''" class="w100 q-mt-md rounded-borders">
+                :readonly="!editando" :filled="!editando">
+                <template v-slot:append>
+                    <q-icon name="location_on" color="primary" />
+                </template>
+            </q-input>
+            <q-input label="Localização Google Maps" v-model="evento.localizacao" outlined color="primary"
+                :readonly="!editando" :filled="!editando">
+                <template v-slot:append>
+                    <q-icon name="map" color="primary" />
+                </template>
+            </q-input>
+            <div v-if="evento.localizacao && !evento.localizacao.trim() == '' && evento.localizacao.includes('https://www.google.com/maps/embed')" class="w100 q-mt-md rounded-borders">
                 <iframe :src="evento.localizacao" class="w100 rounded-borders shadow-2" height="200" style="border:0;"
                     allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
@@ -110,7 +128,7 @@
                 <q-icon name="credit_card" size="md" class="text-primary" />
                 PACOTES
             </div>
-            <div class="w100 text-primary text-bold mid-opacity q-pt-md">
+            <div class="w100 text-secondary text-bold q-pt-md">
                 <div class="w100 rounded-borders bg-primary mid-opacity q-mb-md" style="height:4px"></div>
                 🌱 PACOTE INICIAL<br>
                 💰 {{ evento.pacote.label }}<br>
@@ -125,11 +143,11 @@
             </div>
             <div class="w100 text-primary text-bold q-pb-md">
                 <!-- faça um v-for no evento.subhosts mostrando o id e o nome -->
-                <div class="row justify-between no-wrap items-center no-wrap q-py-sm q-mt-md"
+                <div class="w100 row justify-between no-wrap items-center no-wrap q-py-sm q-mt-md"
                     v-for="subhost in evento.subhosts" :key="subhost.id"
                     style="border-bottom: 4px solid #872DE1;border-top: 4px solid #872DE1">
                     <q-icon name="account_circle" size="md"></q-icon>
-                    <div class="column q-ml-sm mid-opacity items-center justify-center">
+                    <div class="column mid-opacity items-center justify-center">
                         <div class="text-black text-uppercase text-center">{{ subhost.nome }}</div>
                         <div>{{ subhost.id }}</div>
                     </div>
@@ -342,7 +360,7 @@ img {
 
     #img-evento {
         width: 100%;
-        height: 600px;
+        height: 500px;
         border-radius: 10px;
     }
 }

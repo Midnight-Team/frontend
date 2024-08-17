@@ -43,10 +43,8 @@ onBeforeUnmount(() => {
 </script>
 <style scoped>
 .q-page {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
 }
 .steps{

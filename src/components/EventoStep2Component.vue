@@ -5,15 +5,15 @@
             Configuração de Ingressos
         </div>
         <div class="column q-gutter-y-md q-pa-md q-mb-xl">
-            <q-input outlined class="q-mt-lg" v-model="ingressoHandler.titulo"
+            <q-input :inputStyle="{ fontWeight: 'bold' }" outlined class="q-mt-lg" v-model="ingressoHandler.titulo"
                 placeholder="Ex: Entrada Meia, Camarote, Pista Inteira" label="Título Tipo do Ingresso*" />
-            <q-input outlined maxlength="7" prefix="R$" v-model="ingressoHandler.valor" label="Valor do Ingresso*"
+            <q-input :inputStyle="{ fontWeight: 'bold' }" outlined maxlength="7" prefix="R$" v-model="ingressoHandler.valor" label="Valor do Ingresso*"
                 reverse-fill-mask mask="####,##">
                 <template v-slot:append>
                     <q-icon name="payments" color="primary" />
                 </template>
             </q-input>
-            <q-input outlined mask="#####" maxlength="4" v-model="ingressoHandler.quantidade" label="Quantidade de Ingressos*"
+            <q-input :inputStyle="{ fontWeight: 'bold' }" outlined mask="#####" maxlength="4" v-model="ingressoHandler.quantidade" label="Quantidade de Ingressos*"
                 reverse-fill-mask >
                 <template v-slot:append>
                     <div class="q-pr-sm">{{ ingressosDisponiveis }}</div>
@@ -57,6 +57,7 @@ const ingressoHandler = ref({
     titulo: '',
     valor: '',
     quantidade: '',
+    status: true
 })
 
 const $q = useQuasar()
@@ -103,6 +104,7 @@ const addIngresso = () => {
             titulo: '',
             valor: '',
             quantidade: '',
+            status: true
         }
     }
 }
@@ -114,9 +116,9 @@ function validaIngresso() {
 
 function format(text) {
     if (text.length > 20) {
-        return text.substring(0, 10) + '...'
+        return (text.substring(0, 13) + '...').toUpperCase()
     }
-    return text
+    return text.toUpperCase()
 }
 
 function removeIngresso(index) {
@@ -174,7 +176,7 @@ const checkNext = () => {
 <style scoped>
 .title-1 {
     position: sticky;
-    top: 138px;
+    top: 90px;
     background: #efefef4d;
     backdrop-filter: blur(4px);
     z-index: 1;

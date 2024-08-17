@@ -19,7 +19,7 @@
       </q-input>
 
       <q-btn :disabled="check()" label="Criar Evento" color="primary" class="q-py-md" @click="criarEvento()" icon-right="event" />
-      <q-btn label="voltar" flat color="primary" @click="goPrev()" />
+      <!-- <q-btn label="voltar" flat color="primary" @click="goPrev()" /> -->
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@ import { useRouter } from "vue-router";
 
 const $q = useQuasar();
 const authStore = useAuthStore();
-const emit = defineEmits(['next', 'prev']);
+const emit = defineEmits(['next']);
 const host = ref({
   id: authStore.getInfoId(),
   senha: '',
@@ -103,7 +103,7 @@ onMounted(() => {
 <style scoped>
 .title-1 {
   position: sticky;
-  top: 138px;
+  top: 90px;
   background: #efefef4d;
   backdrop-filter: blur(2px);
   z-index: 1;

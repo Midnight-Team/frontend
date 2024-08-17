@@ -43,9 +43,9 @@
         </q-card>
       </q-dialog>
       <div v-if="loading" class="row w100 q-py-md justify-center">
-        <q-spinner-ball color="primary" size="lg" />
-        <q-spinner-ball color="primary" size="lg" />
-        <q-spinner-ball color="primary" size="lg" />
+        <q-spinner-ball color="blue" size="lg" />
+        <q-spinner-ball color="blue" size="lg" />
+        <q-spinner-ball color="blue" size="lg" />
     </div>
   </q-page>
 </template>
