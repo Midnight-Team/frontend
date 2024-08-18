@@ -34,9 +34,9 @@
         <q-page-container>
             <div class="w100 row justify-center q-mt-md relative" style="overflow: hidden ">
                 <div class="animate__animated animate__zoomInDown animate__delay-1s animate__slower row no-wrap justify-center q-px-sm  w100" style="overflow: hidden ;z-index: 9;">
-                    <q-btn to="/login/host" class="animate__animated animate__fadeInRight animate__delay-3s animate__slower q-pa-xl q-mr-sm rounded-borders" style="border-radius: 20px" color="dark" icon-right="nightlife"
+                    <q-btn to="/login/host" class="animate__animated  animate__fadeInLeft  animate__delay-3s animate__slower q-pa-xl q-mr-sm rounded-borders" style="border-radius: 20px" color="dark" icon-right="nightlife"
                         label="Sou Produtor!" />
-                    <q-btn to="/login" @click="scrollBot()" class="animate__animated animate__fadeInLeft animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-radius: 20px" color="primary" icon-right="confirmation_number"
+                    <q-btn to="/login" @click="scrollBot()" class="animate__animated animate__fadeInRight animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-radius: 20px" color="primary" icon-right="confirmation_number"
                         label="Quero Ingressos!" />
                 </div>
             </div>
@@ -52,7 +52,7 @@
                             <q-icon v-if="!isMobile" size="xl" color="white" name="local_activity" />
                         </q-toolbar-title>
                     </q-toolbar>
-                    <div class="text-shadow space bg-grad-2 w100 text-center text-grey-4 q-py-md text-bold q-px-md high-opacity"
+                    <div class="text-shadow space bg-grad-2 w100 text-center text-blue-1 q-py-md text-bold q-px-md high-opacity"
                         style="font-size:1rem">
                         PARE de PAGAR TAXAS excessivas na VENDA de SEUS INGRESSOS e REALIZE seus EVENTOS com 0% de
                         TAXA!!

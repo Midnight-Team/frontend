@@ -27,13 +27,13 @@
           <img  :src="authStore.getInfoImg()" alt="">
         </q-avatar>
       </div>
-      <div v-if="isHost" class="text-center text-bold text-purple-1">{{authStore.getInfoRazao()}}</div>
+      <div v-if="isHost" class="text-center text-bold text-purple-1">{{authStore.getInfoRazao().toUpperCase()}}</div>
       <div class="text-center text-purple-1 mid-opacity text-bold q-mb-md "><q-btn to="/app" label="Perfil" flat ></q-btn></div>
       <q-list v-if="isAuthenticated"  class="text-bold text-white">
         <q-item v-for="item in menuOptions.items" :key="item.label"
            clickable @click="goTo(item.to)" style="border-radius: 12px;" :class="item.class">
           <q-item-section>
-            <q-item-label class="text-white">{{ item.label }}</q-item-label>
+            <q-item-label class="text-grey-4">{{ item.label }}</q-item-label>
           </q-item-section>
           <q-item-section avatar>
             <q-icon :name="item.icon" color="secondary" />
@@ -94,9 +94,9 @@ const menuOptions = ref({
   items: [
     // HOST MENUS
     // { label: 'Vendas', icon: 'payments', to: '/app/#' },
-    { class:'q-mt-md q-mx-md text-blue-1 bg-primary shadow-2' ,label: 'Eventos', icon: 'calendar_month', to: '/evento', role: 'host', selected: false,},
-    { class:'q-mt-md q-mx-md text-blue-1 bg-primary shadow-2' ,label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false,},
-    { class:'q-mt-md q-mx-md text-blue-1 bg-primary shadow-2' ,label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false,},
+    { class:'q-mt-md q-mx-md text-blue-2 bg-primary shadow-2' ,label: 'Eventos', icon: 'calendar_month', to: '/evento', role: 'host', selected: false,},
+    { class:'q-mt-md q-mx-md text-blue-2 bg-primary shadow-2' ,label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false,},
+    { class:'q-mt-md q-mx-md text-blue-2 bg-primary shadow-2' ,label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false,},
     // { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Suporte', icon: 'contact_support', to: '/app/#', selected: false },
     { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Sair', icon: 'logout', to: '/', selected: false }
     // { label: 'Ingressos', icon: 'confirmation_number', to: '/app/#' },

@@ -104,7 +104,8 @@ const addIngresso = () => {
             titulo: '',
             valor: '',
             quantidade: '',
-            status: true
+            status: true,
+            vendidos: 0
         }
     }
 }

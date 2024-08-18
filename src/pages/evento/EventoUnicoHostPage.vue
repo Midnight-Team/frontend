@@ -19,7 +19,7 @@
                     <q-icon name="nightlife" size="md" class="text-primary" />
                     EVENTO
                 </div>
-                <div style="font-size: .8rem;" class="text-primary text-bold mid-opacity">
+                <div style="font-size: .8rem;" class="text-primary text-bold">
                     {{ evento.status }}
                 </div>
             </div>
@@ -102,9 +102,12 @@
             </div>
         </div>
         <div id="subhost-info" class="relative bg-glass-1 rounded-borders q-pa-md q-mt-md">
-            <div class="row items-center text-h5 text-primary text-bold " id="text-menu">
-                <q-icon name="confirmation_number" size="md" class="text-primary" />
-                INGRESSOS
+            <div class="row no-wrap items-center text-h5 text-primary text-bold " id="text-menu">
+                <div class="w100 row items-center">
+                    <q-icon name="confirmation_number" size="md" class="text-primary" />
+                    INGRESSOS
+                </div>
+                <q-btn label="" @click="goToLoteIngresso()" icon-right="sell"></q-btn>
             </div>
             <div class="text-bold text-secondary q-mt-sm">Ingressos Disponíveis: 74/{{ evento.qtd_ingressos }}</div>
             <div class="w100 text-primary text-bold mid-opacity">
@@ -113,10 +116,10 @@
                     v-for="ingresso in evento.tipos_ingressos" :key="ingresso.id" style="border: 2px solid #872DE1">
                     <q-icon name="local_activity" size="xl"></q-icon>
                     <div class="column q-ml-sm">
-                        <div style="font-size: .9rem;text-transform: uppercase;" class="text-black">{{ ingresso.titulo
+                        <div style="font-size: .9rem;text-transform: uppercase;" class="text-blue-8">{{ ingresso.titulo
                             }}</div>
                         <div>R$ {{ ingresso.valor }}</div>
-                        <div> 34/{{ ingresso.quantidade }} Ingressos</div>
+                        <div> {{ (ingresso.vendidos ? ingresso.vendidos : 8)}}/{{ ingresso.quantidade }} Ingressos</div>
                     </div>
                 </div>
             </div>
@@ -186,8 +189,10 @@
                     <q-btn class="q-mt-md" color="green" label="Adicionar ao Evento" icon-right="sensor_occupied"
                         @click="updateSubhostsEvento(acesso)" />
                 </q-list-item>
-
             </q-list>
+        </q-dialog>
+        <q-dialog v-model="dialogLoteIngresso">
+                <LoteIngressoComponent/>
         </q-dialog>
     </q-page>
     <q-page v-else>
@@ -203,16 +208,17 @@
 import { onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import { api } from 'src/boot/axios';
 import { useQuasar } from 'quasar';
+import LoteIngressoComponent from "components/LoteIngressoComponent.vue";
 
 const host = JSON.parse(sessionStorage.getItem('userLogado'));
 const evento = ref({})
 const pageLoaded = ref(false)
 const dialogAcessos = ref(false)
+const dialogLoteIngresso = ref(false)
 const eventoLoaded = ref(true)
 const editando = ref(false)
 const $q = useQuasar()
 const acessos = ref([])
-
 function openImgur() {
     window.open('https://imgur.com/', '_blank')
 }
@@ -270,6 +276,11 @@ async function removeSubhost(idSubhost) {
         .catch(error => {
             console.log(error)
         })
+}
+
+async function goToLoteIngresso(){
+    sessionStorage.setItem('eventoTiposIngressos', JSON.stringify(evento.value.tipos_ingressos))
+    dialogLoteIngresso.value = true
 }
 
 async function salvarAlteracoes() {
@@ -345,7 +356,7 @@ onBeforeMount(async () => {
 <style scoped>
 #img-evento {
     width: 100%;
-    height: 200px;
+    height: 220px;
 }
 
 img {
