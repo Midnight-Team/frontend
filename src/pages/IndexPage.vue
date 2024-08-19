@@ -1,5 +1,5 @@
 <template>
-  <q-page class="animate__animated animate__fadeIn flex column relative bg-grad-5" v-if="pageLoaded">
+  <q-page class="animate__animated animate__fadeIn flex column relative " v-if="pageLoaded">
     <div class="home-wrapper q-px-md q-pb-xl">
       <div class="w100  column justify-center items-center text-white text-bold" style="border-radius: 20px; ">
         <div class="w100 flex q-mb-lg flex-center q-mt-lg">
@@ -8,8 +8,8 @@
           </q-avatar>
         </div>
         <div id="title"
-          class="w100 text-h5 text-bold text-center bg-grad-6 q-pa-md q-pb-md rounded-borders  text-purple-1"
-          style="border-top: 2px solid #9573f3;">
+          class="w100 text-h5 text-bold text-center q-pa-md q-pb-md rounded-borders  text-purple-1"
+          style="border-top: 2px solid #9573f3;border-bottom: 2px solid #9573f3;">
           {{ host.nome_razao }}<br>
           <div class="high-opacity text-secondary q-mt-sm" style="font-size: 1rem">host</div>
         </div>
@@ -110,9 +110,9 @@
   </q-page>
   <q-page v-else>
     <div class="row w100 q-pt-md justify-center">
-      <q-spinner-ball color="blue" size="lg" />
-      <q-spinner-ball color="blue" size="lg" />
-      <q-spinner-ball color="blue" size="lg" />
+      <q-spinner-ball color="secondary" size="lg" />
+      <q-spinner-ball color="secondary" size="lg" />
+      <q-spinner-ball color="secondary" size="lg" />
     </div>
   </q-page>
 </template>

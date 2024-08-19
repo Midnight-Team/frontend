@@ -1,5 +1,5 @@
 <template>
-    <q-layout class="relative animate__animated animate__fadeIn q-pa-md bg-grad-6 column items-center justify-center">
+    <q-layout class="relative animate__animated animate__fadeIn q-pa-md bg-grad-4 column items-center justify-center">
         <div class="text-white text-h4 w100 q-mb-md row no-wrap justify-center items-center ">
             <q-avatar>
                 <q-icon size="xl" color="white" name="local_activity" />
@@ -9,9 +9,9 @@
             </div>
         </div>
         <router-view></router-view>
-        <q-card class="q-mt-md column animate__delay-1s bg-primary" style="box-shadow: none!important;">
+        <q-card class="q-mt-md column  q-mt-xl animate__delay-1s bg-secondary" style="box-shadow: none!important;">
             <q-btn @click="isLoginHost = !isLoginHost"  v-if="isLoginHost" label="voltar" icon-right="keyboard_return" color="primary" class="bg-white text-primary q-mb-xl" flat to="/login"/>
-            <q-btn class="high-opacity" icon="home" label="página inicial" color="purple-1" flat to="/" />
+            <q-btn class="high-opacity" icon="home" label="página inicial" color="grey-1" flat to="/" />
         </q-card>
     </q-layout>
 </template>

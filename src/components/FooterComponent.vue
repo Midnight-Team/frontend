@@ -37,11 +37,11 @@
             <img class="shadow-2" src="https://avatars.githubusercontent.com/u/95868897?v=4">
           </q-avatar>
           <div>
-            <div id="title-menu" class="q-pb-sm text-primary text-center text-bold">Samuel Victor<br><strong id="title-layout" class="text-secondary">Founder & Cloud Sofware Developer</strong></div>
+            <div id="title-menu" class="q-pb-sm text-primary text-center text-bold">Samuel Victor<br><strong id="title-layout" class="text-secondary">Founder & Sofware Developer</strong></div>
             <div class="q-my-md text-blue-6 text-bold high-opacity text-center"><strong></strong><a href="https://samuelvictorol.github.io/portfolio/" target="_blank" class="text-primary ">Ver Portfólio</a> </div>
-            <div class="text-blue-6 text-bold high-opacity q-py-sm"><strong><q-icon class="" size="sm" name="email" color="primary"></q-icon></strong> samuel.softdev@outlook.com</div>
-            <div class="text-blue-6 text-bold high-opacity q-py-sm"><strong><q-icon class="" size="sm" name="photo_camera" color="primary"></q-icon></strong> instagram.com/samuelvictorol</div>
-            <div class="text-blue-6 text-bold high-opacity"><strong><q-icon size="sm" name="phone" color="primary"></q-icon></strong> 61 98174-8795</div>
+            <div class="text-secondary text-bold high-opacity q-py-sm"><strong><q-icon class="" size="sm" name="email" color="primary"></q-icon></strong> samuel.softdev@outlook.com</div>
+            <div class="text-secondary text-bold high-opacity q-py-sm"><strong><q-icon class="" size="sm" name="photo_camera" color="primary"></q-icon></strong> instagram.com/samuelvictorol</div>
+            <div class="text-secondary text-bold high-opacity"><strong><q-icon size="sm" name="phone" color="primary"></q-icon></strong> 61 98174-8795</div>
           </div>
         </q-card-section>
 
@@ -59,7 +59,7 @@
         </q-card-section> -->
 
         <q-card-actions align="center">
-          <q-btn class="w100 bg-blue" flat label="OK" color="white" v-close-popup />
+          <q-btn class="w100 "  label="OK" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>

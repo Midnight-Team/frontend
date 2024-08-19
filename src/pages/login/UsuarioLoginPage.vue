@@ -1,9 +1,9 @@
 <template>
-    <div id="usuariologin-wrapper" class="animate__animated animate__fadeInLeft flex flex-center">
-        <q-card class="shadow-9 bg-blue-1 q-mt-md " id="card-login">
+    <div id="usuariologin-wrapper" class="animate__animated  animate__zoomInRight animate__slower flex flex-center">
+        <q-card class="shadow-9 bg-puple-light q-mt-md " id="card-login">
             <div class="text-h5 q-pl-md q-pt-md text-primary row items-center">
                 <q-icon  :name="registrando ? 'person_add' : 'person'" size="lg" class="q-mr-sm"/>
-                {{ !registrando ? 'Login': 'Registrar'}} Usuário
+                {{ !registrando ? 'Login': 'Registrar'}} Login
             </div>
             <q-card-section>
                 <q-form @submit="submitForm()">

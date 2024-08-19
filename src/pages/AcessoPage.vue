@@ -1,26 +1,34 @@
 <template>
   <q-page class="bg-grad-2 q-px-md  q-py-md animate__animated animate__fadeIn ">
-    <div class="q-mb-md text-h6 text-bold bg-grad-1  rounded-borders text-white row items-center justify-center q-pa-md">
+    <q-btn icon="keyboard_return" flat color="grey-5" class="q-pb-md q-pt-sm absolute-top-left" to="/evento" label="eventos"></q-btn>
+    <div class="q-mb-md q-mt-lg text-h6 text-bold bg-grad-1  rounded-borders text-white row items-center justify-center q-pa-md">
       <q-icon size="md" name="sensor_occupied" color="blue-1" class="q-pr-sm"></q-icon>
       Acessos
     </div>
     <p class="text-center text-white">
-      Os acessos são as contas que você cria e disponibiliza para os colaboradores de seus eventos
+      Os acessos são as contas que você cria e disponibiliza para seus colaboradores de eventos validarem os ingressos dos seus clientes.
     </p>
     <div class="w100 q-mb-md rounded-borders ">
-      <q-input maxlength="20" :input-style="{ fontSize: '1rem', fontWeight: 'bold', color: '#6310E1'}" outlined class="bg-grey-2 rounded-borders q-mb-md" v-model="acesso.id" label="Login do Acesso*"/>
-      <q-input maxlength="40" :input-style="{ fontSize: '1rem', fontWeight: 'bold', color: '#6310E1'}"  outlined class="bg-grey-2 rounded-borders" v-model="acesso.nome" label="Título do Acesso*" placeholder="ex: Entrada Principal ou nome da pessoa" />
-      <q-btn @click="createAccessPerson()" :disabled="acesso.id.trim() == '' || acesso.nome.trim() == ''" class="w100 q-mt-md" label="Criar Acesso" icon-right="person_add"
-        color="green" />
+      <q-input maxlength="20" :input-style="{ fontSize: '1rem', fontWeight: 'bold', color: '#6310E1'}" filled class="bg-purple-light rounded-borders q-mb-md" v-model="acesso.id" label="Login do Acesso*">
+          <template v-slot:prepend>
+            <q-icon name="assignment_ind" color="primary" />
+          </template>
+      </q-input>
+      <q-input maxlength="40" :input-style="{ fontSize: '1rem', fontWeight: 'bold', color: '#6310E1'}"  filled class="bg-purple-light rounded-borders" v-model="acesso.nome" label="Título do Acesso*" placeholder="ex: Entrada Principal ou nome da pessoa" >
+        <template v-slot:prepend>
+          <q-icon name="title" color="primary" />
+        </template>
+      </q-input>
+      <q-btn @click="createAccessPerson()" :disabled="acesso.id.trim() == '' || acesso.nome.trim() == ''" class="w100 q-mt-md q-pa-lg" label="Criar Acesso" icon-right="person_add"
+        color="positive" />
     </div>
-    <div class="q-mb-md text-h6 text-bold bg-grad-1  rounded-borders text-white row items-center justify-center q-pa-md">
+    <div v-if="acessos && acessos.length > 0" class="q-mb-md text-h6 text-bold bg-grad-1  rounded-borders text-white row items-center justify-center q-pa-md">
       <q-icon size="md" name="people" color="blue-1" class="q-pr-sm"></q-icon>
       Acessos Criados
     </div>
-      <div v-if="!loading" class="rounded-borders bg-grad-4 row q-pa-md q-mt-md justify-around cards-wrapper">
+      <div v-if="!loading && acessos.length > 0" class="rounded-borders row q-pa-md q-mt-md justify-around cards-wrapper">
           <q-card id="card-acesso" v-for="acesso in acessos" :key="acesso.id" class="w100 bg-blue-1 q-mb-md">
             <q-card-section>
-              <q-icon name="engineering" size="xl" color="primary" class="absolute-right q-pa-xs q-pr-sm"></q-icon>
               <div class="text-h6 text-bold text-primary q-pt-lg">{{ acesso.nome }}</div>
               <div class="text-subtitle2 text-bold text-secondary">{{ acesso.id }}</div>
             </q-card-section>
@@ -71,10 +79,10 @@ function verificaEspacosStr(str) {
 async function createAccessPerson(){
   if(verificaEspacosStr(acesso.value.id)){
     $q.notify({
-      color: 'red-4',
+      color: 'red-8',
       textColor: 'white',
-      icon: 'error',
-      message: 'O campo de identificação não pode conter espaços!',
+      icon: 'fingerprint',
+      message: 'O campo de identificação não pode conter espaços',
       position: 'top'
     })
     acesso.value.id = ''
@@ -88,10 +96,10 @@ async function createAccessPerson(){
   await api.post('/create_access_person', { host: myHost, acesso: acesso.value })
   .then(response => {
     $q.notify({
-      color: 'green',
+      color: 'green-7',
       textColor: 'white',
       icon: 'check',
-      message: 'Acesso criado com sucesso!',
+      message: 'Acesso criado com sucesso',
       position: 'top'
     })
     acesso.value.id = ''
@@ -119,10 +127,10 @@ async function deleteAccessPerson(id){
     await api.post('/delete_access_person', { host: myHost, acesso: { id: id } })
     .then(response => {
       $q.notify({
-        color: 'green',
+        color: 'green-7',
         textColor: 'white',
         icon: 'delete',
-        message: 'Acesso excluído com sucesso!',
+        message: 'Acesso Excluído com sucesso',
         position: 'top'
       })
       getAcessos()

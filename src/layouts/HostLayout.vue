@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR lFr">
 
-    <q-header class="bg-grad-2 text-white" height-hint="98">
+    <q-header class="bg-glass-2 text-white" height-hint="98">
       <q-toolbar>
         <q-toolbar-title class="row items-center">
           <q-avatar>
@@ -12,7 +12,7 @@
           </a>
         </q-toolbar-title>
 
-        <q-btn style="rounded-borders "  icon="menu" @click="toggleRightDrawer" />
+        <q-btn style="rounded-borders " size="md" icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
 
       <!-- <q-tabs align="center" v-if="!isMobile">
@@ -27,17 +27,17 @@
           <img  :src="authStore.getInfoImg()" alt="">
         </q-avatar>
       </div>
-      <div v-if="isHost" class="text-center text-bold text-purple-1">{{authStore.getInfoRazao().toUpperCase()}}</div>
-      <div class="text-center text-purple-1 mid-opacity text-bold q-mb-md "><q-btn to="/app" label="Perfil" flat ></q-btn></div>
+      <div id="title-menu" v-if="isHost" class="text-center text-bold text-purple-1">{{authStore.getInfoRazao().toUpperCase()}}</div>
+      <div  v-if="isAuthenticated" class="text-center text-purple-1 mid-opacity text-bold q-mb-md "><q-btn @click="goTo({to:'/app', selected:false})" label="Perfil" flat ></q-btn></div>
       <q-list v-if="isAuthenticated"  class="text-bold text-white">
         <q-item v-for="item in menuOptions.items" :key="item.label"
-           clickable @click="goTo(item.to)" style="border-radius: 12px;" :class="item.class">
-          <q-item-section>
-            <q-item-label class="text-grey-4">{{ item.label }}</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-icon :name="item.icon" color="secondary" />
-          </q-item-section>
+           clickable @click="goTo(item)" style="border-radius: 8px;" :class="'q-mt-md q-mx-md text-blue-2  ' + (item.selected ? 'shadow-inset' : 'shadow-2')">
+           <q-item-section avatar>
+             <q-icon :name="item.icon" :color="!item.selected ? 'grey-3' : 'secondary'" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label :class=" !item.selected ? 'text-grey-4' : 'text-secondary'">{{ item.label }}</q-item-label>
+            </q-item-section>
         </q-item>
       </q-list>
       <div v-if="!isAuthenticated" class="w100 text-white text-bold row items-center justify-center q-mt-xl">
@@ -78,8 +78,24 @@ const isHost = computed(() => authStore.getInfoRole() == 'host')
 const router = useRouter()
 const landingLink = !window.location.href.includes('localhost') ? 'https://midnightickets.com' : 'http://localhost:9000'
 const isMobile = window.innerWidth < 800
-function goTo(to) {
-  router.push(to)
+
+const menuOptions = ref({
+  items: [
+    // HOST MENUS
+    // { label: 'Vendas', icon: 'payments', to: '/app/#' },
+    { label: 'Eventos', icon: 'calendar_month', to: '/evento', role: 'host', selected: false,},
+    { label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false,},
+    { label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false,},
+    // { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Suporte', icon: 'contact_support', to: '/app/#', selected: false },
+    { label: 'Sair', icon: 'logout', to: '/', selected: false }
+    // { label: 'Ingressos', icon: 'confirmation_number', to: '/app/#' },
+    // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
+  ]
+})
+function goTo(item) {
+  menuOptions.value.items.forEach(i => i.selected = false)
+  item.selected = true
+  router.push(item.to)
 }
 
 function cleanSessionStorage() {
@@ -90,23 +106,6 @@ onBeforeUnmount(() => {
   cleanSessionStorage()
 })
 
-const menuOptions = ref({
-  items: [
-    // HOST MENUS
-    // { label: 'Vendas', icon: 'payments', to: '/app/#' },
-    { class:'q-mt-md q-mx-md text-blue-2 bg-primary shadow-2' ,label: 'Eventos', icon: 'calendar_month', to: '/evento', role: 'host', selected: false,},
-    { class:'q-mt-md q-mx-md text-blue-2 bg-primary shadow-2' ,label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false,},
-    { class:'q-mt-md q-mx-md text-blue-2 bg-primary shadow-2' ,label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false,},
-    // { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Suporte', icon: 'contact_support', to: '/app/#', selected: false },
-    { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Sair', icon: 'logout', to: '/', selected: false }
-    // { label: 'Ingressos', icon: 'confirmation_number', to: '/app/#' },
-    // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
-  ]
-})
-
-const loginLayout = (to) => {
-  router.push(to)
-}
 
 const toggleRightDrawer = () => {
   rightDrawerOpen.value = !rightDrawerOpen.value
@@ -115,5 +114,8 @@ const toggleRightDrawer = () => {
 <style scoped>
 .bg-purple-2{
     background-color: #8025e22b!important;
+}
+.shadow-inset{
+    box-shadow: inset 0 0 96px 0 rgba(0, 0, 0, 0.552);
 }
 </style>

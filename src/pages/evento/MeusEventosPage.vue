@@ -22,7 +22,7 @@
                             <q-btn class="q-py-sm" label="Novo Evento" color="primary"
                                 @click="navigateTo('/evento/steps')" icon="today" icon-right="add" />
                         </div>
-                        <q-input v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined
+                        <q-input :inputStyle="{ fontWeight:'bold', color:'#6310E1' }" v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined
                             label="Procurar Evento">
                             <template v-slot:append>
                                 <q-btn icon="search" color="primary" @click="getEventos()" />
@@ -63,7 +63,7 @@
                                             Visualizar Evento
                                         </q-tooltip>
                                     </q-btn>
-                                    <q-btn icon="sell " color="green">
+                                    <q-btn v-if="props.row.status.includes('andamento')" icon="sell " color="green">
                                         <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                                             Virar lote de ingressos
                                         </q-tooltip>

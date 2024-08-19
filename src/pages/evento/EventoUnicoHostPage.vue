@@ -1,7 +1,8 @@
 <template>
     <q-page class="animate__animated animate__fadeIn  column bg-grad-2 q-px-md q-pb-xl relative" id="dialog-evento"
         v-if="pageLoaded">
-        <div class="w100 rounded-borders q-mt-md">
+        <q-btn icon="keyboard_return" flat color="grey-5" class="absolute-top-left" to="/evento" label="eventos"></q-btn>
+        <div class="w100 rounded-borders q-mt-xl">
             <div id="title-menu"
                 class="text-shadow q-mb-sm text-h5 text-center text-purple-1 rounded-borders bg-grad-1 shadow-1 q-pa-md  text-bold">
                 {{ evento.titulo }}
@@ -10,7 +11,7 @@
         <div class="w100">
             <img class="shadow-2" id="img-evento" style="border: 4px solid #610FE1" :src="evento.img_url" alt="">
         </div>
-        <q-btn @click="editando = !editando" class="q-mt-sm q-py-sm" :color="editando ? 'orange-8' : 'blue'"
+        <q-btn v-if="evento.status.includes('andamento')"  id="cancelar-edit" @click="editando = !editando" class="q-mt-sm q-py-sm" :color="editando ? 'orange-8' : 'blue'"
             :icon-right="editando ? 'close' : 'edit'" :label="editando ? 'Cancelar edição' : 'Editar Evento'"></q-btn>
         <div id="evento-info" v-if="eventoLoaded"
             class="w100 q-px-md q-gutter-y-md q-mt-sm bg-glass-1 rounded-borders q-pb-md">
@@ -96,7 +97,7 @@
                     <q-icon name="map" color="primary" />
                 </template>
             </q-input>
-            <div v-if="evento.localizacao && !evento.localizacao.trim() == '' && evento.localizacao.includes('https://www.google.com/maps/embed')" class="w100 q-mt-md rounded-borders">
+            <div v-if="evento.localizacao && !evento.localizacao.trim() == '' && evento.localizacao.includes('https://www.google.com/maps/embed') && !evento.localizacao.includes('iframe')" class="w100 q-mt-md rounded-borders">
                 <iframe :src="evento.localizacao" class="w100 rounded-borders shadow-2" height="200" style="border:0;"
                     allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
@@ -107,7 +108,7 @@
                     <q-icon name="confirmation_number" size="md" class="text-primary" />
                     INGRESSOS
                 </div>
-                <q-btn label="" @click="goToLoteIngresso()" icon-right="sell"></q-btn>
+                <q-btn v-if="evento.status.includes('andamento')" label="" @click="goToLoteIngresso()" icon-right="sell"></q-btn>
             </div>
             <div class="text-bold text-secondary q-mt-sm">Ingressos Disponíveis: 74/{{ evento.qtd_ingressos }}</div>
             <div class="w100 text-primary text-bold mid-opacity">
@@ -141,10 +142,10 @@
                         <div class="text-black text-uppercase text-center">{{ subhost.nome }}</div>
                         <div>{{ subhost.id }}</div>
                     </div>
-                    <q-btn @click="removeSubhost(subhost.id)" color="secondary" size="xl" flat icon="remove"></q-btn>
+                    <q-btn v-if="evento.status.includes('andamento')" @click="removeSubhost(subhost.id)" color="secondary" size="xl" flat icon="remove"></q-btn>
                 </div>
             </div>
-            <q-btn v-if="!editando" @click="dialogAcessos = !dialogAcessos" label="Adicionar Subhost"
+            <q-btn v-if="!editando && evento.status.includes('andamento')" @click="dialogAcessos = !dialogAcessos" label="Adicionar Subhost"
                 icon-right="person_add" class="" color="primary"></q-btn>
         </div>
         <div id="pacote-info" class="q-mb-md bg-glass-1 rounded-borders q-pa-md q-mt-md">
@@ -163,9 +164,9 @@
         <div class="w100 q-my-lg" v-if="editando"></div>
         <q-btn v-if="!editando" class=" w100  q-py-xl q-mb-md" label="Painel de Vendas" icon-right="payments"
             icon="insert_chart" color="primary"></q-btn>
-        <q-btn v-if="!editando" class=" w100  q-py-lg " label="Visualizar Convite" icon-right="visibility"
+        <q-btn v-if="!editando && evento.status.includes('andamento')" class=" w100  q-py-lg " label="Visualizar Convite" icon-right="visibility"
             color="dark"></q-btn>
-        <q-btn v-if="!editando" class="w100 q-mt-md q-mb-lg" label="Cancelar Evento" icon-right="cancel"
+        <q-btn @click="cancelarEvento()" v-if="!editando && evento.status.includes('andamento')" class="w100 q-mt-md q-mb-lg" label="Cancelar Evento" icon-right="cancel"
             color="red-8"></q-btn>
         <div class="w100 q-pb-xl"></div>
         <q-btn @click="salvarAlteracoes()" v-if="editando" class=" w100 q-mt-md q-py-lg fixed"
@@ -186,7 +187,7 @@
                     <div class="text-primary text-bold">
                         {{ acesso.nome }} <br><strong class="text-secondary">{{ acesso.id }}</strong>
                     </div>
-                    <q-btn class="q-mt-md" color="green" label="Adicionar ao Evento" icon-right="sensor_occupied"
+                    <q-btn v-if="evento.status.includes('andamento')" class="q-mt-md" color="green" label="Adicionar ao Evento" icon-right="sensor_occupied"
                         @click="updateSubhostsEvento(acesso)" />
                 </q-list-item>
             </q-list>
@@ -209,7 +210,8 @@ import { onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import { api } from 'src/boot/axios';
 import { useQuasar } from 'quasar';
 import LoteIngressoComponent from "components/LoteIngressoComponent.vue";
-
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const host = JSON.parse(sessionStorage.getItem('userLogado'));
 const evento = ref({})
 const pageLoaded = ref(false)
@@ -309,6 +311,31 @@ async function salvarAlteracoes() {
         })
 }
 
+async function cancelarEvento() {
+    const confirm = window.confirm('Deseja realmente CANCELAR este Evento PERMANENTEMENTE?')
+    if (!confirm) return
+    await api.put(`/cancel_evento`, { evento: evento.value, host: JSON.parse(sessionStorage.getItem('userLogado')) })
+        .then(response => {
+            $q.notify({
+                color: 'green-7',
+                textColor: 'white',
+                icon: 'cancel',
+                message: response.data.message,
+                position: 'top'
+            })
+            router.push('/evento')
+        })
+        .catch(error => {
+            console.log(error)
+            $q.notify({
+                color: 'red-8',
+                textColor: 'white',
+                icon: 'error',
+                message: error.response.data.error,
+                position: 'top'
+            })
+        })
+}
 
 async function getEvento() {
     await api.post(`/get_evento_host`, {
@@ -375,4 +402,11 @@ img {
         border-radius: 10px;
     }
 }
+#cancelar-edit{
+    position: sticky!important;
+    top: 48px;
+    left: 0px;
+    z-index: 9;
+}
+
 </style>
