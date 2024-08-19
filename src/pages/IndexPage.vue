@@ -10,7 +10,7 @@
         <div id="title"
           class="w100 text-h5 text-bold text-center q-pa-md q-pb-md rounded-borders  text-purple-1"
           style="border-top: 2px solid #9573f3;border-bottom: 2px solid #9573f3;">
-          {{ host.nome_razao }}<br>
+          {{ host.nome_razao.toUpperCase() }}<br>
           <div class="high-opacity text-secondary q-mt-sm" style="font-size: 1rem">host</div>
         </div>
         <div class="rounded-borders w100 column text-secondary q-pa-md q-mt-md" style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
@@ -18,12 +18,12 @@
             <div class="text-h6 row items-center text-green-2">
               <strong class="text-green q-pr-sm">R$ </strong> {{ formatToNumber(host.saldo) }}
             </div>
-            <q-btn label="Sacar" class="q-px-md" icon-right="attach_money" color="green-8" />
+            <!-- <q-btn label="Sacar" class="q-px-md" icon-right="attach_money" color="green-8" /> -->
           </div>
           <p class="row no-wrap items-center justify-between text-shadow">
             <div>            🟣 {{ host.purpleCoins }}
               <strong class="text-blue text-shadow">🔵 {{ host.subCoins }}</strong></div>
-            <q-btn to="/app/recarregar" dense label="recarregar" class="q-px-md q-ml-md" icon-right="currency_exchange" color="primary" />
+            <q-btn to="/app/recarregar" glossy label="recarregar" class="q-px-md q-ml-md" icon-right="currency_exchange" color="primary" />
           </p>
         </div>
         <div class="w100 text-secondary column q-gutter-y-md q-mt-md items-center q-pb-md q-px-md rounded-borders"

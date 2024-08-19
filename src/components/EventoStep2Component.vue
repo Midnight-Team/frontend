@@ -57,7 +57,7 @@ const ingressoHandler = ref({
     titulo: '',
     valor: '',
     quantidade: '',
-    status: true
+    vendidos: 0
 })
 
 const $q = useQuasar()
@@ -104,7 +104,6 @@ const addIngresso = () => {
             titulo: '',
             valor: '',
             quantidade: '',
-            status: true,
             vendidos: 0
         }
     }

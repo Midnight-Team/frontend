@@ -19,7 +19,7 @@
             <q-icon name="assignment_ind" color="primary" />
           </template>
       </q-input>
-      <q-btn @click="createAccessPerson()" :disabled="acesso.id.trim() == '' || acesso.nome.trim() == ''" class="w100 q-mt-md q-pa-lg" label="Criar Acesso" icon-right="person_add"
+      <q-btn glossy  @click="createAccessPerson()" :disabled="acesso.id.trim() == '' || acesso.nome.trim() == ''" class="w100 q-mt-md q-pa-lg" label="Criar Acesso" icon-right="person_add"
         color="positive" />
     </div>
     <div v-if="acessos && acessos.length > 0" class="q-mb-md text-h6 text-bold bg-grad-1  rounded-borders text-white row items-center justify-center q-pa-md">

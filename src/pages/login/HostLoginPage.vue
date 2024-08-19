@@ -47,7 +47,7 @@
                             <q-icon name="vpn_key" size="md" color="primary" class="cursor-pointer" />
                         </template>
                     </q-input>
-                    <q-btn v-if="!loading" @click="login()" type="submit"
+                    <q-btn glossy v-if="!loading" @click="login()" type="submit"
                         :label="!usuario.isHost ? 'Escanear Ingressos' : 'Entrar'" color="primary"
                         :icon-right="!usuario.isHost ? 'document_scanner' : 'login'" class="w100 q-mt-md q-py-md" />
                     <div v-if="loading" class="row w100 q-pt-md justify-center">
@@ -87,7 +87,7 @@ const login = async () => {
             sessionStorage.setItem('role', JSON.stringify(res.data.role));
             $q.notify({
                 color: 'primary',
-                message: '✨ Bem Vindo(a), ' + res.data.host.login.toLowerCase(),
+                message: 'Bem Vindo(a), ' + res.data.host.login.toLowerCase() + ' ✨',
                 icon: 'local_activity',
                 position: 'top',
             });

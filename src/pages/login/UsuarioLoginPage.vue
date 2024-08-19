@@ -7,19 +7,38 @@
             </div>
             <q-card-section>
                 <q-form @submit="submitForm()">
-                    <q-input :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-my-md" v-model="usuario.nome" label="Nome*" />
-                    <q-input :inputStyle="{ fontWeight: 'bold'}" filled class="q-mb-md" v-model="usuario.cpf" label="CPF*" mask="###.###.###-##"  />
-                    <q-input :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.email" label="Email*" />
-                    <q-input :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.telefone" label="Telefone*"  mask="(##) #####-####" />
+                    <q-input :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-my-md" v-model="usuario.nome" label="Nome*">
+                        <template v-slot:prepend>
+                            <q-icon name="person" color="primary" class="cursor-pointer" />
+                        </template>
+                    </q-input>
+                    <q-input :inputStyle="{ fontWeight: 'bold'}" filled class="q-mb-md" v-model="usuario.cpf" label="CPF*" mask="###.###.###-##" >
+                        <template v-slot:prepend>
+                            <q-icon name="badge" color="primary" class="cursor-pointer" />
+                        </template>
+                    </q-input>
+                    <q-input type="email" :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.email" label="Email*">
+                        <template v-slot:prepend>
+                            <q-icon name="email" color="primary" class="cursor-pointer" />
+                        </template>
+                    </q-input>
+                    <q-input type="phone" :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.telefone" label="Telefone*"  mask="(##) #####-####">
+                        <template v-slot:prepend>
+                            <q-icon name="phone" color="primary" class="cursor-pointer" />
+                        </template>
+                    </q-input>
                     <q-input maxlength="20" :inputStyle="{ fontWeight: 'bold'}" filled v-model="usuario.senha" label="Senha*" :type="showPassword ? 'text' : 'password'">
+                        <template v-slot:prepend>
+                            <q-icon name="lock" color="primary" class="cursor-pointer"/>
+                        </template>
                         <template v-slot:append>
                             <q-icon :name="showPassword ? 'visibility' : 'visibility_off'" color="primary" class="cursor-pointer" @click="showPassword = !showPassword" />
                         </template>
                     </q-input>
                     <div v-if="registrando" class="q-my-sm text-h6 text-primary">Data de Nascimento:*</div>
                     <q-date class="w100 row justify-center q-mb-md" v-if="registrando" v-model="usuario.dataNascimento" mask="DD-MM-YYYY HH:mm" color="primary" />
-                    <q-btn v-if="registrando" type="submit" label="Registrar" color="blue" icon-right="person_add" class="w100 q-mt-md q-pa-md"/>
-                    <q-btn v-if="!registrando" type="submit" label="Entrar" color="primary" icon-right="login" class="w100 q-mt-md"/>
+                    <q-btn glossy v-if="registrando" type="submit" label="Registrar" color="blue" icon-right="person_add" class="w100 q-mt-md q-pa-md"/>
+                    <q-btn glossy v-if="!registrando" type="submit" label="Entrar" color="primary" icon-right="login" class="w100 q-mt-md"/>
                 </q-form>
             </q-card-section>
             <div class="column q-mb-md q-mx-md">

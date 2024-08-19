@@ -22,11 +22,11 @@
                     <a v-if="isMobile" class="menu-item" @click="scrollToBottom()">
                         <q-btn icon="contact_support" color="secondary"></q-btn>
                     </a>
-                    <a class="menu-item bg-primary q-pa-md text-purple-1 row items-center q-gutter-x-sm"
+                    <q-btn glossy dense class="menu-item bg-primary q-pa-md text-purple-1 row items-center"
                         style="border-radius:8px" @click="navigateTo('/login')">
                         Entrar
                         <q-icon name="login" size="md" />
-                    </a>
+                    </q-btn>
                 </div>
             </div>
 
@@ -65,7 +65,7 @@
                                     <q-icon name="email" color="primary" />
                                 </template>
                                 <template v-slot:append>
-                                    <q-btn @click="fastEmailGetter()" color="primary" icon="send" label="Enviar" />
+                                    <q-btn @click="fastEmailGetter()" color="primary" icon="send" label="Enviar" glossy/>
                                 </template>
                             </q-input>
                             <p class="text-center q-pt-md q-px-md high-opacity" style="font-size: .8rem;">Digite seu EMAIL para
@@ -283,7 +283,7 @@
                                 </template>
                             </q-input>
                             <q-btn v-if="!sendLoading" @click="sendForm()" class="q-pa-md w100" color="primary"
-                                icon-right="description" label="Enviar formulário" />
+                                icon-right="description" label="Enviar" glossy />
                             <div class="w100 row justify-center">
                                 <q-spinner-bars v-if="sendLoading" class="q-mt-md" color="primary" size="2em" />
                             </div>
@@ -291,13 +291,13 @@
                     </div>
                     <div class="space rounded-borders q-my-md ">
                         <q-btn @click="wppConsultor()" class="q-pa-md w100" color="green" icon-right="sms"
-                            label="Fale Agora Com um de nossos Consultores" />
+                            label="Fale Agora Com um de nossos Consultores" glossy />
                     </div>
                     <div
                         class="w100 text-bold rounded-borders column bg-grad-2 items-center justify-center text-white q-pa-md text-center q-mt-md ">
                         <div class="column text-h5 text-white text-bold">LOGIN HOST</div>
                         <div class="text-purple-2">É Produtor de Eventos ou Subhost??</div>
-                        <q-btn icon-right="admin_panel_settings" label="Faça login Aqui" dense class="q-mt-sm q-pa-lg rounded-borders"
+                        <q-btn icon-right="admin_panel_settings" label="Faça login Aqui" glossy dense class="q-mt-sm q-pa-lg rounded-borders"
                             color="dark" to="/login/host" />
                     </div>
                 </div>

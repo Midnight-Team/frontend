@@ -19,7 +19,7 @@
                     <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
                         <div class="w100 q-my-md">
-                            <q-btn class="q-pa-md" label="Novo Evento" color="primary"
+                            <q-btn class="q-pa-md" label="Novo Evento" glossy color="primary"
                                 @click="navigateTo('/evento/steps')" icon="event" icon-right="add" />
                         </div>
                         <q-input :inputStyle="{ fontWeight:'bold', color:'#6310E1' }" v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined
@@ -38,7 +38,7 @@
                         </div>
                         <q-table v-if="!loading" no-data-label="Nenhum evento encontrado 🌆" separator="cell"
                             class="my-sticky-column-table text-primary q-mb-md w100 text-bold" :rows="rows"
-                            :columns="columns" hide-pagination>
+                            :columns="columns">
                             <template v-slot:body-cell-titulo="props">
                                 <q-td :props="props">
                                     <div class="q-gutter-y-xs q-py-sm">
@@ -52,27 +52,27 @@
                             <template v-slot:body-cell-pacote="props">
                                 <q-td :props="props">
                                     <div class="q-gutter-y-xs q-py-sm">
-                                        {{ formatBigPct(props.row.pacote) }}
+                                        {{ props.row.pacote }} 
                                     </div>
                                 </q-td>
                             </template>
                             <template v-slot:body-cell-acoes="props">
                                 <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
-                                    <q-btn icon="visibility" color="primary" @click="openMeuEventoPage(props.row.id)">
+                                    <q-btn icon="edit_note" color="blue-7"  @click="openMeuEventoPage(props.row.id)">
                                         <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
-                                            Visualizar Evento
+                                            Gerenciar Evento
                                         </q-tooltip>
                                     </q-btn>
-                                    <q-btn v-if="props.row.status.includes('andamento')" icon="sell " color="green">
+                                    <!-- <q-btn v-if="props.row.status.includes('andamento')" icon="sell " color="green">
                                         <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                                             Virar lote de ingressos
                                         </q-tooltip>
-                                    </q-btn>
+                                    </q-btn> -->
                                 </div>
                             </template>
                         </q-table>
                         <div  v-if="!loading" class="w100 text-right text-secondary  q-mb-md text-bold">
-                            {{ rows.length > 0 ? rows.length.toString() + ' evento(s) encontrado(s)🔎' : 'Nenhum evento encontrado🌃' }} 
+                            {{ rows.length > 0 ? (rows.length.toString() + ' evento(s) encontrado(s)🔎') : 'Nenhum evento encontrado🌃' }} 
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@ const columns = [
     {
         name: 'acoes',
         align: 'left',
-        label: 'Ações',
+        label: 'Gerenciar',
         field: 'acoes',
     },
     {
@@ -126,17 +126,10 @@ const columns = [
         field: 'status'
     },
     {
-        name: 'pacote',
-        required: true,
-        label: 'Pacote',
+        name: 'data_evento',
         align: 'left',
-        field: 'pacote'
-    },
-    {
-        name: 'tipos_ingressos',
-        align: 'left',
-        label: 'Tipos Ingressos',
-        field: 'tipos_ingressos'
+        label: 'Data do Evento',
+        field: 'data_evento',
     },
     {
         name: 'qtd_ingressos',
@@ -145,16 +138,29 @@ const columns = [
         field: 'qtd_ingressos'
     },
     {
+        name: 'access_code',
+        align: 'left',
+        label: 'Código de Acesso',
+        field: 'access_code'
+    },
+    {
         name: 'subhosts',
         align: 'left',
         label: 'Subhosts',
         field: 'subhosts'
     },
     {
-        name: 'data_evento',
+        name: 'tipos_ingressos',
         align: 'left',
-        label: 'Data do Evento',
-        field: 'data_evento',
+        label: 'Tipos Ingressos',
+        field: 'tipos_ingressos'
+    },
+    {
+        name: 'pacote',
+        required: true,
+        label: 'Pacote',
+        align: 'left',
+        field: 'pacote'
     },
 ]
 
