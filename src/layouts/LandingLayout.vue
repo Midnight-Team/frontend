@@ -45,9 +45,9 @@
                     class="q-mt-md q-mb-md animate__animated animate__zoomIn animate__slower ">
                     <q-toolbar class="bg-grad-4">
                         <q-toolbar-title
-                            class="row justify-center  q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
+                            class="row justify-center q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
                             <div id="title" class="text-center">
-                                MIDNIGHT<br>TICKETS
+                                MIDNIGHT <br v-if="isMobile">TICKETS
                             </div>
                             <q-icon v-if="!isMobile" size="xl" color="white" name="local_activity" />
                         </q-toolbar-title>

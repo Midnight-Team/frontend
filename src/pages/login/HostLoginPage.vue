@@ -87,7 +87,7 @@ const login = async () => {
             sessionStorage.setItem('role', JSON.stringify(res.data.role));
             $q.notify({
                 color: 'primary',
-                message: 'Bem Vindo, ' + res.data.host.login.toUpperCase(),
+                message: '✨ Bem Vindo(a), ' + res.data.host.login.toLowerCase(),
                 icon: 'local_activity',
                 position: 'top',
             });

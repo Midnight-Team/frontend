@@ -19,8 +19,8 @@
                     <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
                         <div class="w100 q-my-md">
-                            <q-btn class="q-py-sm" label="Novo Evento" color="primary"
-                                @click="navigateTo('/evento/steps')" icon="today" icon-right="add" />
+                            <q-btn class="q-pa-md" label="Novo Evento" color="primary"
+                                @click="navigateTo('/evento/steps')" icon="event" icon-right="add" />
                         </div>
                         <q-input :inputStyle="{ fontWeight:'bold', color:'#6310E1' }" v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined
                             label="Procurar Evento">
@@ -71,6 +71,9 @@
                                 </div>
                             </template>
                         </q-table>
+                        <div  v-if="!loading" class="w100 text-right text-secondary  q-mb-md text-bold">
+                            {{ rows.length > 0 ? rows.length.toString() + ' evento(s) encontrado(s)🔎' : 'Nenhum evento encontrado🌃' }} 
+                        </div>
                     </div>
                 </div>
             </div>

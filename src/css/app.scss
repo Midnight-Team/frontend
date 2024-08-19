@@ -12,9 +12,9 @@ background: #3D3943
 }
 
 .bg-grad-1 {
-    background: #8E2DE2;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #4A00E0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #4A00E0, #670bb8);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #4A00E0, #670bb8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
 }
 .bg-grad-2 {
@@ -30,9 +30,9 @@ background: #3D3943
     backdrop-filter: blur(10px);
 }
 .bg-grad-3 {
-    background: #8E2DE2;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #682edc, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #682edc, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #682edc;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #682edc, #670bb8);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #682edc, #670bb8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .bg-grad-4 {
@@ -89,13 +89,13 @@ background: #3D3943
   
   /* Handle */::-webkit-scrollbar-thumb {
     border-radius: 6px;
-    background: #8D2DE2;
+    background: #6310E1;
     cursor: grab;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #3f117c94; 
+    background: #57329F; 
   }
 
   .hline{
@@ -136,4 +136,8 @@ th{
 }
 .bg-purple-light{
   background: #dbccf7!important;
+}
+
+tr:nth-child(2n){
+  background: #efe6fd!important;
 }
