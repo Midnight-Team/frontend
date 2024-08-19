@@ -52,18 +52,15 @@
                             <q-icon v-if="!isMobile" size="xl" color="white" name="local_activity" />
                         </q-toolbar-title>
                     </q-toolbar>
-                    <div class="text-shadow space bg-grad-2 w100 text-center text-blue-1 q-py-md text-bold q-px-md high-opacity"
+                    <div class="text-shadow space bg-grad-2 w100 text-center text-white q-py-md text-bold q-px-md high-opacity"
                         style="font-size:1rem">
                         REALIZE seus EVENTOS com 0% de TAXA e PARE de PAGAR TRIBUTOS excessivos na VENDA de SEUS INGRESSOS!!
                     </div>
                     <div class="row justify-center  q-mx-md">
                         <q-card id="email-card"
                             class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-3s">
-                            <p class="text-center q-pt-md q-px-md" style="font-size: .8rem;">Digite seu EMAIL para
-                                SOLICITAR
-                                a ABERTURA da sua CONTA de PRODUTOR</p>
-                            <q-input v-model="contato.email" type="email" class="bg-white" filled
-                                label="Seu melhor email">
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" v-model="contato.email" type="email" class="bg-white" filled
+                                label="Email">
                                 <template v-slot:prepend>
                                     <q-icon name="email" color="primary" />
                                 </template>
@@ -71,16 +68,19 @@
                                     <q-btn @click="fastEmailGetter()" color="primary" icon="send" label="Enviar" />
                                 </template>
                             </q-input>
+                            <p class="text-center q-pt-md q-px-md high-opacity" style="font-size: .8rem;">Digite seu EMAIL para
+                                SOLICITAR
+                                a ABERTURA da sua CONTA de PRODUTOR</p>
                         </q-card>
                     </div>
                     <div class="w100 img-wrapper">
                         <img class="img"
                             src="https://images.blush.design/UKjlMI8EIiiOMVntZau4?w=920&auto=compress&cs=srgb" alt="">
                     </div>
-                    <div style="font-size:1.3rem" class=" bg-grad-4 text-blue-1 text-bold q-px-sm q-py-md text-left">Quem
+                    <div style="font-size:1.3rem" class=" bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">Quem
                         Somos ?</div>
                     <div style="font-size:1.1rem"
-                        class=" bg-grad-2 text-blue-1 high-opacity text-bold q-px-sm q-py-md text-right text-shadow">
+                        class=" bg-grad-2 text-white high-opacity text-bold q-px-sm q-py-md text-right text-shadow">
                         Somos
                         um
                         Aplicativo Web de Bilheteria Online e Monitoramento de Eventos focados na Escalabilidade
@@ -89,10 +89,10 @@
                         <img class="img"
                             src="https://images.blush.design/PJcHFUF4pMy6BXPLEFnD?w=500&auto=compress&cs=srgb" alt="">
                     </div>
-                    <div style="font-size:1.3rem" class=" bg-grad-4 text-blue-1 text-bold q-px-sm q-py-md text-left">O
+                    <div style="font-size:1.3rem" class=" bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">O
                         que Fazemos ?</div>
                     <div style="font-size:1.1rem"
-                        class="text-shadow q-mb-md bg-grad-2 text-blue-1 high-opacity text-bold q-px-sm q-py-md text-right">
+                        class="text-shadow q-mb-md bg-grad-2 text-white high-opacity text-bold q-px-sm q-py-md text-right">
                         Maximizamos seus lucros na venda de ingressos de forma escalável com serviços personalizados,
                         transparência, suporte e uma
                         interface amigável. Seus ingressos mais caros são os que mais pagam taxas abusivas, mas pra nós
@@ -103,11 +103,11 @@
                     <div class="w100 img-wrapper column">
                         <img class="img" src="~/assets/landing-images/drawn1.png" alt="">
                     </div>
-                    <div style="font-size:1.3rem" class="bg-grad-4 text-blue-1 text-bold q-px-sm q-py-md text-left">Como
+                    <div style="font-size:1.3rem" class="bg-grad-4 text-white text-bold q-px-sm q-py-md text-left">Como
                         fazemos isso ?
                     </div>
                     <div id="vantagens" style="font-size:1.1rem;"
-                        class="text-shadow bg-grad-2 text-blue-1  text-bold q-px-sm  q-py-md text-right">
+                        class="text-shadow bg-grad-2 text-white high-opacity  text-bold q-px-sm  q-py-md text-right">
                         Desde
                         pequenos encontros a grandes festivais, nossa plataforma se adapta às suas necessidades e
                         POTENCIALIZA seus ganhos.
@@ -121,32 +121,35 @@
                         class="text-shadow text-h6 w100 text-bold text-blue-4 text-center q-px-md q-py-sm border-bottom">
                         Veja como
                         nossa Plataforma pode aumentar o Faturamento do seu Evento!!</div> -->
-                    <div class="text-h4 bg-white text-primary text-center w100 border-bottom text-bold q-pt-md q-pb-md">
+                    <div id="title" class="text-h4 bg-white text-primary text-center w100 border-bottom text-bold q-pt-md q-pb-md">
                         Vantagens</div>
                     <div style="font-size:1.1rem"
-                        class="text-shadow q-px-md bg-grey-5 text-left q-py-md rounded-borders">
+                        class="text-shadow q-px-md bg-grey-4 text-left q-py-md rounded-borders">
                         🟣 <strong class="text-primary">SEM TAXA POR VENDA<br></strong> Nossa <strong>moeda
                             virtual</strong>
                         permite realizar <strong>Eventos</strong> com <strong>0% de taxa</strong> em ingressos
                         vendidos. Obtenha
                         o <strong>máximo do seu
-                            lucro</strong> e ainda <strong>GANHE CASHBACK</strong> com cada ingresso
-                        não vendido
+                            lucro</strong> e ainda <strong>GANHE CASHBACK</strong>
                         <br>🟣 <strong class="text-primary">LUCRO EM TEMPO REAL<br></strong> Disponibilizamos a
                         possibilidade de receber o
                         <strong>lucro de suas vendas automaticamente em tempo real na sua conta</strong> enquanto
-                        acontece o seu evento
+                        acontece o seu evento<br>
+                        🟣 <strong class="text-primary">AJUSTES DE LOTES GRATUITOS<br></strong>
+                        Realize <strong>ajustes de lotes</strong> e <strong>preços</strong> dos seus ingressos sem custo adicional. <strong>Altere</strong> o valor dos seus ingressos a <strong>qualquer momento</strong>
+                        <br>
+                        🟣 <strong class="text-primary">NOVAS FUNCIONALIDADES PERIODICAMENTE<br></strong> 
+                        Estamos sempre <strong>inovando</strong> e <strong>adicionando novas funcionalidades</strong> para <strong>otimizar</strong> a <strong>experiência</strong> dos nossos <strong>usuários</strong> e <strong>produtores</strong>
                     </div>
-                    <div
-                        class="w100 text-h4 text-bold bg-white text-primary text-center q-px-md rounded-borders q-py-sm border-bottom q-mt-md">
+                    <div id="title"
+                        class="w100 text-h4 text-bold bg-white text-primary text-center q-px-md rounded-borders q-py-sm border-bottom" style="border:4px solid #692EDD">
                         Benefícios</div>
                     <div style="font-size:1.1rem"
-                        class="text-shadow q-px-md bg-grey-5 q-py-md rounded-borders border-bottom">
-                        💸 <strong style="font-size:1.2rem" class="text-primary text-bold">AS MENORES TAXAS<br></strong>
+                        class="text-shadow q-px-md bg-grey-4 q-py-md rounded-borders border-bottom">
+                        💸 <strong style="font-size:1.2rem" class="text-primary text-bold">LIBERTE-SE das TAXAS<br></strong>
                         Estamos
                         integrados ao <strong>Mercado Pago</strong> com segurança
-                        e confidencialidade. Além de possuir <strong>as menores taxas de
-                            transações</strong>
+                        e confidencialidade. Integrado a todos os métodos de pagamentos, existe a possibilidade de <strong>Taxa 0</strong> na venda de ingressos
                         <br>
                         <br>
                         🤳🏼 <strong style="font-size:1.2rem" class="text-primary text-bold">SEM INSTALAÇÃO
@@ -158,12 +161,8 @@
                         <br>
                         🧑🏼‍💻 <strong style="font-size:1.2rem" class="text-primary text-bold">SUPORTE HUMANIZADO<br>
                         </strong> Nosso
-                        serviço é monitorado constantemente, focado em <strong>otimizar os
-                            custos</strong>
-                        para todos e <strong>gratificar os usuários</strong> com nossas <strong>moedas
-                            virtuais</strong>.
-                        Nosso serviço de suporte é <strong>humanizado e rápido</strong> para atender o quanto antes suas
-                        dúvidas
+                        serviço é monitorado constantemente, focado em <strong>otimizar o tráfego de dados. </strong>
+                        O Suporte é <strong>humanizado</strong> e <strong>ágil</strong> para atender suas necessidades o quanto antes
                         <br>
                         <br>
                         🖥️ <strong style="font-size:1.2rem" class="text-primary text-bold">CONSULTORIA
@@ -179,12 +178,9 @@
                         <br>
                         📲 <strong style="font-size:1.2rem" class="text-primary text-bold">TECNOLOGIA DE
                             PONTA<br></strong>
-                        Nosso WebApp é desenvolvido com as <strong id="contato">melhores tecnologias</strong> do mercado
+                        Nosso App Web é desenvolvido com as <strong id="contato">melhores tecnologias</strong> do mercado
                         e hospedada
-                        na nuvem com
-                        serviços da AWS, <strong>garantindo segurança e escalabilidade</strong> para <strong>todos os
-                            tipos de eventos e
-                            usuários</strong>
+                        na nuvem, <strong>garantindo segurança e escalabilidade</strong>. Nosso foco é a <strong>Usabilidade</strong> de todos os tipos de usuários: <strong>produtores, organizadores de eventos e compradores de ingressos digitais</strong>
                     </div>
                 </div>
                 <!-- <q-carousel v-model="slide" transition-prev="scale" transition-next="scale" swipeable animated
@@ -225,64 +221,63 @@
                             <div class="mid-opacity text-blue-6 text-center w100 text-bold">
                                 Todos campos abaixos são opcionais
                             </div>
-                            <q-input maxlength="200" filled v-model="contato.form.name" label="1.Qual é o seu nome?">
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" maxlength="200" filled v-model="contato.form.name" label="1.Qual é o seu nome?">
                                 <template v-slot:append>
                                     <q-icon name="person" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="200" filled v-model="contato.form.companyName"
-                                label="2.Nome Empresa/Razão Social">
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" maxlength="200" filled v-model="contato.form.companyName"
+                                label="2.Nome da Empresa">
                                 <template v-slot:append>
                                     <q-icon name="business" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input mask="(##) #####-####" placeholder="ex: (12) 34567-8910" type="tel" maxlength="200"
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" mask="(##) #####-####" placeholder="(12) 34567-8910" type="tel" maxlength="200"
                                 filled v-model="contato.form.phone" label="3.Telefone/WhatsApp">
                                 <template v-slot:append>
                                     <q-icon name="phone" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input placeholder="ex: Shows, baile funk, festival de eletrônica..." maxlength="200"
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" placeholder="Shows, baile funk, festival de rock..." maxlength="200"
                                 filled v-model="contato.form.eventType" label="4.Tipos de Eventos">
                                 <template v-slot:append>
                                     <q-icon name="nightlife" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input suffix="pessoas" mask="#####" filled v-model="contato.form.maxCapacity"
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" suffix="pessoas" mask="#####" filled v-model="contato.form.maxCapacity"
                                 label="5.Capacidade máxima de público">
                                 <template v-slot:append>
                                     <q-icon name="groups" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input suffix="pessoas" mask="#####" filled v-model="contato.form.mediumEventCapacity"
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" suffix="pessoas" mask="#####" filled v-model="contato.form.mediumEventCapacity"
                                 label="6.Média de público por evento">
                                 <template v-slot:append>
                                     <q-icon name="people" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="5" mask="#####" filled v-model="contato.form.mediumVendaIngressos"
-                                placeholder="Média qtd. de Ingressos vendidos"
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" maxlength="5" mask="#####" filled v-model="contato.form.mediumVendaIngressos"
+                                placeholder="Média de Ingressos vendidos online"
                                 label="7.Quantidade de Ingressos Digitais ">
                                 <template v-slot:append>
-                                    <q-icon name="123" color="primary" />
+                                    <q-icon name="confirmation_number" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="3" suffix="%" reverse-fill-mask mask="###" filled
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" maxlength="3" suffix="%" reverse-fill-mask mask="###" filled
                                 v-model="contato.form.percentAvista" label="8.Percentual de Vendas à Vista"
-                                placeholder="ex: 60%">
+                                >
                                 <template v-slot:append>
                                     <q-icon name="payments" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="9" prefix="R$" reverse-fill-mask mask="##.###,##" filled
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" maxlength="9" prefix="R$" reverse-fill-mask mask="##.###,##" filled
                                 v-model="contato.form.mediumProfits" placeholder="Média de faturamento por evento"
                                 label="9.Lucro por evento em Ingressos Digitais">
                                 <template v-slot:append>
                                     <q-icon name="paid" color="primary" />
                                 </template>
                             </q-input>
-                            <q-input maxlength="200" filled v-model="contato.form.localizacao" label="10.Localização"
-                                placeholder="Ex: Asa Sul - Brasília, Goiânia - GO...">
+                            <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" maxlength="200" filled v-model="contato.form.localizacao" label="10.Localização">
                                 <template v-slot:append>
                                     <q-icon name="location_on" color="primary" />
                                 </template>
@@ -512,5 +507,7 @@ a {
     }
 }
 
-div {}
+.high-opacity {
+    opacity: 0.8;
+}
 </style>
