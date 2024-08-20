@@ -22,7 +22,7 @@
                     <a v-if="isMobile" class="menu-item" @click="scrollToBottom()">
                         <q-btn icon="contact_support" color="secondary"></q-btn>
                     </a>
-                    <q-btn glossy dense class="menu-item bg-primary q-pa-md text-purple-1 row items-center"
+                    <q-btn glossy dense class="menu-item text-bold bg-primary q-pa-md text-purple-1 row items-center"
                         style="border-radius:8px" @click="navigateTo('/login')">
                         Entrar
                         <q-icon name="login" size="md" />
@@ -59,6 +59,7 @@
                     <div class="row justify-center  q-mx-md">
                         <q-card id="email-card"
                             class="text-white bg-grad-1 q-mt-md text-bold rounded-borders animate__animated animate__zoomIn animate__slower animate__delay-3s">
+                            <p class="text-center q-pt-md q-px-md high-opacity" style="font-size: .8rem;">DIGITE seu EMAIL e ALAVANQUE o seu FATURAMENTO em INGRESSOS</p>
                             <q-input :inputStyle="{fontWeight: 'bold', color:'#6310E1'}" v-model="contato.email" type="email" class="bg-white" filled
                                 label="Email">
                                 <template v-slot:prepend>
@@ -68,9 +69,6 @@
                                     <q-btn @click="fastEmailGetter()" color="primary" icon="send" label="Enviar" glossy/>
                                 </template>
                             </q-input>
-                            <p class="text-center q-pt-md q-px-md high-opacity" style="font-size: .8rem;">Digite seu EMAIL para
-                                SOLICITAR
-                                a ABERTURA da sua CONTA de PRODUTOR</p>
                         </q-card>
                     </div>
                     <div class="w100 img-wrapper">
@@ -487,7 +485,7 @@ a {
 
 @media(min-width: 1300px) {
     .q-page {
-        padding: 0 400px;
+        padding: 0 15vw;
         margin: 0 30px;
     }
     .q-page-container{

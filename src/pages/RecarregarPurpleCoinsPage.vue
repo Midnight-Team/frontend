@@ -22,17 +22,18 @@
                 <q-card-section>
                     <q-item class="column q-mb-sm option" style="border-radius: 12px;border: 2px solid #6310E1;"
                         v-for="item in pacotesCoins" :key="item.label" clickable>
-                        <q-item-section avatar >
+                        <q-item-section avatar>
                             <q-icon color="secondary" size="sm" name="paid" />
                         </q-item-section>
-                        <q-item-section  style="font-size:1rem" class="text-bold text-primary q-px-xs q-pb-md q-pt-sm">
+                        <q-item-section style="font-size:1rem" class="text-bold text-primary q-px-xs q-pb-md q-pt-sm">
                             <q-item-label>{{ item.label }}
                                 <div class="text-blue" v-if="item.value == 4">+ 50 subcoins</div>
                                 <div class="text-blue" v-if="item.value == 5">+ 150 subcoins</div>
                             </q-item-label>
                         </q-item-section>
                         <div>
-                            <q-btn class="absolute-right" style="border-radius:10px;width:45%" dense @click="addRecargaPacote(item)"
+                            <q-btn class="text-bold absolute-right" style="border-radius:10px;width:45%" dense
+                                @click="addRecargaPacote(item)"
                                 :label="(item.valorAvista ? formatString(item.valorAvista) : formatString(item.preco))"
                                 color="green-6" icon="shopping_cart" />
                         </div>
@@ -45,7 +46,7 @@
                     <q-icon size="md" color="blue-1" name="confirmation_number" />
                     <div class="text-center text-h6 text-bold q-px-md ">Pacotes de Ingressos</div>
                 </div>
-    
+
                 <div id="tabela-pacotes">
                     <q-card style="border-radius: 16px;border: 2px solid #6D2EDD;border-bottom: 10px solid #6D2EDD;"
                         class="bg-blue-1 w100 shadow-3 animate__animated animate__zoomIn animate__delay-1s">
@@ -53,8 +54,8 @@
                             <q-item class="q-mb-sm option" style="border-radius: 12px;border: 2px solid #6310E1;"
                                 v-for="item in pacoteOptions" :key="item.label" clickable>
                                 <q-item-section class="text-bold text-primary">
-                                    <q-item-label>🎫 {{ item.max_ingressos }} Ingressos por {{ item.purpleCoins }}
-                                        PurpleCoin</q-item-label>
+                                    <q-item-label>🎫 {{ item.max_ingressos }} Ingressos - {{ item.purpleCoins }}
+                                        Moeda(s)🟣</q-item-label>
                                 </q-item-section>
                             </q-item>
                         </q-card-section>
@@ -71,27 +72,27 @@
                 <div class="text-center text-white text-h6 text-bold q-px-md q-pb-sm ">Transforme suas SubCoins em
                     PurpleCoins</div>
                 <div class="row q-mt-md q-mx-xl no-wrap text-center">
-                    <q-btn label="Trocar 5.000 SubCoins em 1 PurpleCoin" color="primary" class="text-center q-pa-md"
-                        icon-right="paid" />
+                    <q-btn @click="cashback()" label="Trocar 5.000 SubCoins em 1 PurpleCoin" color="primary"
+                        class="text-center q-pa-md" icon-right="paid" />
                 </div>
             </div>
         </div>
         <q-dialog class="animate__animated animate__fadeIn" persistent v-model="openPaymentModal"
             style="backdrop-filter: blur(4px);">
             <div style="border-radius: 16px"
-            class="item-selecionado bg-primary q-mb-md rounded-borders q-pa-md text-blue-4 text-bold">
-            <div class="q-pa-md" id="title" >Confirmar Recarga
-            </div>
-            <div  class="text-center text-h5 text-bold text-grey-3 q-my-md">
-                {{ itemSelected.label }} por<br> {{
-                    formatString(itemSelected.preco) }} </div>
-                    <!-- <div style="font-size:.5rem" class=" text-bold text-blue-2">
+                class="item-selecionado bg-primary q-mb-md rounded-borders q-pa-md text-blue-4 text-bold">
+                <div class="q-pa-md" id="title">Confirmar Recarga
+                </div>
+                <div class="text-center text-h5 text-bold text-grey-3 q-my-md">
+                    {{ itemSelected.label }} por<br> {{
+                        formatString(itemSelected.preco) }} </div>
+                <!-- <div style="font-size:.5rem" class=" text-bold text-blue-2">
                         Você será Redirecionado para o Ambiente de Pagamento
                     </div> -->
-                    <RecargaBricksPaymentComponent />
-                    <div class="row w100 justify-center">
-                        <q-btn class="" label="voltar" flat color="secondary" @click="openPaymentModal = false" />
-                    </div>
+                <RecargaBricksPaymentComponent />
+                <div class="row w100 justify-center">
+                    <q-btn class="" label="voltar" flat color="secondary" @click="openPaymentModal = false" />
+                </div>
             </div>
         </q-dialog>
         <div class="w100 q-mt-lg">
@@ -105,6 +106,12 @@ import { onMounted, ref } from "vue";
 import FooterComponent from "../components/FooterComponent.vue";
 import RecargaBricksPaymentComponent from "../components/RecargaBricksPaymentComponent.vue";
 import { useAuthStore } from 'src/stores/authStore';
+import { api } from 'src/boot/axios';
+import { useQuasar } from "quasar";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const $q = useQuasar()
 const itemSelected = ref('');
 const openPaymentModal = ref(false);
 const addRecargaPacote = (pacote) => {
@@ -115,6 +122,28 @@ const addRecargaPacote = (pacote) => {
     openPaymentModal.value = true;
 }
 const authStore = useAuthStore();
+
+async function cashback() {
+    const userLogado = JSON.parse(sessionStorage.getItem('userLogado'));
+    await api.post('/cashback', userLogado)
+        .then((response) => {
+            $q.notify({
+                color: 'positive',
+                position: 'top',
+                message: response.data,
+                icon: 'paid'
+            });
+            router.push('/app');
+        })
+        .catch((error) => {
+            $q.notify({
+                color: 'negative',
+                position: 'top',
+                message: error.response.data.error,
+                icon: 'attach_money'
+            });
+        });
+}
 
 const pacoteOptions = [
     { value: 1, label: '0% taxa 50 ingressos por 1p🟣', purpleCoins: 1, max_ingressos: 50, },
@@ -135,6 +164,7 @@ const pacotesCoins = ref(
         // { tipo: 'teste 1 real', id: 6, value: 6, label: '10 SubCoins', preco: 1, purpleCoinsCredito: 0, subCoinsCredito: 10 },
     ]
 )
+
 onMounted(() => {
     sessionStorage.getItem('recargaPacote') && sessionStorage.removeItem('recargaPacote')
 })
@@ -171,7 +201,7 @@ function formatString(value) {
 }
 
 .option:hover {
-    background-color: #37fc9348;
+    background-color: #57c4ff5d;
     border-radius: 12px;
 }
 
@@ -192,7 +222,7 @@ function formatString(value) {
     }
 }
 
-.text-blue-2{
-    color:#71c4f7!important;
+.text-blue-2 {
+    color: #71c4f7 !important;
 }
 </style>

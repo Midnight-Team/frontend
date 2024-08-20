@@ -401,7 +401,7 @@ img {
 
 @media (min-width: 1300px) {
     .q-page {
-        padding: 16px 300px;
+        padding: 16px 10vw;
     }
 
     #img-evento {
