@@ -4,6 +4,9 @@
             <q-icon size="md" color="primary" name="confirmation_number" class="q-pr-sm" />
             Configuração de Ingressos
         </div>
+        <div class="text-center text-bold q-pt-md text-primary mid-opacity q-mx-md">
+            Os títulos e valores dos ingressos poderão ser editados posteriormente:
+        </div>
         <div class="column q-gutter-y-md q-pa-md q-mb-xl">
             <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1' }" outlined class="q-mt-lg" v-model="ingressoHandler.titulo"
                 placeholder="Entrada Masculina, Camarote, Pista Inteira" label="Título Tipo do Ingresso*" />

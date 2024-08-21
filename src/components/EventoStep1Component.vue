@@ -157,7 +157,6 @@ const checkRequiredFields = () => {
     // Converte a data do formato DD-MM-YYYY para um objeto Date no fuso horário local
     const [day, month, year] = data_evento.slice(0, -6).split('-');
     const dataEventoDate = new Date(year, month - 1, day); // Mês é zero-indexado
-    console.log(dataEventoDate + ' || ' + new Date());
     
 
     // Verifica se a data do evento é anterior ou igual à data de hoje
@@ -165,6 +164,12 @@ const checkRequiredFields = () => {
     hoje.setHours(0, 0, 0, 0); // Zera as horas para comparar apenas as datas
 
     if (dataEventoDate < hoje) {
+        $q.notify({
+            message: 'A data do evento não pode ser anterior à data de hoje',
+            color: 'orange-8',
+            position: 'top',
+            icon: 'event_busy'
+        })
         return true;
     }
 

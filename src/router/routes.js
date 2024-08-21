@@ -10,8 +10,8 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'recarregar', component: () => import('pages/RecarregarPurpleCoinsPage.vue') },
-      { path: 'acesso', component: () => import('pages/AcessoPage.vue'),
-      },
+      { path: 'acesso', component: () => import('pages/AcessoPage.vue')},
+      { path: 'suporte', component: () => import('pages/suporte/SuporteHostPage.vue')},
     ]
   },
   {

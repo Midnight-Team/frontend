@@ -91,8 +91,8 @@
                     <q-icon name="location_on" color="primary" />
                 </template>
             </q-input>
-            <q-input label="Localização Google Maps" v-model="evento.localizacao" outlined color="primary"
-                :readonly="!editando" :filled="!editando">
+            <q-input  v-if="editando" label="Localização Google Maps" v-model="evento.localizacao" outlined color="primary"
+                :filled="!editando">
                 <template v-slot:append>
                     <q-icon name="map" color="primary" />
                 </template>
@@ -296,7 +296,7 @@ async function salvarAlteracoes() {
     await api.put(`/update_evento`, { evento: evento.value, host: JSON.parse(sessionStorage.getItem('userLogado')) })
         .then(response => {
             $q.notify({
-                color: 'green-8',
+                color: 'primary',
                 textColor: 'white',
                 icon: 'edit',
                 message: response.data.message,
