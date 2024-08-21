@@ -15,12 +15,12 @@ const routes = [
     ]
   },
   {
-    path: '/evento',
+    path: '/eventos',
     component: () => import('src/layouts/HostLayout.vue'),
     children: [
       { path: '', component: () => import('pages/evento/MeusEventosPage.vue') },
-      { path: 'steps', component: () => import('pages/evento/StepsPage.vue') },
-      { path: 'meu-evento', component: () => import('pages/evento/EventoUnicoHostPage.vue') },
+      { path: 'criar', component: () => import('pages/evento/StepsPage.vue') },
+      { path: 'gerenciar', component: () => import('pages/evento/EventoUnicoHostPage.vue') },
     ]
   },
   // {

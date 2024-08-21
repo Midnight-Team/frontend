@@ -5,15 +5,15 @@
             Configuração de Ingressos
         </div>
         <div class="column q-gutter-y-md q-pa-md q-mb-xl">
-            <q-input :inputStyle="{ fontWeight: 'bold' }" outlined class="q-mt-lg" v-model="ingressoHandler.titulo"
-                placeholder="Ex: Entrada Meia, Camarote, Pista Inteira" label="Título Tipo do Ingresso*" />
-            <q-input :inputStyle="{ fontWeight: 'bold' }" outlined maxlength="7" prefix="R$" v-model="ingressoHandler.valor" label="Valor do Ingresso*"
+            <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1' }" outlined class="q-mt-lg" v-model="ingressoHandler.titulo"
+                placeholder="Entrada Masculina, Camarote, Pista Inteira" label="Título Tipo do Ingresso*" />
+            <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1' }" outlined maxlength="7" prefix="R$" v-model="ingressoHandler.valor" label="Valor do Ingresso*"
                 reverse-fill-mask mask="####,##">
                 <template v-slot:append>
                     <q-icon name="payments" color="primary" />
                 </template>
             </q-input>
-            <q-input :inputStyle="{ fontWeight: 'bold' }" outlined mask="#####" maxlength="4" v-model="ingressoHandler.quantidade" label="Quantidade de Ingressos*"
+            <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1' }" outlined mask="#####" maxlength="4" v-model="ingressoHandler.quantidade" label="Quantidade de Ingressos*"
                 reverse-fill-mask >
                 <template v-slot:append>
                     <div class="q-pr-sm">{{ ingressosDisponiveis }}</div>
@@ -27,20 +27,20 @@
             </div>
             <div id="list-ingressos" class="column">
                 <div v-for="(ingresso, index) in ingressos" :key="index"
-                    class="column no-wrap items-center rounded-borders shadow-4 bg-grad-2 q-mb-md  justify-between">
+                    class="column no-wrap items-center rounded-borders shadow-4 bg-grad-6 q-mb-md  justify-between">
                     <div class="row q-py-xs items-center">
-                        <div class="text-bold text-white">{{ format(ingresso.titulo) }}</div>
+                        <div class="text-bold text-white q-py-sm text-center">🎫 {{ format(ingresso.titulo) }}</div>
                     </div>
-                    <div class="w100 bg-primary mid-opacity q-mx-md" style="height: 2px"></div>
+                    <div class="w100 bg-secondary mid-opacity q-mx-md" style="height: 2px"></div>
                     <div class="row w100 items-center justify-center">
                         <q-btn color="red-4" flat icon="delete" @click="removeIngresso(index)" />
                         <q-btn :label="ingresso.quantidade" icon="local_activity" flat color="blue-3" />
-                        <div class="text-bold text-green-3">R$ {{ ingresso.valor }}</div>
+                        <div class="text-bold text-green-4">R$ {{ ingresso.valor }}</div>
                     </div>
                 </div>
             </div>
             <div class="w100 hline bg-primary"></div>
-            <q-btn :disabled="checkNext()" label="próximo" color="primary" @click="goNext()" icon-right="skip_next" />
+            <q-btn :disabled="checkNext()" label="próximo" color="primary"  @click="goNext()" icon-right="skip_next" />
             <q-btn label="voltar" flat color="primary" @click="goPrev()" />
         </div>
 

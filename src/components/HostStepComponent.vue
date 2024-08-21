@@ -18,7 +18,7 @@
         </template>
       </q-input>
 
-      <q-btn :disabled="check()" label="Criar Evento" color="primary" class="q-py-md" @click="criarEvento()" icon-right="event" />
+      <q-btn :disabled="check()" label="Criar Evento" color="primary" class="q-py-md" @click="criarEvento()" glossy icon-right="event" />
       <!-- <q-btn label="voltar" flat color="primary" @click="goPrev()" /> -->
     </div>
   </div>
@@ -65,8 +65,6 @@ const criarEvento = async () => {
     sessionStorage.removeItem('eventoStep1');
     sessionStorage.removeItem('eventoStep2');
     sessionStorage.removeItem('eventoStep3');
-
-    router.push('/evento');
   }).catch(err => {
     $q.notify({
       color: 'negative',
@@ -75,6 +73,8 @@ const criarEvento = async () => {
       position: 'top',
     });
     host.value.senha = '';
+  }).finally(() => {
+    router.push('/eventos');
   });
 };
 

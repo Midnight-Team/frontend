@@ -14,8 +14,8 @@
         <div class="wrapper-responsive q-mt-xl  q-px-sm">
             <div
                 class="w100 row items-center justify-center q-py-md q-mt-lg q-mb-md  rounded-borders text-white bg-grad-1 shadow-1">
-                <q-icon size="md" color="blue-1" name="currency_exchange" />
-                <div class="text-center text-h6 text-bold q-px-md ">Recarregar Moedas</div>
+                <q-icon size="md" color="white" name="currency_exchange" />
+                <div class="text-center text-h6 text-bold q-px-md ">RECARREGAR MOEDAS</div>
             </div>
             <q-card style="border-radius: 16px;border: 2px solid #6D2EDD;border-bottom: 10px solid #6D2EDD;"
                 class="bg-blue-1 w100 shadow-3 animate__animated animate__zoomIn animate__delay-1s">
@@ -34,7 +34,7 @@
                         <div>
                             <q-btn class="text-bold absolute-right" style="border-radius:10px;width:45%" dense
                                 @click="addRecargaPacote(item)"
-                                :label="(item.valorAvista ? formatString(item.valorAvista) : formatString(item.preco))"
+                                :label="(formatString(item.preco))"
                                 color="green-6" icon="shopping_cart" />
                         </div>
                     </q-item>
@@ -43,8 +43,8 @@
             <div class="wrapper-responsive q-px-sm">
                 <div
                     class="w100 row items-center justify-center q-py-md q-mb-md q-mt-md rounded-borders text-white bg-grad-1 shadow-1">
-                    <q-icon size="md" color="blue-1" name="confirmation_number" />
-                    <div class="text-center text-h6 text-bold q-px-md ">Pacotes de Ingressos</div>
+                    <q-icon size="md" color="white" name="confirmation_number" />
+                    <div class="text-center text-h6 text-bold q-pl-sm ">PACOTES DE INGRESSOS</div>
                 </div>
 
                 <div id="tabela-pacotes">

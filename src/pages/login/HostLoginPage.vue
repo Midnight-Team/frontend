@@ -92,7 +92,7 @@ const login = async () => {
                 position: 'top',
             });
             setTimeout(() => {
-                window.location.href = '/app'
+                window.location.href = '/eventos';
             }, 1000);
         }).catch(err => {
             $q.notify({

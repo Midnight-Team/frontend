@@ -8,19 +8,18 @@
                     {{ authStore.getInfoPurpleCoins() }} <div class="q-pl-sm mid-opacity">PurpleCoins</div>
                 </div>
                 <div class="row no-wrap items-center">
-                    <div class="text-green-7"> <strong class="high-opacity">R$ </strong>{{ formatToNumber(authStore.getInfoSaldo().toString()) }}</div>
-                    <q-icon size="sm" color="green" name="paid" class="q-pl-sm" />
+                    <div class="text-green-7"> <strong class="high-opacity"></strong>{{ authStore.getInfoLogin().toLowerCase() }}</div>
+                    <q-icon size="sm" color="green" name="person" class="q-pl-sm" />
                 </div>
             </div>
             <div class="column q-mb-xl">
                 <div id="table-eventos" class="q-mt-sm w100">
-                    <div id="title-menu" class=" text-primary q-mb-sm w100 q-px-md text-center text-bold">Eventos
-                        de<br>{{ authStore.getInfoRazao() }}</div>
+                    <div id="title" class=" text-primary q-mb-sm w100 q-px-md text-center text-bold">Eventos</div>
                     <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
                         <div class="w100 q-my-md">
                             <q-btn class="q-pa-md" label="Novo Evento" glossy color="primary"
-                                @click="navigateTo('/evento/steps')" icon="event" icon-right="add" />
+                                @click="navigateTo('/eventos/criar')" icon="event" icon-right="add" />
                         </div>
                         <q-input :inputStyle="{ fontWeight:'bold', color:'#6310E1' }" v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined
                             label="Procurar Evento">
@@ -36,7 +35,7 @@
                             <q-spinner-ball color="primary" size="lg" />
                             <q-spinner-ball color="primary" size="lg" />
                         </div>
-                        <q-table v-if="!loading" no-data-label="Nenhum evento encontrado 🌆" separator="cell"
+                        <q-table v-if="!loading && rows.length > 0" no-data-label="Nenhum evento encontrado 🌆" separator="cell"
                             class="my-sticky-column-table text-primary q-mb-md w100 text-bold" :rows="rows"
                             :columns="columns">
                             <template v-slot:body-cell-titulo="props">
@@ -98,7 +97,7 @@ const buscarEvento = ref({
 const isMobile = window.innerWidth < 800;
 function openMeuEventoPage(eventoId) {
     sessionStorage.setItem('eventoHandlerId', eventoId);
-    router.push('/evento/meu-evento');
+    router.push('/eventos/gerenciar');
 }
 
 const navigateTo = (url) => {
@@ -116,7 +115,7 @@ const columns = [
     {
         name: 'acoes',
         align: 'left',
-        label: 'Gerenciar',
+        label: 'Ações',
         field: 'acoes',
     },
     {
@@ -169,10 +168,6 @@ function formatBigString(str) {
         return str.substring(0, 9) + '...';
     }
     return str;
-}
-
-function formatBigPct(pact) {
-    return pact.substring(12)
 }
 
 function formatToNumber(inputString) {

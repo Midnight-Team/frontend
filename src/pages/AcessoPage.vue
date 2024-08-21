@@ -1,9 +1,9 @@
 <template>
   <q-page class="bg-puple-light q-px-md  q-py-md animate__animated animate__fadeIn ">
-    <q-btn icon="keyboard_return" flat color="grey-5" class="q-pb-md q-pt-sm absolute-top-left" to="/evento" label="eventos"></q-btn>
+    <q-btn icon="keyboard_return" flat color="grey-5" class="q-pb-md q-pt-sm absolute-top-left" to="/eventos" label="eventos"></q-btn>
     <div class="q-mb-md q-mt-lg text-h6 text-bold bg-grad-1  rounded-borders text-white row items-center justify-center q-pa-md">
-      <q-icon size="md" name="sensor_occupied" color="blue-1" class="q-pr-sm"></q-icon>
-      Acessos
+      <q-icon size="md" name="sensor_occupied" color="white" class="q-pr-sm"></q-icon>
+      ACESSOS
     </div>
     <p class="text-center text-white">
       Os acessos são as contas que você cria e disponibiliza para seus colaboradores de eventos validarem os ingressos dos seus clientes.

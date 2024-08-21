@@ -1,10 +1,10 @@
 <template>
-    <q-page class="animate__animated animate__fadeIn  column bg-grad-2 q-px-md q-pb-xl relative" id="dialog-evento"
+    <q-page class="animate__animated animate__fadeIn  column bg-grad-1 q-px-md q-pb-xl relative" id="dialog-evento"
         v-if="pageLoaded">
-        <q-btn icon="keyboard_return" flat color="grey-5" class="absolute-top-left" to="/evento" label="eventos"></q-btn>
+        <q-btn icon="keyboard_return" flat color="grey-5" class="absolute-top-left" to="/eventos" label="eventos"></q-btn>
         <div class="w100 rounded-borders q-mt-xl">
             <div id="title-menu"
-                class="text-shadow q-mb-sm text-h5 text-center text-purple-1 rounded-borders bg-grad-1 shadow-1 q-pa-md  text-bold">
+                class="text-shadow q-mb-sm text-h5 text-center text-purple-1 rounded-borders bg-grad-1 q-pa-md  text-bold">
                 {{ evento.titulo }}
             </div>
         </div>

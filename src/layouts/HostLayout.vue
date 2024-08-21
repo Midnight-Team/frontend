@@ -83,7 +83,7 @@ const menuOptions = ref({
   items: [
     // HOST MENUS
     // { label: 'Vendas', icon: 'payments', to: '/app/#' },
-    { label: 'Eventos', icon: 'calendar_month', to: '/evento', role: 'host', selected: false,},
+    { label: 'Eventos', icon: 'calendar_month', to: '/eventos', role: 'host', selected: false,},
     { label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false,},
     { label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false,},
     // { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Suporte', icon: 'contact_support', to: '/app/#', selected: false },

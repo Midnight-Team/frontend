@@ -2,27 +2,27 @@
     <div class="es1 bg-white q-mx-sm  rounded-borders shadow-4 relative">
         <div class="title-1 w100 text-h6 row items-center text-primary shadow-1 q-py-xs justify-center text-bold">
             <q-icon size="md" color="primary" name="event" class="q-pr-sm" />
-            Informações do Evento
+            {{ evento.titulo.trim() != '' ? evento.titulo : 'Informações do Evento' }}
         </div>
         <div class="column q-gutter-y-md q-pa-md q-mb-xl">
-            <div class="text-center w100 text-blue-4 high-opacity text-bold">Preencha as informações para criação do seu
+            <div class="text-center w100 text-secondary high-opacity text-bold">Preencha as informações para criação do seu
                 evento, elas poderão ser editadas posteriormente:</div>
-            <q-input filled class="q-mt-lg" v-model="evento.titulo" label="Título*">
+            <q-input maxlength="50" filled class="q-mt-lg" v-model="evento.titulo" label="Título*">
                 <template v-slot:append>
                     <q-btn flat icon="nightlife" color="primary" />
                 </template>
             </q-input>
-            <q-input filled type="textarea" v-model="evento.descricao" label="Descrição">
+            <q-input maxlength="500"  filled type="textarea" v-model="evento.descricao" label="Descrição">
                 <template v-slot:append>
                     <q-btn flat icon="info" color="primary" />
                 </template>
             </q-input>
-            <q-input filled type="textarea" v-model="evento.endereco" label="Endereço*">
+            <q-input maxlength="200"  filled type="textarea" v-model="evento.endereco" label="Endereço*">
                 <template v-slot:append>
                     <q-btn flat icon="pin_drop" color="primary" />
                 </template>
             </q-input>
-            <q-input filled type="textarea" v-model="evento.contato" label="Contato*">
+            <q-input maxlength="100"  filled type="textarea" v-model="evento.contato" label="Contato*">
                 <template v-slot:append>
                     <q-btn flat icon="phone" color="primary" />
                 </template>
@@ -35,8 +35,8 @@
                     </div>
                     <q-icon color="primary" size="md" name="today" />
                 </div>
-                <div class="row no-wrap q-mr-md">
-                    <q-input label="Hora Início*" class="q-mt-md q-ml-md" style="width: 45%;" outlined
+                <div class="row no-wrap justify-center items-center q-mr-md">
+                    <q-input id="times" label="Início*" class="q-mt-md q-ml-md"  outlined
                         v-model="evento.hora_evento" mask="time" :rules="['time']">
                         <template v-slot:append>
                             <q-icon name="access_time" color="primary" class="cursor-pointer">
@@ -50,7 +50,7 @@
                             </q-icon>
                         </template>
                     </q-input>
-                    <q-input label="Hora Fim" class="q-mt-md q-ml-md" style="width: 45%;" outlined
+                    <q-input label="Final" class="q-mt-md q-ml-md"  outlined
                         v-model="evento.hora_final" mask="time" :rules="['time']">
                         <template v-slot:append>
                             <q-icon name="access_time" color="primary" class="cursor-pointer">
@@ -65,8 +65,8 @@
                         </template>
                     </q-input>
                 </div>
-                <div class="q-mx-md">
-                    <q-date class="w100" v-model="evento.data_evento" mask="DD-MM-YYYY HH:mm" color="primary" />
+                <div class="row justify-center">
+                    <q-date id="date-picker" class="w100" v-model="evento.data_evento" mask="DD-MM-YYYY HH:mm" color="primary" />
                 </div>
             </div>
             <div class="w100 text-bold text-secondary">0% de Taxa sobre a Venda de Ingresso*</div>
@@ -87,20 +87,20 @@
             </div>
             <q-btn label="Recarregar PurpleCoins" color="primary" glossy  icon-right="currency_exchange" to="/app/recarregar" />
 
-            <q-input maxlength="250" placeholder="Insira a url do banner" filled v-model="evento.img_url"
+            <q-input maxlength="300" placeholder="Insira a url do banner" filled v-model="evento.img_url"
                 label="Link da Imagem do Evento">
                 <template v-slot:append>
                     <q-btn flat icon="image" @click="openImgur()" color="primary" />
                 </template>
             </q-input>
-            <q-input placeholder="Clique no ícone ao lado para ajuda" maxlength="500" filled
+            <q-input placeholder="Clique no ícone ao lado para ajuda" maxlength="800" filled
                 v-model="evento.localizacao" label="Localização Google Maps">
                 <template v-slot:append>
                     <q-btn flat icon="map" @click="helpLocGoogle()" color="primary" />
                 </template>
             </q-input>
             <div class="w100 hline bg-primary"></div>
-            <q-btn :disabled="checkRequiredFields()" label="próximo" color="primary" @click="goNext()"
+            <q-btn :disabled="checkRequiredFields()" label="próximo" color="primary"  @click="goNext()"
                 icon-right="skip_next" />
             <q-btn label="meus eventos" flat color="primary" @click="returnEventos()" />
         </div>
@@ -143,16 +143,35 @@ const goNext = () => {
 }
 
 const returnEventos = () => {
-    router.push('/evento')
+    router.push('/eventos')
 }
 
 const checkRequiredFields = () => {
-    if (evento.value.titulo == '' || evento.value.endereco == '' || evento.value.contato == '' || evento.value.hora_evento == '' || evento.value.data_evento == '' || evento.value.pacote == null) {
-        return true
-    } else {
-        return false
+    const { titulo, endereco, contato, hora_evento, data_evento, pacote } = evento.value;
+
+    // Verifica se algum campo obrigatório está vazio ou nulo
+    if (!titulo || !endereco || !contato || !hora_evento || !data_evento || !pacote) {
+        return true;
     }
+    console.log(data_evento)
+    // Converte a data do formato DD-MM-YYYY para um objeto Date no fuso horário local
+    const [day, month, year] = data_evento.slice(0, -6).split('-');
+    const dataEventoDate = new Date(year, month - 1, day); // Mês é zero-indexado
+    console.log(dataEventoDate + ' || ' + new Date());
+    
+
+    // Verifica se a data do evento é anterior ou igual à data de hoje
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0); // Zera as horas para comparar apenas as datas
+
+    if (dataEventoDate < hoje) {
+        return true;
+    }
+
+    return false;
 }
+
+
 const pacoteOptions = [
     { value: 1, label: '50 ingressos por 1 moedas🟣', purpleCoins: 1, max_ingressos: 50, },
     { value: 2, label: '100 ingressos por 2 moedas🟣', purpleCoins: 2, max_ingressos: 100, },
@@ -210,4 +229,9 @@ onMounted(() => {
     backdrop-filter: blur(2px);
     z-index: 1;
 }
+
+#date-picker {
+    width: 30%;
+}
+
 </style>
