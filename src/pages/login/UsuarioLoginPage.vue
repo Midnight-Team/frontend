@@ -7,27 +7,27 @@
             </div>
             <q-card-section>
                 <q-form @submit="submitForm()">
-                    <q-input maxlength="70"  :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" v-if="registrando" filled class="q-my-md" v-model="usuario.nome" label="Nome*">
+                    <q-input maxlength="70"  :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" v-if="registrando" outlined class="q-my-md" v-model="usuario.nome" label="Nome*">
                         <template v-slot:prepend>
                             <q-icon name="person" color="primary" class="cursor-pointer" />
                         </template>
                     </q-input>
-                    <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" filled class="q-mb-md" v-model="usuario.cpf" label="CPF*" mask="###.###.###-##" >
+                    <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" outlined class="q-mb-md" v-model="usuario.cpf" label="CPF*" mask="###.###.###-##" >
                         <template v-slot:prepend>
                             <q-icon name="badge" color="primary" class="cursor-pointer" />
                         </template>
                     </q-input>
-                    <q-input maxlength="100" type="email" :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.email" label="Email*">
+                    <q-input maxlength="100" type="email" :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" v-if="registrando" outlined class="q-mb-md" v-model="usuario.email" label="Email*">
                         <template v-slot:prepend>
                             <q-icon name="email" color="primary" class="cursor-pointer" />
                         </template>
                     </q-input>
-                    <q-input mask="(##) #####-####" :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.telefone" label="Telefone*"  >
+                    <q-input mask="(##) #####-####" :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" v-if="registrando" outlined class="q-mb-md" v-model="usuario.telefone" label="Telefone*"  >
                         <template v-slot:prepend>
                             <q-icon name="phone" color="primary" class="cursor-pointer" />
                         </template>
                     </q-input>
-                    <q-input maxlength="25" :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" filled v-model="usuario.senha" :label="registrando ? 'Crie uma Senha*' : 'Senha*'" :type="showPassword ? 'text' : 'password'">
+                    <q-input maxlength="25" :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" outlined v-model="usuario.senha" :label="registrando ? 'Crie uma Senha*' : 'Senha*'" :type="showPassword ? 'text' : 'password'">
                         <template v-slot:prepend>
                             <q-icon name="lock" color="primary" class="cursor-pointer"/>
                         </template>
@@ -53,11 +53,12 @@
 import { ref } from "vue";
 import { api } from 'src/boot/axios';
 import { useQuasar } from "quasar";
+import { useRouter } from "vue-router";
 
 const $q = useQuasar()
 const showPassword = ref(false);
 const registrando = ref(false);
-
+const router = useRouter()
 const usuario = ref({
     cpf: '',
     senha: '',
@@ -82,6 +83,7 @@ async function login() {
             icon: 'login'
         })
         sessionStorage.setItem('user', JSON.stringify(response.data))
+        router.push('/eu')
     }).catch((error) => {
         $q.notify({
             color: 'negative',
@@ -113,7 +115,8 @@ async function criarConta() {
             message: 'Conta criada com sucesso',
             icon: 'person_add'
         })
-        sessionStorage.setItem('user', JSON.stringify(response.data))            
+        sessionStorage.setItem('user', JSON.stringify(response.data))
+        router.push('/eu')          
     }).catch((error) => {
         $q.notify({
             color: 'negative',

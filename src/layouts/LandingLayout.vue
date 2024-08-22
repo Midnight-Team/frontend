@@ -34,9 +34,9 @@
         <q-page-container>
             <div class="w100 row justify-center q-mt-md relative" style="overflow: hidden ">
                 <div class="animate__animated animate__zoomInDown animate__delay-1s animate__slower row no-wrap justify-center q-px-sm  w100" style="overflow: hidden ;z-index: 9;">
-                    <q-btn glossy to="/login/host" class="animate__animated text-primary bg-grey-4 animate__fadeInLeft  animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-bottom-left-radius: 8px;border-top-left-radius: 8px" icon-right="nightlife"
+                    <q-btn glossy to="/login/host" color="secondary" class="animate__animated text-primary animate__fadeInLeft  animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-bottom-left-radius: 8px;border-top-left-radius: 8px;border-top-right-radius: 0px;border-bottom-right-radius: 0px" icon-right="nightlife"
                         label="Sou Produtor!" />
-                    <q-btn glossy to="/login" @click="scrollBot()" class="animate__animated animate__fadeInRight animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-bottom-right-radius: 8px;border-top-right-radius: 8px" color="primary" icon-right="confirmation_number"
+                    <q-btn glossy to="/login" @click="scrollBot()"  class="animate__animated animate__fadeInRight bg-primary text-white animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-bottom-left-radius: 0px;border-top-left-radius: 0px;;border-bottom-right-radius: 8px;border-top-right-radius: 8px" icon-right="confirmation_number"
                         label="Quero Ingressos!" />
                 </div>
             </div>
@@ -45,14 +45,14 @@
                     class="q-mt-md q-mb-md animate__animated animate__zoomIn animate__slower ">
                     <q-toolbar class="bg-grad-4">
                         <q-toolbar-title
-                            class="row justify-center q-py-sm text-bold text-white rounded-borders animate__animated animate__zoomInLeft animate__delay-1s animate__slower items-center q-gutter-x-sm">
+                            class="row justify-center q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
                             <div id="title" class="text-center">
                                 MIDNIGHT <br v-if="isMobile">TICKETS
                             </div>
                             <q-icon v-if="!isMobile" size="xl" color="white" name="local_activity" />
                         </q-toolbar-title>
                     </q-toolbar>
-                    <div class="text-shadow space bg-grad-2 w100 text-center text-white q-py-md text-bold q-px-md high-opacity"
+                    <div class="text-shadow space bg-grad-2 w100 text-center text-grey-4 q-py-md text-bold q-px-md "
                         style="font-size:1rem">
                         REALIZE seus EVENTOS com 0% de TAXA e PARE de PAGAR TRIBUTOS excessivos na VENDA de SEUS INGRESSOS!!
                     </div>

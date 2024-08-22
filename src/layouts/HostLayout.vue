@@ -7,7 +7,8 @@
           <q-avatar>
             <q-icon size="md" color="purple-1" name="local_activity" />
           </q-avatar>
-          <a @click="goTo('/app')" style="text-decoration: none;" id="title-layout" class="text-purple-1 q-pl-xs text-bold">
+          <a @click="goTo('/app')" style="text-decoration: none;" id="title-layout"
+            class="text-purple-1 q-pl-xs text-bold">
             Midnight Tickets
           </a>
         </q-toolbar-title>
@@ -22,37 +23,40 @@
     </q-header>
 
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grad-1">
-      <div v-if="isAuthenticated"  class="w100 flex q-mb-md flex-center q-mt-lg">
+      <div v-if="isAuthenticated" class="w100 flex q-mb-md flex-center q-mt-lg">
         <q-avatar style="width:110px;height:110px;" class="shadow-2">
-          <img  :src="authStore.getInfoImg()" alt="">
+          <img :src="authStore.getInfoImg()" alt="">
         </q-avatar>
       </div>
-      <div id="title-menu" v-if="isHost" class="text-center text-bold text-purple-1">{{authStore.getInfoRazao().toUpperCase()}}</div>
-      <div  v-if="isAuthenticated" class="text-center text-purple-1 mid-opacity text-bold q-mb-md "><q-btn @click="goTo({to:'/app', selected:false})" label="Perfil" flat ></q-btn></div>
-      <q-list v-if="isAuthenticated"  class="text-bold text-white">
-        <q-item v-for="item in menuOptions.items" :key="item.label"
-           clickable @click="goTo(item)" style="border-radius: 8px;" :class="'q-mt-md q-mx-md text-blue-2  ' + (item.selected ? 'shadow-inset' : 'shadow-2')">
-           <q-item-section avatar>
-             <q-icon :name="item.icon" :color="!item.selected ? 'grey-3' : 'secondary'" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label :class=" !item.selected ? 'text-grey-4' : 'text-secondary'">{{ item.label }}</q-item-label>
-            </q-item-section>
+      <div id="title-menu" v-if="isHost" class="text-center text-bold text-purple-1">
+        {{ authStore.getInfoRazao().toUpperCase() }}</div>
+      <div v-if="isAuthenticated" class="text-center text-purple-1 mid-opacity text-bold q-mb-md "><q-btn
+          @click="goTo({ to: '/app', selected: false })" label="Perfil" flat></q-btn></div>
+      <q-list v-if="isAuthenticated" class="text-bold text-white">
+        <q-item v-for="item in menuOptions.items" :key="item.label" clickable @click="goTo(item)"
+          style="border-radius: 8px;"
+          :class="'q-mt-md q-mx-md text-blue-2  ' + (item.selected ? 'shadow-inset' : 'shadow-2')">
+          <q-item-section avatar>
+            <q-icon :name="item.icon" :color="!item.selected ? 'grey-3' : 'secondary'" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label :class="!item.selected ? 'text-grey-4' : 'text-secondary'">{{ item.label }}</q-item-label>
+          </q-item-section>
         </q-item>
       </q-list>
       <div v-if="!isAuthenticated" class="w100 text-white text-bold row items-center justify-center q-mt-xl">
         <div class="text-center q-mb-md q-mx-md">
           Registre-se ou Faça Login para ter acesso aos seus Eventos e Ingressos!!
         </div>
-        <q-btn v-if="!isAuthenticated" class="q-mt-lg" to="/" label="Página Inicial" color="primary"
-          icon="home" />
+        <q-btn v-if="!isAuthenticated" class="q-mt-lg" to="/" label="Página Inicial" color="primary" icon="home" />
       </div>
       <div class="absolute-bottom w100  row no-wrap items-center justify-center q-mt-xl text-primary q-py-sm">
         <div class="row items-center ">
           <q-avatar>
             <q-icon size="md" color="blue-1" name="support_agent" />
           </q-avatar>
-          <a href="https://samuelvictorol.github.io/portfolio/contato" target="_blank" style="text-decoration: none;" class="text-blue-1 q-pl-xs text-bold">
+          <a href="https://samuelvictorol.github.io/portfolio/contato" target="_blank" style="text-decoration: none;"
+            class="text-blue-1 q-pl-xs text-bold">
             Suporte
           </a>
         </div>
@@ -83,9 +87,9 @@ const menuOptions = ref({
   items: [
     // HOST MENUS
     // { label: 'Vendas', icon: 'payments', to: '/app/#' },
-    { label: 'Eventos', icon: 'calendar_month', to: '/eventos', role: 'host', selected: false,},
-    { label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false,},
-    { label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false,},
+    { label: 'Eventos', icon: 'calendar_month', to: '/eventos', role: 'host', selected: false, },
+    { label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false, },
+    { label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false, },
     // { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Suporte', icon: 'contact_support', to: '/app/#', selected: false },
     { label: 'Sair', icon: 'logout', to: '/', selected: false }
     // { label: 'Ingressos', icon: 'confirmation_number', to: '/app/#' },
@@ -112,10 +116,11 @@ const toggleRightDrawer = () => {
 }
 </script>
 <style scoped>
-.bg-purple-2{
-    background-color: #8025e22b!important;
+.bg-purple-2 {
+  background-color: #8025e22b !important;
 }
-.shadow-inset{
-    box-shadow: inset 0 0 96px 0 rgba(0, 0, 0, 0.552);
+
+.shadow-inset {
+  box-shadow: inset 0 0 96px 0 rgba(0, 0, 0, 0.552);
 }
 </style>

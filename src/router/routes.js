@@ -15,6 +15,13 @@ const routes = [
     ]
   },
   {
+    path: '/eu',
+    component: () => import('src/layouts/UserLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/usuario/IndexPage.vue') },
+    ]
+  },
+  {
     path: '/eventos',
     component: () => import('src/layouts/HostLayout.vue'),
     children: [
@@ -30,6 +37,7 @@ const routes = [
   //     { path: '', component: () => import('pages/StatusPaymentPage.vue') },
   //   ]
   // },
+  
   {
     path: '/login',
     component: () => import('layouts/LoginLayout.vue'),
