@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-        <q-btn :disable="!edited" color="green" label="Salvar Ingressos" @click="salvar()" class="w100 save-lote q-py-md" icon-right="sell"></q-btn>
+        <q-btn :disabled="!edited" color="green" label="Salvar Ingressos" @click="salvar()" class="w100 save-lote q-py-md" icon-right="sell"></q-btn>
     </div>
 </template>
 

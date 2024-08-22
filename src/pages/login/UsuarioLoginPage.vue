@@ -3,31 +3,31 @@
         <q-card class="shadow-9 bg-puple-light q-mt-md " id="card-login">
             <div class="text-h5 q-pl-md q-pt-md text-primary row items-center">
                 <q-icon  :name="registrando ? 'person_add' : 'person'" size="lg" class="q-mr-sm"/>
-                {{ !registrando ? 'Login': 'Registrar'}} Login
+                {{ !registrando ? 'Login': 'Registrar'}} Usuário
             </div>
             <q-card-section>
                 <q-form @submit="submitForm()">
-                    <q-input :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-my-md" v-model="usuario.nome" label="Nome*">
+                    <q-input maxlength="70"  :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" v-if="registrando" filled class="q-my-md" v-model="usuario.nome" label="Nome*">
                         <template v-slot:prepend>
                             <q-icon name="person" color="primary" class="cursor-pointer" />
                         </template>
                     </q-input>
-                    <q-input :inputStyle="{ fontWeight: 'bold'}" filled class="q-mb-md" v-model="usuario.cpf" label="CPF*" mask="###.###.###-##" >
+                    <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" filled class="q-mb-md" v-model="usuario.cpf" label="CPF*" mask="###.###.###-##" >
                         <template v-slot:prepend>
                             <q-icon name="badge" color="primary" class="cursor-pointer" />
                         </template>
                     </q-input>
-                    <q-input type="email" :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.email" label="Email*">
+                    <q-input maxlength="100" type="email" :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.email" label="Email*">
                         <template v-slot:prepend>
                             <q-icon name="email" color="primary" class="cursor-pointer" />
                         </template>
                     </q-input>
-                    <q-input type="phone" :inputStyle="{ fontWeight: 'bold'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.telefone" label="Telefone*"  mask="(##) #####-####">
+                    <q-input mask="(##) #####-####" :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" v-if="registrando" filled class="q-mb-md" v-model="usuario.telefone" label="Telefone*"  >
                         <template v-slot:prepend>
                             <q-icon name="phone" color="primary" class="cursor-pointer" />
                         </template>
                     </q-input>
-                    <q-input maxlength="20" :inputStyle="{ fontWeight: 'bold'}" filled v-model="usuario.senha" label="Senha*" :type="showPassword ? 'text' : 'password'">
+                    <q-input maxlength="25" :inputStyle="{ fontWeight: 'bold', color:'#6310E1'}" filled v-model="usuario.senha" :label="registrando ? 'Crie uma Senha*' : 'Senha*'" :type="showPassword ? 'text' : 'password'">
                         <template v-slot:prepend>
                             <q-icon name="lock" color="primary" class="cursor-pointer"/>
                         </template>
@@ -35,9 +35,9 @@
                             <q-icon :name="showPassword ? 'visibility' : 'visibility_off'" color="primary" class="cursor-pointer" @click="showPassword = !showPassword" />
                         </template>
                     </q-input>
-                    <div v-if="registrando" class="q-my-sm text-h6 text-primary">Data de Nascimento:*</div>
-                    <q-date class="w100 row justify-center q-mb-md" v-if="registrando" v-model="usuario.dataNascimento" mask="DD-MM-YYYY HH:mm" color="primary" />
-                    <q-btn glossy v-if="registrando" type="submit" label="Registrar" color="blue" icon-right="person_add" class="w100 q-mt-md q-pa-md"/>
+                    <!-- <div v-if="registrando" class="q-my-sm text-h6 text-primary">Data de Nascimento:*</div> -->
+                    <!-- <q-date class="w100 row justify-center q-mb-md" v-if="registrando" v-model="usuario.dataNascimento" mask="DD-MM-YYYY HH:mm" color="primary" /> -->
+                    <q-btn glossy v-if="registrando" @click="criarConta()" :disabled="checkCampos()"  type="submit" label="Criar Conta" color="blue" icon-right="person_add" class="w100 q-mt-md q-pa-md"/>
                     <q-btn glossy v-if="!registrando" type="submit" label="Entrar" color="primary" icon-right="login" class="w100 q-mt-md"/>
                 </q-form>
             </q-card-section>
@@ -50,7 +50,10 @@
 
 <script setup>
 import { ref } from "vue";
+import { api } from 'src/boot/axios';
+import { useQuasar } from "quasar";
 
+const $q = useQuasar()
 const showPassword = ref(false);
 const registrando = ref(false);
 
@@ -58,7 +61,6 @@ const usuario = ref({
     cpf: '',
     senha: '',
     nome: '',
-    dataNascimento: '',
     telefone: '',
     email: ''
 })
@@ -68,6 +70,38 @@ const toggleRegistrando = () => {
     setTimeout(() => {
         window.scrollTo(0, 0);
     }, 100);
+}
+
+function checkCampos() {
+    if(!usuario.value.cpf || !usuario.value.senha || !usuario.value.nome || !usuario.value.telefone || !usuario.value.email){
+        return true;
+    }
+    if(usuario.value.senha.length < 6){
+        return true;
+    }
+    return false;
+}
+
+async function criarConta() {
+    usuario.value.nome = usuario.value.nome.trim().toLowerCase()
+    usuario.value.email = usuario.value.email.trim().toLowerCase()
+
+    await api.post('/usuario', usuario.value).then((response) => {
+        $q.notify({
+            color: 'positive',
+            position: 'top',
+            message: 'Conta criada com sucesso',
+            icon: 'person_add'
+        })
+        sessionStorage.setItem('user', JSON.stringify(response.data))            
+    }).catch((error) => {
+        $q.notify({
+            color: 'negative',
+            position: 'top',
+            message: error.response.data.error,
+            icon: 'error'
+        })
+    })
 }
 
 </script>
