@@ -1,6 +1,6 @@
 <template>
-    <div id="usuariologin-wrapper" class="animate__animated  animate__zoomInRight animate__slower flex flex-center">
-        <q-card class="shadow-9 bg-puple-light q-mt-md " id="card-login">
+    <div id="usuariologin-wrapper" class="animate__animated   animate__zoomInRight animate__slower flex flex-center">
+        <q-card class=" bg-purple-light q-mt-md " id="card-login">
             <div class="text-h5 q-pl-md q-pt-md text-primary row items-center">
                 <q-icon  :name="registrando ? 'person_add' : 'person'" size="lg" class="q-mr-sm"/>
                 {{ !registrando ? 'Login': 'Registrar'}} Usuário
@@ -37,12 +37,13 @@
                     </q-input>
                     <!-- <div v-if="registrando" class="q-my-sm text-h6 text-primary">Data de Nascimento:*</div> -->
                     <!-- <q-date class="w100 row justify-center q-mb-md" v-if="registrando" v-model="usuario.dataNascimento" mask="DD-MM-YYYY HH:mm" color="primary" /> -->
-                    <q-btn glossy v-if="registrando" @click="criarConta()" :disabled="checkCampos()"  type="submit" label="Criar Conta" color="blue" icon-right="person_add" class="w100 q-mt-md q-pa-md"/>
-                    <q-btn glossy v-if="!registrando" type="submit" label="Entrar" color="primary" icon-right="login" class="w100 q-mt-md"/>
+                    <q-btn glossy v-if="!registrando" @click="login()" :disabled="!usuario.cpf || !usuario.senha || usuario.senha.length < 6 || usuario.cpf.length != 14" type="submit" label="Entrar" color="green" icon-right="login" class="w100 q-pa-lg q-mt-md"/>
+                    <q-btn glossy v-if="registrando" @click="criarConta()" :disabled="checkCampos()"  type="submit" label="Criar Conta" color="green" icon-right="person_add" class="w100 q-mt-md q-pa-md"/>
                 </q-form>
             </q-card-section>
             <div class="column q-mb-md q-mx-md">
-                <q-btn flat :label="registrando ? 'já possuo uma conta' : 'criar conta'" @click="toggleRegistrando()" :icon-right="registrando ? 'keyboard_return' : 'person_add'" color="primary" />
+                <q-btn glossy :label="registrando ? 'já possuo uma conta' : 'criar conta'" @click="toggleRegistrando()" :icon-right="registrando ? 'keyboard_return' : 'person_add'" color="primary" />
+                <q-btn v-if="!registrando" type="submit" label="Esqueci minha senha" color="secondary" dense flat class="w100 q-mt-md text-bold"/>
             </div>
         </q-card>
     </div>
@@ -70,6 +71,25 @@ const toggleRegistrando = () => {
     setTimeout(() => {
         window.scrollTo(0, 0);
     }, 100);
+}
+
+async function login() {
+    await api.post('/login', { cpf:usuario.value.cpf, senha:usuario.value.senha }).then((response) => {
+        $q.notify({
+            color: 'local_activity',
+            position: 'top',
+            message: 'Bem Vindo(a), ' + response.data.nome.split(' ')[0].toLowerCase(),
+            icon: 'login'
+        })
+        sessionStorage.setItem('user', JSON.stringify(response.data))
+    }).catch((error) => {
+        $q.notify({
+            color: 'negative',
+            position: 'top',
+            message: error.response.data,
+            icon: 'error'
+        })
+    })
 }
 
 function checkCampos() {

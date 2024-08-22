@@ -1,5 +1,5 @@
 <template>
-    <q-layout class="relative animate__animated animate__fadeIn bg-grad-6">
+    <q-layout class="relative animate__animated animate__fadeIn bg-grad-7">
         <q-header class="fixed bg-glass-2 text-white animate__animated animate__backInDown animate__slow shadow-1"
             height-hint="98">
             <div style="font-size: 1rem;" class=" q-py-md w100 row no-wrap items-center  justify-evenly">
@@ -34,9 +34,9 @@
         <q-page-container>
             <div class="w100 row justify-center q-mt-md relative" style="overflow: hidden ">
                 <div class="animate__animated animate__zoomInDown animate__delay-1s animate__slower row no-wrap justify-center q-px-sm  w100" style="overflow: hidden ;z-index: 9;">
-                    <q-btn  to="/login/host" class="animate__animated text-primary bg-grey-4 animate__fadeInLeft  animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-bottom-left-radius: 8px;border-top-left-radius: 8px" icon-right="nightlife"
+                    <q-btn glossy to="/login/host" class="animate__animated text-primary bg-grey-4 animate__fadeInLeft  animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-bottom-left-radius: 8px;border-top-left-radius: 8px" icon-right="nightlife"
                         label="Sou Produtor!" />
-                    <q-btn to="/login" @click="scrollBot()" class="animate__animated animate__fadeInRight animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-bottom-right-radius: 8px;border-top-right-radius: 8px" color="primary" icon-right="confirmation_number"
+                    <q-btn glossy to="/login" @click="scrollBot()" class="animate__animated animate__fadeInRight animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-bottom-right-radius: 8px;border-top-right-radius: 8px" color="primary" icon-right="confirmation_number"
                         label="Quero Ingressos!" />
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     class="q-mt-md q-mb-md animate__animated animate__zoomIn animate__slower ">
                     <q-toolbar class="bg-grad-4">
                         <q-toolbar-title
-                            class="row justify-center q-py-sm text-bold text-white rounded-borders items-center q-gutter-x-sm">
+                            class="row justify-center q-py-sm text-bold text-white rounded-borders animate__animated animate__zoomInLeft animate__delay-1s animate__slower items-center q-gutter-x-sm">
                             <div id="title" class="text-center">
                                 MIDNIGHT <br v-if="isMobile">TICKETS
                             </div>
@@ -66,7 +66,7 @@
                                     <q-icon name="email" color="primary" />
                                 </template>
                                 <template v-slot:append>
-                                    <q-btn @click="fastEmailGetter()" color="primary" icon="send" label="Enviar" glossy/>
+                                    <q-btn @click="fastEmailGetter()" color="primary" icon="send" label="Enviar" />
                                 </template>
                             </q-input>
                         </q-card>
@@ -281,7 +281,7 @@
                                 </template>
                             </q-input>
                             <q-btn v-if="!sendLoading" @click="sendForm()" class="q-pa-md w100" color="primary"
-                                icon-right="description" label="Enviar" glossy />
+                                icon-right="description" label="Enviar"  />
                             <div class="w100 row justify-center">
                                 <q-spinner-bars v-if="sendLoading" class="q-mt-md" color="primary" size="2em" />
                             </div>
@@ -294,13 +294,13 @@
                     <div
                         class="w100 text-bold rounded-borders column bg-grad-2 items-center justify-center text-white q-pa-md text-center q-mt-md ">
                         <div class="column text-h5 text-white text-bold">LOGIN HOST</div>
-                        <div class="text-purple-2">É Produtor de Eventos ou Subhost??</div>
-                        <q-btn icon-right="admin_panel_settings" label="Faça login Aqui" glossy dense class="q-mt-sm q-pa-lg rounded-borders"
+                        <div class="text-purple-2">É Produtor de Eventos ou Possui Acesso Externo??</div>
+                        <q-btn icon-right="admin_panel_settings" label="Faça login Aqui" style="border-radius:12px" glossy dense class="q-mt-sm q-pa-lg "
                             color="dark" to="/login/host" />
                     </div>
                 </div>
                 <div class="w100 text-secondary text-purple-1 text-bold text-center q-mt-md">
-                    Siga-nos no <a href="https://www.instagram.com/midnightickets" class="text-blue"
+                    Siga-nos no <a href="https://www.instagram.com/midnightickets" class="text-secondary"
                         target="_blank">Instagram</a> e
                     acompanhe o nosso desenvolvimento!
                 </div>
@@ -403,7 +403,7 @@ async function sendForm(msg) {
 
 
 function scrollBot() {
-    window.scrollTo(0, document.body.scrollHeight- 810);
+    window.scrollTo(0, document.body.scrollHeight- 830);
 }
 
 function scrollToBottom() {

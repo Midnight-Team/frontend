@@ -11,7 +11,7 @@
         <div class="w100">
             <img class="shadow-2" id="img-evento" style="border: 4px solid #610FE1" :src="evento.img_url" alt="">
         </div>
-        <q-btn v-if="evento.status.includes('andamento')"  id="cancelar-edit" @click="editando = !editando" class="q-mt-sm q-py-sm" :color="editando ? 'orange-8' : 'blue'"
+        <q-btn v-if="evento.status.includes('andamento')"  id="cancelar-edit" @click="editando = !editando" glossy class="q-mt-sm q-py-sm" :color="editando ? 'orange-8' : 'blue'"
             :icon-right="editando ? 'close' : 'edit'" :label="editando ? 'Cancelar edição' : 'Editar Evento'"></q-btn>
         <div id="evento-info" v-if="eventoLoaded"
             class="w100 q-px-md q-gutter-y-md q-mt-sm bg-glass-1 rounded-borders q-pb-md">
@@ -108,7 +108,7 @@
                     <q-icon name="local_activity" size="md" class="text-primary" />
                     INGRESSOS
                 </div>
-                <q-btn v-if="evento.status.includes('andamento')" label="" @click="goToLoteIngresso()" icon-right="sell"></q-btn>
+                <q-btn glossy v-if="evento.status.includes('andamento')" label="" @click="goToLoteIngresso()" icon-right="sell"></q-btn>
             </div>
             <div class="text-bold text-secondary q-mt-sm">Ingressos Disponíveis: 2000/{{ evento.qtd_ingressos }}</div>
             <div class="w100 text-primary text-bold high-opacity">
@@ -170,7 +170,7 @@
             color="red-8"></q-btn>
         <div class="w100 q-pb-xl"></div>
         <q-btn @click="salvarAlteracoes()" v-if="editando" class=" w100 q-mt-md q-py-lg fixed"
-            style="bottom:0px;left:0px;z-index: 9;" label="Salvar Alterações" icon-right="save" color="green-7"></q-btn>
+            style="bottom:0px;left:0px;z-index: 9;" label="Salvar Alterações" glossy icon-right="save" color="green-7"></q-btn>
         <q-dialog v-model="dialogAcessos">
             <q-list id="acessos_disponiveis" class="colum bg-white q-px-md q-pt-md">
                 <div
@@ -196,7 +196,7 @@
             <LoteIngressoComponent @dialogBack="dialogBack()"/>
         </q-dialog>
     </q-page>
-    <q-page v-else class="animate__animated animate__fadeIn">
+    <q-page v-else class="animate__animated animate__fadeIn bg-grad-7">
         <div class="row w100 q-pt-md justify-center">
             <q-spinner-ball color="primary" size="lg" />
             <q-spinner-ball color="primary" size="lg" />

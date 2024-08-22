@@ -50,6 +50,11 @@ background: #3D3943
     background: -webkit-linear-gradient(to bottom, #3d3d3df0, #232323);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #3d3d3df0, #232323); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+.bg-grad-7 {
+    background: #2a2a2af0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #2a2a2af0, #0e0e0e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #0f0a1cf0, #00002e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
 .bg-glass-1{
   background: #f0e5ff;  /* fallback for old browsers */

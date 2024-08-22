@@ -1,5 +1,5 @@
 <template>
-    <q-page class="animate__animated animate__fadeIn bg-grad-2 q-pb-xl">
+    <q-page class="animate__animated animate__fadeIn bg-grad-7 q-pb-xl">
         <div class="es1 bg-grey-4 q-mx-sm  rounded-borders  relative">
             <div
                 class="title-1 w100 q-px-sm row items-center text-primary shadow-1 q-py-md justify-between no-wrap text-bold">
@@ -14,11 +14,11 @@
             </div>
             <div class="column q-mb-xl">
                 <div id="table-eventos" class="q-mt-sm w100">
-                    <div id="title" class=" text-primary q-mb-sm w100 q-px-md text-center text-bold">Eventos</div>
+                    <div id="title" class=" text-primary q-mb-sm w100 q-px-md text-center text-bold">Meus Eventos</div>
                     <div class="q-px-sm">
                         <div class="w100 hline bg-primary q-mb-md"></div>
                         <div class="w100 q-my-md">
-                            <q-btn class="q-pa-md" label="Novo Evento" glossy color="primary"
+                            <q-btn class="q-pa-md text-bold" label="Novo Evento" glossy color="primary"
                                 @click="navigateTo('/eventos/criar')" icon="event" icon-right="add" />
                         </div>
                         <q-input :inputStyle="{ fontWeight:'bold', color:'#6310E1' }" v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined
@@ -139,13 +139,13 @@ const columns = [
     {
         name: 'access_code',
         align: 'left',
-        label: 'Código de Acesso',
+        label: 'Código',
         field: 'access_code'
     },
     {
         name: 'subhosts',
         align: 'left',
-        label: 'Subhosts',
+        label: 'Acessos',
         field: 'subhosts'
     },
     {
@@ -221,6 +221,7 @@ onMounted(async () => {
 @media (min-width: 1100px) {
     .es1 {
         margin: 0px 100px;
+        padding: 0px 30px;
     }
 }
 

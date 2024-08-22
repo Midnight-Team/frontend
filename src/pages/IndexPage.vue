@@ -1,5 +1,5 @@
 <template>
-  <q-page class="animate__animated animate__fadeIn flex column relative " v-if="pageLoaded">
+  <q-page class="animate__animated animate__fadeIn bg-grad-7 flex column relative " v-if="pageLoaded">
     <div class="home-wrapper q-px-md q-pb-xl">
       <div class="w100  column justify-center items-center text-white text-bold" style="border-radius: 20px; ">
         <div class="w100 flex q-mb-lg flex-center q-mt-lg">
@@ -11,7 +11,7 @@
           class="w100 text-h5 text-bold text-center q-pa-md q-pb-md rounded-borders  text-purple-1"
           style="border-top: 2px solid #9573f3;border-bottom: 2px solid #9573f3;">
           {{ host.nome_razao.toUpperCase() }}<br>
-          <div class="high-opacity text-secondary q-mt-sm" style="font-size: 1rem">host</div>
+          <div class="high-opacity text-secondary q-mt-sm" style="font-size: .9rem">HOST</div>
         </div>
         <div class="rounded-borders w100 column text-secondary q-pa-md q-mt-md" style="border-bottom: 2px solid #9573f3;border-top: 2px solid #9573f3;">
           <div class="row q-pb-xs rounded-borders items-center no-wrap w100 q-mb-md justify-between">
@@ -50,7 +50,7 @@
           </div>
           <div class="row no-wrap w100 items-center">
             <q-icon name="shopping_cart" size="lg" color="secondary" class="q-mr-md" />
-            <q-btn @click="dialog.historico = !dialog.historico" label="Histórico de Recargas" color="secondary" icon-right="history" class="q-px-md" dense />
+            <q-btn @click="dialog.historico = !dialog.historico" glossy label="Histórico de Recargas" color="secondary" icon-right="history" class="q-px-md" dense />
 
           </div>
         </div>
@@ -103,6 +103,7 @@
     </div>
     <q-dialog v-model="dialog.historico" style="backdrop-filter: blur(4px);">
       <HistoricoPagamentoComponent />
+      <q-btn icon="cancel" color="secondary" dense class="text-bold cursor-pointer" flat></q-btn>
     </q-dialog>
     <div class="w100 bg-white q-mt-xl">
       <FooterComponent />
