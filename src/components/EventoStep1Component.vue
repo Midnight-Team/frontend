@@ -178,7 +178,7 @@ const checkRequiredFields = () => {
 
 
 const pacoteOptions = [
-    { value: 1, label: '50 ingressos por 1 moedas🟣', purpleCoins: 1, max_ingressos: 50, },
+    { value: 1, label: '50 ingressos por 1 moeda🟣', purpleCoins: 1, max_ingressos: 50, },
     { value: 2, label: '100 ingressos por 2 moedas🟣', purpleCoins: 2, max_ingressos: 100, },
     { value: 3, label: '300 ingressos por 3 moedas🟣', purpleCoins: 3, max_ingressos: 300 },
     { value: 4, label: '600 ingressos por 5 moedas🟣', purpleCoins: 5, max_ingressos: 600 },

@@ -1,12 +1,12 @@
 <template>
-    <q-page class="relative column no-wrap items-center animate__animated animate__fadeIn bg-grad-2">
+    <q-page class="relative column no-wrap items-center q-pb-xl animate__animated animate__fadeIn bg-grad-2">
         <div class="w100 row no-wrap justify-between q-px-xs q-py-md" id="fixed-saldo">
             <div class="row items-center">
                 <q-icon name="paid" color=primary size="md" />
-                <div class="text-bold text-primary q-px-sm">{{ authStore.getInfoPurpleCoins() }} PurpleCoins</div>
+                <div class="text-bold text-primary q-px-sm">{{ authStore.getInfoPurpleCoins() }} Purplecoins</div>
             </div>
             <div class="row items-center">
-                <div class="text-bold text-blue q-px-sm">{{ authStore.getInfoSubCoins() }} SubCoins</div>
+                <div class="text-bold text-blue-13 q-px-sm">{{ authStore.getInfoSubCoins() }} Subcoins</div>
                 <q-icon name="savings" color="blue" size="md" />
             </div>
         </div>
@@ -27,15 +27,14 @@
                         </q-item-section>
                         <q-item-section style="font-size:1rem" class="text-bold text-primary q-px-xs q-pb-md q-pt-sm">
                             <q-item-label>{{ item.label }}
-                                <div class="text-blue" v-if="item.value == 4">+ 50 subcoins</div>
-                                <div class="text-blue" v-if="item.value == 5">+ 150 subcoins</div>
+                                <div class="text-blue" v-if="item.value == 4">+ 100 subcoins</div>
+                                <div class="text-blue" v-if="item.value == 5">+ 500 subcoins</div>
                             </q-item-label>
                         </q-item-section>
                         <div>
                             <q-btn class="text-bold absolute-right" style="border-radius:10px;width:45%" dense
-                                @click="addRecargaPacote(item)"
-                                :label="(formatString(item.preco))"
-                                color="green-6" icon="shopping_cart" />
+                                @click="addRecargaPacote(item)" :label="(formatString(item.preco))" color="green-6"
+                                icon="shopping_cart" />
                         </div>
                     </q-item>
                 </q-card-section>
@@ -72,7 +71,7 @@
                 <div class="text-center text-white text-h6 text-bold q-px-md q-pb-sm ">Transforme suas SubCoins em
                     PurpleCoins</div>
                 <div class="row q-mt-md q-mx-xl no-wrap text-center">
-                    <q-btn @click="cashback()" label="Trocar 5.000 SubCoins em 1 PurpleCoin" color="primary"
+                    <q-btn glossy @click="cashback()" label="Trocar 5.000 SubCoins em 1 PurpleCoin" color="primary"
                         class="text-center q-pa-md" icon-right="paid" />
                 </div>
             </div>
@@ -89,22 +88,19 @@
                 <!-- <div style="font-size:.5rem" class=" text-bold text-blue-2">
                         Você será Redirecionado para o Ambiente de Pagamento
                     </div> -->
-                <RecargaBricksPaymentComponent />
+                <RecargaPaymentComponent />
                 <div class="row w100 justify-center">
                     <q-btn class="" label="voltar" flat color="secondary" @click="openPaymentModal = false" />
                 </div>
             </div>
         </q-dialog>
-        <div class="w100 q-mt-lg">
-            <FooterComponent />
-        </div>
     </q-page>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue";
-import FooterComponent from "../components/FooterComponent.vue";
-import RecargaBricksPaymentComponent from "../components/RecargaBricksPaymentComponent.vue";
+import FooterComponent from "../../components/FooterComponent.vue";
+import RecargaPaymentComponent from "../../components/RecargaPaymentComponent.vue";
 import { useAuthStore } from 'src/stores/authStore';
 import { api } from 'src/boot/axios';
 import { useQuasar } from "quasar";
@@ -156,11 +152,11 @@ const pacoteOptions = [
 
 const pacotesCoins = ref(
     [
-        { tipo: 'recarga de purplecoins', id: 1, value: 1, label: '1 PurpleCoin', preco: 120, purpleCoinsCredito: 1, subCoinsCredito: 0 },
-        { tipo: 'recarga de purplecoins', id: 2, value: 2, label: '3 PurpleCoins', preco: 300, purpleCoinsCredito: 3, subCoinsCredito: 0 },
-        { tipo: 'recarga de purplecoins', id: 3, value: 3, label: '5 PurpleCoins', preco: 500, purpleCoinsCredito: 5, subCoinsCredito: 0 },
-        { tipo: 'recarga de purplecoins', id: 4, value: 4, label: '12 PurpleCoins', preco: 1000, purpleCoinsCredito: 12, subCoinsCredito: 50 },
-        { tipo: 'recarga de purplecoins', id: 5, value: 5, label: '25 PurpleCoins', preco: 2000, purpleCoinsCredito: 25, subCoinsCredito: 150 },
+        { tipo: 'recarga de purplecoins', id: 1, value: 1, label: '1 Moeda', preco: 120, purpleCoinsCredito: 1, subCoinsCredito: 0 },
+        { tipo: 'recarga de purplecoins', id: 2, value: 2, label: '3 Moedas', preco: 300, purpleCoinsCredito: 3, subCoinsCredito: 0 },
+        { tipo: 'recarga de purplecoins', id: 3, value: 3, label: '5 Moedas', preco: 500, purpleCoinsCredito: 5, subCoinsCredito: 0 },
+        { tipo: 'recarga de purplecoins', id: 4, value: 4, label: '12 Moedas', preco: 1000, purpleCoinsCredito: 12, subCoinsCredito: 100 },
+        { tipo: 'recarga de purplecoins', id: 5, value: 5, label: '25 Moedas', preco: 2000, purpleCoinsCredito: 25, subCoinsCredito: 500 },
         // { tipo: 'teste 1 real', id: 6, value: 6, label: '10 SubCoins', preco: 1, purpleCoinsCredito: 0, subCoinsCredito: 10 },
     ]
 )

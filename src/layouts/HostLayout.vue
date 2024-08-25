@@ -86,14 +86,10 @@ const isMobile = window.innerWidth < 800
 const menuOptions = ref({
   items: [
     // HOST MENUS
-    // { label: 'Vendas', icon: 'payments', to: '/app/#' },
     { label: 'Eventos', icon: 'calendar_month', to: '/eventos', role: 'host', selected: false, },
     { label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false, },
     { label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false, },
-    // { class:'q-mt-md q-mx-md bg-primary shadow-2' ,label: 'Suporte', icon: 'contact_support', to: '/app/#', selected: false },
     { label: 'Sair', icon: 'logout', to: '/', selected: false }
-    // { label: 'Ingressos', icon: 'confirmation_number', to: '/app/#' },
-    // { label: 'Meus Ingressos', icon: 'local_activity', to: '/page2' },
   ]
 })
 function goTo(item) {

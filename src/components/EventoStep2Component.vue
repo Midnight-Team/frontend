@@ -2,10 +2,7 @@
     <div class="es1 bg-white q-mx-sm  rounded-borders shadow-4 relative">
         <div class="title-1 w100 text-h6 row items-center text-primary shadow-1 q-py-xs justify-center text-bold">
             <q-icon size="md" color="primary" name="confirmation_number" class="q-pr-sm" />
-            Configuração de Ingressos
-        </div>
-        <div class="text-center text-bold q-pt-md text-primary mid-opacity q-mx-md">
-            Os títulos e valores dos ingressos poderão ser editados posteriormente:
+            Configuração de Ingresso
         </div>
         <div class="column q-gutter-y-md q-pa-md q-mb-xl">
             <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1' }" outlined class="q-mt-lg" v-model="ingressoHandler.titulo"
@@ -23,22 +20,22 @@
                     <q-icon name="confirmation_number" color="primary" />
                 </template>
             </q-input>
-            <q-btn label="Adicionar Ingresso" color="blue" :disable="validaIngresso()" @click="addIngresso()"
+            <q-btn label="Adicionar Ingresso" color="blue-14" glossy :disable="validaIngresso()" @click="addIngresso()"
                 icon-right="add_circle" />
             <div v-if="ingressos.length > 0" class="w100 hline bg-primary"></div>
             <div v-if="ingressos.length > 0" class="text-bold mid-opacity text-primary text-center">Ingressos
             </div>
             <div id="list-ingressos" class="column">
                 <div v-for="(ingresso, index) in ingressos" :key="index"
-                    class="column no-wrap items-center rounded-borders shadow-4 bg-grad-6 q-mb-md  justify-between">
+                    class="relative column no-wrap items-center rounded-borders shadow-4 bg-grad-1 q-mb-md  justify-between">
                     <div class="row q-py-xs items-center">
-                        <div class="text-bold text-white q-py-sm text-center">🎫 {{ format(ingresso.titulo) }}</div>
+                        <div class="text-bold text-white q-py-sm text-center" id="title-layout">{{ format(ingresso.titulo) }}</div>
                     </div>
                     <div class="w100 bg-secondary mid-opacity q-mx-md" style="height: 2px"></div>
-                    <div class="row w100 items-center justify-center">
-                        <q-btn color="red-4" flat icon="delete" @click="removeIngresso(index)" />
-                        <q-btn :label="ingresso.quantidade" icon="local_activity" flat color="blue-3" />
-                        <div class="text-bold text-green-4">R$ {{ ingresso.valor }}</div>
+                    <div class="row w100 items-center justify-center ">
+                        <q-btn class="absolute" style="top:-5px;left:-15px" color="red" flat icon="close" @click="removeIngresso(index)" />
+                        <q-btn :label="ingresso.quantidade" icon="local_activity" flat color="grey-4" class="text-bold q-mr-lg" />
+                        <div class="text-bold text-green-13 text-shadow">R$ {{ ingresso.valor }}</div>
                     </div>
                 </div>
             </div>

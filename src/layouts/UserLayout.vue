@@ -7,43 +7,50 @@
                     <q-avatar>
                         <q-icon size="md" color="purple-1" name="local_activity" />
                     </q-avatar>
-                    <a @click="goTo('/eu')" style="text-decoration: none;" id="title-layout"
-                        class="text-purple-1 q-pl-xs text-bold">
+                    <a style="text-decoration: none;" id="title-layout" class="text-purple-1 q-pl-xs text-bold">
                         Midnight Tickets
                     </a>
                 </q-toolbar-title>
 
-                <q-btn style="rounded-borders " size="md" icon="menu" />
+                <q-btn @click="toggleRightDrawer()" style="rounded-borders " size="md" label="menu" glossy
+                    icon-right="menu" />
             </q-toolbar>
-
+            <!-- 
             <q-tabs align="center">
-                <q-route-tab class="text-purple-1" to="#ingressos" label="Meus Ingressos" />
-                <q-route-tab class="text-purple-1" to="#buscar-evento" label="Buscar Eventos" />
-            </q-tabs>
+                <q-route-tab class="text-purple-1" to="/eu/buscar" label="Eventos" />
+                <q-route-tab class="text-purple-1" to="/eu" label="Ingressos" />
+            </q-tabs> -->
         </q-header>
 
-        <!-- <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grad-1">
-        <div  v-if="isAuthenticated" class="text-center text-purple-1 mid-opacity text-bold q-mb-md "><q-btn @click="goTo({to:'/app', selected:false})" label="Perfil" flat ></q-btn></div>
-
-        <div v-if="!isAuthenticated" class="w100 text-white text-bold row items-center justify-center q-mt-xl">
-          <div class="text-center q-mb-md q-mx-md">
-            Registre-se ou Faça Login para ter acesso aos seus Eventos e Ingressos!!
-          </div>
-          <q-btn v-if="!isAuthenticated" class="q-mt-lg" to="/" label="Página Inicial" color="primary"
-            icon="home" />
-        </div>
-        <div class="absolute-bottom w100  row no-wrap items-center justify-center q-mt-xl text-primary q-py-sm">
-          <div class="row items-center ">
-            <q-avatar>
-              <q-icon size="md" color="blue-1" name="support_agent" />
-            </q-avatar>
-            <a href="https://samuelvictorol.github.io/portfolio/contato" target="_blank" style="text-decoration: none;" class="text-blue-1 q-pl-xs text-bold">
-              Suporte
-            </a>
-          </div>
-        </div>
-      </q-drawer>
-   -->
+        <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grad-1">
+            <div class="w100 text-center text-grey-3 text-bold q-mt-xl" id="title-menu">
+                {{ user.nome.toUpperCase() }}
+            </div>
+            <div class="w100 text-center text-white mid-opacity text-bold">
+                {{ user.cpf.toLowerCase() }}
+            </div>
+            <div class="w100 text-center q-mt-md">
+                <q-btn class="text-white q-px-xs" color="blue-12" label="perfil" dense ></q-btn>
+            </div>
+            <div class="menu-options q-mt-xl">
+                <q-list>
+                    <q-item v-for="item in menuOptions.items" :key="item.label" clickable @click="goTo(item)"
+                        style="border-radius: 8px;"
+                        :class="'q-mt-md q-mx-md text-blue-2  ' + (item.selected ? 'shadow-inset' : 'shadow-2')">
+                        <q-item-section avatar>
+                            <q-icon :name="item.icon" :color="!item.selected ? 'grey-3' : 'secondary'" />
+                        </q-item-section>
+                        <q-item-section>
+                            <q-item-label :class="(!item.selected ? 'text-grey-4' : 'text-secondary') + ' text-bold'">{{
+                                item.label }}</q-item-label>
+                        </q-item-section>
+                    </q-item>
+                </q-list>
+            </div>
+            <div class="q-px-md absolute-bottom q-mb-lg">
+                <q-btn to="/" label="Encerrar Sessão" glossy color="red-14" class="q-mt-xl  w100" />
+            </div>
+        </q-drawer>
         <q-page-container>
             <router-view />
         </q-page-container>
@@ -55,9 +62,18 @@
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+const user = JSON.parse(sessionStorage.getItem('user'))
 const rightDrawerOpen = ref(false)
 const router = useRouter()
 const isMobile = window.innerWidth < 800
+
+const menuOptions = ref({
+    items: [
+        { label: 'Meus Ingressos', icon: 'confirmation_number', to: '/eu', selected: true },
+        { label: 'Eventos', icon: 'event', to: '/eu/buscar', selected: true },
+        { label: 'Suporte', icon: 'help', to: '#suporte-usuario', selected: false },
+    ]
+})
 
 function goTo(item) {
     menuOptions.value.items.forEach(i => i.selected = false)
@@ -65,12 +81,8 @@ function goTo(item) {
     router.push(item.to)
 }
 
-function cleanSessionStorage() {
-    sessionStorage.clear()
-}
-
 onBeforeUnmount(() => {
-    cleanSessionStorage()
+    sessionStorage.clear()
 })
 
 

@@ -1,5 +1,5 @@
 <template>
-    <q-page class="animate__animated animate__fadeIn  column bg-grad-1 q-px-md q-pb-xl relative" id="dialog-evento"
+    <q-page class="animate__animated animate__fadeIn  column bg-grad-7 q-px-md q-pb-xl relative" id="dialog-evento"
         v-if="pageLoaded">
         <q-btn icon="keyboard_return" flat color="grey-5" class="absolute-top-left" to="/eventos" label="eventos"></q-btn>
         <div class="w100 rounded-borders q-mt-xl">
@@ -11,7 +11,7 @@
         <div class="w100">
             <img class="shadow-2" id="img-evento" style="border: 4px solid #610FE1" :src="evento.img_url" alt="">
         </div>
-        <q-btn v-if="evento.status.includes('andamento')"  id="cancelar-edit" @click="editando = !editando" glossy class="q-mt-sm q-py-sm" :color="editando ? 'orange-8' : 'blue'"
+        <q-btn v-if="evento.status.includes('andamento')"  id="cancelar-edit" @click="editando = !editando" glossy class="q-mt-sm q-py-md" :color="editando ? 'orange-8' : 'blue'"
             :icon-right="editando ? 'close' : 'edit'" :label="editando ? 'Cancelar edição' : 'Editar Evento'"></q-btn>
         <div id="evento-info" v-if="eventoLoaded"
             class="w100 q-px-md q-gutter-y-md q-mt-sm bg-glass-1 rounded-borders q-pb-md">
@@ -24,37 +24,39 @@
                     {{ evento.status }}
                 </div>
             </div>
-            <q-input v-if="editando" label="Título do Evento*" v-model="evento.titulo" outlined color="primary">
+            <div class="w100 rounded-borders bg-primary mid-opacity q-mt-md" style="height:4px"></div>
+            <q-input :inputStyle="{ fontWeight:'bold' }" v-if="editando" label="Título do Evento*" v-model="evento.titulo" outlined color="primary">
                 <template v-slot:append>
                     <q-icon name="nightlife" color="primary" />
                 </template>
             </q-input>
-            <q-input v-if="editando" label="Link da Imagem" v-model="evento.img_url" outlined color="primary">
+            <q-input :inputStyle="{ fontWeight:'bold' }" v-if="editando" label="Link da Imagem" v-model="evento.img_url" outlined color="primary">
                 <template v-slot:append>
                     <q-icon @click="openImgur()" name="image" color="primary" />
                 </template>
             </q-input>
-            <q-input :readonly="!editando" :filled="!editando" mask="####" maxlength="4" label="Código de Acesso"
+            <q-input :inputStyle="{ fontWeight:'bold' }" :readonly="!editando" :filled="!editando" mask="####" maxlength="4" label="Código de Acesso"
                 v-model="evento.access_code" outlined color="primary">
                 <template v-slot:append>
                     <q-icon name="lock" color="primary" />
                 </template>
             </q-input>
-            <q-input type="textarea" label="Descrição" v-model="evento.descricao" outlined :readonly="!editando"
+            <q-input :inputStyle="{ fontWeight:'bold' }" type="textarea" label="Descrição" v-model="evento.descricao" outlined :readonly="!editando"
                 :filled="!editando">
                 <template v-slot:append>
                     <q-icon name="description" color="primary" />
                 </template>
             </q-input>
-            <q-input :readonly="!editando" :filled="!editando" label="Contato*" v-model="evento.contato" type="textarea"
+            <q-input :inputStyle="{ fontWeight:'bold' }" :readonly="!editando" :filled="!editando" label="Contato*" v-model="evento.contato" type="textarea"
                 outlined color="primary">
                 <template v-slot:append>
                     <q-icon name="phone" color="primary" />
                 </template>
             </q-input>
-            <!-- <q-input label="Data" v-model="evento.data_evento" outlined color="primary" :readonly="!editando" :filled="!editando"></q-input> -->
+            <!-- <q-input :inputStyle="{ fontWeight:'bold' }" label="Data" v-model="evento.data_evento" outlined color="primary" :readonly="!editando" :filled="!editando"></q-input> -->
             <div class="row q-gutter-x-md justify-center no-wrap">
-                <q-input :filled="!editando" :readonly="!editando" label="Hora Início*" class="q-mt-md q-ml-md"
+                
+                <q-input :inputStyle="{ fontWeight:'bold' }" :filled="!editando" :readonly="!editando" label="Hora Início*" class="q-mt-md q-ml-md"
                     style="width: 45%;" outlined v-model="evento.hora_evento" mask="time" :rules="['time']">
                     <template v-if="editando" v-slot:append>
                         <q-icon name="access_time" color="primary" class="cursor-pointer">
@@ -68,7 +70,7 @@
                         </q-icon>
                     </template>
                 </q-input>
-                <q-input :filled="!editando" :readonly="!editando" label="Hora Fim" class="q-mt-md q-ml-md"
+                <q-input :inputStyle="{ fontWeight:'bold' }" :filled="!editando" :readonly="!editando" label="Hora Fim" class="q-mt-md q-ml-md"
                     style="width: 45%;" outlined v-model="evento.hora_final" mask="time" :rules="['time']">
                     <template v-if="editando" v-slot:append>
                         <q-icon name="access_time" color="primary" class="cursor-pointer">
@@ -85,13 +87,13 @@
             </div>
             <q-date v-model="evento.data_evento" :color="editando ? 'primary' : 'grey-8'" :readonly="!editando"
                 class="w100" mask="DD-MM-YYYY" />
-            <q-input label="Endereço" v-model="evento.endereco" type="textarea" outlined color="primary"
+            <q-input :inputStyle="{ fontWeight:'bold' }" label="Endereço" v-model="evento.endereco" type="textarea" outlined color="primary"
                 :readonly="!editando" :filled="!editando">
                 <template v-slot:append>
                     <q-icon name="location_on" color="primary" />
                 </template>
             </q-input>
-            <q-input  v-if="editando" label="Localização Google Maps" v-model="evento.localizacao" outlined color="primary"
+            <q-input :inputStyle="{ fontWeight:'bold' }"  v-if="editando" label="Localização Google Maps" v-model="evento.localizacao" outlined color="primary"
                 :filled="!editando">
                 <template v-slot:append>
                     <q-icon name="map" color="primary" />
@@ -110,8 +112,9 @@
                 </div>
                 <q-btn glossy v-if="evento.status.includes('andamento')" label="" @click="goToLoteIngresso()" icon-right="sell"></q-btn>
             </div>
-            <div class="text-bold text-secondary q-mt-sm">Ingressos Disponíveis: 2000/{{ evento.qtd_ingressos }}</div>
+            <div class="w100 rounded-borders bg-primary mid-opacity q-mt-md" style="height:4px"></div>
             <div class="w100 text-primary text-bold high-opacity">
+                <div class="text-bold text-secondary q-mt-sm">Ingressos Disponíveis: 2000/{{ evento.qtd_ingressos }}</div>
                 <!-- faça um v-for no evento.tipos_ingressos mostrando o titulo, valor e quantidade. -->
                 <div class="row no-wrap items-center no-wrap q-pa-sm q-mt-md rounded-borders"
                     v-for="ingresso in evento.tipos_ingressos" :key="ingresso.id" style="border: 2px solid #872DE1">
@@ -133,6 +136,8 @@
                 ACESSOS
             </div>
             <div class="w100 text-primary text-bold q-pb-md">
+                <div class="w100 rounded-borders bg-primary mid-opacity q-mt-md" style="height:4px"></div>
+
                 <!-- faça um v-for no evento.subhosts mostrando o id e o nome -->
                 <div class="w100 row justify-between no-wrap items-center no-wrap q-py-sm q-mt-md"
                     v-for="subhost in evento.subhosts" :key="subhost.id"
@@ -145,7 +150,7 @@
                     <q-btn v-if="evento.status.includes('andamento')" @click="removeSubhost(subhost.id)" color="secondary" size="xl" flat icon="remove"></q-btn>
                 </div>
             </div>
-            <q-btn v-if="!editando && evento.status.includes('andamento')" @click="dialogAcessos = !dialogAcessos" label="Adicionar Subhost"
+            <q-btn v-if="!editando && evento.status.includes('andamento')" @click="dialogAcessos = !dialogAcessos" label="Criar Acesso"
                 icon-right="person_add" class="" color="primary"></q-btn>
         </div>
         <div id="pacote-info" class="q-mb-md bg-glass-1 rounded-borders q-pa-md q-mt-md">
@@ -158,7 +163,6 @@
                 <!-- 🌱 PACOTE INICIAL<br> -->
                 💰 {{ evento.pacote.label }}<br>
                 🎟️ Máximo de Ingressos: {{ evento.pacote.max_ingressos }}<br>
-                <div class="w100 rounded-borders bg-primary mid-opacity q-mt-md" style="height:4px"></div>
             </div>
         </div>
         <div class="w100 q-my-lg" v-if="editando"></div>
@@ -198,9 +202,9 @@
     </q-page>
     <q-page v-else class="animate__animated animate__fadeIn bg-grad-7">
         <div class="row w100 q-pt-md justify-center">
-            <q-spinner-ball color="primary" size="lg" />
-            <q-spinner-ball color="primary" size="lg" />
-            <q-spinner-ball color="primary" size="lg" />
+            <q-spinner-ball color="secondary" size="lg" />
+            <q-spinner-ball color="secondary" size="lg" />
+            <q-spinner-ball color="secondary" size="lg" />
         </div>
     </q-page>
 </template>
@@ -296,7 +300,7 @@ async function salvarAlteracoes() {
     await api.put(`/update_evento`, { evento: evento.value, host: JSON.parse(sessionStorage.getItem('userLogado')) })
         .then(response => {
             $q.notify({
-                color: 'primary',
+                color: 'green',
                 textColor: 'white',
                 icon: 'edit',
                 message: response.data.message,

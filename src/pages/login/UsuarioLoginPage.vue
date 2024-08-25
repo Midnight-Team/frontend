@@ -37,8 +37,13 @@
                     </q-input>
                     <!-- <div v-if="registrando" class="q-my-sm text-h6 text-primary">Data de Nascimento:*</div> -->
                     <!-- <q-date class="w100 row justify-center q-mb-md" v-if="registrando" v-model="usuario.dataNascimento" mask="DD-MM-YYYY HH:mm" color="primary" /> -->
-                    <q-btn glossy v-if="!registrando" @click="login()" :disabled="!usuario.cpf || !usuario.senha || usuario.senha.length < 6 || usuario.cpf.length != 14" type="submit" label="Entrar" color="green" icon-right="login" class="w100 q-pa-lg q-mt-md"/>
-                    <q-btn glossy v-if="registrando" @click="criarConta()" :disabled="checkCampos()"  type="submit" label="Criar Conta" color="green" icon-right="person_add" class="w100 q-mt-md q-pa-md"/>
+                    <q-btn glossy v-if="!registrando && !loading" @click="login()" :disabled="!usuario.cpf || !usuario.senha || usuario.senha.length < 6 || usuario.cpf.length != 14" type="submit" label="Entrar" color="green" icon-right="login" class="w100 q-pa-lg q-mt-md"/>
+                    <q-btn glossy v-if="registrando && !loading" @click="criarConta()" :disabled="checkCampos()"  type="submit" label="Criar Conta" color="green" icon-right="person_add" class="w100 q-mt-md q-pa-md"/>
+                    <div v-if="loading" class="row w100 q-pt-md justify-center">
+                        <q-spinner-ball color="secondary" size="lg" />
+                        <q-spinner-ball color="secondary" size="lg" />
+                        <q-spinner-ball color="secondary" size="lg" />
+                    </div>
                 </q-form>
             </q-card-section>
             <div class="column q-mb-md q-mx-md">
@@ -54,7 +59,7 @@ import { ref } from "vue";
 import { api } from 'src/boot/axios';
 import { useQuasar } from "quasar";
 import { useRouter } from "vue-router";
-
+const loading = ref(false);
 const $q = useQuasar()
 const showPassword = ref(false);
 const registrando = ref(false);
@@ -75,15 +80,16 @@ const toggleRegistrando = () => {
 }
 
 async function login() {
+    loading.value = true;
     await api.post('/login', { cpf:usuario.value.cpf, senha:usuario.value.senha }).then((response) => {
         $q.notify({
-            color: 'local_activity',
+            color: 'blue',
             position: 'top',
             message: 'Bem Vindo(a), ' + response.data.nome.split(' ')[0].toLowerCase(),
-            icon: 'login'
+            icon: 'local_activity',
         })
         sessionStorage.setItem('user', JSON.stringify(response.data))
-        router.push('/eu')
+        router.push('/eu/buscar')
     }).catch((error) => {
         $q.notify({
             color: 'negative',
@@ -91,6 +97,7 @@ async function login() {
             message: error.response.data,
             icon: 'error'
         })
+        loading.value = false;
     })
 }
 
@@ -105,6 +112,7 @@ function checkCampos() {
 }
 
 async function criarConta() {
+    loading.value = true;
     usuario.value.nome = usuario.value.nome.trim().toLowerCase()
     usuario.value.email = usuario.value.email.trim().toLowerCase()
 
@@ -124,6 +132,7 @@ async function criarConta() {
             message: error.response.data.error,
             icon: 'error'
         })
+        loading.value = false;
     })
 }
 

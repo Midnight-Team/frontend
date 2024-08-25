@@ -57,7 +57,7 @@
                             </template>
                             <template v-slot:body-cell-acoes="props">
                                 <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
-                                    <q-btn icon="visibility" color="blue-7"  @click="openMeuEventoPage(props.row.id)">
+                                    <q-btn icon="visibility" color="green-6"  @click="openMeuEventoPage(props.row.id)">
                                         <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                                             Gerenciar Evento
                                         </q-tooltip>
@@ -221,7 +221,6 @@ onMounted(async () => {
 @media (min-width: 1100px) {
     .es1 {
         margin: 0px 100px;
-        padding: 0px 30px;
     }
 }
 

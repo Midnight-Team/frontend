@@ -6,7 +6,7 @@
     </div>
     <div class="column q-gutter-y-md q-pa-md q-mb-xl text-primary text-bold text-center">
       <div>
-        <div class="mid-opacity">Confirmo a Criação do Evento:<br>{{ pacote.label }}<q-icon size="xs" class="q-pl-xs" name="paid" color="primary" /></div>
+        <div class="mid-opacity">Confirmo a Criação do Evento com<br>{{ pacote.label }}<q-icon size="xs" class="q-pl-xs" name="paid" color="primary" /></div>
       </div>
       <div class="w100 hline bg-primary"></div>
       <q-input outlined v-model="host.senha" maxlength="20" :type="!lockpassword ? 'password' : 'text'" label="Senha*">

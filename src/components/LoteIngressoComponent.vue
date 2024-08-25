@@ -1,6 +1,6 @@
 <template>
     <div class="w100 bg-grad-1 relative">
-        <div id="title-menu" class="bg-grad-1 text-white w100 q-pa-md text-center title-lote">
+        <div id="title-menu" class="bg-grad-1 text-white w100  text-center title-lote">
             <q-btn style="z-index:9999!important" label="voltar" @click="$emit('dialogBack')" flat color="secondary" dense ></q-btn>
             <br>Lote de Ingressos
         </div>

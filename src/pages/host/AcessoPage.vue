@@ -1,6 +1,6 @@
 <template>
   <q-page class="bg-puple-light q-px-md  q-py-md animate__animated animate__fadeIn ">
-    <q-btn icon="keyboard_return" flat color="grey-5" class="q-pb-md q-pt-sm absolute-top-left" to="/eventos" label="eventos"></q-btn>
+    <q-btn icon="keyboard_return" flat color="grey-5" class="q-py-sm absolute-top-left" to="/eventos" label="eventos"></q-btn>
     <div class="q-mb-md q-mt-lg text-h6 text-bold bg-grad-1  rounded-borders text-white row items-center justify-center q-pa-md">
       <q-icon size="md" name="sensor_occupied" color="white" class="q-pr-sm"></q-icon>
       ACESSOS
@@ -9,7 +9,7 @@
       Os acessos são as contas que você cria e disponibiliza para seus colaboradores de eventos validarem os ingressos dos seus clientes.
     </p>
     <div class="w100 q-mb-md rounded-borders ">
-      <q-input maxlength="40" :input-style="{ fontSize: '1rem', fontWeight: 'bold', color: '#6310E1'}"  filled class="bg-purple-light rounded-borders" v-model="acesso.nome" label="Título do Acesso*" placeholder="ex: Entrada Principal ou nome da pessoa" >
+      <q-input maxlength="40" :input-style="{ fontSize: '1rem', fontWeight: 'bold', color: '#6310E1'}"  filled class="bg-purple-light rounded-borders" v-model="acesso.nome" label="Título do Acesso*" placeholder="Entrada Principal, Maria Recepção..." >
         <template v-slot:prepend>
           <q-icon name="title" color="primary" />
         </template>
@@ -23,17 +23,17 @@
         color="positive" />
     </div>
     <div v-if="acessos && acessos.length > 0" class="q-mb-md text-h6 text-bold bg-grad-1  rounded-borders text-white row items-center justify-center q-pa-md">
-      <q-icon size="md" name="people" color="blue-1" class="q-pr-sm"></q-icon>
-      Acessos Criados
+      <q-icon size="md" name="people" color="white" class="q-pr-sm"></q-icon>
+      ACESSOS CRIADOS
     </div>
-      <div v-if="!loading && acessos.length > 0" class="rounded-borders row q-pa-md q-mt-md justify-around cards-wrapper">
-          <q-card id="card-acesso" v-for="acesso in acessos" :key="acesso.id" class="w100 bg-blue-1 q-mb-md">
+      <div v-if="!loading && acessos.length > 0" class="rounded-borders row q-pa-sm q-mt-md justify-around cards-wrapper">
+          <q-card id="card-acesso" v-for="acesso in acessos" :key="acesso.id" class="w100 bg-grad-6 q-mb-md">
             <q-card-section>
-              <div class="text-h6 text-bold text-primary q-pt-lg">{{ acesso.nome }}</div>
-              <div class="text-subtitle2 text-bold text-secondary">{{ acesso.id }}</div>
+              <div class="text-h6 text-bold text-grey-4 q-pt-md text-center" id="title-layout">{{ acesso.nome.toUpperCase() }}</div>
+              <div class="text-subtitle2 text-bold text-secondary text-center q-mt-sm"><q-icon name="assignment_ind" size="sm" class="q-mr-sm"></q-icon>{{ acesso.id }}</div>
             </q-card-section>
             <q-card-actions align="left">
-              <q-btn @click="deleteAccessPerson(acesso.id)" class="absolute-top-left q-mb-sm" icon="delete" flat color="secondary" />
+              <q-btn @click="deleteAccessPerson(acesso.id)" class="absolute-top-left q-mb-sm" icon="close" flat color="red" />
             </q-card-actions>
           </q-card>
       </div>
@@ -99,7 +99,7 @@ async function createAccessPerson(){
     $q.notify({
       color: 'green-7',
       textColor: 'white',
-      icon: 'check',
+      icon: 'assignment_ind',
       message: 'Acesso criado com sucesso',
       position: 'top'
     })
@@ -115,6 +115,7 @@ async function createAccessPerson(){
       message: err.response.data.error,
       position: 'top'
     })
+    loading.value = false
   })
 }
 
