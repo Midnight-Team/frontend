@@ -34,9 +34,11 @@
         <q-page-container>
             <div class="w100 row justify-center q-mt-md relative" style="overflow: hidden ">
                 <div class="animate__animated animate__zoomInDown animate__delay-1s animate__slower row no-wrap justify-center q-px-sm  w100" style="overflow: hidden ;z-index: 9;">
-                    <q-btn glossy to="/login/host" color="secondary" class="animate__animated text-primary animate__fadeInLeft  animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-bottom-left-radius: 8px;border-top-left-radius: 8px;border-top-right-radius: 0px;border-bottom-right-radius: 0px" icon-right="nightlife"
+                    <q-btn glossy to="/login/host" color="secondary" class="animate__animated text-primary animate__fadeInLeft  animate__delay-3s animate__slower q-pa-xl rounded-borders" 
+                    icon-right="nightlife"
                         label="Sou Produtor!" />
-                    <q-btn glossy to="/login" @click="scrollBot()"  class="animate__animated animate__fadeInRight bg-primary text-white animate__delay-3s animate__slower q-pa-xl rounded-borders" style="border-bottom-left-radius: 0px;border-top-left-radius: 0px;;border-bottom-right-radius: 8px;border-top-right-radius: 8px" icon-right="confirmation_number"
+                    <q-btn glossy to="/login" @click="scrollBot()"  class="animate__animated animate__fadeInRight bg-primary q-ml-sm text-white animate__delay-3s animate__slower q-pa-xl rounded-borders"
+                     icon-right="confirmation_number"
                         label="Quero Ingressos!" />
                 </div>
             </div>

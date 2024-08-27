@@ -86,7 +86,7 @@ const isMobile = window.innerWidth < 800
 const menuOptions = ref({
   items: [
     // HOST MENUS
-    { label: 'Eventos', icon: 'calendar_month', to: '/eventos', role: 'host', selected: false, },
+    { label: 'Eventos', icon: 'calendar_month', to: '/eventos', role: 'host', selected: true, },
     { label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false, },
     { label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false, },
     { label: 'Sair', icon: 'logout', to: '/', selected: false }

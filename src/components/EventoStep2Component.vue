@@ -6,7 +6,7 @@
         </div>
         <div class="column q-gutter-y-md q-pa-md q-mb-xl">
             <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1' }" outlined class="q-mt-lg" v-model="ingressoHandler.titulo"
-                placeholder="Entrada Masculina, Camarote, Pista Inteira" label="Título Tipo do Ingresso*" />
+                placeholder="Entrada Masculina, Camarote, Pista Inteira" maxlength="40" label="Título do Ingresso*" />
             <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1' }" outlined maxlength="7" prefix="R$" v-model="ingressoHandler.valor" label="Valor do Ingresso*"
                 reverse-fill-mask mask="####,##">
                 <template v-slot:append>
@@ -86,6 +86,7 @@ function formatToNumber(inputString) {
     return formattedString;
 }
 const addIngresso = () => {
+    let valid = true
     if (ingressoHandler.value.quantidade > ingressosDisponiveis.value) {
         $q.notify({
             color: 'red',
@@ -96,6 +97,22 @@ const addIngresso = () => {
         ingressoHandler.value.quantidade = 0
         return
     } else {
+        ingressoHandler.value.titulo = ingressoHandler.value.titulo.trim().toLowerCase()
+        ingressos.value.forEach(ingresso => {
+            if (ingresso.titulo.trim().toLowerCase() == ingressoHandler.value.titulo) {
+                $q.notify({
+                    color: 'orange-14',
+                    position: 'top',
+                    message: 'Título de ingresso já cadastrado',
+                    icon: 'report_problem'
+                })
+                ingressoHandler.value.titulo = ''
+                valid = false
+                return
+            }
+        });
+    }
+    if(valid) {
         ingressoHandler.value.quantidade = Number(ingressoHandler.value.quantidade)
         ingressosDisponiveis.value -= ingressoHandler.value.quantidade
         ingressoHandler.value.valor = formatToNumber(ingressoHandler.value.valor)

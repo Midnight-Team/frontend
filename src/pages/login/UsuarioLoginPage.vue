@@ -37,7 +37,7 @@
                     </q-input>
                     <!-- <div v-if="registrando" class="q-my-sm text-h6 text-primary">Data de Nascimento:*</div> -->
                     <!-- <q-date class="w100 row justify-center q-mb-md" v-if="registrando" v-model="usuario.dataNascimento" mask="DD-MM-YYYY HH:mm" color="primary" /> -->
-                    <q-btn glossy v-if="!registrando && !loading" @click="login()" :disabled="!usuario.cpf || !usuario.senha || usuario.senha.length < 6 || usuario.cpf.length != 14" type="submit" label="Entrar" color="green" icon-right="login" class="w100 q-pa-lg q-mt-md"/>
+                    <q-btn glossy v-if="!registrando && !loading" @click="login()" :disabled="!usuario.cpf || !usuario.senha || usuario.senha.length < 6 || usuario.cpf.length != 14" type="submit" label="Entrar" color="primary" icon-right="login" class="w100 q-pa-lg q-mt-md"/>
                     <q-btn glossy v-if="registrando && !loading" @click="criarConta()" :disabled="checkCampos()"  type="submit" label="Criar Conta" color="green" icon-right="person_add" class="w100 q-mt-md q-pa-md"/>
                     <div v-if="loading" class="row w100 q-pt-md justify-center">
                         <q-spinner-ball color="secondary" size="lg" />
@@ -46,8 +46,8 @@
                     </div>
                 </q-form>
             </q-card-section>
-            <div class="column q-mb-md q-mx-md">
-                <q-btn glossy :label="registrando ? 'já possuo uma conta' : 'criar conta'" @click="toggleRegistrando()" :icon-right="registrando ? 'keyboard_return' : 'person_add'" color="primary" />
+            <div  v-if="!loading" class="column q-mb-md q-mx-md">
+                <q-btn glossy :label="registrando ? 'já possuo uma conta' : 'criar conta'" @click="toggleRegistrando()" :icon-right="registrando ? 'keyboard_return' : 'person_add'" color="blue-13" />
                 <q-btn v-if="!registrando" type="submit" label="Esqueci minha senha" color="secondary" dense flat class="w100 q-mt-md text-bold"/>
             </div>
         </q-card>
@@ -83,7 +83,7 @@ async function login() {
     loading.value = true;
     await api.post('/login', { cpf:usuario.value.cpf, senha:usuario.value.senha }).then((response) => {
         $q.notify({
-            color: 'blue',
+            color: 'primary',
             position: 'top',
             message: 'Bem Vindo(a), ' + response.data.nome.split(' ')[0].toLowerCase(),
             icon: 'local_activity',

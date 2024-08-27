@@ -196,7 +196,7 @@
                 </q-list-item>
             </q-list>
         </q-dialog>
-        <q-dialog persistent v-model="dialogLoteIngresso" style="backdrop-filter: blur(4px)">
+        <q-dialog persistent v-model="dialogLoteIngresso">
             <LoteIngressoComponent @dialogBack="dialogBack()"/>
         </q-dialog>
     </q-page>
@@ -300,11 +300,11 @@ async function salvarAlteracoes() {
     await api.put(`/update_evento`, { evento: evento.value, host: JSON.parse(sessionStorage.getItem('userLogado')) })
         .then(response => {
             $q.notify({
-                color: 'green',
+                color: 'blue-8',
                 textColor: 'white',
-                icon: 'edit',
+                icon: 'save',
                 message: response.data.message,
-                position: 'top'
+                position: 'bottom'
             })
             getEvento().then(() => {
                 editando.value = false

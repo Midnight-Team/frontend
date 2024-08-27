@@ -146,3 +146,18 @@ th{
 tr:nth-child(2n){
   background: #efe6fd!important;
 }
+
+.q-dialog{
+    backdrop-filter: blur(12px)!important;
+    animation: fadeIn 0.5s;
+    transition: all 0.5s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

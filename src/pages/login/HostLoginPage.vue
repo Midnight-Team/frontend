@@ -48,7 +48,7 @@
                         </template>
                     </q-input>
                     <q-btn glossy v-if="!loading" @click="login()" type="submit"
-                        :label="!usuario.isHost ? 'Escanear Ingressos' : 'Entrar'" color="primary"
+                        :label="!usuario.isHost ? 'Escanear Ingressos' : 'Entrar'" color="primary" :disabled="usuario.senha.length < 8 || usuario.login.trim() ==''"
                         :icon-right="!usuario.isHost ? 'document_scanner' : 'login'" class="w100 q-mt-md q-py-md" />
                     <div v-if="loading" class="row w100 q-pt-md justify-center">
                         <q-spinner-ball color="secondary" size="lg" />

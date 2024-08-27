@@ -24,13 +24,13 @@
 
         <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grad-1">
             <div class="w100 text-center text-grey-3 text-bold q-mt-xl" id="title-menu">
-                {{ user.nome.toUpperCase() }}
+                {{ firstAndLastToUpper(user.nome.trim()) }}
             </div>
             <div class="w100 text-center text-white mid-opacity text-bold">
                 {{ user.cpf.toLowerCase() }}
             </div>
-            <div class="w100 text-center q-mt-md">
-                <q-btn class="text-white q-px-xs" color="blue-12" label="perfil" dense ></q-btn>
+            <div class="w100 text-center q-mt-sm">
+                <q-btn class="text-bold" color="secondary" flat label="perfil" ></q-btn>
             </div>
             <div class="menu-options q-mt-xl">
                 <q-list>
@@ -48,7 +48,7 @@
                 </q-list>
             </div>
             <div class="q-px-md absolute-bottom q-mb-lg">
-                <q-btn to="/" label="Encerrar Sessão" glossy color="red-14" class="q-mt-xl  w100" />
+                <q-btn to="/" label="Sair" glossy color="secondary" class="q-mt-xl  w100" />
             </div>
         </q-drawer>
         <q-page-container>
@@ -69,8 +69,8 @@ const isMobile = window.innerWidth < 800
 
 const menuOptions = ref({
     items: [
-        { label: 'Meus Ingressos', icon: 'confirmation_number', to: '/eu', selected: true },
         { label: 'Eventos', icon: 'event', to: '/eu/buscar', selected: true },
+        { label: 'Meus Ingressos', icon: 'confirmation_number', to: '/eu', selected: false },
         { label: 'Suporte', icon: 'help', to: '#suporte-usuario', selected: false },
     ]
 })
@@ -84,7 +84,22 @@ function goTo(item) {
 onBeforeUnmount(() => {
     sessionStorage.clear()
 })
+function firstAndLastToUpper(str) {
+    // Dividir a string em palavras
+    let words = str.split(' ');
 
+    // Se houver apenas uma palavra, retorna ela em maiúscula
+    if (words.length === 1) {
+        return words[0].toUpperCase();
+    }
+
+    // Obter a primeira e última palavra e convertê-las em maiúsculas
+    let firstWord = words[0].toUpperCase();
+    let lastWord = words[words.length - 1].toUpperCase();
+
+    // Retornar a primeira e última palavra
+    return `${firstWord} ${lastWord}`;
+}
 
 const toggleRightDrawer = () => {
     rightDrawerOpen.value = !rightDrawerOpen.value

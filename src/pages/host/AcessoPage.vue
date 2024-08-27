@@ -26,7 +26,7 @@
       <q-icon size="md" name="people" color="white" class="q-pr-sm"></q-icon>
       ACESSOS CRIADOS
     </div>
-      <div v-if="!loading && acessos.length > 0" class="rounded-borders row q-pa-sm q-mt-md justify-around cards-wrapper">
+      <div v-if="!loading && acessos.length > 0" class="rounded-borders row q-pa-sm q-mt-md cards-wrapper justify-center" style="gap:5%">
           <q-card id="card-acesso" v-for="acesso in acessos" :key="acesso.id" class="w100 bg-grad-6 q-mb-md">
             <q-card-section>
               <div class="text-h6 text-bold text-grey-4 q-pt-md text-center" id="title-layout">{{ acesso.nome.toUpperCase() }}</div>
@@ -187,7 +187,7 @@ onBeforeMount(async () => {
    padding: 16px 320px
   }
   #card-acesso{
-    width: 280px;
+    width: 45%
   }
 }
 .bg-puple-light{

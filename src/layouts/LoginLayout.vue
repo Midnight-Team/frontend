@@ -1,5 +1,5 @@
 <template>
-    <q-layout class="relative animate__animated animate__fadeIn q-pa-md bg-grad-7 column items-center justify-center">
+    <q-layout class="w100 relative animate__animated animate__fadeIn q-pa-md bg-grad-7 column items-center justify-center">
         <div class="text-white text-h4 w100 q-mb-md row no-wrap justify-center items-center ">
             <q-avatar>
                 <q-icon size="xl" color="white" name="local_activity" />
@@ -22,12 +22,11 @@ const isLoginHost = ref(false);
 
 </script>
 
-<style>
-body{
+<style scoped>
+*{
     overflow-x: hidden!important;
 }
 .q-layout {
-    width: 100vw;
     min-height: 100vh;
 }
 
