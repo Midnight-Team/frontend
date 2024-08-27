@@ -1,9 +1,9 @@
 <template>
-    <q-page class="bg-grad-1 animate__animated animate__fadeIn relative">
-        <div class="steps w100 row justify-center bg-grad-2 q-py-xs">
-            <div  id="step-1" :class=" step == 1 ?  'bg-grey-4' : 'bg-primary'"></div>
-            <div  id="step-2" :class=" step == 2 ? 'bg-grey-4' : 'bg-primary'"></div>
-            <div  id="step-3" :class=" step == 3 ? 'bg-grey-4' : 'bg-primary'"></div>
+    <q-page class="bg-grad-7 animate__animated animate__fadeIn relative">
+        <div class="steps w100 row justify-center bg-grad-7 q-py-xs">
+            <div  id="step-1" :class=" step == 1 ?  'bg-green-14' : 'bg-secondary mid-opacity'"></div>
+            <div  id="step-2" :class=" step == 2 ? 'bg-green-14' : 'bg-secondary mid-opacity'"></div>
+            <div  id="step-3" :class=" step == 3 ? 'bg-green-14' : 'bg-secondary mid-opacity'"></div>
         </div>
         <div class="step-wrapper">
             <EventoStep1Component v-if="step == 1" @next="next"/>

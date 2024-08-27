@@ -1,7 +1,7 @@
 <template>
     <div class="es1 bg-white q-mx-sm  rounded-borders shadow-4 relative">
-        <div class="title-1 w100 text-h6 row items-center text-primary shadow-1 q-py-xs justify-center text-bold">
-            <q-icon size="md" color="primary" name="event" class="q-pr-sm" />
+        <div class="title-1 w100 text-h6 row items-center text-primary shadow-1 q-py-sm justify-center text-bold">
+            <q-icon size="md" color="primary" name="date_range" class="q-pr-sm" />
             {{ evento.titulo.trim() != '' ? evento.titulo : 'Informações do Evento' }}
         </div>
         <div class="column q-gutter-y-md q-pa-md q-mb-xl">
@@ -66,7 +66,14 @@
                     </q-input>
                 </div>
                 <div class="row justify-center">
-                    <q-date id="date-picker" class="w100" v-model="evento.data_evento" mask="DD-MM-YYYY HH:mm" color="primary" />
+                    <q-date id="date-picker" class="w100" v-model="evento.data_evento" mask="DD-MM-YYYY HH:mm" :options="(date) => {
+                        const today = new Date();
+                        const yesterday = new Date(today);
+                        yesterday.setDate(today.getDate());
+                        const minDate = yesterday.toISOString().split('T')[0];
+                        const mydate = new Date(date);
+                        return mydate >= new Date(minDate);
+                      }" color="primary" />
                 </div>
             </div>
             <div class="w100 text-bold text-secondary">0% de Taxa sobre a Venda de Ingresso*</div>
@@ -153,7 +160,7 @@ const checkRequiredFields = () => {
     if (!titulo || !endereco || !contato || !hora_evento || !data_evento || !pacote) {
         return true;
     }
-    console.log(data_evento)
+    // console.log(data_evento)
     // Converte a data do formato DD-MM-YYYY para um objeto Date no fuso horário local
     const [day, month, year] = data_evento.slice(0, -6).split('-');
     const dataEventoDate = new Date(year, month - 1, day); // Mês é zero-indexado
@@ -164,12 +171,12 @@ const checkRequiredFields = () => {
     hoje.setHours(0, 0, 0, 0); // Zera as horas para comparar apenas as datas
 
     if (dataEventoDate < hoje) {
-        $q.notify({
-            message: 'A data do evento não pode ser anterior à data de hoje',
-            color: 'orange-8',
-            position: 'top',
-            icon: 'event_busy'
-        })
+        // $q.notify({
+        //     message: 'A data do evento não pode ser anterior à data de hoje',
+        //     color: 'orange-8',
+        //     position: 'top',
+        //     icon: 'event_busy'
+        // })
         return true;
     }
 
@@ -231,7 +238,7 @@ onMounted(() => {
     position: sticky;
     top: 90px;
     background: #efefef4d;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(10px);
     z-index: 1;
 }
 

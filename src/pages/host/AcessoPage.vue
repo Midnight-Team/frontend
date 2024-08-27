@@ -26,7 +26,7 @@
       {{ acessos.length }} ACESSO(S) CADASTRADO(S):
     </div>
       <div v-if="!loading && acessos.length > 0" class="rounded-borders row q-pa-sm cards-wrapper justify-center" style="gap:5%">
-          <q-card id="card-acesso" v-for="acesso in acessos" :key="acesso.id" class="w100 bg-grad-6 q-mb-md">
+          <q-card id="card-acesso" v-for="acesso in acessos" :key="acesso.id" class="w100 bg-grad-7 q-mb-md">
             <q-card-section>
               <div class="text-h6 text-bold text-grey-4 q-pt-md text-center" id="title-layout">{{ acesso.nome.toUpperCase() }}</div>
               <div class="text-subtitle2 text-bold text-secondary text-center q-mt-sm"><q-icon name="assignment_ind" size="sm" class="q-mr-sm"></q-icon>{{ acesso.id }}</div>

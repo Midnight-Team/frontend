@@ -1,8 +1,8 @@
 <template>
     <div class="es1 bg-white q-mx-sm  rounded-borders shadow-4 relative">
-        <div class="title-1 w100 text-h6 row items-center text-primary shadow-1 q-py-xs justify-center text-bold">
+        <div class="title-1 w100 text-h6 row items-center text-primary shadow-1 q-py-xs q-px-sm justify-center text-bold">
             <q-icon size="md" color="primary" name="confirmation_number" class="q-pr-sm" />
-            Configuração de Ingresso
+            Configurar Ingressos
         </div>
         <div class="column q-gutter-y-md q-pa-md q-mb-xl">
             <q-input :inputStyle="{ fontWeight: 'bold', color:'#6310E1' }" outlined class="q-mt-lg" v-model="ingressoHandler.titulo"

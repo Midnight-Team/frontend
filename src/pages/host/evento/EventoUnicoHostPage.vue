@@ -86,7 +86,14 @@
                 </q-input>
             </div>
             <q-date v-model="evento.data_evento" :color="editando ? 'primary' : 'grey-8'" :readonly="!editando"
-                class="w100" mask="DD-MM-YYYY" />
+                class="w100" mask="DD-MM-YYYY"  :options="(date) => {
+                    const today = new Date();
+                    const yesterday = new Date(today);
+                    yesterday.setDate(today.getDate());
+                    const minDate = yesterday.toISOString().split('T')[0];
+                    const mydate = new Date(date);
+                    return mydate >= new Date(minDate);
+                  }"/>
             <q-input :inputStyle="{ fontWeight:'bold' }" label="Endereço" v-model="evento.endereco" type="textarea" outlined color="primary"
                 :readonly="!editando" :filled="!editando">
                 <template v-slot:append>
@@ -139,18 +146,18 @@
                 <div class="w100 rounded-borders bg-primary mid-opacity q-mt-md" style="height:4px"></div>
 
                 <!-- faça um v-for no evento.subhosts mostrando o id e o nome -->
-                <div class="w100 row justify-between no-wrap items-center no-wrap q-py-sm q-mt-md"
+                <div class="w100 row justify-between no-wrap items-center no-wrap q-py-sm q-mt-sm"
                     v-for="subhost in evento.subhosts" :key="subhost.id"
-                    style="border-bottom: 4px solid #872DE1;border-top: 4px solid #872DE1">
-                    <q-icon name="account_circle" size="md"></q-icon>
+                    style="border-bottom: 2px dashed #9573f3">
+                    <q-icon name="sensor_occupied" size="xl"></q-icon>
                     <div class="column mid-opacity items-center justify-center">
                         <div class="text-black text-uppercase text-center">{{ subhost.nome }}</div>
                         <div>{{ subhost.id }}</div>
                     </div>
-                    <q-btn v-if="evento.status.includes('andamento')" @click="removeSubhost(subhost.id)" color="secondary" size="xl" flat icon="remove"></q-btn>
+                    <q-btn v-if="evento.status.includes('andamento')" @click="removeSubhost(subhost.id)" color="secondary" size="md" dense icon="remove"></q-btn>
                 </div>
             </div>
-            <q-btn v-if="!editando && evento.status.includes('andamento')" @click="openDialogAcessos()" label="Criar Acesso"
+            <q-btn v-if="!editando && evento.status.includes('andamento')" @click="openDialogAcessos()" glossy label="Criar Acesso"
                 icon-right="person_add" class="" color="primary"></q-btn>
         </div>
         <div id="pacote-info" class="q-mb-md bg-glass-1 rounded-borders q-pa-md q-mt-md">
