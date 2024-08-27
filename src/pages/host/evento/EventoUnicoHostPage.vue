@@ -150,7 +150,7 @@
                     <q-btn v-if="evento.status.includes('andamento')" @click="removeSubhost(subhost.id)" color="secondary" size="xl" flat icon="remove"></q-btn>
                 </div>
             </div>
-            <q-btn v-if="!editando && evento.status.includes('andamento')" @click="dialogAcessos = !dialogAcessos" label="Criar Acesso"
+            <q-btn v-if="!editando && evento.status.includes('andamento')" @click="openDialogAcessos()" label="Criar Acesso"
                 icon-right="person_add" class="" color="primary"></q-btn>
         </div>
         <div id="pacote-info" class="q-mb-md bg-glass-1 rounded-borders q-pa-md q-mt-md">
@@ -234,20 +234,26 @@ onBeforeUnmount(() => {
     // sessionStorage.removeItem('eventoHandlerId')
 })
 
+async function openDialogAcessos() {
+    await getAcessos().then(() => {
+        dialogAcessos.value = true
+    })
+}
+
 async function updateSubhostsEvento(acesso) {
     acessos.value = acessos.value.filter(ac => ac.id != acesso.id)
     evento.value.subhosts.push(acesso)
     await api.put(`/update_subhosts_evento`, { host: { id: host.id, senha: host.senha }, evento: evento.value })
         .then(response => {
-            acessos.value = response.data
+            // acessos.value = response.data
             dialogAcessos.value = false
-            acessos.value = acessos.value.filter(acesso => !evento.value.subhosts.find(subhost => subhost.id == acesso.id))
+            // acessos.value = acessos.value.filter(acesso => !evento.value.subhosts.find(subhost => subhost.id == acesso.id))
             $q.notify({
                 color: 'green-8',
                 textColor: 'white',
                 icon: 'person_add',
                 message: 'Acesso adicionado com sucesso',
-                position: 'top'
+                position: 'bottom'
             })
         })
         .catch(error => {
@@ -257,7 +263,7 @@ async function updateSubhostsEvento(acesso) {
                 textColor: 'white',
                 icon: 'error',
                 message: error.response.data.error,
-                position: 'top'
+                position: 'bottom'
             })
         })
 }
@@ -282,7 +288,7 @@ async function removeSubhost(idSubhost) {
                 textColor: 'white',
                 icon: 'delete',
                 message: 'Acesso removido com sucesso',
-                position: 'top'
+                position: 'bottom'
             })
         })
     getAcessos()
@@ -300,7 +306,7 @@ async function salvarAlteracoes() {
     await api.put(`/update_evento`, { evento: evento.value, host: JSON.parse(sessionStorage.getItem('userLogado')) })
         .then(response => {
             $q.notify({
-                color: 'blue-8',
+                color: 'green-14',
                 textColor: 'white',
                 icon: 'save',
                 message: response.data.message,
@@ -317,7 +323,7 @@ async function salvarAlteracoes() {
                 textColor: 'white',
                 icon: 'error',
                 message: error.response.data.error,
-                position: 'top'
+                position: 'bottom'
             })
         })
 }
@@ -332,7 +338,7 @@ async function cancelarEvento() {
                 textColor: 'white',
                 icon: 'cancel',
                 message: response.data.message,
-                position: 'top'
+                position: 'bottom'
             })
             router.push('/evento')
         })
@@ -343,7 +349,7 @@ async function cancelarEvento() {
                 textColor: 'white',
                 icon: 'error',
                 message: error.response.data.error,
-                position: 'top'
+                position: 'bottom'
             })
         })
 }
@@ -378,6 +384,7 @@ async function getAcessos() {
     //remover os acessos que já estão no evento.subhosts
     acessos.value = acessos.value.filter(acesso => !evento.value.subhosts.find(subhost => subhost.id == acesso.id))
 }
+
 onBeforeMount(async () => {
     await getEvento()
     await getAcessos()

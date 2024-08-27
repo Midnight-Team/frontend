@@ -50,15 +50,15 @@ const criarEvento = async () => {
       color: 'positive',
       message: res.data.message,
       icon: 'local_activity',
-      position: 'top',
-      timeout: 2000,
+      position: 'bottom',
+      timeout: 1000,
     });
     $q.notify({
       color: 'primary',
       message: res.data.evento.msgPurpleCoins,
       icon: 'paid',
       position: 'bottom',
-      timeout: 3000,
+      timeout: 2000,
     });
     authStore.setInfoPurpleCoins(res.data.evento.host.purpleCoins);
     authStore.setInfoSubCoins(res.data.evento.host.subCoins);

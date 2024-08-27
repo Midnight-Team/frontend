@@ -84,7 +84,7 @@ async function login() {
     await api.post('/login', { cpf:usuario.value.cpf, senha:usuario.value.senha }).then((response) => {
         $q.notify({
             color: 'primary',
-            position: 'top',
+            position: 'bottom',
             message: 'Bem Vindo(a), ' + response.data.nome.split(' ')[0].toLowerCase(),
             icon: 'local_activity',
         })

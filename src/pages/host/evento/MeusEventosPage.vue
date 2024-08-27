@@ -24,7 +24,7 @@
                         <q-input :inputStyle="{ fontWeight:'bold', color:'#6310E1' }" v-model="buscarEvento.titulo" maxlength="100" class="q-mb-md" outlined
                             label="Procurar Evento">
                             <template v-slot:append>
-                                <q-btn icon="search" color="primary" @click="getEventos()" />
+                                <q-btn icon="search"  color="primary" @click="getEventos()" />
                             </template>
                         </q-input>
                         <q-toggle v-model="buscarEvento.status" @update:model-value="getEventos()"
@@ -57,7 +57,7 @@
                             </template>
                             <template v-slot:body-cell-acoes="props">
                                 <div class="column items-center justify-center q-gutter-y-xs q-py-sm">
-                                    <q-btn icon="visibility" color="green-6"  @click="openMeuEventoPage(props.row.id)">
+                                    <q-btn glossy icon="visibility" color="green-14"  @click="openMeuEventoPage(props.row.id)">
                                         <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                                             Gerenciar Evento
                                         </q-tooltip>

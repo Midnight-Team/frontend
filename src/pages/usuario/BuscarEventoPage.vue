@@ -1,8 +1,8 @@
 <template>
   <q-page class="bg-grad-7 w100 q-px-md animate__animated animate__fadeIn q-pb-xl">
-    <div class="form-wrapper rounded-borders q-pt-md">
+    <div class="form-wrapper rounded-borders q-pt-md column items-center justify-center ">
       <q-input @keyup.enter="buscarEvento()" v-model="busca.titulo"
-        :inputStyle="{ fontWeight: 'bold', color: '#6310E1' }" class="bg-white rounded-borders cursor-pointer" outlined
+        :inputStyle="{ fontWeight: 'bold', color: '#6310E1' }" class="w100 bg-white rounded-borders cursor-pointer" filled
         label="Procurar Eventos">
         <template v-slot:append>
           <q-icon v-if="busca.titulo.trim() != ''" color="secondary" size="sm" @click="busca.titulo = ''; buscarEvento()"
@@ -11,7 +11,7 @@
         </template>
       </q-input>
       <q-list v-if="eventos.length > 0 && !loading" class="animate__animated animate__backInUp ">
-        <div class="text-center q-py-xs text-secondary bg-grey-3 rounded-borders q-my-sm">
+        <div class="text-center q-py-xs text-secondary bg-grey-3 rounded-borders q-mt-md">
           <strong>{{ eventos.length }}</strong> Evento(s) Encontrado(s)
         </div>
         <div class="items-wrapper column">
@@ -93,6 +93,10 @@ onMounted(async () => {
     flex-direction: row;
     gap: 1em;
     justify-content: center;
+  }
+
+  .q-input{
+    width: 25vw;
   }
 
   .q-item {

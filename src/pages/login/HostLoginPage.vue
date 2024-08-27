@@ -89,7 +89,7 @@ const login = async () => {
                 color: 'primary',
                 message: 'Bem Vindo(a), ' + res.data.host.login.toLowerCase() + ' ✨',
                 icon: 'local_activity',
-                position: 'top',
+                position: 'bottom',
             });
             setTimeout(() => {
                 window.location.href = '/eventos';

@@ -5,9 +5,9 @@
       <q-icon size="md" name="sensor_occupied" color="white" class="q-pr-sm"></q-icon>
       ACESSOS
     </div>
-    <p class="text-center text-white">
+    <!-- <p class="text-center text-white">
       Os acessos são as contas que você cria e disponibiliza para seus colaboradores de eventos validarem os ingressos dos seus clientes.
-    </p>
+    </p> -->
     <div class="w100 q-mb-md rounded-borders ">
       <q-input maxlength="40" :input-style="{ fontSize: '1rem', fontWeight: 'bold', color: '#6310E1'}"  filled class="bg-purple-light rounded-borders" v-model="acesso.nome" label="Título do Acesso*" placeholder="Entrada Principal, Maria Recepção..." >
         <template v-slot:prepend>
@@ -22,11 +22,10 @@
       <q-btn glossy  @click="createAccessPerson()" :disabled="acesso.id.trim() == '' || acesso.nome.trim() == ''" class="w100 q-mt-md q-pa-lg" label="Criar Acesso" icon-right="person_add"
         color="positive" />
     </div>
-    <div v-if="acessos && acessos.length > 0" class="q-mb-md text-h6 text-bold bg-grad-1  rounded-borders text-white row items-center justify-center q-pa-md">
-      <q-icon size="md" name="people" color="white" class="q-pr-sm"></q-icon>
-      ACESSOS CRIADOS
+    <div v-if="acessos && acessos.length > 0" id="title-layout" class="text-bold rounded-borders text-secondary row items-center q-pa-sm">
+      {{ acessos.length }} ACESSO(S) CADASTRADO(S):
     </div>
-      <div v-if="!loading && acessos.length > 0" class="rounded-borders row q-pa-sm q-mt-md cards-wrapper justify-center" style="gap:5%">
+      <div v-if="!loading && acessos.length > 0" class="rounded-borders row q-pa-sm cards-wrapper justify-center" style="gap:5%">
           <q-card id="card-acesso" v-for="acesso in acessos" :key="acesso.id" class="w100 bg-grad-6 q-mb-md">
             <q-card-section>
               <div class="text-h6 text-bold text-grey-4 q-pt-md text-center" id="title-layout">{{ acesso.nome.toUpperCase() }}</div>
@@ -134,7 +133,7 @@ async function deleteAccessPerson(id){
         textColor: 'white',
         icon: 'delete',
         message: 'Acesso Excluído com sucesso',
-        position: 'top'
+        position: 'bottom'
       })
       getAcessos()
     })

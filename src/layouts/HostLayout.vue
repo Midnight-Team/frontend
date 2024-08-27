@@ -13,7 +13,7 @@
           </a>
         </q-toolbar-title>
 
-        <q-btn style="rounded-borders " size="md" icon="menu" @click="toggleRightDrawer" />
+        <q-btn class="rounded-borders shadow-0" size="md" icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
 
       <!-- <q-tabs align="center" v-if="!isMobile">
