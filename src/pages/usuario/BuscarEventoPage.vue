@@ -51,8 +51,10 @@
 <script setup>
 import { api } from "src/boot/axios";
 import { onMounted, ref } from "vue";
-const loading = ref(false);
+import { useRouter } from "vue-router";
 
+const router = useRouter()
+const loading = ref(false);
 
 const busca = ref({
   titulo: '',
@@ -75,7 +77,8 @@ async function buscarEvento() {
 }
 
 function openEvento(id) {
-  alert(id);
+  sessionStorage.setItem('evento', id);
+  router.push('/eu/evento');
 }
 
 onMounted(async () => {

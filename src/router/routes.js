@@ -44,6 +44,7 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/usuario/IndexPage.vue') },
       { path: 'buscar', component: () => import('pages/usuario/BuscarEventoPage.vue') },
+      { path: 'evento', component: () => import('pages/usuario/EventoPage.vue') },
     ]
   },
   // Always leave this as last one,
