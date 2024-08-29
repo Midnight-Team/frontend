@@ -117,7 +117,7 @@
                     <q-icon name="local_activity" size="md" class="text-primary" />
                     INGRESSOS
                 </div>
-                <q-btn glossy v-if="evento.status.includes('andamento')" label="" @click="goToLoteIngresso()" icon-right="sell"></q-btn>
+                <q-btn glossy v-if="!editando && evento.status.includes('andamento')" label="" @click="goToLoteIngresso()" icon-right="sell"></q-btn>
             </div>
             <div class="w100 rounded-borders bg-primary mid-opacity q-mt-md" style="height:4px"></div>
             <div class="w100 text-primary text-bold high-opacity">

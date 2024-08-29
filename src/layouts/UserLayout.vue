@@ -1,7 +1,7 @@
 <template>
     <q-layout view="hHh lpR lFr">
 
-        <q-header class="bg-grad-1 text-white" height-hint="98">
+        <q-header class="bg-glass-2 text-white q-py-md" height-hint="98">
             <q-toolbar>
                 <q-toolbar-title class="row items-center">
                     <q-avatar>
@@ -12,7 +12,7 @@
                     </a>
                 </q-toolbar-title>
 
-                <q-btn @click="toggleRightDrawer()" style="rounded-borders " size="md" label="menu" glossy
+                <q-btn @click="toggleRightDrawer()" style="rounded-borders" color="primary" size="md" label="menu" class="q-py-sm" glossy
                     icon-right="menu" />
             </q-toolbar>
             <!-- 
@@ -23,7 +23,7 @@
         </q-header>
 
         <q-drawer show-if-above v-model="rightDrawerOpen" side="right" class="bg-grad-1">
-            <div class="w100 text-center text-grey-3 text-bold q-mt-xl" id="title-menu">
+            <div class="w100 text-center text-grey-3 text-bold q-mt-xl q-px-md" id="title-menu">
                 {{ firstAndLastToUpper(user.nome.trim()) }}
             </div>
             <div class="w100 text-center text-white mid-opacity text-bold">

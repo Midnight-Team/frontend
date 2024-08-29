@@ -13,7 +13,7 @@
           </a>
         </q-toolbar-title>
 
-        <q-btn class="rounded-borders" size="md" label="menu" glossy icon-right="menu" @click="toggleRightDrawer" />
+        <q-btn class="rounded-borders" size="md" label="menu" color="primary" glossy icon-right="menu" @click="toggleRightDrawer" />
       </q-toolbar>
 
       <!-- <q-tabs align="center" v-if="!isMobile">
@@ -51,14 +51,8 @@
         <q-btn v-if="!isAuthenticated" class="q-mt-lg" to="/" label="Página Inicial" color="primary" icon="home" />
       </div>
       <div class="absolute-bottom w100  row no-wrap items-center justify-center q-mt-xl text-primary q-py-sm">
-        <div class="row items-center ">
-          <q-avatar>
-            <q-icon size="md" color="blue-1" name="support_agent" />
-          </q-avatar>
-          <a href="https://samuelvictorol.github.io/portfolio/contato" target="_blank" style="text-decoration: none;"
-            class="text-blue-1 q-pl-xs text-bold">
-            Suporte
-          </a>
+        <div class="row items-center w100">
+          <q-btn label="sair" color="secondary" class="w100 q-mx-md" to="/" glossy></q-btn>
         </div>
       </div>
     </q-drawer>
@@ -89,7 +83,7 @@ const menuOptions = ref({
     { label: 'Eventos', icon: 'calendar_month', to: '/eventos', role: 'host', selected: true, },
     { label: 'Acessos', icon: 'sensor_occupied', to: '/app/acesso', role: 'host', selected: false, },
     { label: 'Recarregar', icon: 'currency_exchange', to: '/app/recarregar', role: 'host', selected: false, },
-    { label: 'Sair', icon: 'logout', to: '/', selected: false }
+    { label: 'Suporte', icon: 'support_agent', to: 'https://samuelvictorol.github.io/portfolio/contato', selected: false }
   ]
 })
 function goTo(item) {

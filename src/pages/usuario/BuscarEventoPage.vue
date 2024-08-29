@@ -10,13 +10,13 @@
           <q-icon color="primary" size="lg" @click="buscarEvento()" name="search" />
         </template>
       </q-input>
-      <q-list v-if="eventos.length > 0 && !loading" class="animate__animated animate__backInUp ">
+      <q-list v-if="eventos.length > 0 && !loading" class="w100 animate__animated animate__backInUp ">
         <div class="text-center q-py-xs text-secondary bg-grey-3 rounded-borders q-mt-md">
           <strong>{{ eventos.length }}</strong> Evento(s) Encontrado(s)
         </div>
-        <div class="items-wrapper column">
+        <div class="w100 items-wrapper column">
           <q-item v-for="evento in eventos" :key="evento.id"
-            :class="'rounded-borders q-mt-md ' + (Number(evento.hora_evento.replace(':', '.')) > 18 ? 'bg-blue-grad' : 'bg-orange-grad')">
+            :class="'rounded-borders q-mt-md row ' + (Number(evento.hora_evento.replace(':', '.')) > 18 ? 'bg-blue-grad' : 'bg-orange-grad')">
             <q-item-section class="row no-wrap items-center">
               <q-avatar size="150px" class="q-my-md shadow-4">
                 <img :src="evento.img_url" />
@@ -89,13 +89,12 @@ onMounted(async () => {
 <style scoped>
 @media (min-width: 800px) {
   .q-page {
-    padding: 0 200px;
+    padding: 0 220px;
   }
 
   .items-wrapper {
     flex-direction: row;
-    gap: 1em;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .q-input{
@@ -103,7 +102,7 @@ onMounted(async () => {
   }
 
   .q-item {
-    width: 25vw;
+    width: 30vw;
   }
 }
 
