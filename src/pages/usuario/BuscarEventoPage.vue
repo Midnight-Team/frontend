@@ -11,17 +11,17 @@
         </template>
       </q-input>
       <q-list v-if="eventos.length > 0 && !loading" class="w100 animate__animated animate__backInUp ">
-        <div class="text-center q-py-xs text-secondary bg-grey-3 rounded-borders q-mt-md">
+        <div style="font-size:1rem;" class="text-center q-py-xs text-secondary rounded-borders q-mt-md">
           <strong>{{ eventos.length }}</strong> Evento(s) Encontrado(s)
         </div>
         <div class="w100 items-wrapper column">
           <q-item v-for="evento in eventos" :key="evento.id"
             :class="'rounded-borders q-mt-md row ' + (Number(evento.hora_evento.replace(':', '.')) > 18 ? 'bg-blue-grad' : 'bg-orange-grad')">
             <q-item-section class="row no-wrap items-center">
-              <q-avatar size="150px" class="q-my-md shadow-4">
-                <img :src="evento.img_url" />
-              </q-avatar>
-              <div class="column justify-center items-center">
+               <div class="w100 q-mt-sm rounded-borders">
+                <img class="w100 rounded-borders" style="border: 6px solid #6310E1" :src="evento.img_url" />
+               </div>
+              <div class="column justify-center items-center q-pt-sm">
                 <q-item-label class="text-primary text-center" id="title-menu">{{ evento.titulo }}</q-item-label>
                 <q-item-label class="text-primary high-opacity text-bold">{{ evento.host_name.toUpperCase()
                   }}</q-item-label>
@@ -29,7 +29,7 @@
               <div class="w100 text-center text-bold text-secondary q-my-sm">
                 {{ evento.data_evento }}
               </div>
-              <q-btn @click="openEvento(evento.id)" label="visualizar evento" class="w100 q-pa-md q-mt-sm"
+              <q-btn @click="openEvento(evento.id)" label="visualizar evento" class="w100 q-pa-md q-my-sm"
                 color="primary" icon-right="visibility" glossy></q-btn>
             </q-item-section>
           </q-item>
@@ -109,9 +109,9 @@ onMounted(async () => {
 .bg-blue-grad {
   background: #bef3ff;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #bef3ff, #3eb1ce);
+  background: -webkit-linear-gradient(to top, #bef3ff, #138ba9);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #bef3ff, #3eb1ce);
+  background: linear-gradient(to top, #d6deff, #1366a9);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

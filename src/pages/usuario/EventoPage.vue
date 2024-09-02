@@ -82,7 +82,7 @@
         <q-dialog v-model="dialogIngresso" persistent>
             <div class="column justify-center bg-white">
                 <div id="title-menu" class="q-pa-md bg-primary text-white text-bold text-center">Confirmação de Compra</div>
-                <div class="q-px-sm q-pt-md bg-white text-primary text-bold text-center">{{ ingressoSelected.titulo }}<br><strong class="text-secondary">por</strong> R$ {{ingressoSelected.valor  }}</div>
+                <div class="q-px-sm q-pt-md bg-white text-primary text-bold text-center"><q-icon name="confirmation_number" size="md"/> {{ ingressoSelected.titulo }}<br><strong class="text-secondary">por</strong> R$ {{ingressoSelected.valor  }}</div>
                 <IngressoPaymentComponent />
                 <q-btn label="voltar" @click="dialogIngresso = !dialogIngresso" color="primary" flat></q-btn>
             </div>
