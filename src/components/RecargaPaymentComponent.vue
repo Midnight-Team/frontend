@@ -19,7 +19,6 @@ import { api } from "src/boot/axios";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
 
-const pixWindow = ref('');
 const valorPagar = ref()
 const loading = ref(true)
 const $q = useQuasar();
@@ -33,11 +32,6 @@ const loadScript = (src) => {
         document.head.appendChild(script);
     });
 };
-function openPixWindow() {
-    setTimeout(() => {
-        window.open(pixWindow.value, '_blank');
-    }, 2000);
-}
 
 onBeforeUnmount(async () => {
     const host = JSON.parse(sessionStorage.getItem('userLogado'));

@@ -2,7 +2,7 @@
     <q-page class="animate__animated animate__fadeInRight column bg-grad-7 q-pb-xl relative" id="dialog-evento"
         v-if="pageLoaded">
         <div class="wrapper q-px-md relative">
-            <q-btn icon="keyboard_return" flat color="grey-5" class="absolute-top-left" to="/eu/buscar"
+            <q-btn icon="keyboard_return" flat color="grey-5" class="absolute-top-left q-mt-xs" to="/eu/buscar"
                 label="eventos"></q-btn>
             <div class="w100 rounded-borders q-mt-xl">
                 <div id="title-menu"
@@ -27,20 +27,19 @@
                     <!-- faça um v-for no evento.tipos_ingressos mostrando o titulo, valor e quantidade. -->
                     <div class="row no-wrap items-center no-wrap q-pa-sm q-mt-md rounded-borders"
                         v-for="ingresso in evento.tipos_ingressos" :key="ingresso.id" style="border: 2px solid #872DE1">
-                        <q-icon name="confirmation_number" size="md"></q-icon>
+                        <q-icon name="confirmation_number" size="lg"></q-icon>
                         <div class="column q-mx-md w100">
                             <div style="font-size: .9rem;text-transform: uppercase;" class="text-primary">{{
                                 ingresso.titulo
-                                }}</div>
+                            }}</div>
                             <div class="text-secondary">R$ {{ ingresso.valor }}</div>
                             <div class="high-opacity text-orange-13"
                                 v-if="ingresso.quantidade - ingresso.vendidos <= 20">🟠 Esgotando Ingressos
                             </div>
                             <div class="row no-wrap q-gutter-x-md">
-                                <q-btn :disabled="!ingressoExistInCart(ingresso)" @click="removeCartIngresso(ingresso)"
-                                    color="red" dense glossy icon-right="remove" class="q-mt-sm w100"></q-btn>
-                                <q-btn @click="addCartIngressos(ingresso)" color="blue-14" dense glossy icon-right="add"
-                                    class="q-mt-sm w100"></q-btn>
+                                <q-btn @click="comprarIngresso(ingresso)" color="positive" label="comprar ingresso"
+                                    dense glossy icon-right="add_shopping_cart"
+                                    class="text-bold q-mt-sm q-py-md w100"></q-btn>
                             </div>
                         </div>
                     </div>
@@ -80,9 +79,14 @@
             </div>
             <div class="w100 q-pb-lg"></div>
         </div>
-        <q-btn v-if="cartIngressos.length > 0" id="comprar-btn" color="green"
-            :label="'Comprar ' + totalIngressos + ' Ingresso(s)'" glossy class="q-py-xl w100"
-            icon-right="add_shopping_cart"></q-btn>
+        <q-dialog v-model="dialogIngresso" persistent>
+            <div class="column justify-center bg-white">
+                <div id="title-menu" class="q-pa-md bg-primary text-white text-bold text-center">Confirmação de Compra</div>
+                <div class="q-px-sm q-pt-md bg-white text-primary text-bold text-center">{{ ingressoSelected.titulo }}<br><strong class="text-secondary">por</strong> R$ {{ingressoSelected.valor  }}</div>
+                <IngressoPaymentComponent />
+                <q-btn label="voltar" @click="dialogIngresso = !dialogIngresso" color="primary" flat></q-btn>
+            </div>
+        </q-dialog>
     </q-page>
     <q-page v-else class="animate__animated animate__fadeIn bg-grad-7">
         <div class="row w100 q-pt-md justify-center">
@@ -97,6 +101,7 @@
 import { onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import { api } from 'src/boot/axios';
 import { useQuasar } from 'quasar';
+import IngressoPaymentComponent from "../../components/IngressoPaymentComponent.vue";
 import { useRouter } from 'vue-router';
 const router = useRouter()
 
@@ -104,9 +109,9 @@ const evento = ref({})
 const pageLoaded = ref(false)
 const eventoLoaded = ref(true)
 const $q = useQuasar()
-const cartIngressos = ref([])
-const totalIngressos = ref(0)
 const data = ref('')
+const ingressoSelected = ref({})
+const dialogIngresso = ref(false)
 onBeforeUnmount(() => {
     sessionStorage.removeItem('evento')
 })
@@ -120,6 +125,13 @@ async function getEvento() {
     })
         .then(response => {
             evento.value = response.data
+            const eventoSpecs = {
+                titulo: response.data.titulo,
+                produtor: response.data.host,
+                eventoId: response.data.id,
+                host_mp: response.data.host_mp,
+            }
+            sessionStorage.setItem('evento', JSON.stringify(eventoSpecs))
             data.value = evento.value.data_evento.substring(0, 10).replaceAll('/', '-')
         })
         .catch(error => {
@@ -129,61 +141,17 @@ async function getEvento() {
         })
 }
 
-function ingressoExistInCart(ingresso) {
-    let exist = false
-    cartIngressos.value.forEach(item => {
-        if (item.titulo === ingresso.titulo) {
-            exist = true
-        }
-    })
-    return exist
-}
-
-function removeCartIngresso(ingresso) {
-    cartIngressos.value.forEach((item, index) => {
-        if (item.titulo === ingresso.titulo) {
-            if (item.qtdCart > 1) {
-                item.qtdCart--
-            } else {
-                cartIngressos.value.splice(index, 1)
-            }
-        }
-    })
-    totalIngressos.value--
-    $q.notify({
-        message: 'Ingresso Removido do Carrinho',
-        color: 'red-8',
-        position: 'top',
-        icon: 'remove_shopping_cart'
-    })
-    console.log(JSON.stringify(cartIngressos.value))
-}
-
-function addCartIngressos(ingresso) {
-    let existIngresso = false
-    cartIngressos.value.forEach(item => {
-        if (item.titulo === ingresso.titulo) {
-            item.qtdCart++
-            existIngresso = true
-            return
-        }
-    })
-    if(!existIngresso) {
-        ingresso.qtdCart = 1
-        cartIngressos.value.push(ingresso)
-    }
-    $q.notify({
-        message: 'Ingresso Adicionado ao Carrinho',
-        color: 'green-8',
-        position: 'top',
-        icon: 'add_shopping_cart'
-    })
-    console.log(JSON.stringify(cartIngressos.value))
-    totalIngressos.value++
+function comprarIngresso(ingresso) {
+    ingressoSelected.value = ingresso
+    sessionStorage.setItem('ingresso', JSON.stringify(ingresso))
+    dialogIngresso.value = true
 }
 
 onBeforeMount(async () => {
     await getEvento()
+})
+onBeforeUnmount(async () => {
+    sessionStorage.removeItem('ingresso')
 })
 
 </script>
